@@ -43,10 +43,9 @@ public class StaticRegexPipeline extends Pipeline {
             AnalysisEngineDescription regexDesc = createEngineDescription(StaticRegexAnnotator.class);
             // aggregate AE for basic pipe
             AnalysisEngineDescription basicPipeDesc = createEngineDescription(regexDesc, conceptAnnotatorDesc);
-
             AnalysisEngine pipe = createEngine(basicPipeDesc);
 
-            JCas jCas = UimaUtil.produceJCas();
+            JCas jCas = UimaUtil.produceJCas(StaticFunctions.CONCEPT, StaticFunctions.REGEX);
             jCas.setDocumentText(this.getDocument().getRawContent());
             jCas.setDocumentLanguage(this.getDocument().getLanguage());
             pipe.process(jCas);
@@ -87,6 +86,7 @@ public class StaticRegexPipeline extends Pipeline {
 
             if(featureAsJson.has(StaticFunctions.BEGIN) && featureAsJson.has(StaticFunctions.END))
                 featureAsJson.put(StaticFunctions.TOKEN, this.getDocument().getRawContent().substring(Integer.parseInt(featureAsJson.get(StaticFunctions.BEGIN).asText()), Integer.parseInt(featureAsJson.get(StaticFunctions.END).asText())));
+
 
             annotations.add(featureAsJson);
         }

@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  * Created by mahabaleshwar on 11/2/2016.
  */
 public class StaticRegexAnnotator extends JCasAnnotator_ImplBase {
-    private Pattern pattern1 = Pattern.compile("\\bCU[0-9]+[\\-a-zA-Z0-9]+\\b");
+    private Pattern pattern1 = Pattern.compile("\\bcu[0-9]+[\\-a-zA-Z0-9]+\\b");
     private Pattern pattern2 = Pattern.compile("wait\\(");
 
     @Override
@@ -30,22 +30,17 @@ public class StaticRegexAnnotator extends JCasAnnotator_ImplBase {
     @Override
     public void process(JCas jCas) throws AnalysisEngineProcessException {
         String documentText = jCas.getDocumentText().toLowerCase();
-
         if (documentText == null || documentText.isEmpty()) {
             return;
         }
-
         addAnnotations(jCas, documentText, pattern1, "Hardcoded system name detected");
         addAnnotations(jCas, documentText, pattern2, "Hardcoded wait function detected");
-
     }
 
     private void addAnnotations(JCas aJCas, String docText, Pattern pattern, String name) {
         Matcher matcher = pattern.matcher(docText);
         int pos = 0;
         while (matcher.find(pos)) {
-            // match found - create the match as annotation in
-            // the JCas with some additional meta information
             StaticRegex annotation = new StaticRegex(aJCas);
             annotation.setBegin(matcher.start());
             annotation.setEnd(matcher.end());

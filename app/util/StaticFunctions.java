@@ -29,6 +29,10 @@ public class StaticFunctions {
     public static final String EXPERTISE = "expertise";
     public static final String METHOD = "knowledgeMethod";
     public static final String TEMPLATE = "template";
+    public static final String CONCEPT = "CONCEPT";
+    public static final String SPOTLIGHT = "SPOTLIGHT";
+    public static final String REGEX = "REGEX";
+
 
     public static Result jsonResult(Result httpResponse) {
         return httpResponse.as("application/json; charset=utf-8");

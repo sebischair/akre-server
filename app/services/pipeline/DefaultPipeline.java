@@ -16,7 +16,6 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.InvalidXMLException;
 import play.libs.Json;
-import services.SparqlQueryExecuter;
 import services.annotator.ConceptAnnotator;
 import services.annotator.SpotlightAnnotator;
 import util.PipelineUtil;
@@ -49,12 +48,11 @@ public class DefaultPipeline extends Pipeline {
         try {
             AnalysisEngineDescription conceptAnnotatorDesc = createEngineDescription(ConceptAnnotator.class);
             AnalysisEngineDescription spotlightDesc = createEngineDescription(SpotlightAnnotator.class);
-            // aggregate AE for basic pipe
-            AnalysisEngineDescription basicPipeDesc = createEngineDescription(spotlightDesc, conceptAnnotatorDesc);
 
+            AnalysisEngineDescription basicPipeDesc = createEngineDescription(spotlightDesc, conceptAnnotatorDesc);
             AnalysisEngine pipe = createEngine(basicPipeDesc);
 
-            JCas jCas = UimaUtil.produceJCas();
+            JCas jCas = UimaUtil.produceJCas(StaticFunctions.CONCEPT, StaticFunctions.SPOTLIGHT);
             jCas.setDocumentText(this.getDocument().getRawContent());
             jCas.setDocumentLanguage(this.getDocument().getLanguage());
             pipe.process(jCas);

@@ -23,16 +23,30 @@ public class UimaUtil {
 
     private static final String CONCEPT_TYPESYSTEM_PATH = "app" + File.separator + "resources" + File.separator + "Concept.xml";
     private static final String SPOTLIGHT_TYPESYSTEM_PATH = "app" + File.separator + "resources" + File.separator + "SpotlightTypeSystemDescriptor.xml";
+    private static final String STATICREGEX_TYPESYSTEM_PATH = "app" + File.separator + "resources" + File.separator + "StaticRegexDescriptor.xml";
 
-    public static JCas produceJCas() throws IOException, InvalidXMLException, ResourceInitializationException, CASException {
+    public static JCas produceJCas(String... typeSystems) throws IOException, InvalidXMLException, ResourceInitializationException, CASException {
         Set<TypeSystemDescription> typeSystemDescs = new HashSet<TypeSystemDescription>();
-
         XMLParser xmlParser = UIMAFramework.getXMLParser();
-        TypeSystemDescription aeDesc = xmlParser.parseTypeSystemDescription(new XMLInputSource(Play.application().getFile(CONCEPT_TYPESYSTEM_PATH).getAbsolutePath()));
-        TypeSystemDescription saeDesc = xmlParser.parseTypeSystemDescription(new XMLInputSource(Play.application().getFile(SPOTLIGHT_TYPESYSTEM_PATH).getAbsolutePath()));
+        TypeSystemDescription aeDesc = null;
+        TypeSystemDescription saeDesc = null;
+        TypeSystemDescription srDesc = null;
+        for(int i=0; i <typeSystems.length ; i ++) {
+            String ts = typeSystems[i];
+            switch(ts) {
+                case "CONCEPT":
+                    aeDesc = xmlParser.parseTypeSystemDescription(new XMLInputSource(Play.application().getFile(CONCEPT_TYPESYSTEM_PATH).getAbsolutePath()));
+                case "SPOTLIGHT":
+                    saeDesc = xmlParser.parseTypeSystemDescription(new XMLInputSource(Play.application().getFile(SPOTLIGHT_TYPESYSTEM_PATH).getAbsolutePath()));
+                case "REGEX":
+                    srDesc = xmlParser.parseTypeSystemDescription(new XMLInputSource(Play.application().getFile(STATICREGEX_TYPESYSTEM_PATH).getAbsolutePath()));
+            }
+
+        }
+
         typeSystemDescs.add(aeDesc);
         typeSystemDescs.add(saeDesc);
-
+        typeSystemDescs.add(srDesc);
 
         TypeSystemDescription tsDesc = CasCreationUtils.mergeTypeSystems(typeSystemDescs);
 

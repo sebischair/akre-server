@@ -8,8 +8,8 @@ import model.Software;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import services.GoogleTrend;
 import services.SparqlQueryExecuter;
+import services.WikiTrends;
 import util.StaticFunctions;
 
 import java.util.ArrayList;
@@ -74,7 +74,7 @@ public class AlternativesController extends Controller {
                     response = e.query(queryString);
                 }
 
-                GoogleTrend trends = new GoogleTrend();
+                WikiTrends trends = new WikiTrends();
                 response = trends.getTrends(response);
 
                 result.addAll(StaticFunctions.sortJsonArray(response));

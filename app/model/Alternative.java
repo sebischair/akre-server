@@ -57,13 +57,15 @@ public class Alternative {
 
     public ArrayNode getAlternativesAsJsonArray() {
         ArrayNode jsonArray = Json.newArray();
-        for (Software software : getSoftware()) {
-            ObjectNode jsonObject = Json.newObject();
-            jsonObject.put(StaticFunctions.URI, software.getUri());
-            jsonObject.put(StaticFunctions.TITLE, software.getTitle());
-            jsonObject.put(StaticFunctions.DESCRIPTION, software.getDescription());
-            jsonObject.put(StaticFunctions.SCORE, software.getScore());
-            jsonArray.add(jsonObject);
+        if(getSoftware() != null) {
+            for (Software software : getSoftware()) {
+                ObjectNode jsonObject = Json.newObject();
+                jsonObject.put(StaticFunctions.URI, software.getUri());
+                jsonObject.put(StaticFunctions.TITLE, software.getTitle());
+                jsonObject.put(StaticFunctions.DESCRIPTION, software.getDescription());
+                jsonObject.put(StaticFunctions.SCORE, software.getScore());
+                jsonArray.add(jsonObject);
+            }
         }
         return jsonArray;
     }

@@ -2,7 +2,9 @@ package util;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import play.libs.Json;
+import play.mvc.Result;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +29,17 @@ public class StaticFunctions {
     public static final String EXPERTISE = "expertise";
     public static final String METHOD = "knowledgeMethod";
     public static final String TEMPLATE = "template";
+
+    public static Result jsonResult(Result httpResponse) {
+        return httpResponse.as("application/json; charset=utf-8");
+    }
+
+    public static ObjectNode errorAsJson(Throwable error) {
+        ObjectNode result = Json.newObject();
+        result.put("status", "error");
+        result.put("message", error.toString());
+        return result;
+    }
 
     public static ArrayNode sortJsonArray(ArrayNode arrayNode) {
         ArrayNode sortedJsonArray = Json.newArray();

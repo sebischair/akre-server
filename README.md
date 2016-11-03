@@ -1,4 +1,4 @@
-This is a new Play
+AKREC Server
 =================================
 
 ## Core dependencies  

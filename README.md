@@ -1,6 +1,8 @@
 AKREC Server
 =================================
 
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b0e50cadbc1e938dc293)
+
 ## Core dependencies  
 Apache UIMA  
 MongoDB  

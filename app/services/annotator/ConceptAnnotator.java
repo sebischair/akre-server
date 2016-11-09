@@ -71,7 +71,9 @@ public class ConceptAnnotator extends JCasAnnotator_ImplBase {
     List<DBpediaToken> savedTokens = new DBpediaToken().findAllCustomTokens();
     List<String> tokens = new ArrayList<String>();
     for(DBpediaToken token : savedTokens) {
-      tokens.add(token.getName());
+      if(token.getScore() >= 0) {
+        tokens.add(token.getName());
+      }
     }
     return tokens;
   }

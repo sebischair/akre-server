@@ -54,6 +54,12 @@ public class AlternativesController extends Controller {
                         "?x dct:subject ?concept .\n" +
                         "?x ns:type dbo:Genre .\n" +
                         "?x schema:label ?title } } \n" +
+                        "UNION { \n"+
+                        "SELECT DISTINCT ?x ?title WHERE { \n" +
+                        key + " dct:subject ?concept .\n" +
+                        "?x dct:subject ?concept .\n" +
+                        "?x ns:type <http://dbpedia.org/class/yago/Software106566077> .\n" +
+                        "?x schema:label ?title } }\n" +
                         "FILTER langMatches(lang(?title), \"EN\")\n" +
                         " } LIMIT 100";
 

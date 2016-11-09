@@ -90,11 +90,10 @@ public class SoftwareRecommendationController extends Controller {
                         "SELECT ?x ?title WHERE { \n" +
                         key + "dct:subject ?concept . \n" +
                         "?genre dct:subject ?concept . \n" +
-                        "?genre ns:type dbo:Genre . \n" +
                         "?x dbo:genre ?genre . \n" +
                         "?x ns:type dbo:Software ." +
                         "?x schema:label ?title } } \n" +
-                        "filter(langMatches(lang(?title),\"EN\")) } LIMIT 300";
+                        "filter(langMatches(lang(?title),\"EN\")) } LIMIT 100";
 
                 SparqlQueryExecuter e = new SparqlQueryExecuter();
                 ArrayNode response = e.query(queryString);
@@ -115,7 +114,11 @@ public class SoftwareRecommendationController extends Controller {
             List<Software> softwareList = new ArrayList<Software>();
             for(int i=0; i<result.size(); i++) {
                 JsonNode jsonObject = result.get(i);
-                softwareList.add(new Software(jsonObject.get(StaticFunctions.URI).asText(), jsonObject.get(StaticFunctions.TITLE).asText(), jsonObject.get(StaticFunctions.DESCRIPTION).asText(""), jsonObject.get(StaticFunctions.SCORE).asDouble()));
+                String id =  jsonObject.get(StaticFunctions.URI) != null ? jsonObject.get(StaticFunctions.URI).asText() : "";
+                String title = jsonObject.get(StaticFunctions.TITLE) != null ? jsonObject.get(StaticFunctions.TITLE).asText() : "";
+                String description = jsonObject.get(StaticFunctions.DESCRIPTION) != null ? jsonObject.get(StaticFunctions.DESCRIPTION).asText() : "";
+                double score = jsonObject.get(StaticFunctions.SCORE) != null ? jsonObject.get(StaticFunctions.SCORE).asDouble() : 0.0;
+                softwareList.add(new Software(id, title, description, score));
             }
             genre.setSoftware(softwareList);
             genre.save();

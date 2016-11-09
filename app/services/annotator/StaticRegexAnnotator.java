@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  * Created by mahabaleshwar on 11/2/2016.
  */
 public class StaticRegexAnnotator extends JCasAnnotator_ImplBase {
-    private Pattern pattern1 = Pattern.compile("\\bcu[0-9]+[\\-a-zA-Z0-9]+\\b");
+    private Pattern pattern1 = Pattern.compile("\\bcu[a-zA-Z0-9_]+\\b");
     private Pattern pattern2 = Pattern.compile("wait\\(");
 
     @Override

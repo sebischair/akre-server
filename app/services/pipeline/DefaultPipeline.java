@@ -96,7 +96,7 @@ public class DefaultPipeline extends Pipeline {
 
             DBpediaToken savedToken = new DBpediaToken().findByName(featureAsJson.get(StaticFunctions.TOKEN).asText());
 
-           if(savedToken!=null && savedToken.getScore()>0) {
+           if(savedToken != null && savedToken.getScore() >= 0) {
                 featureAsJson.put(StaticFunctions.CONCEPTTYPE, savedToken.getType());
            } else if (featureAsJson.has(StaticFunctions.URI.toUpperCase())) {
                 //String queryString = "select DISTINCT ?x where { <" + featureAsJson.get(StaticFunctions.URI.toUpperCase()).asText() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?x }";

@@ -74,7 +74,7 @@ public class HtmlUtil {
         renderer.setBlockIndentSize(0);
         renderer.setListIndentSize(0);
         result = renderer.toString();
-        result = result.replace('_', ' '); // After extracting the plaintext replace the dummy char with the space again
+        //result = result.replace('_', ' '); // After extracting the plaintext replace the dummy char with the space again
         return result;
     }
 

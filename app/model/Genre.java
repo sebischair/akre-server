@@ -74,6 +74,7 @@ public class Genre {
     public boolean updateSoftwareScore(String genreName, String softwareName, String description, double score) {
         try {
             softwareName = softwareName.replaceAll("\\(", "\\\\(").replaceAll("\\)","\\\\)").replaceAll("\\+", "\\\\+");
+            genreName = genreName.replaceAll("\\(", "\\\\(").replaceAll("\\)","\\\\)").replaceAll("\\+", "\\\\+");
             Query<Genre> query = (Query<Genre>) MorphiaObject.datastore.createQuery(this.getClass()).field("genreName").equalIgnoreCase(genreName).field("software.title").equalIgnoreCase(softwareName);
             UpdateOperations<Genre> ops = (UpdateOperations<Genre>) MorphiaObject.datastore.createUpdateOperations(this.getClass()).set("software.$.score", score).set("software.$.description", description);
             MorphiaObject.datastore.update(query, ops);

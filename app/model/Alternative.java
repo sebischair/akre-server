@@ -75,6 +75,7 @@ public class Alternative {
 
     public boolean updateAlternativeScore(String conceptName, String softwareName, String description, double score) {
         try {
+            conceptName = conceptName.replaceAll("\\(", "\\\\(").replaceAll("\\)","\\\\)").replaceAll("\\+", "\\\\+");
             softwareName = softwareName.replaceAll("\\(", "\\\\(").replaceAll("\\)","\\\\)").replaceAll("\\+", "\\\\+");
             Query<Alternative> query = (Query<Alternative>) MorphiaObject.datastore.createQuery(this.getClass()).field("conceptName").equalIgnoreCase(conceptName).field("software.title").equalIgnoreCase(softwareName);
             UpdateOperations<Alternative> ops = (UpdateOperations<Alternative>) MorphiaObject.datastore.createUpdateOperations(this.getClass()).set("software.$.score", score).set("software.$.description", description);

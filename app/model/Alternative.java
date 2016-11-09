@@ -50,6 +50,7 @@ public class Alternative {
     }
 
     public Alternative findByName(String conceptName) {
+        conceptName = conceptName.replaceAll("\\(", "\\\\(").replaceAll("\\)","\\\\)").replaceAll("\\+", "\\\\+");
         List<? extends Alternative> alternatives = MorphiaObject.datastore.createQuery(this.getClass()).field("conceptName").equalIgnoreCase(conceptName).asList();
         if(alternatives.size() > 0) return alternatives.get(0);
         return null;

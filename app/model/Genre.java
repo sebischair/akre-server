@@ -48,6 +48,7 @@ public class Genre {
     }
 
     public Genre findByName(String name) {
+        name = name.replaceAll("\\(", "\\\\(").replaceAll("\\)","\\\\)").replaceAll("\\+", "\\\\+");
         List<? extends Genre> genres = MorphiaObject.datastore.createQuery(this.getClass()).field("genreName").equalIgnoreCase(name).asList();
         if(genres.size() > 0) return genres.get(0);
         return null;

@@ -116,7 +116,11 @@ public class DefaultPipeline extends Pipeline {
                         break;
                     }
                 }*/
-                featureAsJson.put(StaticFunctions.CONCEPTTYPE, conceptType);
+               savedToken = new DBpediaToken().findByName(featureAsJson.get(StaticFunctions.TOKEN).asText());
+
+               if(savedToken != null && savedToken.getScore() >= 0) {
+                   featureAsJson.put(StaticFunctions.CONCEPTTYPE, conceptType);
+               }
             }
             annotations.add(featureAsJson);
         }

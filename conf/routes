@@ -16,3 +16,4 @@ POST     /removeAlternative          controllers.AlternativesController.removeAl
 POST     /addAlternative             controllers.AlternativesController.addAlternative()
 
 POST     /processCode                controllers.CodeController.processCode()
+POST     /project                    controllers.CodeController.createProject()

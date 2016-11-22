@@ -1,7 +1,7 @@
 AKREC Server
 =================================
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b0e50cadbc1e938dc293#?env%5Bspotlight.in.tum.de%5D=W3sia2V5IjoiU0VSVkVSX1VSTCIsInZhbHVlIjoiaHR0cHM6Ly9zcG90bGlnaHQuaW4udHVtLmRlIiwidHlwZSI6InRleHQiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6IkVYQU1QTEVfUkVNT1ZFX1RPS0VOIiwidmFsdWUiOiJZdW1teSIsInR5cGUiOiJ0ZXh0IiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJFWEFNUExFX0FERF9UT0tFTiIsInZhbHVlIjoiWXVtbXkiLCJ0eXBlIjoidGV4dCIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiUFJPSkVDVF9JRCIsInZhbHVlIjoiNTgzNDU4OWM4ODY5NWQyMTdjMWVlZDFhIiwidHlwZSI6InRleHQiLCJlbmFibGVkIjp0cnVlfV0=)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b0e50cadbc1e938dc293#?env%5Bspotlight.in.tum.de%5D=W3sidHlwZSI6InRleHQiLCJlbmFibGVkIjp0cnVlLCJrZXkiOiJTRVJWRVJfVVJMIiwidmFsdWUiOiJodHRwczovL3Nwb3RsaWdodC5pbi50dW0uZGUifSx7InR5cGUiOiJ0ZXh0IiwiZW5hYmxlZCI6dHJ1ZSwia2V5IjoiRVhBTVBMRV9SRU1PVkVfVE9LRU4iLCJ2YWx1ZSI6Ill1bW15In0seyJ0eXBlIjoidGV4dCIsImVuYWJsZWQiOnRydWUsImtleSI6IkVYQU1QTEVfQUREX1RPS0VOIiwidmFsdWUiOiJZdW1teSJ9LHsidHlwZSI6InRleHQiLCJlbmFibGVkIjp0cnVlLCJrZXkiOiJQUk9KRUNUX0lEIiwidmFsdWUiOiI1ODM0NTg5Yzg4Njk1ZDIxN2MxZWVkMWEifV0=)
 
 ## Core dependencies  
 Apache UIMA  

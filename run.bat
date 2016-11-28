@@ -1,1 +1,1 @@
-activator "run 9999"
+ activator "run -Dhttps.port=9999"

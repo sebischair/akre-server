@@ -32,7 +32,10 @@ public class StaticFunctions {
     public static final String CONCEPT = "CONCEPT";
     public static final String SPOTLIGHT = "SPOTLIGHT";
     public static final String REGEX = "REGEX";
-
+    public static final String NAME = "name";
+    public static final String PROGLANGUAGE = "progLanguage";
+    public static final String PATTERN = "pattern";
+    public static final String PROJECTID = "projectId";
 
     public static Result jsonResult(Result httpResponse) {
         return httpResponse.as("application/json; charset=utf-8");

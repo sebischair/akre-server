@@ -31,7 +31,13 @@ public class ConceptAnnotator extends JCasAnnotator_ImplBase {
 
   @Override
   public void process(JCas jcas) throws AnalysisEngineProcessException {
-    String documentText = jcas.getDocumentText().toLowerCase();
+    String document = jcas.getDocumentText();
+    if(jcas.getDocumentText().contains(":projectId:")) {
+      String[] dt_temp = jcas.getDocumentText().split(":projectId:");
+      document = dt_temp[0];
+    }
+
+    String documentText = document.toLowerCase();
 
     if (documentText == null || documentText.isEmpty()) {
       return;
@@ -48,7 +54,13 @@ public class ConceptAnnotator extends JCasAnnotator_ImplBase {
   }
 
   private void addAnnotations(JCas jcas, List<String> tokens, String conceptType) {
-    String documentText = jcas.getDocumentText().toLowerCase();
+    String document = jcas.getDocumentText();
+    if(jcas.getDocumentText().contains("//$projectId:")) {
+      String[] dt_temp = jcas.getDocumentText().split("//$projectId:");
+      document = dt_temp[0];
+    }
+
+    String documentText = document.toLowerCase();
 
     for(String token: tokens) {
       int index = documentText.indexOf(token.toLowerCase());

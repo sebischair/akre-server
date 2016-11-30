@@ -30,6 +30,16 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
  * Created by mahabaleshwar on 11/2/2016.
  */
 public class StaticRegexPipeline extends Pipeline {
+    private String projectId;
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
     @Override
     public String preProcessDocument() {
         return null;
@@ -46,8 +56,9 @@ public class StaticRegexPipeline extends Pipeline {
             AnalysisEngine pipe = createEngine(basicPipeDesc);
 
             JCas jCas = UimaUtil.produceJCas(StaticFunctions.CONCEPT, StaticFunctions.REGEX);
-            jCas.setDocumentText(this.getDocument().getRawContent());
+            jCas.setDocumentText(this.getDocument().getRawContent() + ":projectId:" + this.getProjectId());
             jCas.setDocumentLanguage(this.getDocument().getLanguage());
+
             pipe.process(jCas);
             annotations = getAnnotations(jCas);
 

@@ -8,7 +8,9 @@ import model.Document;
  */
 public abstract class Pipeline {
     private Document document;
+
     public Document getDocument() { return document; }
+
     public void setDocument(Document document) { this.document = document; }
 
     public abstract String preProcessDocument();

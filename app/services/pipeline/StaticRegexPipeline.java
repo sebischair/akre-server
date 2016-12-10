@@ -111,7 +111,7 @@ public class StaticRegexPipeline extends Pipeline {
         String[] lines = subString.split("\n");
         if(lines.length > 0) {
             String line = lines[lines.length - 1];
-            return !((line.contains("//") || line.contains("*")) && line.contains("wait") && name.contains("wait"));
+            return !((line.contains("//") || line.contains("*") || line.contains("' ")) && line.contains("wait") && name.contains("wait"));
         }
         return true;
     }

@@ -19,3 +19,5 @@ POST     /processCode                controllers.CodeController.processCode()
 POST     /project                    controllers.CodeController.createProject()
 GET      /pattern                    controllers.CodeController.pattern(projectId: String ?= "")
 POST     /pattern                    controllers.CodeController.updatePattern()
+
+POST     /getFileContent             controllers.getFileContent.upload()

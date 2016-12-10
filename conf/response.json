@@ -1,0 +1,1236 @@
+{
+  "documentHeader": "",
+  "documentFooter": "",
+  "documentSectionModelList": [
+    {
+      "paragraphs": [
+        "Icon ",
+        "This page has been imported from a text document - and is therefore NOT structured like a typical wiki space.",
+        "In any real project you should avoid overly long pages (like this one...) - maybe we will refactor it one day.",
+        "(any volunteers out there?)",
+        "Referenced Documents",
+        " "
+      ],
+      "title": "Financial Data Migration",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [],
+      "title": "Introduction and Goals",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "This document describes the system architecture of the MaMaMia Systems, which will be implemented with the purpose of migrating 20 million account users and their accompanying account data from the company, Fies & Teuer AG, a company in the finance sector.",
+        "(?@Gernot: migrate from the existing mainframe-application to new client-server system)\n ",
+        "Functional Context\nThe customer, Fies-und-Teuer-AG, wishes to implement MaMaMia has been in using a number of main-frame applications (Cobol, VSAM) to maintain clients, accounts and banking data.\nThe system will be replaced with a uniform Java application, which will be developed simultaneously in another parallel project.\nFies-und-Teuer AG has millions of customers in Germany and administers and maintains data for these clients, all in all, more than 20 million accounts.\nClients in this context refer to legal or personal entities as well as organizations (Clubs, associations, etc.)\nIn addition to booking information, accounts contain static or other financial information about the client or with the associated persons (for example, information about other family members, spouse etc.) or organizations (for example, a company owned or run by the account holder).\nThe content information of these accounts and booking information as well as their attributes have changed over the course of time in the business. To change to a new and consolidated object model a team of 20 experts have created hundreds of functional rules that must be adhered to in the migration process.\nAll existing data from the current format (VSAM data, EBCDIC code) muss be migrated to Java. This migration is part of the task of the MaMaMia systems that will be described in this document.\nThe following figure attempts to give you an overview of MaMaMia System's purpose.\n\nFigure 1: Zweck des Systems MaMaMia \n\nInitial State of Existing Data",
+        "Previously the data was organized according to the accounts ",
+        "For each operation the account had to first be identified by an administrator. Only then could a functional operation such as booking, information updates be carried out for the respective account holder.",
+        "Due to the increasing customer orientation in Fies-und-Teuer AG, data must be organized in the future in terms of account users",
+        "The output data is stored in the form of varying data on tape. These data entries are stored according to functional criteria in relation to each other.",
+        "The old keys and ratio systems must be replaced with new keys. For example: the old tariff rate, \"T13\" will be presented in the new system as follows: \"Annual payments without discount\".",
+        " "
+      ],
+      "title": "Overview: Functional Requirements",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Table 1: Architectural Goals\nAlthough not explicitly listed as a goal, the following aim is set forth as a worthwhile task:\nFlexibility and the easy alteration of the transformation rules (is not a mandatory requirement) as the migration will only take place once.\nNOTE: Although this task is not a primary goal, it is not part of the SAT 42 template. However when this aspect of the project is not highlighted in the system analysis section, it may be worth keeping this aspect in mind."
+      ],
+      "title": "Primary Architectural Goals",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Table 2: Stakeholder"
+      ],
+      "title": "Stakeholders",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [],
+      "title": "Constraints",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Table 3: Technical Prerequisites and Conditions \nNotes",
+        "TEC-04: For performance reasons pure technical transformations such as the EBCDI-ASCII conversion may be conducted in various languages (in this case in C). This compromise was achieved during the course of the project life-cycle.",
+        "TEC-05: The project that is running in parallel, KOUSYNE: the new account system to MaMaMia may produce structural changes that require continuous consultation and changes to the project."
+      ],
+      "title": "Technical Constraints",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Fies-und-Teuer AG is a fastidious client. The intricate and convoluted company structure and politics inherent in the company leads to long and complicated decision making processes, which may be motivated out of primarily fractional or political motives rather than being inspired by technical or functional considerations.\nFies-und-Teuer AG has long-standing contractual agreements and obligations with diverse IT service consultancies that may hinder its ability to select the necessary external experts in a free and competitive manner as and when the need arises. It is currently locked-in to its contractual obligations. \nAn excellent and effective quality assurance process requires useful and extensive documentation.",
+        "Table 4: Organizational Preconditions"
+      ],
+      "title": "Organizational Constraints",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Table 5: Conventions"
+      ],
+      "title": "Conventions",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [],
+      "title": "Context",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "",
+        "Figure 2: Functional Context",
+        " ",
+        "Table 6: Overview of external interfaces",
+        "NOTE: A decision has been made in agreement with the client to treat the database containing error data as an internal interface."
+      ],
+      "title": "Business Context",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "The migration will run on two separate servers: a migration server for actual data migration and to carry out the technical and functional transformation, and a second database server. The migrated data will be passed on to the target, KOUSYNE system via a Session Bean interface.\nPossible migration errors (missing data, data sets) will be persisted in a database server.\n",
+        "Figure 3: Technical Context",
+        " ",
+        "Table 7: Overview of the Technical System"
+      ],
+      "title": "Technical Context",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "All incoming data will be stored on individual LTO (LTO = Linear Tape Open, see en.wikipedia.org/wiki/Linear_Tape-Open-1) tapes for each delivered data type. Each of these tapes can contain up to 100 gigabytes of data. The exact data volume has not been specified by Fies & Teuer AG due to certain technical limitations.",
+        " ",
+        "Table 8: Overview of incoming Data Interfaces\nA detailed data record description of each data type and their variants is part of the system documentation.\nNOTE: In the real document, there should be a reference to the abovementioned document."
+      ],
+      "title": "Overview of Incoming Data (-interfaces)",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [],
+      "title": "Building Blocks View",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "\nFigure 4: Component View, Level 1 \n ",
+        "Level 1 Components",
+        "Migration Controller: channels and controls the other system components",
+        "VSAMReader: reads the VSAM data from the tapes and transfers them to a temporary relational database (migration database).",
+        "Segmentizer: divides the data into functionally compatible segments that can eventually be processed in parallel.",
+        "Packager: reads from a segment all data relating to one person in order to use that data as one unit of data to be migrated.",
+        "RuleProcessor: applies the functional migration rules to one package.",
+        "TargetSystemAdapter: interface to KOUSYNE",
+        "Migration Database: temporary data storage for all outgoing data and to be used as an error database.",
+        "\nRelationship and Dependencies",
+        "VSAM-Reader reads VSAM data",
+        "MigrationController calls <<other components>> for flow control",
+        "Konv-Fehler: conversion errors during the transformation from EBCDIC to ASCII",
+        "Seg-Fehler: segment errors, data records that cannot be assigned to a valid segment.",
+        "Pack-Fehler: errors during the read process when migrating a data package ( one that is composed of functionally compatible data records).",
+        "Rule-Fehler: errors during the migration process that occur when no appropriate migration rule is found or when there is a breach in plausibility.",
+        "Target-Fehler: target system does not accept the migrated data",
+        "Target-System-Adapter transfers migrated data to KOUSYNE",
+        "\nLocal Design Decisions \nIn order to resolve the MaMaMia migration task we will be using a modified pipe and filter architecture pattern, which is described in detail in the book, \"Pattern-Oriented Software Architecture\" by Buschman et.al.\nOne of the major reasons for selecting this architecture is that it provides the possibility of parallelizing components if and when the need arises.\nRejected Design Alternatives \nNone\nReferences\nNone\nOpen Issues\nThe \"Reporting and Analysis\" interface has not been documented as yet.\nNOTE: In the real document external interface must be documented"
+      ],
+      "title": "Whitebox - Level 1",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Table 1 Blackbox Description of Migration Controller"
+      ],
+      "title": "Blackbox Description of the Migration Controller",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Table 2 VSAM-Reader"
+      ],
+      "title": "Blackbox Description of the VSAM-Reader",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Table 3 Segmentizer"
+      ],
+      "title": "Blackbox Description of the Segmentizer",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Table 4 Migration Database"
+      ],
+      "title": "Blackbox Description of the Migration Database",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "See chapter on \"Rule Processor\""
+      ],
+      "title": "Blackbox Description of the Packager",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Table 5 Rule Processor (and Packager"
+      ],
+      "title": "Blackbox Description of the Rule Processor (and Packager)",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Table 6 Target System Adapter"
+      ],
+      "title": "Blackbox Description of Target System Adapter",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "This chapter describes the level-2 components. Since this document serves mostly as a guidance template, the information provided here is limited.\nIn the real document, concentrate on capturing the most important components but make sure you explain or give plausible reasons for not providing a detailed picture of all components."
+      ],
+      "title": " Building Block Level 2",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "\nFigure 5: Internal Structure of the VSAMReader\nA decisive separation between the VSAMReader within the EBCDIC-ASCII converter and the individual specific reader components may have been conceptually a desirable option. However, this was rejected by the development team on the grounds that it would cause too much intricate and complex structuring work and it was decided to opt for a more pragmatic solution.\nThe relationship between the Reader components and the EBCDIC2ASCII-Converter components are pure usage relationships. The individual readers write their results into the migration database.",
+        "Table 7 VSAMReader Level 2"
+      ],
+      "title": "White Box View of VSAM-Reader",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        " ",
+        "Table 8 Person, Bank Data, Address and KontoReader (Account Reader)"
+      ],
+      "title": "Person- Bank Date-, Adress-and KontoReader",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Table 9 EBCDIC2ASCIIConverter"
+      ],
+      "title": "EBCDIC2ASCIIConverter",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "The actual work of functionally migrating the data records is carried out by the Rule Processor. It combines the various categories of input data (persons, accounts, bank and address data) together and processes all functional exceptions. In particular the Rule Processor is responsible for the reorganization of the data in such a way that in future instead of the account being viewed as the starting point for the data navigation, the system starts with persons. \n\nFigure 6: Internal Structure of the RuleProcessor",
+        "Table 10 RuleProcessor\nAs this is simply a sample document, only two components will be described here, the UseCaseDispatcher and the PersonMapper for illustration purposes. In the actual document all components should be described from a white box perspective using the black box templates as reference material."
+      ],
+      "title": "White Box Perspective of the Component: RuleProcessor",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        " ",
+        "Table 11 UseCaseDispatcher"
+      ],
+      "title": "UseCaseDispatcher",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Table 12 NatPersonMapper \nOther components will not be described in this example"
+      ],
+      "title": "NatPersonMapper",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "In the real document (this document is only a sample or template) this would serve as a very important chapter in which repetitive patterns can be described.\nCommon use cases include, for example:",
+        "Data Access Objects or similar contstructs that aid in object persistence",
+        "Model-View-Controller constructs, that typically map the business objects to the graphical user interface.",
+        "This section should be displayed as shown here as 4.A but MS Word does not support such a numbering format."
+      ],
+      "title": "4.A Typical Structures and Patterns",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        " ",
+        "Tabelle 9: Übersicht der dargestellten Laufzeit-Szenarien\nNOTE: In the real document, you will probably outline many scenarios here. The example provided in this sample (template) document is as such not typical as only a single scenario is outlined here."
+      ],
+      "title": "Runtime View",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "In the first phase each - of the readers within the VSAMReader - reads the delivered data (tapes) and fills the migration database with the data. Next, the Segmentizer distributes the data in parallel to the segments which can be processed.\nThe RuleProcessor allows access via the Packager to all the data that is required for the migration of a person or an account from the migration database. It is selected and enables the functional rules from the data package.\nThe TargetSytemAdapter transfers the migrated data to the target system, KOUSYNE.\n\nFigure 7: Runtime Scenario: Complete Migration Process"
+      ],
+      "title": "Runtime Scenario: The Overall Migration",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Description is not applicable to the example"
+      ],
+      "title": "Run Time Scenario: Integration with KOUSYNE",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "A description of the software components seen from the perspective of the various distributed artifacts."
+      ],
+      "title": "Deployment Overview",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "The entire migration takes place on a standalone Linux Server (migration 2) on which an Application server (EJB Container), hosting a number of parallel instances of the actual migration components (Packer and RuleProcessor), is runing\nUsing a fast bus this server is connected to the database server (migration 1) which contains the VSAM Reader and Segmentizer. The VSAM Reader and Segmentizer are responsible for the initial work of filling up the migration database.\nIn the actual system architecture document you should provide more information about the hardware (computer, network, bus system etc.)\n\nTable 8. Deployment Variant 1"
+      ],
+      "title": "Deployment Variant 1: Dual-Server",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Tabelle 10: Node description of the Server in Migration 1"
+      ],
+      "title": "Node Migration-1",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Not required for the example"
+      ],
+      "title": "Node Migration 2",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "A description of the channels between the nodes are not required for this example\nThese channels to external systems usually exist and can be cross-referenced.Channels that are internal to the system should be specified further in the real document for a real use case scenario."
+      ],
+      "title": "Description of the channels for the first deployment (distribution?) variant",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "The second variant of the deployment perspective of MaMaMia uses only one server. All application components run on this server.\n\nAbbildung 9. Verteilungssicht Variante 2: Single-Server\nThe node and channels will not be described in this example."
+      ],
+      "title": "Deployment Variant 2: Single-Server",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [],
+      "title": "Architectural and Technical Cross-Cutting Concerns",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "This section deals primarily with data storage and other related themes such as caching, transaction handling, locking the database and archiving"
+      ],
+      "title": "Persistence and Related Themes",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "A Java Framework based on J2EE (Bean Managed Persistence) undertakes the work of saving the data in the target system (the system into which MaMaMia delivers the migrated data via the TargetSystemAdapter)\nAs such the issue of persistence becomes irrelevant: if an object graph is created in the memory, it can be handed over to the TargetSytemAdapter in its entirety. The persistence is contained in the target system and is not a task for MaMaMia."
+      ],
+      "title": "Persistence of Migrated Data",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "The input data in sequential VSAM format will be written into the migration database via JDBC and SQL. All erroneous data records will also be written into the error database using JDBC and SQL."
+      ],
+      "title": "Persistence of the Interim Format und Error Situations",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "The migration database acts as a cache between the VSAM tapes and the actual migration.\nA volatile cache is not envisioned for this scenario"
+      ],
+      "title": "Caching",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Each instance of a migration step is saved in its state in a complete data record, after the migration of a record and its storage in the target or error database."
+      ],
+      "title": "Transaction Handling",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Not applicable for this scenario."
+      ],
+      "title": "Locking the Database",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Not applicable for this scenario as no data is archived."
+      ],
+      "title": "Archiving",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Not applicable as usage is only possible via the command shell.\nNo requirements in terms of ergonomics or internationalization."
+      ],
+      "title": "Graphical User Interface",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "The coordination and automatic sequence control of all the migration processes will be handled by the MigrationController. This means that at any point in time it is possible to restart the application."
+      ],
+      "title": "Flow Control",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Structural changes related to authorization are not necessary as only authorized administrators are allowed to start the processes.",
+        "Security of the original and target data is ensured via the respective applications.",
+        "The security of all temporary data, especially the data in the migration database will be saved by applying a secondary organizational measure. The hard disk will be overwritten with random data to ensure that all temporary data is permanently deleted."
+      ],
+      "title": "Security Issues (Safety, Security, Authentication, Authorization)",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Not applicable as MaMaMai does not have user sessions."
+      ],
+      "title": "Session or State Handling",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Due to cost constraints and licensing issues the customer has declined the option of using commercial rule machines such as Fairlsaac & ILOG to name a few.\nThe business rules, in this case, the migration rules, will be implemented in Java."
+      ],
+      "title": "Business Validation and Plausibility Rules",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "The integration with the source system is carried out by exchanging VSAM tapes.\nIntegration mit dem Zielsystem über Java 2 Session-Beans und den Java Application Server. Der Objektgraph der migrierten Daten wird als POJO-Parameter übermittelt."
+      ],
+      "title": "Communication and Integration",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "As the customer has deemed that an extremely strict accuracy must prevail, all exceptions, for example, data that cannot be migrated because it contains erroneous data records will be stored in the error database.\nThis data will then be manually migrated. For this work, the customer has set aside 200 person days. Each day a staff member can migrate approximately 25 records. As such, the error table should not contain more than 500 (20*25) data records."
+      ],
+      "title": "Exception and Error Handling",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Not applicable as there is an error database which makes the need for any extra logging and protocols unnecessary."
+      ],
+      "title": "Logging, Protocols and Tracing",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Not applicable because a connection to the management system (IBM Tivoli) is not required."
+      ],
+      "title": "System Management and Administration",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Not applicable, as there are no configuration or installation parameters."
+      ],
+      "title": "Configuration (Installation and Runtime)",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Die Parallelisierung der Migration wird durch die Segmentierung vorbereitet und durch die Verteilung der verschiedenen Segmente auf unterschiedliche Instanzen des eingesetzten Application-Servers realisiertSorry, lost in translation. I don't really know what this means..\nThe parallelization of the migration is prepared for by the Segmentizer and by the distribution of the segments into various instances of the application server. \nMaMaMia does not have to write or generate any source code for this parallelization work."
+      ],
+      "title": "Scaling, Parallelizing und Threading",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Not applicable, as the application will only run once."
+      ],
+      "title": "High Availability and Disaster Recovery",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Functional tests will be conducted manually. All test cases will be transferred as JUnit Tests to be used in the regression testing process."
+      ],
+      "title": "Testing",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Since that is the prime goal of the system as such no further explanation is required here."
+      ],
+      "title": "Migration of Old System and its Corresponding Data",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "This section deals with the development of relevant themes, primarily those dealing with development and the build environment. In addition this is the section where code generation will be discussed."
+      ],
+      "title": "Development Environment",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "There will be no code generation, all code will be manually written."
+      ],
+      "title": "Code Generation",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Not relevant here as it is covered in the Developer's Guide.\nNOTE: There should be a reference here to the corrresponding developer guide in a real life use case scenario."
+      ],
+      "title": "Build-Management",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        " ",
+        "Table 11: Central Design Decisions"
+      ],
+      "title": "Conceptual Design Decisions",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "ToDo: in progress"
+      ],
+      "title": "Possible Scenarios to Evalaute System Architecture",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "A few words of explanation regarding this project: This project really did take place and the \"MaMaMia System\" was really developed. The customer, referred to throughout this document as \"Fies and Teuer\" had a different name. The name was changed to protect the identity of the customer. Some functional aspects of this project have also been modified in this template document.\nThe actual migration project took place between 2002 and 2003 somewhere in Germany. Over a period of 12 months 10 domain experts analyzed the logic and business rules of the mainframe system and based on that, they created a functional migration concept. At that point it was necessary to take into consideration the burden of providing a plausible justification or evidence for the project scope and the legal framework within which it had to be carried out. \n.Based on these requirements and constraints a team of over 12 developers and architects designed and developed software that was fit for use.\nSome of the hurdles and challenges faced along the way included:",
+        "The data quality of the outgoing data varies greatly. This forced the project to modify its initial \"mandatory\" and \"optional\" categories so that the data fields were limited because 2 to 3 % of the 20 million personal data records were not required (today). \"Must\" attributes were preseved",
+        "Logical or functional attributes were sometimes extremely convoluted in order to save proccesor space and that made it difficult to identify them. For example: ",
+        "If the attribute pertains to a Type 42 case, then enter Bit 4 (in EBDIC format) for the data records to determine if the scenario involves a completed and cancelled bookings.",
+        "The logic of the existing programmes sometimes extended beyond 30 years and this proved to be challenging since some of original programmers who wrote the code were no longer available for consultation.",
+        " "
+      ],
+      "title": "The Project Management Perspective",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Not applicable in this example."
+      ],
+      "title": "Glossary",
+      "headerSection": true
+    },
+    {
+      "paragraphs": [
+        "Not required in this example."
+      ],
+      "title": "Index",
+      "headerSection": true
+    }
+  ],
+  "docTableList": [
+    {
+      "rows": [
+        [
+          "Mass Data Migration from Mainframe to Java"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "Document",
+          "Location",
+          "Status/Version"
+        ],
+        [
+          "VSAM",
+          "IBM-Redbook zu VSAM: http://www.redbooks.ibm.com/abstracts/sg246105.html",
+          " "
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "Nr",
+          "Architekturziel",
+          "Beschreibung / Verweis"
+        ],
+        [
+          "AZ-1",
+          "Error-free",
+          "Due to the prevailing legal framework pertaining to the situation of the customer, there is zero tolerance for errors in the data migration."
+        ],
+        [
+          "AZ-2",
+          "Performance",
+          "The entire migration process (approximately 100 Million) data records must be migrated within 24 hours."
+        ],
+        [
+          "AZ-3",
+          "Security",
+          "All data are subject to stringent confidentiality laws. No data may trickle out of the company without making that particular data anonymous."
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "Name / Role",
+          "Goal / Boundary",
+          "Expected Participation and Contribution"
+        ],
+        [
+          "Client: Fies-und-Teuer AG",
+          "Migration of the existing data, personal, bank, account and booking information",
+          "Providing functional know-how in identifying rules for data migration."
+        ],
+        [
+          "Vendor: Datacenter used by Fies-und-Teuer AG",
+          "The entire migration process is to be completed in 24 hours on a Saturday.",
+          "Agreement on the technical format for handing over the project.Including Development in the techical conversion process, especially the implementation of EBDIC into ASCII"
+        ],
+        [
+          "Regulatory Authority",
+          "Observation",
+          "Proof of judicial criteria especially those pertaining to an error-free migration."
+        ],
+        [
+          "Fies-und-Teuer Customers",
+          "Correct migration",
+          "Is not expected to be a part of the project. If errors occur during migration, one may encounter legal consequences from the customer."
+        ],
+        [
+          "Yellow Press",
+          "Suspicious observation of all Fies-und-Teuer activities.",
+          "The yellow press has decided to keep an eye on the company and to report any misconduct or other suspicious activtities and publish them."
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "ID",
+          "Conditions",
+          "Description"
+        ],
+        [
+          "TEC-01",
+          "VSAM-Data is in EBCDIC code",
+          "Input data exists and is available in EBCDIC code"
+        ],
+        [
+          "TEC-02",
+          "Input data is not sorted",
+          "Eine Vorsortierung der Ausgangsdaten durch die Fies-und-Teuer AG ist nicht möglich."
+        ],
+        [
+          "TEC-03",
+          "Infrastructure of Target System",
+          "Sun-Solaris with and Oracle Database, J2EE-compliant Application-Server"
+        ],
+        [
+          "TEC-04",
+          "Code in Java",
+          "Code must be written in Java."
+        ],
+        [
+          "TEC-05",
+          "Data structure of Target System",
+          "Das Objektmodell des Zielsystems wird durch das Parallelprojekt vorgegeben."
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "ID",
+          "Preconditions",
+          "Description"
+        ],
+        [
+          "ORG-01",
+          "Migration in 24h",
+          "Due to the prevailing conditions of the internal business processes, the data center migration must occur on a Saturday and must be accomplished within 24 hours."
+        ],
+        [
+          "ORG-02",
+          "Documentation",
+          "Extensive documentation about the existing and new system and processes will be created as part of a pro-active stance towards quality assurance."
+        ],
+        [
+          "ORG-03",
+          "External personnel may only be selected from the existing delivery pool.",
+          "External personnel may only be recruited from Fies-und-Teuer's existing pool of IT consultancy suppliers as outlined in their existing contracts."
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "ID",
+          "Preconditions",
+          "Description"
+        ],
+        [
+          "KONV-01",
+          "CM-Synergy for Version Control",
+          "All software development in Fies-und-Teuer projects will de done in CM Synergy"
+        ],
+        [
+          "KONV-02",
+          "Sun Java Coding Standard",
+          "All Java programs must comply to the Sun Java coding standards"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "Interface",
+          "Description",
+          "Technology"
+        ],
+        [
+          "VSAM Data",
+          "Four types of data (personal data, address data, bank and bank account data)",
+          "LTO-1, see section 3.2.1."
+        ],
+        [
+          "Migrated Data",
+          "Compliant to the object model design specified by KOUSYNE",
+          "Transfer as object graphs via a session bean."
+        ],
+        [
+          "Reports, Statistics",
+          "During the migration reports and statistics will be continuously generated about the number of migrated persons. After the migration information will be available about missing data and errors.",
+          "Console"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "External System",
+          "Description"
+        ],
+        [
+          "Mainframe",
+          "The existing mainframe at Fies & Teuer"
+        ],
+        [
+          "Migration Server",
+          "Responsible for the migration which has at its core a J2EE compliant application server."
+        ],
+        [
+          "Database Server",
+          "Stores temporary data during the migration and contains the error database."
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "Incoming Data",
+          "Description"
+        ],
+        [
+          "Account Data",
+          "Inspite of its title this volume contains booking and account transaction data for all acounts. \nInternal record description \nVariables Satzformat mit 5-25 Feldern, gemäß FT-Satzart 43."
+        ],
+        [
+          "Personal Data",
+          "Master data in Fies-und-Teuer AG that is handled by persons and organizations (companies, associations, foundations, public offices) \nVariables Satzformat mit 15-50 Feldern, gemäß FT-Satzart 27."
+        ],
+        [
+          "Address Data",
+          "Address and address data, including information about all permissible recipients, location and postal code, information regarding headquarters and other addresses (central, branches) for organizations and companies."
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "Migration Controller",
+          " "
+        ],
+        [
+          "Purpose and responsibility",
+          "The Migration Controller coordinates the migration process which consists of a Java class with a detailed exception and error handling capacity as well as"
+        ],
+        [
+          "Interfaces",
+          "Direct calls to the rest of the involved Java components."
+        ],
+        [
+          "Fulfilled Requirements",
+          "Guarantees the automatic activation of the entire migration process or as the case may be the resumption of the activity in case the process aborts suddenly."
+        ],
+        [
+          "Variations",
+          "None"
+        ],
+        [
+          "Source Code Artifacts",
+          "de.fiesteuer.mamamia.core.MigrationController.java"
+        ],
+        [
+          "Further Information",
+          "It contains an interface for reporting and analysis (not visible in the diagram)."
+        ],
+        [
+          "Open Issues",
+          "None"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "VSAM-Reader",
+          " "
+        ],
+        [
+          "Purpose and responsibility",
+          "Convert data records from VSAM format (EBCDIC code) into an ASCII or UNICODE format that is editable in UNIX. At the same time the properties of the VSAM data (parts of the data may have individual bits or bit groups that may have a special purpose or meaning in the EBDIC format) will be resolved into individually identifiable data elements. The VSAM Reader does not perform any semantic checks, it only provides format conversion."
+        ],
+        [
+          "Interfaces",
+          "Input: VSAM data – for each data type (personal account, address and bank data) there is a reader component, that recognizes the respective data record layout. \nOutput: Records in the migration database (tables, TPersons, TAdresses; TBankdata, TAccountdata). \nOnce the read process is completed the VSAMReader writes its status into the migration database. This then prompts MigrationController to continue with"
+        ],
+        [
+          "Fulfilled Requirements",
+          "Input data successfully read and written into the database"
+        ],
+        [
+          "Variability",
+          "None."
+        ],
+        [
+          "Storage Location",
+          "VSAMReader.java. \nFor a more detailed description of this component as a white box entity, see 4.2.1"
+        ],
+        [
+          "Further Information",
+          "For performance reasons, some parts of this component were written in C."
+        ],
+        [
+          "Open Issues",
+          "None."
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "Segmentizer",
+          " "
+        ],
+        [
+          "Purpose and responsibility",
+          "Preparation work to parallelize the \"Rule Processor\", which involves the correct allocation of the individual data records of the various data sources (personal account, address and bank data) into related data groups or segments. Elements that belong to one segment can be worked upon and processed independently of other segments. It is necessary to divided the input data into 3 to 5 different segments"
+        ],
+        [
+          "Interfaces",
+          "Data records of the migration database."
+        ],
+        [
+          "Fulfilled Requirements",
+          "Not applicable"
+        ],
+        [
+          "Variability",
+          "None"
+        ],
+        [
+          "Source Code Artifacts",
+          "de.fiesteuer.mamamia.segmentizer.Segmentizer.java"
+        ],
+        [
+          "Further Information",
+          "For each record in the migration database there is a reference to the segment to which it belongs. The segment numbers are whole numbers."
+        ],
+        [
+          "Open Issues",
+          "None"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "Migration Database",
+          " "
+        ],
+        [
+          "Purpose and responsibility",
+          "This component saves the converted and segmented migration data. It serves as the pipe in the pipe and filter architecture pattern and does not contain any further logic. The migration database is a collection of tables in a relational database (person, account, bank, address, plus a number of key tables)"
+        ],
+        [
+          "Open Issues",
+          "None"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "Segmentizer",
+          " "
+        ],
+        [
+          "Purpose and responsibility",
+          "Creates an object graph with the associated person (natural or non-natural, legal entities, companies, associations, et cetera) as a root node together with all functional objects which appear as branches (bank account details, accounts, bookings, addresses, postal addresses, legal proxy) \nThe rule processor carries out the actual functional migration steps to create the new (person-oriented) representation from of the old data-oriented version. This operation may require several iterations. \nExamples:To migrate the information of a married person all information about the spouse must also be added (for example, the family status, married, widowed, or divorced).Data about legal guardians need to be migrated for a child or minor.When migrating information about companies all information pertaining to that company, including previous ownership of the company, its type & form must also be migrated. This applies to organizations and associations. \n\nIn order to ensure that all functionally relevant and co-dependent data and data groups are simultaneously migrated this data must be packaged prior to migration. This work is undertaken by the Packager component. \nNOTE: In the actual document, add all the necessary examples and references."
+        ],
+        [
+          "Interfaces",
+          "Incoming: Functionally co-dependent data packages that the packager puts together. \nOutgoing: Migrated data in the form of object graphs or entries in the error database."
+        ],
+        [
+          "Fulfilled Requirements",
+          "Not applicable"
+        ],
+        [
+          "Variability",
+          "None as the migration rules are coded in Java classes and not variable."
+        ],
+        [
+          "Source Code Artifacts",
+          "de.fiesteuer.mamamia.ruleprocessor.RuleProcessor.java"
+        ],
+        [
+          "Further Information",
+          "None"
+        ],
+        [
+          "Open Issues",
+          "None"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "Target System Adapter",
+          " "
+        ],
+        [
+          "Purpose and responsibility",
+          "Once the Rule Processor finishes creating object graphs, the Target System Adaptor transforms them into object models in the target system. \nAfter the data is successfully committed into the target system, the Adaptor sends a message back. In the event of an error the complete object graph and the error message from the target system is written into the error database."
+        ],
+        [
+          "Interfaces",
+          "Incoming: Object graph with an instance of the person as a root. \nOutgoing: Transferring of this graph to the target system."
+        ],
+        [
+          "Fulfilled Requirements",
+          "Migrated data stored in the target system."
+        ],
+        [
+          "Variability",
+          "None"
+        ],
+        [
+          "Source Code Artifacts",
+          "de.fiesteuer.mamamia.targetsystem.TargetSystemAdapter.java"
+        ],
+        [
+          "Further Information",
+          "None"
+        ],
+        [
+          "Open Issues",
+          "None"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "VSAMReader Level 2",
+          " "
+        ],
+        [
+          "Components",
+          "PersonReader NatPersonReaderNichtNatPersonReaderAdressReaderBankDatenReaderKontoReaderEBCDIC2ASCIIConverter"
+        ],
+        [
+          "Relationships and Dependencies",
+          "The relationship within the VSAMReader is based on calls..The *Reader components read from the respecitve tapes."
+        ],
+        [
+          "Local Design Decisions",
+          "Not applicable"
+        ],
+        [
+          "Discarded Alternatives",
+          "None"
+        ],
+        [
+          "Further Information",
+          "None"
+        ],
+        [
+          "Open Issues",
+          "None"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "Person, Bank Data, Address and KontoReader (Account Reader)",
+          " "
+        ],
+        [
+          "Purpose and responsibility",
+          "In each case the Reader components read a specific data type from its \"own\" input tape. It checks the overall data in each individual attribute. \nThe individual Reader encapsulates the syntax of the \"old\" VSM data representation as well as the technical details of the encoding."
+        ],
+        [
+          "Interfaces",
+          " "
+        ],
+        [
+          "Fulfilled Requirements",
+          " "
+        ],
+        [
+          "Variability",
+          "None"
+        ],
+        [
+          "Source Code Artifacts",
+          "Classes in the package: de.fiesteuer.mamamia.reader.*"
+        ],
+        [
+          "Further Information",
+          "<Note to Author: Add a diagram here to describe the packaged data.>"
+        ],
+        [
+          "Open Issues",
+          "None"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "EBCDIC2ASCIIConverter",
+          " "
+        ],
+        [
+          "Purpose and responsibility",
+          "Converts the character string from EBCDIC to ASCII."
+        ],
+        [
+          "Interfaces",
+          "Input: String (in EBCDIC-Code), maximum length 256 characters \nOuput: String (in ASCII or in UNICODE), maximum length 256 characters."
+        ],
+        [
+          "Fulfilled Requirements",
+          "The input data is delivered in EBCDI code format, the target system requires ASCII or UNICODE."
+        ],
+        [
+          "Variability",
+          "None"
+        ],
+        [
+          "Source Code Artifacts",
+          "EBCDIC2ASCIIConverter.c"
+        ],
+        [
+          "Further Information",
+          "For more information on EBCDIC, http://en.wikipedia.org/wiki/EBCDIC"
+        ],
+        [
+          "Open Issues",
+          "None"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "RuleProcessor Level 2",
+          " "
+        ],
+        [
+          "Components",
+          "UseCaseDispatcherNichtNatPersonMapperNatPersonMapperEhegattenMapperAdressMapperBankdatenMapperKontoMapper"
+        ],
+        [
+          "Relationships and Dependencies",
+          " "
+        ],
+        [
+          "Local Design Decisions",
+          "See chapter 8: Design Decisions"
+        ],
+        [
+          "Discarded Alternatives",
+          "None"
+        ],
+        [
+          "Further Information",
+          "None"
+        ],
+        [
+          "Open Issues",
+          "None"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "UseCaseDispatcher",
+          " "
+        ],
+        [
+          "Purpose and responsibility",
+          "Based on the available constellation of data the UseCaseDispatcher decides which functional mapper components need to be called. This decision making process is not trivial. At times, in addition to reading the available data, further data records must be read in order to come to a conclusive decision. \nThis interaction between the UseCaseDispatcher and the Package are not displayed in the diagram. \nExample:One-person companies deemed non-natural persons can partly be mapped using the NatPersonenMapper depending on the date on which the company was established, the progress of the company, its history. This only applies to a single-person company and cannot be applied to companies that have more than one person in it. \n\n\nNatürliche Personen, die in der Vergangenheit Mitinhaber von Mehrpersonengesellschaften gewesen sind und darüber hinaus heute noch als Unternehmer tätig sind, müssen in Abhängigkeit von der Rechtsform der früheren Gesellschaft sowohl als natürliche als auch als nichtnatürliche Person geführt werden. Die Konto- und Buchungsinformationen sind entsprechend aufzuteilen???"
+        ],
+        [
+          "Interfaces",
+          "Not described here"
+        ],
+        [
+          "Fulfilled Requirements",
+          "Not applicable"
+        ],
+        [
+          "Variability",
+          "None"
+        ],
+        [
+          "Source Code Artifacts",
+          "Not required for this example"
+        ],
+        [
+          "Further Information",
+          "None"
+        ],
+        [
+          "Open Issues",
+          "None"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "NatPersonMapper",
+          " "
+        ],
+        [
+          "Purpose and responsibility",
+          "This is created out of the input data for a natural person in a new object model and next it fills up the required information for address, bank and account data. If the case applies to a married man, his spouse (including any ex-wives) will be migrated as well."
+        ],
+        [
+          "Interfaces",
+          "Not described here"
+        ],
+        [
+          "Fulfilled Requirements",
+          "Not applicable"
+        ],
+        [
+          "Variability",
+          "None"
+        ],
+        [
+          "Source Code Artifacts",
+          "Not required for this example"
+        ],
+        [
+          "Further Information",
+          "None"
+        ],
+        [
+          "Open Issues",
+          "None"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "Scenario",
+          "Purpose and Short Description"
+        ],
+        [
+          "Overall Migration",
+          "Describes the overall migration process for MaMaMia"
+        ],
+        [
+          "Integration with KOUSYNE",
+          "Shows how MaMaMia integrates and works with the KOUSYNE system with special emphasis on the functions of the TargetSystemAdapter component."
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "Element",
+          "Description"
+        ],
+        [
+          "Name",
+          "Migration-1"
+        ],
+        [
+          "Description",
+          "The hardware suppliers who will provide loaned hardware for the migration process \nOperating System: Suse Enterprise Linux (V 9 and upwards)"
+        ],
+        [
+          "Characteristics",
+          "Intel Dual Core, 8 Gbyte CPU, SATA-Raid-5, 500 Gb"
+        ],
+        [
+          "Relevant Software Components",
+          "Datenbase: Oracle 9i Runtime (Full Installation) \nMaMaMia: VSAM-Reader, Segmentizer Migrations- and Target Database."
+        ],
+        [
+          "Other Administration Issues",
+          "None."
+        ],
+        [
+          "Open Issues",
+          "KeineNone"
+        ]
+      ]
+    },
+    {
+      "rows": [
+        [
+          "Decisions",
+          "Date and Name of Decision Maker",
+          "Justification, Consequences and Alternatives"
+        ],
+        [
+          "Description of the migration logic in Java, NOT in pseudocode.",
+          "PL",
+          "Nach einigen Versuchen, unter anderem mit eigens formulierten Regelsprachen (mit Lex und Yacc) befand das Entwicklungsteam, dass eine Umsetzung fachlicher Regeln in eine solche Regelsprache keine wesentliche Vereinfachung gegenüber der Programmierung in Java gebracht hätte."
+        ],
+        [
+          "No commercial rule interpreter",
+          "PLWhat is PL? \n\nProject Leader",
+          "After investigating various commercially available rule machine tools, the project team decided against using those tools. \nSee decisions relating to rule language \nNOTE: With the benefit of hindsight, today I would propose the rethinking the issue and contemplating the use of Open Source Rule Frameworks such as JBoss Drools and check ist viability for a project of similar scope."
+        ],
+        [
+          "Pipes and Filter Architecture",
+          "Architect or Developer",
+          "The parallelization of the actual migration rules (for example, in RuleProcessor) can be significantly simplified. \nNo GUI implementation required."
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,988 @@
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c8d"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":-1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c8e"},"className":"model.DBpediaToken","name":"SUSE Linux Enterprise Server","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c90"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":-1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c91"},"className":"model.DBpediaToken","name":"Apache","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c92"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":-1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c93"},"className":"model.DBpediaToken","name":"Windows Server 2012 R2","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c8f"},"className":"model.DBpediaToken","name":"Java","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c94"},"className":"model.DBpediaToken","name":"Java Servlet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c95"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":-1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c96"},"className":"model.DBpediaToken","name":"Apache Webserver","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c97"},"className":"model.DBpediaToken","name":"Servlet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c98"},"className":"model.DBpediaToken","name":"Apache Tomcat","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c99"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":-1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c9a"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":-1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c9b"},"className":"model.DBpediaToken","name":"HTTP","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c9c"},"className":"model.DBpediaToken","name":"HTTPS","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c9d"},"className":"model.DBpediaToken","name":"Internet Information Server","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c9e"},"className":"model.DBpediaToken","name":"Siemens","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782c9f"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":-1}
+{"_id":{"$oid":"5821c4f9c2f0d00e58782ca0"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":-1}
+{"_id":{"$oid":"5821c4fac2f0d00e58782ca1"},"className":"model.DBpediaToken","name":"Tomcat","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4fac2f0d00e58782ca2"},"className":"model.DBpediaToken","name":"Webserver","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4fbc2f0d00e58782ca3"},"className":"model.DBpediaToken","name":"Vaadin","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4fbc2f0d00e58782ca4"},"className":"model.DBpediaToken","name":"web container","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4fbc2f0d00e58782ca5"},"className":"model.DBpediaToken","name":"file system","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4fbc2f0d00e58782ca6"},"className":"model.DBpediaToken","name":"Spring Security","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4fbc2f0d00e58782ca7"},"className":"model.DBpediaToken","name":"IAM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821c4fcc2f0d00e58782ca8"},"className":"model.DBpediaToken","name":"Google Guice","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821e064c2f0d00e58782cb3"},"className":"model.DBpediaToken","name":"Apache Pig","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821e064c2f0d00e58782cb4"},"className":"model.DBpediaToken","name":"Postgres","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821e064c2f0d00e58782cb5"},"className":"model.DBpediaToken","name":"Maven","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821e064c2f0d00e58782cb6"},"className":"model.DBpediaToken","name":"SQL","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821e065c2f0d00e58782cb7"},"className":"model.DBpediaToken","name":"Eclipse IDE","type":"dbpedia","score":1}
+{"_id":{"$oid":"5821e065c2f0d00e58782cb8"},"className":"model.DBpediaToken","name":"JUnit","type":"dbpedia","score":1}
+{"_id":{"$oid":"5822eb53f18e9007d84cfac0"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"5822eb53f18e9007d84cfabf"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"5822eb54f18e9007d84cfac1"},"className":"model.DBpediaToken","name":"relational database","type":"dbpedia","score":1}
+{"_id":{"$oid":"5822eb54f18e9007d84cfac2"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"5822eb54f18e9007d84cfac3"},"className":"model.DBpediaToken","name":"Websphere Application Server","type":"dbpedia","score":1}
+{"_id":{"$oid":"5822eb64f18e9007d84cfac4"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":-1}
+{"_id":{"$oid":"5822eb7cf18e9007d84cfac5"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":-1}
+{"_id":{"$oid":"582324c9f18e9007d84cface"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":-1}
+{"_id":{"$oid":"58234645f18e9007d84cfacf"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":-1}
+{"_id":{"$oid":"58234830f18e9007d84cfad2"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234919f18e9013f49a3b59"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234bbef18e9013f49a3b5a"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234c9bf18e9013f49a3b5d"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234cdef18e9013f49a3b5e"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234cdef18e9013f49a3b5f"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234ce0f18e9013f49a3b60"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234ce0f18e9013f49a3b61"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234ce1f18e9013f49a3b62"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234ce2f18e9013f49a3b63"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234cf4f18e9013f49a3b64"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234cf4f18e9013f49a3b65"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234cf5f18e9013f49a3b66"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234cf5f18e9013f49a3b67"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234cf6f18e9013f49a3b68"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234cf7f18e9013f49a3b69"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d59f18e9013f49a3b6a"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d59f18e9013f49a3b6b"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d59f18e9013f49a3b6c"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d59f18e9013f49a3b6d"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d59f18e9013f49a3b6e"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d5af18e9013f49a3b6f"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d5af18e9013f49a3b70"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d5af18e9013f49a3b71"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d5bf18e9013f49a3b72"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d5bf18e9013f49a3b73"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d5bf18e9013f49a3b74"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d5bf18e9013f49a3b75"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d5cf18e9013f49a3b76"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d7ff18e9013f49a3b77"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d7ff18e9013f49a3b78"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d7ff18e9013f49a3b79"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d7ff18e9013f49a3b7b"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d7ff18e9013f49a3b7a"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d7ff18e9013f49a3b7c"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d7ff18e9013f49a3b7d"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d7ff18e9013f49a3b7e"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d81f18e9013f49a3b7f"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d81f18e9013f49a3b80"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d81f18e9013f49a3b81"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d81f18e9013f49a3b82"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234d82f18e9013f49a3b83"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e40f18e9013f49a3b84"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e40f18e9013f49a3b85"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e41f18e9013f49a3b86"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e41f18e9013f49a3b87"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e41f18e9013f49a3b88"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e41f18e9013f49a3b89"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e41f18e9013f49a3b8a"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e41f18e9013f49a3b8b"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e42f18e9013f49a3b8c"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e42f18e9013f49a3b8d"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e42f18e9013f49a3b8e"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e42f18e9013f49a3b8f"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e44f18e9013f49a3b90"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e6ff18e9013f49a3b93"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e6ff18e9013f49a3b94"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e6ff18e9013f49a3b95"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e6ff18e9013f49a3b96"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e6ff18e9013f49a3b97"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e70f18e9013f49a3b98"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e70f18e9013f49a3b99"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e70f18e9013f49a3b9a"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e70f18e9013f49a3b9b"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e70f18e9013f49a3b9c"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e70f18e9013f49a3b9d"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e70f18e9013f49a3b9e"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e70f18e9013f49a3b9f"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e71f18e9013f49a3ba0"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e9af18e9013f49a3ba1"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e9af18e9013f49a3ba2"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e9af18e9013f49a3ba3"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e9af18e9013f49a3ba4"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e9af18e9013f49a3ba5"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e9af18e9013f49a3ba6"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e9af18e9013f49a3ba7"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e9af18e9013f49a3ba8"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e9af18e9013f49a3ba9"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e9bf18e9013f49a3baa"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e9bf18e9013f49a3bab"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e9bf18e9013f49a3bac"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e9bf18e9013f49a3bad"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234e9cf18e9013f49a3bae"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f11f18e9013f49a3baf"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f11f18e9013f49a3bb0"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f11f18e9013f49a3bb1"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f11f18e9013f49a3bb2"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f11f18e9013f49a3bb3"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f11f18e9013f49a3bb4"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f11f18e9013f49a3bb5"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f11f18e9013f49a3bb6"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f11f18e9013f49a3bb7"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f11f18e9013f49a3bb8"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f12f18e9013f49a3bb9"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f12f18e9013f49a3bba"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f12f18e9013f49a3bbb"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f13f18e9013f49a3bbc"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58234f14f18e9013f49a3bbd"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5823523ef18e9013f49a3bc4"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"5823523ef18e9013f49a3bc5"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5823523ef18e9013f49a3bc6"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5823523ef18e9013f49a3bc7"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5823523ff18e9013f49a3bc8"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"5823523ff18e9013f49a3bc9"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5823523ff18e9013f49a3bca"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"5823523ff18e9013f49a3bcb"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5823523ff18e9013f49a3bcc"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5823523ff18e9013f49a3bcd"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235240f18e9013f49a3bce"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235240f18e9013f49a3bcf"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235240f18e9013f49a3bd0"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235240f18e9013f49a3bd1"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235241f18e9013f49a3bd2"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbbf18e9013f49a3bd5"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbbf18e9013f49a3bd6"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbbf18e9013f49a3bd7"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbbf18e9013f49a3bd8"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbbf18e9013f49a3bd9"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbcf18e9013f49a3bda"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbcf18e9013f49a3bdb"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbcf18e9013f49a3bdc"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbcf18e9013f49a3bdd"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbcf18e9013f49a3bde"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbcf18e9013f49a3bdf"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbcf18e9013f49a3be0"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbcf18e9013f49a3be1"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbdf18e9013f49a3be2"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58235dbef18e9013f49a3be3"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5829c8cff18e9013f49a3be4"},"className":"model.DBpediaToken","name":"Yummy","type":"custom","score":1}
+{"_id":{"$oid":"5829fab4f18e9013f49a3be5"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"5829fab4f18e9013f49a3be6"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"5829fabef18e9013f49a3be7"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"5829fabef18e9013f49a3be8"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"5829fabef18e9013f49a3be9"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"5829fabef18e9013f49a3bea"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3635f18e900cec39510f"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3635f18e900cec395110"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3635f18e900cec395111"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3635f18e900cec395112"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3654f18e900cec395113"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3654f18e900cec395114"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3654f18e900cec395115"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3654f18e900cec395116"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3658f18e900cec395117"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3658f18e900cec395118"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3658f18e900cec395119"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3658f18e900cec39511a"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3692f18e900cec39511b"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3692f18e900cec39511c"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3692f18e900cec39511d"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3692f18e900cec39511e"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3699f18e900cec39511f"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3699f18e900cec395120"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3699f18e900cec395121"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3699f18e900cec395122"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b36f2f18e900cec395123"},"className":"model.DBpediaToken","name":"\"application server\"","type":"custom","score":1}
+{"_id":{"$oid":"582b36f9f18e900cec395124"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b36f9f18e900cec395125"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b36f9f18e900cec395126"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b36f9f18e900cec395127"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3706f18e900cec395128"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3706f18e900cec395129"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3724f18e900cec39512a"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b3724f18e900cec39512b"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b373cf18e900cec39512c"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582b373cf18e900cec39512d"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582c9ae9f18e900cec39512e"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582c9ae9f18e900cec39512f"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582c9b1ef18e900cec395130"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582c9b1ef18e900cec395131"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582c9d25f18e900cec395132"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582c9d25f18e900cec395133"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582d7f5cf18e900cec395134"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582d7f5cf18e900cec395135"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582d7f85f18e900cec395136"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582d7f85f18e900cec395137"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ddc3df18e900cec395138"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ddc3df18e900cec395139"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582de810f18e900cec39513a"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582de810f18e900cec39513b"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582de8a4f18e900cec39513c"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582de8a4f18e900cec39513d"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ded6df18e900cec39513e"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ded6df18e900cec39513f"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582deed4f18e900cec395140"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582deed4f18e900cec395141"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582def52f18e900cec395142"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582def52f18e900cec395143"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582def60f18e900cec395144"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582def60f18e900cec395145"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582def85f18e900cec395146"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582def85f18e900cec395147"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582df010f18e900cec395148"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582df010f18e900cec395149"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582df015f18e900cec39514a"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582df015f18e900cec39514b"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582df015f18e900cec39514c"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582df015f18e900cec39514d"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582df019f18e900cec39514e"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582df019f18e900cec39514f"},"className":"model.DBpediaToken","name":"J2EE","type":"dbpedia","score":1}
+{"_id":{"$oid":"582df121f18e900cec395150"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582df121f18e900cec395151"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582df38af18e900cec395152"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582df38af18e900cec395153"},"className":"model.DBpediaToken","name":"application server","type":"dbpedia","score":1}
+{"_id":{"$oid":"582df3abf18e900cec395154"},"className":"model.DBpediaToken","name":"Websphere","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef513f18e900cec395155"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef513f18e900cec395156"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef513f18e900cec395157"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef515f18e900cec395158"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef515f18e900cec395159"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef516f18e900cec39515a"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef516f18e900cec39515b"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef516f18e900cec39515c"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef516f18e900cec39515d"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef516f18e900cec39515e"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef517f18e900cec39515f"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef517f18e900cec395160"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef517f18e900cec395161"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef517f18e900cec395162"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef51af18e900cec395163"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5e7f18e900cec395164"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5e7f18e900cec395165"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5e7f18e900cec395166"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5e7f18e900cec395167"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5e7f18e900cec395168"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5e8f18e900cec395169"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5e8f18e900cec39516a"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5e8f18e900cec39516b"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5e8f18e900cec39516c"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5e8f18e900cec39516d"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5e9f18e900cec39516e"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5e9f18e900cec39516f"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5e9f18e900cec395170"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5eaf18e900cec395171"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef5ebf18e900cec395172"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6bcf18e900cec395175"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6bcf18e900cec395176"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6bcf18e900cec395177"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6bcf18e900cec395178"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6bcf18e900cec395179"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6c6f18e900cec39517a"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6c6f18e900cec39517b"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6c6f18e900cec39517c"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6c6f18e900cec39517d"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6c6f18e900cec39517e"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6c7f18e900cec39517f"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6c7f18e900cec395180"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6c7f18e900cec395181"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6c8f18e900cec395182"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"582ef6c9f18e900cec395183"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8f9f18e900cec395186"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8f9f18e900cec395187"},"className":"model.DBpediaToken","name":"Java","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8f9f18e900cec395188"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8f9f18e900cec395189"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8faf18e900cec39518a"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8faf18e900cec39518b"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8faf18e900cec39518c"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8faf18e900cec39518d"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8faf18e900cec39518e"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8faf18e900cec39518f"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8faf18e900cec395190"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8faf18e900cec395191"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8faf18e900cec395192"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8faf18e900cec395193"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8fbf18e900cec395194"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8fbf18e900cec395195"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5832d8fcf18e900cec395196"},"className":"model.DBpediaToken","name":"Java","type":"dbpedia","score":1}
+{"_id":{"$oid":"583c3feaf18e900e944a177b"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"583c3feaf18e900e944a1779"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"583c3feaf18e900e944a177a"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"583c3feaf18e900e944a177c"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"583c3feaf18e900e944a177d"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"583c3feaf18e900e944a177e"},"className":"model.DBpediaToken","name":"Java","type":"dbpedia","score":1}
+{"_id":{"$oid":"583c3febf18e900e944a177f"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"583c3febf18e900e944a1780"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"583c3febf18e900e944a1781"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"583c3febf18e900e944a1782"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"583c3febf18e900e944a1783"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"583c3fecf18e900e944a1784"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"583c3fecf18e900e944a1785"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"583c3fecf18e900e944a1786"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cf9f18e900f803d82bf"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cf9f18e900f803d82c0"},"className":"model.DBpediaToken","name":"Java","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cf9f18e900f803d82c1"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cf9f18e900f803d82c2"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cf9f18e900f803d82c3"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cf9f18e900f803d82c4"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cfaf18e900f803d82c5"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cfaf18e900f803d82c6"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cfaf18e900f803d82c7"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cfaf18e900f803d82c8"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cfaf18e900f803d82c9"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cfbf18e900f803d82ca"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cfbf18e900f803d82cb"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cfbf18e900f803d82cc"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cfcf18e900f803d82cd"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cfdf18e900f803d82ce"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414cfdf18e900f803d82cf"},"className":"model.DBpediaToken","name":"Java","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d05f18e900f803d82d0"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d05f18e900f803d82d1"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d05f18e900f803d82d2"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d05f18e900f803d82d3"},"className":"model.DBpediaToken","name":"Java","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d05f18e900f803d82d4"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d05f18e900f803d82d5"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d06f18e900f803d82d6"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d06f18e900f803d82d7"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d06f18e900f803d82d8"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d06f18e900f803d82d9"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d06f18e900f803d82da"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d07f18e900f803d82db"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d07f18e900f803d82dc"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d07f18e900f803d82dd"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d08f18e900f803d82de"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d09f18e900f803d82df"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58414d09f18e900f803d82e0"},"className":"model.DBpediaToken","name":"Java","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153dbf18e900f803d82e1"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153dbf18e900f803d82e2"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153dbf18e900f803d82e3"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153dbf18e900f803d82e4"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153dbf18e900f803d82e5"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153dcf18e900f803d82e6"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153dcf18e900f803d82e7"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153dcf18e900f803d82e8"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153dcf18e900f803d82e9"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153dcf18e900f803d82ea"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153dcf18e900f803d82eb"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153dcf18e900f803d82ec"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153dcf18e900f803d82ed"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153ddf18e900f803d82ee"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584153def18e900f803d82ef"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841626ef18e900f803d82f0"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841626ef18e900f803d82f1"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841626ef18e900f803d82f2"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841626ef18e900f803d82f3"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841626ef18e900f803d82f4"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841626ef18e900f803d82f5"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841626ef18e900f803d82f6"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58416270f18e900f803d82f7"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58416270f18e900f803d82f8"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58416270f18e900f803d82f9"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841627cf18e900f803d82fa"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841627cf18e900f803d82fb"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841627cf18e900f803d82fc"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841627df18e900f803d82fd"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841627ef18e900f803d82fe"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a4f18e900f803d8305"},"className":"model.DBpediaToken","name":"user interface","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a4f18e900f803d8306"},"className":"model.DBpediaToken","name":"HDFS","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a4f18e900f803d8307"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":-1}
+{"_id":{"$oid":"584175a4f18e900f803d8308"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a4f18e900f803d8309"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a4f18e900f803d830a"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a4f18e900f803d830b"},"className":"model.DBpediaToken","name":"REST","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a4f18e900f803d830c"},"className":"model.DBpediaToken","name":"Hadoop","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a4f18e900f803d830d"},"className":"model.DBpediaToken","name":"Teradata","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a5f18e900f803d830e"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a5f18e900f803d830f"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a5f18e900f803d8310"},"className":"model.DBpediaToken","name":"gas turbine","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a5f18e900f803d8311"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a6f18e900f803d8312"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a6f18e900f803d8313"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a6f18e900f803d8314"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a6f18e900f803d8315"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584175a8f18e900f803d8316"},"className":"model.DBpediaToken","name":"C#","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a4f18e900f803d831b"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a5f18e900f803d831c"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a5f18e900f803d831d"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a5f18e900f803d831e"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a5f18e900f803d831f"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a5f18e900f803d8320"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a5f18e900f803d8321"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a5f18e900f803d8322"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a6f18e900f803d8323"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a6f18e900f803d8324"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a6f18e900f803d8325"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a6f18e900f803d8326"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a7f18e900f803d8327"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a8f18e900f803d8328"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179a9f18e900f803d8329"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b0f18e900f803d832a"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b0f18e900f803d832b"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b0f18e900f803d832c"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b1f18e900f803d832d"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b1f18e900f803d832e"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b2f18e900f803d832f"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b2f18e900f803d8330"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b2f18e900f803d8331"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b2f18e900f803d8332"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b2f18e900f803d8333"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b2f18e900f803d8334"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b2f18e900f803d8335"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b2f18e900f803d8336"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b7f18e900f803d8337"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b7f18e900f803d8338"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b7f18e900f803d8339"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b7f18e900f803d833a"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b7f18e900f803d833b"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b9f18e900f803d833c"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b9f18e900f803d833d"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b9f18e900f803d833e"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b9f18e900f803d833f"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b9f18e900f803d8340"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b9f18e900f803d8341"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b9f18e900f803d8342"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179b9f18e900f803d8343"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179baf18e900f803d8344"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"584179bbf18e900f803d8345"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417a64f18e900f803d8346"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417a64f18e900f803d8347"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417a64f18e900f803d8348"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417a65f18e900f803d8349"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417a65f18e900f803d834a"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417a66f18e900f803d834b"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417a66f18e900f803d834c"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417a66f18e900f803d834d"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417a67f18e900f803d834e"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417a67f18e900f803d834f"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417d15f18e900f803d8352"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417d15f18e900f803d8353"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417d15f18e900f803d8354"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417d15f18e900f803d8355"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417d15f18e900f803d8356"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417d16f18e900f803d8357"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417d16f18e900f803d8358"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417d17f18e900f803d8359"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417d17f18e900f803d835a"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417d17f18e900f803d835b"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417d17f18e900f803d835c"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417d17f18e900f803d835d"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417ee9f18e900f803d8360"},"className":"model.DBpediaToken","name":"HIVE","type":"custom","score":1}
+{"_id":{"$oid":"58417ef0f18e900f803d8361"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417ef0f18e900f803d8362"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417ef0f18e900f803d8363"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417ef0f18e900f803d8364"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417ef0f18e900f803d8365"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417ef1f18e900f803d8366"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417ef1f18e900f803d8367"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417ef2f18e900f803d8368"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417ef2f18e900f803d8369"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417ef2f18e900f803d836a"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417ef2f18e900f803d836b"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58417ef3f18e900f803d836c"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418153f18e900f803d8373"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418153f18e900f803d8374"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418153f18e900f803d8375"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418154f18e900f803d8376"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418154f18e900f803d8377"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418155f18e900f803d8378"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418155f18e900f803d8379"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418156f18e900f803d837a"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418156f18e900f803d837b"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418157f18e900f803d837c"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418157f18e900f803d837d"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418157f18e900f803d837e"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841855ef18e900f803d837f"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":-1}
+{"_id":{"$oid":"5841855ef18e900f803d8380"},"className":"model.DBpediaToken","name":"web browser","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841855ef18e900f803d8381"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":-1}
+{"_id":{"$oid":"5841855ef18e900f803d8382"},"className":"model.DBpediaToken","name":"N-tier","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841855ef18e900f803d8383"},"className":"model.DBpediaToken","name":"client/server","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418560f18e900f803d8384"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":-1}
+{"_id":{"$oid":"58418561f18e900f803d8385"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418561f18e900f803d8386"},"className":"model.DBpediaToken","name":"CORBA","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418561f18e900f803d8387"},"className":"model.DBpediaToken","name":"object-oriented","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418561f18e900f803d8388"},"className":"model.DBpediaToken","name":"middleware","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418561f18e900f803d8389"},"className":"model.DBpediaToken","name":"software configuration management","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418575f18e900f803d838a"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418991f18e900f803d838d"},"className":"model.DBpediaToken","name":"client-server","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418992f18e900f803d838e"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418c0ef18e900f803d8391"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58418e3af18e900f803d8398"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419220f18e900f803d83a1"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":-1}
+{"_id":{"$oid":"58419220f18e900f803d83a2"},"className":"model.DBpediaToken","name":"graphical user interface (GUI)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419220f18e900f803d83a3"},"className":"model.DBpediaToken","name":"JBuilder","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419220f18e900f803d83a4"},"className":"model.DBpediaToken","name":"GUI","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419220f18e900f803d83a5"},"className":"model.DBpediaToken","name":"Java Virtual Machine (JVM)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419221f18e900f803d83a6"},"className":"model.DBpediaToken","name":"shared services","type":"dbpedia","score":-1}
+{"_id":{"$oid":"58419222f18e900f803d83a7"},"className":"model.DBpediaToken","name":"VisiBroker","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419222f18e900f803d83a8"},"className":"model.DBpediaToken","name":"Object Request Broker","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419222f18e900f803d83a9"},"className":"model.DBpediaToken","name":"Java virtual machine","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419222f18e900f803d83aa"},"className":"model.DBpediaToken","name":"The ORB","type":"dbpedia","score":-1}
+{"_id":{"$oid":"58419222f18e900f803d83ab"},"className":"model.DBpediaToken","name":"distributed object","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419222f18e900f803d83ac"},"className":"model.DBpediaToken","name":"Internet","type":"dbpedia","score":-1}
+{"_id":{"$oid":"58419222f18e900f803d83ad"},"className":"model.DBpediaToken","name":"IIOP","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419222f18e900f803d83ae"},"className":"model.DBpediaToken","name":"Oracle","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419222f18e900f803d83af"},"className":"model.DBpediaToken","name":"JDBC","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419222f18e900f803d83b0"},"className":"model.DBpediaToken","name":"application program interface","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419222f18e900f803d83b1"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419222f18e900f803d83b2"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419223f18e900f803d83b3"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419223f18e900f803d83b4"},"className":"model.DBpediaToken","name":"structured query language (SQL)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419223f18e900f803d83b5"},"className":"model.DBpediaToken","name":"data access objects","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419223f18e900f803d83b6"},"className":"model.DBpediaToken","name":"Business rules","type":"dbpedia","score":-1}
+{"_id":{"$oid":"58419223f18e900f803d83b7"},"className":"model.DBpediaToken","name":"Embedded SQL","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419224f18e900f803d83b8"},"className":"model.DBpediaToken","name":"relational database management system (RDBMS)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419224f18e900f803d83b9"},"className":"model.DBpediaToken","name":"RDBMS","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419224f18e900f803d83ba"},"className":"model.DBpediaToken","name":"Oracle8","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419224f18e900f803d83bb"},"className":"model.DBpediaToken","name":"ANSI","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419224f18e900f803d83bc"},"className":"model.DBpediaToken","name":"data dictionary","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419224f18e900f803d83bd"},"className":"model.DBpediaToken","name":"Enterprise","type":"dbpedia","score":-1}
+{"_id":{"$oid":"58419224f18e900f803d83be"},"className":"model.DBpediaToken","name":"database design","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419224f18e900f803d83bf"},"className":"model.DBpediaToken","name":"PowerDesigner","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419225f18e900f803d83c0"},"className":"model.DBpediaToken","name":"Entity relationship diagrams","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419225f18e900f803d83c1"},"className":"model.DBpediaToken","name":"conceptual data model","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419225f18e900f803d83c2"},"className":"model.DBpediaToken","name":"physical data model","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419226f18e900f803d83c3"},"className":"model.DBpediaToken","name":"Technical documentation","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419226f18e900f803d83c4"},"className":"model.DBpediaToken","name":"Microsoft Word","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419226f18e900f803d83c5"},"className":"model.DBpediaToken","name":"SCM","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419226f18e900f803d83c6"},"className":"model.DBpediaToken","name":"software application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419226f18e900f803d83c7"},"className":"model.DBpediaToken","name":"Carnegie Mellon","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419226f18e900f803d83c8"},"className":"model.DBpediaToken","name":"Software Engineering Institute","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419226f18e900f803d83c9"},"className":"model.DBpediaToken","name":"Configuration Management","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419226f18e900f803d83ca"},"className":"model.DBpediaToken","name":"Capability Maturity Model","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419226f18e900f803d83cb"},"className":"model.DBpediaToken","name":"CMM","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419227f18e900f803d83cc"},"className":"model.DBpediaToken","name":"PVCS","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419227f18e900f803d83cd"},"className":"model.DBpediaToken","name":"audit trail","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841923ef18e900f803d83d0"},"className":"model.DBpediaToken","name":"graphical user interface (GUI)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841923ef18e900f803d83d1"},"className":"model.DBpediaToken","name":"Java Virtual Machine (JVM)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419241f18e900f803d83d2"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419241f18e900f803d83d3"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419241f18e900f803d83d4"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419241f18e900f803d83d5"},"className":"model.DBpediaToken","name":"structured query language (SQL)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419242f18e900f803d83d6"},"className":"model.DBpediaToken","name":"relational database management system (RDBMS)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419250f18e900f803d83d7"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419250f18e900f803d83d8"},"className":"model.DBpediaToken","name":"graphical user interface (GUI)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419251f18e900f803d83d9"},"className":"model.DBpediaToken","name":"Java Virtual Machine (JVM)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419252f18e900f803d83da"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419253f18e900f803d83db"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419253f18e900f803d83dc"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419253f18e900f803d83dd"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419253f18e900f803d83de"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419253f18e900f803d83df"},"className":"model.DBpediaToken","name":"structured query language (SQL)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419254f18e900f803d83e0"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419255f18e900f803d83e1"},"className":"model.DBpediaToken","name":"relational database management system (RDBMS)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419462f18e900f803d83e6"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419462f18e900f803d83e7"},"className":"model.DBpediaToken","name":"graphical user interface (GUI)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419463f18e900f803d83e8"},"className":"model.DBpediaToken","name":"Java Virtual Machine (JVM)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419463f18e900f803d83e9"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419464f18e900f803d83ea"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419464f18e900f803d83eb"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419464f18e900f803d83ec"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419465f18e900f803d83ed"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419465f18e900f803d83ee"},"className":"model.DBpediaToken","name":"structured query language (SQL)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419465f18e900f803d83ef"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419466f18e900f803d83f0"},"className":"model.DBpediaToken","name":"relational database management system (RDBMS)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841946df18e900f803d83f1"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841946df18e900f803d83f2"},"className":"model.DBpediaToken","name":"graphical user interface (GUI)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841946ef18e900f803d83f3"},"className":"model.DBpediaToken","name":"shared services","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841946ef18e900f803d83f4"},"className":"model.DBpediaToken","name":"Java Virtual Machine (JVM)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841946ff18e900f803d83f5"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419470f18e900f803d83f6"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419470f18e900f803d83f7"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419470f18e900f803d83f8"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419470f18e900f803d83f9"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419470f18e900f803d83fa"},"className":"model.DBpediaToken","name":"structured query language (SQL)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419470f18e900f803d83fb"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419471f18e900f803d83fc"},"className":"model.DBpediaToken","name":"relational database management system (RDBMS)","type":"dbpedia","score":1}
+{"_id":{"$oid":"584198c6f18e900f803d8409"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"584198c6f18e900f803d840a"},"className":"model.DBpediaToken","name":"graphical user interface (GUI)","type":"dbpedia","score":1}
+{"_id":{"$oid":"584198c7f18e900f803d840b"},"className":"model.DBpediaToken","name":"Java Virtual Machine (JVM)","type":"dbpedia","score":1}
+{"_id":{"$oid":"584198c9f18e900f803d840c"},"className":"model.DBpediaToken","name":"shared services","type":"dbpedia","score":1}
+{"_id":{"$oid":"584198cbf18e900f803d840d"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"584198cdf18e900f803d840e"},"className":"model.DBpediaToken","name":"Internet","type":"dbpedia","score":1}
+{"_id":{"$oid":"584198cff18e900f803d840f"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"584198cff18e900f803d8410"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"584198cff18e900f803d8411"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"584198cff18e900f803d8412"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"584198cff18e900f803d8413"},"className":"model.DBpediaToken","name":"structured query language (SQL)","type":"dbpedia","score":1}
+{"_id":{"$oid":"584198d0f18e900f803d8414"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"584198d2f18e900f803d8415"},"className":"model.DBpediaToken","name":"relational database management system (RDBMS)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b1ff18e900f803d8416"},"className":"model.DBpediaToken","name":"Java Virtual Machine (JVM)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b1ff18e900f803d8417"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b1ff18e900f803d8418"},"className":"model.DBpediaToken","name":"graphical user interface (GUI)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b1ff18e900f803d8419"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b20f18e900f803d841a"},"className":"model.DBpediaToken","name":"Internet","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b21f18e900f803d841b"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b21f18e900f803d841c"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b21f18e900f803d841d"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b21f18e900f803d841e"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b21f18e900f803d841f"},"className":"model.DBpediaToken","name":"structured query language (SQL)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b21f18e900f803d8420"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b22f18e900f803d8421"},"className":"model.DBpediaToken","name":"relational database management system (RDBMS)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b25f18e900f803d8422"},"className":"model.DBpediaToken","name":"shared services","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b3af18e900f803d8425"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b3af18e900f803d8426"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b3af18e900f803d8427"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b3af18e900f803d8428"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b3af18e900f803d8429"},"className":"model.DBpediaToken","name":"structured query language (SQL)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b3af18e900f803d842a"},"className":"model.DBpediaToken","name":"Java Virtual Machine (JVM)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b3af18e900f803d842b"},"className":"model.DBpediaToken","name":"shared services","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b3af18e900f803d842c"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b3af18e900f803d842d"},"className":"model.DBpediaToken","name":"graphical user interface (GUI)","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b3bf18e900f803d842e"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b3cf18e900f803d842f"},"className":"model.DBpediaToken","name":"Internet","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b3cf18e900f803d8430"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"58419b3df18e900f803d8431"},"className":"model.DBpediaToken","name":"relational database management system (RDBMS)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1eaf18e900f803d8436"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1eaf18e900f803d8437"},"className":"model.DBpediaToken","name":"Java Virtual Machine (JVM)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1eaf18e900f803d8438"},"className":"model.DBpediaToken","name":"graphical user interface (GUI)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1eaf18e900f803d8439"},"className":"model.DBpediaToken","name":"The ORB","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1eaf18e900f803d843a"},"className":"model.DBpediaToken","name":"Internet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1ebf18e900f803d843b"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1ebf18e900f803d843c"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1ebf18e900f803d843d"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1ebf18e900f803d843e"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1ebf18e900f803d843f"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1ebf18e900f803d8440"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1ebf18e900f803d8441"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1ebf18e900f803d8442"},"className":"model.DBpediaToken","name":"structured query language (SQL)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1ecf18e900f803d8443"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1ecf18e900f803d8444"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1edf18e900f803d8445"},"className":"model.DBpediaToken","name":"relational database management system (RDBMS)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1f0f18e900f803d8446"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a1f0f18e900f803d8447"},"className":"model.DBpediaToken","name":"shared services","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a210f18e900f803d8448"},"className":"model.DBpediaToken","name":"Java Virtual Machine (JVM)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a210f18e900f803d8449"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a210f18e900f803d844a"},"className":"model.DBpediaToken","name":"graphical user interface (GUI)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a210f18e900f803d844b"},"className":"model.DBpediaToken","name":"shared services","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a211f18e900f803d844c"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a212f18e900f803d844d"},"className":"model.DBpediaToken","name":"The ORB","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a212f18e900f803d844e"},"className":"model.DBpediaToken","name":"Internet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a212f18e900f803d844f"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a212f18e900f803d8450"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a212f18e900f803d8451"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a212f18e900f803d8452"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a212f18e900f803d8453"},"className":"model.DBpediaToken","name":"structured query language (SQL)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a212f18e900f803d8454"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a212f18e900f803d8455"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a212f18e900f803d8456"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a213f18e900f803d8457"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a213f18e900f803d8458"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a213f18e900f803d8459"},"className":"model.DBpediaToken","name":"relational database management system (RDBMS)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a32ef18e900f803d845e"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a32ef18e900f803d845f"},"className":"model.DBpediaToken","name":"graphical user interface (GUI)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a32ef18e900f803d8460"},"className":"model.DBpediaToken","name":"Java Virtual Machine (JVM)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a32ef18e900f803d8461"},"className":"model.DBpediaToken","name":"shared services","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a32ff18e900f803d8462"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a32ff18e900f803d8463"},"className":"model.DBpediaToken","name":"The ORB","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a32ff18e900f803d8464"},"className":"model.DBpediaToken","name":"Internet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a330f18e900f803d8465"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a330f18e900f803d8466"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a330f18e900f803d8467"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a330f18e900f803d8468"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a330f18e900f803d8469"},"className":"model.DBpediaToken","name":"structured query language (SQL)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a330f18e900f803d846a"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a330f18e900f803d846b"},"className":"model.DBpediaToken","name":"Business rules","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a330f18e900f803d846c"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a330f18e900f803d846d"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a330f18e900f803d846e"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a330f18e900f803d846f"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a331f18e900f803d8470"},"className":"model.DBpediaToken","name":"relational database management system (RDBMS)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a877f18e900f803d847c"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a878f18e900f803d847d"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a878f18e900f803d847e"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a878f18e900f803d847f"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a878f18e900f803d8480"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a878f18e900f803d8481"},"className":"model.DBpediaToken","name":"structured query language (SQL)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a878f18e900f803d8482"},"className":"model.DBpediaToken","name":"The ORB","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a878f18e900f803d8483"},"className":"model.DBpediaToken","name":"Internet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a879f18e900f803d8484"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a879f18e900f803d8485"},"className":"model.DBpediaToken","name":"Business rules","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a879f18e900f803d8486"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a879f18e900f803d8487"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a879f18e900f803d8488"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a879f18e900f803d8489"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a879f18e900f803d848a"},"className":"model.DBpediaToken","name":"Enterprise","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a87af18e900f803d848b"},"className":"model.DBpediaToken","name":"Java Virtual Machine (JVM)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a87bf18e900f803d848c"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a87bf18e900f803d848d"},"className":"model.DBpediaToken","name":"graphical user interface (GUI)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a87bf18e900f803d848e"},"className":"model.DBpediaToken","name":"relational database management system (RDBMS)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a87bf18e900f803d848f"},"className":"model.DBpediaToken","name":"shared services","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a87ef18e900f803d8490"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a951f18e900f803d8492"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a951f18e900f803d8493"},"className":"model.DBpediaToken","name":"graphical user interface (GUI)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a951f18e900f803d8494"},"className":"model.DBpediaToken","name":"Java Virtual Machine (JVM)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a952f18e900f803d8495"},"className":"model.DBpediaToken","name":"shared services","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a953f18e900f803d8496"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a953f18e900f803d8497"},"className":"model.DBpediaToken","name":"The ORB","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a953f18e900f803d8498"},"className":"model.DBpediaToken","name":"Internet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a954f18e900f803d8499"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a954f18e900f803d849a"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a954f18e900f803d849b"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a954f18e900f803d849c"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a954f18e900f803d849d"},"className":"model.DBpediaToken","name":"structured query language (SQL)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a954f18e900f803d849e"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a955f18e900f803d849f"},"className":"model.DBpediaToken","name":"Business rules","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a955f18e900f803d84a0"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a955f18e900f803d84a1"},"className":"model.DBpediaToken","name":"interact","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a955f18e900f803d84a2"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a955f18e900f803d84a3"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a955f18e900f803d84a4"},"className":"model.DBpediaToken","name":"Enterprise","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a956f18e900f803d84a5"},"className":"model.DBpediaToken","name":"relational database management system (RDBMS)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5841a958f18e900f803d84a6"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bbaaf18e900f803d84ee"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bbaaf18e900f803d84ef"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bbaaf18e900f803d84f0"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bbabf18e900f803d84f1"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf14f18e900f803d84f2"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf14f18e900f803d84f3"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf14f18e900f803d84f4"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf15f18e900f803d84f5"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf15f18e900f803d84f6"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf16f18e900f803d84f7"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf16f18e900f803d84f8"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf16f18e900f803d84f9"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf16f18e900f803d84fa"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf16f18e900f803d84fb"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf17f18e900f803d84fc"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf17f18e900f803d84fd"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf1ef18e900f803d84fe"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf1ef18e900f803d84ff"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf1ff18e900f803d8500"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf1ff18e900f803d8501"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf1ff18e900f803d8502"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf20f18e900f803d8503"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf20f18e900f803d8504"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf20f18e900f803d8505"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf21f18e900f803d8506"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf21f18e900f803d8507"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf21f18e900f803d8508"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf21f18e900f803d8509"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf26f18e900f803d850a"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf26f18e900f803d850b"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf26f18e900f803d850c"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf26f18e900f803d850d"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf26f18e900f803d850e"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf27f18e900f803d850f"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf27f18e900f803d8510"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf27f18e900f803d8511"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf28f18e900f803d8512"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf28f18e900f803d8513"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf28f18e900f803d8514"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846bf28f18e900f803d8515"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0f8f18e900f803d8516"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0f8f18e900f803d8517"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0f8f18e900f803d8518"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0f8f18e900f803d8519"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0f8f18e900f803d851a"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0f9f18e900f803d851b"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0f9f18e900f803d851c"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0f9f18e900f803d851d"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0faf18e900f803d851e"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0faf18e900f803d851f"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0faf18e900f803d8520"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0faf18e900f803d8521"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0faf18e900f803d8522"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0faf18e900f803d8523"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0faf18e900f803d8524"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0fbf18e900f803d8525"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0fbf18e900f803d8526"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0fbf18e900f803d8527"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0fcf18e900f803d8528"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c0fdf18e900f803d8529"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3e8f18e900f803d852a"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3e8f18e900f803d852b"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3e8f18e900f803d852c"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3e8f18e900f803d852d"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3e8f18e900f803d852e"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3e9f18e900f803d852f"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3e9f18e900f803d8530"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3e9f18e900f803d8531"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3e9f18e900f803d8532"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3e9f18e900f803d8533"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3e9f18e900f803d8534"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3e9f18e900f803d8535"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3e9f18e900f803d8536"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3eaf18e900f803d8537"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846c3ecf18e900f803d8538"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cd52f18e900f803d8539"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cd52f18e900f803d853a"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cd52f18e900f803d853b"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cd52f18e900f803d853c"},"className":"model.DBpediaToken","name":"Job","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cd52f18e900f803d853d"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cd53f18e900f803d853e"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cd53f18e900f803d853f"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cd54f18e900f803d8540"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cd54f18e900f803d8541"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cd54f18e900f803d8542"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cd54f18e900f803d8543"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cd54f18e900f803d8544"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cdd6f18e900f803d8545"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cdd6f18e900f803d8546"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cdd6f18e900f803d8547"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cdd7f18e900f803d8548"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cde1f18e900f803d8549"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cde1f18e900f803d854a"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cde2f18e900f803d854b"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cde3f18e900f803d854c"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cf49f18e900f803d854d"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cf49f18e900f803d854e"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cf4af18e900f803d854f"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cf4af18e900f803d8550"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cf9df18e900f803d8551"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cf9df18e900f803d8552"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cf9ef18e900f803d8553"},"className":"model.DBpediaToken","name":"NoSQL","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cf9ef18e900f803d8554"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cf9ff18e900f803d8555"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cfa8f18e900f803d8556"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cfa8f18e900f803d8557"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cfa8f18e900f803d8558"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846cfa9f18e900f803d8559"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846d213f18e900f803d855c"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846d214f18e900f803d855d"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846d214f18e900f803d855e"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846d215f18e900f803d855f"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e2b7f18e900f803d8560"},"className":"model.DBpediaToken","name":"Multitier architecture","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e347f18e900f803d8561"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e347f18e900f803d8562"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e348f18e900f803d8563"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e349f18e900f803d8564"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e412f18e900f803d8565"},"className":"model.DBpediaToken","name":"Model-view-controller","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e412f18e900f803d8566"},"className":"model.DBpediaToken","name":"MVC","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e5f6f18e900f803d8569"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e5f6f18e900f803d856a"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e5f7f18e900f803d856b"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e5f8f18e900f803d856c"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e6abf18e900f803d856d"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e6acf18e900f803d856e"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e6adf18e900f803d856f"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846e6aef18e900f803d8570"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ea7ef18e900f803d8571"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ea7ef18e900f803d8572"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ea7ff18e900f803d8573"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ea80f18e900f803d8574"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ea85f18e900f803d8575"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ea85f18e900f803d8576"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ea86f18e900f803d8577"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ea86f18e900f803d8578"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ea91f18e900f803d8579"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ea91f18e900f803d857a"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ea91f18e900f803d857b"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ea93f18e900f803d857c"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec56f18e900f803d857d"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec56f18e900f803d857e"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec56f18e900f803d857f"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec56f18e900f803d8580"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec56f18e900f803d8581"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec57f18e900f803d8582"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec57f18e900f803d8583"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec57f18e900f803d8584"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec57f18e900f803d8585"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec57f18e900f803d8586"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec57f18e900f803d8587"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec57f18e900f803d8588"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec57f18e900f803d8589"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec58f18e900f803d858a"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ec59f18e900f803d858b"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edabf18e900f803d858c"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edabf18e900f803d858d"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edabf18e900f803d858e"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edabf18e900f803d858f"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edabf18e900f803d8590"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edabf18e900f803d8591"},"className":"model.DBpediaToken","name":"Apache web server","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edabf18e900f803d8592"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edabf18e900f803d8593"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edabf18e900f803d8594"},"className":"model.DBpediaToken","name":"FTP","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edabf18e900f803d8595"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edabf18e900f803d8596"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edacf18e900f803d8597"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edacf18e900f803d8598"},"className":"model.DBpediaToken","name":"web server","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edadf18e900f803d8599"},"className":"model.DBpediaToken","name":"Web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edadf18e900f803d859a"},"className":"model.DBpediaToken","name":"Web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edadf18e900f803d859b"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edadf18e900f803d859c"},"className":"model.DBpediaToken","name":"Web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edadf18e900f803d859d"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb2f18e900f803d859e"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb2f18e900f803d859f"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb2f18e900f803d85a0"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb2f18e900f803d85a1"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb2f18e900f803d85a2"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb2f18e900f803d85a3"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb2f18e900f803d85a4"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb3f18e900f803d85a5"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb3f18e900f803d85a6"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb3f18e900f803d85a7"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb3f18e900f803d85a8"},"className":"model.DBpediaToken","name":"Web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb3f18e900f803d85a9"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb4f18e900f803d85aa"},"className":"model.DBpediaToken","name":"Web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb4f18e900f803d85ab"},"className":"model.DBpediaToken","name":"Web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846edb4f18e900f803d85ac"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede5f18e900f803d85ad"},"className":"model.DBpediaToken","name":"operating system","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede5f18e900f803d85ae"},"className":"model.DBpediaToken","name":"IDA","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede5f18e900f803d85af"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede5f18e900f803d85b0"},"className":"model.DBpediaToken","name":"API","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede5f18e900f803d85b1"},"className":"model.DBpediaToken","name":"V8","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede6f18e900f803d85b2"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede6f18e900f803d85b3"},"className":"model.DBpediaToken","name":"The users","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede6f18e900f803d85b4"},"className":"model.DBpediaToken","name":"Intranet","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede6f18e900f803d85b5"},"className":"model.DBpediaToken","name":"Firewall","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede6f18e900f803d85b6"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede7f18e900f803d85b7"},"className":"model.DBpediaToken","name":"Web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede7f18e900f803d85b8"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede8f18e900f803d85b9"},"className":"model.DBpediaToken","name":"Web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede8f18e900f803d85ba"},"className":"model.DBpediaToken","name":"Web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"5846ede8f18e900f803d85bb"},"className":"model.DBpediaToken","name":"web application","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471747f18e9004a0f7343f"},"className":"model.DBpediaToken","name":"Data Migration","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471747f18e9004a0f73440"},"className":"model.DBpediaToken","name":"client-server system","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471748f18e9004a0f73441"},"className":"model.DBpediaToken","name":"Cobol","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471748f18e9004a0f73442"},"className":"model.DBpediaToken","name":"VSAM","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471748f18e9004a0f73443"},"className":"model.DBpediaToken","name":"Germany","type":"dbpedia","score":-1}
+{"_id":{"$oid":"58471748f18e9004a0f73444"},"className":"model.DBpediaToken","name":"object model","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471748f18e9004a0f73445"},"className":"model.DBpediaToken","name":"EBCDIC","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471748f18e9004a0f73446"},"className":"model.DBpediaToken","name":"tariff","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471748f18e9004a0f73447"},"className":"model.DBpediaToken","name":"SAT","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471749f18e9004a0f73448"},"className":"model.DBpediaToken","name":"TEC","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847174af18e9004a0f73449"},"className":"model.DBpediaToken","name":"hinder","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847174af18e9004a0f7344a"},"className":"model.DBpediaToken","name":"quality assurance","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847174cf18e9004a0f7344b"},"className":"model.DBpediaToken","name":"database server","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847174cf18e9004a0f7344c"},"className":"model.DBpediaToken","name":"Session Bean","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847174cf18e9004a0f7344d"},"className":"model.DBpediaToken","name":"LTO","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847174cf18e9004a0f7344e"},"className":"model.DBpediaToken","name":"data type","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847174cf18e9004a0f7344f"},"className":"model.DBpediaToken","name":"exact data","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847174ef18e9004a0f73450"},"className":"model.DBpediaToken","name":"Whitebox","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471750f18e9004a0f73451"},"className":"model.DBpediaToken","name":"ASCII","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471752f18e9004a0f73452"},"className":"model.DBpediaToken","name":"Software Architecture","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471752f18e9004a0f73453"},"className":"model.DBpediaToken","name":"Blackbox","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471754f18e9004a0f73454"},"className":"model.DBpediaToken","name":"White","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471754f18e9004a0f73455"},"className":"model.DBpediaToken","name":"Reader","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471755f18e9004a0f73456"},"className":"model.DBpediaToken","name":"black box","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471756f18e9004a0f73457"},"className":"model.DBpediaToken","name":"object persistence","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471756f18e9004a0f73458"},"className":"model.DBpediaToken","name":"graphical user interface","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471757f18e9004a0f73459"},"className":"model.DBpediaToken","name":"Linux","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471757f18e9004a0f7345a"},"className":"model.DBpediaToken","name":"EJB","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847175af18e9004a0f7345b"},"className":"model.DBpediaToken","name":"command shell","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847175af18e9004a0f7345c"},"className":"model.DBpediaToken","name":"ergonomics","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847175af18e9004a0f7345d"},"className":"model.DBpediaToken","name":"internationalization","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847175bf18e9004a0f7345e"},"className":"model.DBpediaToken","name":"hard disk","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847175cf18e9004a0f7345f"},"className":"model.DBpediaToken","name":"ILOG","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847175df18e9004a0f73460"},"className":"model.DBpediaToken","name":"mit","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847175df18e9004a0f73461"},"className":"model.DBpediaToken","name":"als","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847175ef18e9004a0f73462"},"className":"model.DBpediaToken","name":"IBM","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847175ff18e9004a0f73463"},"className":"model.DBpediaToken","name":"source code","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847175ff18e9004a0f73464"},"className":"model.DBpediaToken","name":"High Availability","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471760f18e9004a0f73465"},"className":"model.DBpediaToken","name":"regression testing","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471763f18e9004a0f73466"},"className":"model.DBpediaToken","name":"mainframe","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471764f18e9004a0f73467"},"className":"model.DBpediaToken","name":"Type 42","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471aa7f18e9004a0f7346e"},"className":"model.DBpediaToken","name":"Germany","type":"dbpedia","score":1}
+{"_id":{"$oid":"58471ac8f18e9004a0f7346f"},"className":"model.DBpediaToken","name":"Germany","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847e1c8f18e9004a0f73474"},"className":"model.DBpediaToken","name":"Germany","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847e1f7f18e9004a0f73475"},"className":"model.DBpediaToken","name":"Germany","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847e219f18e9004a0f73476"},"className":"model.DBpediaToken","name":"Germany","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847fde7f18e9004a0f7347f"},"className":"model.DBpediaToken","name":"Germany","type":"dbpedia","score":1}
+{"_id":{"$oid":"5847fe0cf18e9004a0f73480"},"className":"model.DBpediaToken","name":"Germany","type":"dbpedia","score":1}
+{"_id":{"$oid":"584811aef18e9004a0f73481"},"className":"model.DBpediaToken","name":"code reuse","type":"dbpedia","score":1}
+{"_id":{"$oid":"584811aef18e9004a0f73482"},"className":"model.DBpediaToken","name":"business rule","type":"dbpedia","score":1}
+{"_id":{"$oid":"584811b1f18e9004a0f73483"},"className":"model.DBpediaToken","name":"IRM","type":"dbpedia","score":1}
+{"_id":{"$oid":"584811b2f18e9004a0f73484"},"className":"model.DBpediaToken","name":"Common Object Request Broker Architecture (CORBA)","type":"dbpedia","score":1}

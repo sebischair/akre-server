@@ -19,21 +19,6 @@ import java.util.List;
 
 public class CodeController extends Controller {
 
-    public Result createProject() {
-        ObjectNode result = Json.newObject();
-        String name = request().body().asJson().findValue(StaticFunctions.NAME).toString().replaceAll("\"", "");
-        String description = "";
-        if(request().body().asJson().hasNonNull(StaticFunctions.DESCRIPTION))
-             description = request().body().asJson().findValue(StaticFunctions.DESCRIPTION).toString().replaceAll("\"", "");
-        Key<Project> project = new Project(name, description).save();
-        result.put(StaticFunctions.NAME, name);
-        result.put(StaticFunctions.DESCRIPTION, description);
-        result.put("id", project.getId().toString());
-        Logger.debug("result={}", result);
-
-        return StaticFunctions.jsonResult(ok(result));
-    }
-
     public Result processCode() {
         try {
             ObjectNode result = Json.newObject();

@@ -16,8 +16,13 @@ POST     /removeAlternative          controllers.AlternativesController.removeAl
 POST     /addAlternative             controllers.AlternativesController.addAlternative()
 
 POST     /processCode                controllers.CodeController.processCode()
-POST     /project                    controllers.CodeController.createProject()
+POST     /project                    controllers.ProjectController.create()
+GET      /project                    controllers.ProjectController.getAll()
 GET      /pattern                    controllers.CodeController.pattern(projectId: String ?= "")
 POST     /pattern                    controllers.CodeController.updatePattern()
+POST     /codeToken                  controllers.CCAnnotatorController.create()
+GET      /codeToken                  controllers.CCAnnotatorController.getAll()
+GET      /codeTokenInFile            controllers.CCAnnotatorController.getAllForFileId(fileId: String ?= "")
+GET      /codeTokenInProject         controllers.CCAnnotatorController.getAllForProjectId(projectId: String ?= "")
 
 POST     /getFileContent             controllers.getFileContent.upload()

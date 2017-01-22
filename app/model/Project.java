@@ -38,4 +38,20 @@ public class Project {
         return null;
     }
 
+    public Project findById(String id) {
+        ObjectId objectId = new ObjectId(id);
+        return MorphiaObject.datastore.get(this.getClass(), objectId);
+    }
+
+    public ObjectId get_id() {
+        return _id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }

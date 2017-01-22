@@ -11,7 +11,7 @@ libraryDependencies ++= Seq(
   javaJdbc,
   cache,
   javaWs,
-  "com.google.code.gson" % "gson" % "2.5",
+  "com.google.code.gson" % "gson" % "2.8.0",
   "org.jsoup" % "jsoup" % "1.8.3",
   "org.webjars" %% "webjars-play" % "2.5.0",
   "org.webjars" % "bootstrap" % "3.3.6",

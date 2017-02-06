@@ -24,5 +24,6 @@ POST     /codeToken                  controllers.CCAnnotatorController.create()
 GET      /codeToken                  controllers.CCAnnotatorController.getAll()
 GET      /codeTokenInFile            controllers.CCAnnotatorController.getAllForFileId(fileId: String ?= "")
 GET      /codeTokenInProject         controllers.CCAnnotatorController.getAllForProjectId(projectId: String ?= "")
+GET      /deleteCodeToken            controllers.CCAnnotatorController.delete(id: String ?= "")
 
 POST     /getFileContent             controllers.getFileContent.upload()

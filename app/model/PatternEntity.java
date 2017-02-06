@@ -73,8 +73,8 @@ public class PatternEntity {
 
     private void createDefaultPattern(String projectId) {
         List<Regex> rl = new ArrayList<Regex>();
-        rl.add(new Regex("Code Smell", "Hardcoded system name detected", "\\bcu[0-9]+[a-zA-Z_0-9]+\\b", "any"));
-        rl.add(new Regex("Code Smell", "Hardcoded wait function detected", "wait\\([0-9]+\\)", "any"));
+        rl.add(new Regex("Code Smell", "Hardcoded system name detected", "\\bcu[0-9]+[a-zA-Z_0-9]+\\b", "any", new ArrayList<String>()));
+        rl.add(new Regex("Code Smell", "Hardcoded wait function detected", "wait\\([0-9]+\\)", "any", new ArrayList<String>()));
         new PatternEntity(projectId, rl).save();
     }
 
@@ -106,10 +106,10 @@ public class PatternEntity {
                 jsonObject.put(StaticFunctions.DESCRIPTION, software.getDescription());
                 jsonObject.put(StaticFunctions.REGEX.toLowerCase(), software.getRegex());
                 jsonObject.put(StaticFunctions.PROGLANGUAGE, software.getProgLanguage());
+                jsonObject.put("tags", StaticFunctions.getJsonFromList(software.getTags()));
                 jsonArray.add(jsonObject);
             }
         }
         return jsonArray;
     }
-
 }

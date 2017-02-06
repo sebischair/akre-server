@@ -7,7 +7,9 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.query.Query;
 import play.libs.Json;
+import util.StaticFunctions;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,9 +29,10 @@ public class CustomCodeAnnotation {
 
     private String token;
 
-    private String range;
+    @Embedded
+    private Range range;
 
-    private String lines;
+    private ArrayList<String> lines;
 
     private String description;
 
@@ -38,6 +41,8 @@ public class CustomCodeAnnotation {
     private String progLanguage;
 
     private Date createdAt;
+
+    private ArrayList<String> tags;
 
     @Embedded
     private User user;
@@ -82,19 +87,19 @@ public class CustomCodeAnnotation {
         this.token = token;
     }
 
-    public String getRange() {
+    public Range getRange() {
         return range;
     }
 
-    public void setRange(String range) {
+    public void setRange(Range range) {
         this.range = range;
     }
 
-    public String getLines() {
+    public ArrayList<String> getLines() {
         return lines;
     }
 
-    public void setLines(String lines) {
+    public void setLines(ArrayList<String> lines) {
         this.lines = lines;
     }
 
@@ -134,26 +139,39 @@ public class CustomCodeAnnotation {
         this.createdAt = createdAt;
     }
 
+    public ArrayList<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(ArrayList<String> tags) {
+        this.tags = tags;
+    }
+
+    public static ObjectNode searalize(CustomCodeAnnotation cca) {
+        ObjectNode obj = Json.newObject();
+        obj.put("id", cca.get_id().toString());
+        obj.put("projectId", cca.getProjectId());
+        obj.put("fileId", cca.getFileId());
+        obj.put("range", cca.getRange().searalize());
+        obj.put("token", cca.getToken());
+        obj.put("lines", StaticFunctions.getJsonFromList(cca.getLines()));
+        obj.put("path", cca.getPath());
+        obj.put("progLanguage", cca.getProgLanguage());
+        obj.put("description", cca.getDescription());
+        User u = cca.getUser();
+        ObjectNode uObj = Json.newObject();
+        uObj.put("name", u.getName());
+        uObj.put("mail", u.getMail());
+        obj.put("user", uObj);
+        obj.put("createdAt", cca.getCreatedAt().toString());
+        obj.put("tags", StaticFunctions.getJsonFromList(cca.getTags()));
+        return obj;
+    }
+
     public static ArrayNode searalize(List<CustomCodeAnnotation> ccas) {
         ArrayNode result = Json.newArray();
         for(CustomCodeAnnotation cca: ccas) {
-            ObjectNode obj = Json.newObject();
-            obj.put("id", cca.get_id().toString());
-            obj.put("projectId", cca.getProjectId());
-            obj.put("fileId", cca.getFileId());
-            obj.put("range", cca.getRange());
-            obj.put("token", cca.getToken());
-            obj.put("lines", cca.getLines());
-            obj.put("path", cca.getPath());
-            obj.put("progLanguage", cca.getProgLanguage());
-            obj.put("description", cca.getDescription());
-            User u = cca.getUser();
-            ObjectNode uObj = Json.newObject();
-            uObj.put("name", u.getName());
-            uObj.put("mail", u.getMail());
-            obj.put("user", uObj);
-            obj.put("createdAt", cca.getCreatedAt().toString());
-            result.add(obj);
+            result.add(searalize(cca));
         }
         return result;
     }
@@ -172,4 +190,21 @@ public class CustomCodeAnnotation {
         List<CustomCodeAnnotation> annotations = MorphiaObject.datastore.createQuery(CustomCodeAnnotation.class).field("fileId").equalIgnoreCase(fileId).asList();
         return searalize(annotations);
     }
+
+    public static CustomCodeAnnotation findById(String id) {
+        ObjectId objectId = new ObjectId(id);
+        return MorphiaObject.datastore.get(CustomCodeAnnotation.class, objectId);
+    }
+
+    public static boolean delete(String id) {
+        try{
+            MorphiaObject.datastore.delete(findById(id));
+            return true;
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+
+    }
+
 }

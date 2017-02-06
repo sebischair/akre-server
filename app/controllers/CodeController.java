@@ -40,8 +40,6 @@ public class CodeController extends Controller {
                 fileId = key.getId().toString();
             }
 
-            PatternEntity p = new PatternEntity().findByProjectId(projectId);
-
             StaticRegexPipeline srp = new StaticRegexPipeline();
             srp.setDocument(new Document(content));
             srp.setProjectId(projectId);
@@ -78,13 +76,23 @@ public class CodeController extends Controller {
 
     public Result updatePattern() {
         String projectId = request().body().asJson().findValue(StaticFunctions.PROJECTID).toString().replaceAll("\"", "");
-        List<JsonNode> patterns = request().body().asJson().findValues(StaticFunctions.PATTERN);
+        JsonNode jsonObject = request().body().asJson();
+        List<JsonNode> patterns = jsonObject.findValues(StaticFunctions.PATTERN);
         List<Regex> regex = new ArrayList<>();
         for(JsonNode p: patterns.get(0)) {
+            ArrayList<String> lines = new ArrayList<String>();
+            if(p.has("tags")) {
+                ArrayNode ls = (ArrayNode) p.get("tags");
+                for(JsonNode l: ls) {
+                    lines.add(l.asText());
+                }
+            }
+
             regex.add(new Regex(p.get(StaticFunctions.NAME).asText("").replaceAll("\"", ""),
                     p.get(StaticFunctions.DESCRIPTION).asText("").replaceAll("\"", ""),
                     p.get(StaticFunctions.REGEX.toLowerCase()).asText("").replaceAll("\"", ""),
-                    p.get(StaticFunctions.PROGLANGUAGE).asText("").replaceAll("\"", "")));
+                    p.get(StaticFunctions.PROGLANGUAGE).asText("").replaceAll("\"", ""),
+                    lines));
         }
 
         new PatternEntity().updatePattern(projectId, regex);

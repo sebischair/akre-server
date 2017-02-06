@@ -88,4 +88,12 @@ public class StaticFunctions {
         }
         return sortedJsonArray;
     }
+
+    public static ArrayNode getJsonFromList(ArrayList<String> lines) {
+        ArrayNode l = Json.newArray();
+        if(lines != null)
+            for(String line: lines)
+                l.add(line);
+        return l;
+    }
 }

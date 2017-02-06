@@ -1,14 +1,17 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import model.CustomCodeAnnotation;
+import model.Range;
 import model.User;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import util.StaticFunctions;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -26,8 +29,7 @@ public class CCAnnotatorController extends Controller {
         cca.setFileId(fileId);
 
         if(jsonObject.has("range")) {
-            String range = jsonObject.findValue("range").toString().replace("\"", "");
-            cca.setRange(range);
+            cca.setRange(new Range(jsonObject.findValue("range")));
         }
 
         if(jsonObject.has("token")) {
@@ -36,7 +38,11 @@ public class CCAnnotatorController extends Controller {
         }
 
         if(jsonObject.has("lines")) {
-            String lines = jsonObject.findValue("lines").toString().replace("\"", "");
+            ArrayNode ls = (ArrayNode) jsonObject.get("lines");
+            ArrayList<String> lines = new ArrayList<String>();
+            for(JsonNode l: ls) {
+                lines.add(l.asText());
+            }
             cca.setLines(lines);
         }
 
@@ -62,9 +68,17 @@ public class CCAnnotatorController extends Controller {
 
         cca.setCreatedAt(new Date());
 
+        if(jsonObject.has("tags")) {
+            ArrayNode ts = (ArrayNode) jsonObject.findValue("tags");
+            ArrayList<String> tags = new ArrayList<String>();
+            for(JsonNode t: ts) {
+                tags.add(t.asText());
+            }
+            cca.setTags(tags);
+        }
+
         cca.save();
-        result.put("success", "200");
-        return ok(result);
+        return StaticFunctions.jsonResult(ok(new CustomCodeAnnotation().searalize(cca)));
     }
 
     public Result getAll() {
@@ -77,5 +91,18 @@ public class CCAnnotatorController extends Controller {
 
     public Result getAllForFileId(String fileId) {
         return StaticFunctions.jsonResult(ok(CustomCodeAnnotation.getAllAnnotationsForFile(fileId)));
+    }
+
+    public Result delete(String id) {
+        ObjectNode result = Json.newObject();
+        boolean status = new CustomCodeAnnotation().delete(id);
+        if(status){
+            result.put("status", 200);
+            result.put("message", "Document successfully deleted");
+        }else{
+            result.put("status", 500);
+            result.put("message", "Unable to delete the document");
+        }
+        return ok(result);
     }
 }

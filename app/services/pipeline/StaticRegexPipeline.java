@@ -14,7 +14,6 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.InvalidXMLException;
 import play.libs.Json;
-import services.annotator.ConceptAnnotator;
 import services.annotator.StaticRegexAnnotator;
 import util.PipelineUtil;
 import util.StaticFunctions;
@@ -49,10 +48,11 @@ public class StaticRegexPipeline extends Pipeline {
     public ArrayNode processDocument() {
         ArrayNode annotations = Json.newArray();
         try {
-            AnalysisEngineDescription conceptAnnotatorDesc = createEngineDescription(ConceptAnnotator.class);
+            //AnalysisEngineDescription conceptAnnotatorDesc = createEngineDescription(ConceptAnnotator.class);
             AnalysisEngineDescription regexDesc = createEngineDescription(StaticRegexAnnotator.class);
             // aggregate AE for basic pipe
-            AnalysisEngineDescription basicPipeDesc = createEngineDescription(regexDesc, conceptAnnotatorDesc);
+            //AnalysisEngineDescription basicPipeDesc = createEngineDescription(regexDesc, conceptAnnotatorDesc);
+            AnalysisEngineDescription basicPipeDesc = createEngineDescription(regexDesc);
             AnalysisEngine pipe = createEngine(basicPipeDesc);
 
             //JCas jCas = UimaUtil.produceJCas(StaticFunctions.CONCEPT, StaticFunctions.REGEX);

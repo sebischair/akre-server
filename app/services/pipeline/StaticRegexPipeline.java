@@ -106,7 +106,7 @@ public class StaticRegexPipeline extends Pipeline {
                 if(name != null) {
                     PatternEntity p = new PatternEntity().findByProjectId(this.getProjectId());
                     for(Regex r : p.getRegex())
-                        if(r.getName().equals(name) && r.getTags()!= null)
+                        if((r.getName().equalsIgnoreCase(name) ||r.getDescription().equalsIgnoreCase(name)) && r.getTags() != null)
                             featureAsJson.put(StaticFunctions.TAGS, StaticFunctions.getJsonFromList(r.getTags()));
                 }
             }

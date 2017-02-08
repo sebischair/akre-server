@@ -81,8 +81,8 @@ public class CodeController extends Controller {
         List<Regex> regex = new ArrayList<>();
         for(JsonNode p: patterns.get(0)) {
             ArrayList<String> lines = new ArrayList<String>();
-            if(p.has("tags")) {
-                ArrayNode ls = (ArrayNode) p.get("tags");
+            if(p.has(StaticFunctions.TAGS)) {
+                ArrayNode ls = (ArrayNode) p.get(StaticFunctions.TAGS);
                 for(JsonNode l: ls) {
                     lines.add(l.asText());
                 }

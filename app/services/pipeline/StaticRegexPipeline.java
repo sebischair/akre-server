@@ -2,6 +2,8 @@ package services.pipeline;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import model.PatternEntity;
+import model.Regex;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -99,7 +101,16 @@ public class StaticRegexPipeline extends Pipeline {
             if(featureAsJson.has(StaticFunctions.BEGIN) && featureAsJson.has(StaticFunctions.END))
                 featureAsJson.put(StaticFunctions.TOKEN, this.getDocument().getRawContent().substring(Integer.parseInt(featureAsJson.get(StaticFunctions.BEGIN).asText()), Integer.parseInt(featureAsJson.get(StaticFunctions.END).asText())));
 
-            System.out.println(Integer.parseInt(featureAsJson.get(StaticFunctions.BEGIN).asText()));
+            if(featureAsJson.has(StaticFunctions.NAME)) {
+                String name = featureAsJson.get(StaticFunctions.NAME).asText();
+                if(name != null) {
+                    PatternEntity p = new PatternEntity().findByProjectId(this.getProjectId());
+                    for(Regex r : p.getRegex())
+                        if(r.getName().equals(name) && r.getTags()!= null)
+                            featureAsJson.put(StaticFunctions.TAGS, StaticFunctions.getJsonFromList(r.getTags()));
+                }
+            }
+
             if(isWaitConditionSatisfied(featureAsJson.get(StaticFunctions.NAME).asText(), jCas.getDocumentText().substring(0,
                             Integer.parseInt(featureAsJson.get(StaticFunctions.BEGIN).asText())))) {
                 annotations.add(featureAsJson);

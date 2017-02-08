@@ -99,7 +99,7 @@ class StartEnd {
     public ObjectNode searalize() {
         ObjectNode o = Json.newObject();
         o.put("row", this.getRow());
-        o.put("column", this.getRow());
+        o.put("column", this.getColumn());
         return o;
     }
 }

@@ -55,7 +55,8 @@ public class StaticRegexPipeline extends Pipeline {
             AnalysisEngineDescription basicPipeDesc = createEngineDescription(regexDesc, conceptAnnotatorDesc);
             AnalysisEngine pipe = createEngine(basicPipeDesc);
 
-            JCas jCas = UimaUtil.produceJCas(StaticFunctions.CONCEPT, StaticFunctions.REGEX);
+            //JCas jCas = UimaUtil.produceJCas(StaticFunctions.CONCEPT, StaticFunctions.REGEX);
+            JCas jCas = UimaUtil.produceJCas(StaticFunctions.REGEX);
             jCas.setDocumentText(this.getDocument().getRawContent() + ":projectId:" + this.getProjectId());
             jCas.setDocumentLanguage(this.getDocument().getLanguage());
 

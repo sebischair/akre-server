@@ -105,9 +105,24 @@ public class StaticRegexPipeline extends Pipeline {
                 String name = featureAsJson.get(StaticFunctions.NAME).asText();
                 if(name != null) {
                     PatternEntity p = new PatternEntity().findByProjectId(this.getProjectId());
-                    for(Regex r : p.getRegex())
-                        if((r.getName().equalsIgnoreCase(name) ||r.getDescription().equalsIgnoreCase(name)) && r.getTags() != null)
+                    for(Regex r : p.getRegex()) {
+                        if ((r.getName().equalsIgnoreCase(name) || r.getDescription().equalsIgnoreCase(name)) && r.getTags() != null) {
                             featureAsJson.put(StaticFunctions.TAGS, StaticFunctions.getJsonFromList(r.getTags()));
+                        }
+                    }
+                }
+            }
+
+            if(featureAsJson.has(StaticFunctions.NAME)) {
+                String name = featureAsJson.get(StaticFunctions.NAME).asText();
+                if(name != null) {
+                    PatternEntity p = new PatternEntity().findByProjectId(this.getProjectId());
+                    for(Regex r : p.getRegex()) {
+                        if ((r.getName().equalsIgnoreCase(name) || r.getDescription().equalsIgnoreCase(name)) && r.getTags() != null) {
+                            featureAsJson.put(StaticFunctions.NAME, r.getName());
+                            featureAsJson.put(StaticFunctions.DESCRIPTION, r.getDescription());
+                        }
+                    }
                 }
             }
 

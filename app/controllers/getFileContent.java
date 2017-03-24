@@ -11,6 +11,8 @@ import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Result;
 import play.Play;
+import services.parser.AutoDetectTikaParser;
+import services.parser.Parser;
 import util.StaticFunctions;
 
 import java.io.File;
@@ -19,19 +21,13 @@ import java.io.File;
 public class getFileContent extends Controller {
 
     public Result upload() {
-        ObjectNode result = Json.newObject();
         try {
             MultipartFormData<File> body = request().body().asMultipartFormData();
             System.out.println(body);
             MultipartFormData.FilePart<File> f = body.getFile("file");
-
-            String fileName = f.getFilename();
-            String contentType = f.getContentType();
             File file = f.getFile();
-            System.out.println(fileName);
-            System.out.println(file);
-            JsonNode json = Json.parse(Files.toString(Play.application().getFile("conf/response.json"), Charsets.UTF_8));
-            result.replace("content", json);
+            Parser parser = new AutoDetectTikaParser();
+            ObjectNode result = (ObjectNode) parser.parse(file);
             result.put("success", true);
             return StaticFunctions.jsonResult(ok(result));
         }

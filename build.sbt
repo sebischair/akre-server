@@ -44,5 +44,8 @@ libraryDependencies ++= Seq(
   //Google Trends
   "commons-configuration" % "commons-configuration" % "1.6",
   "org.apache.commons" % "commons-lang3" % "3.0",
-  "commons-httpclient" % "commons-httpclient" % "3.1"
+  "commons-httpclient" % "commons-httpclient" % "3.1",
+
+  //Apache TIKA
+  "org.apache.tika" % "tika-parsers" % "1.4"
 )

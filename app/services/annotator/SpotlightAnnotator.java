@@ -22,7 +22,7 @@ public class SpotlightAnnotator extends JCasAnnotator_ImplBase {
 
     public static final String PARAM_ENDPOINT = "endPoint";
     //"http://spotlight.sztaki.hu:2222/rest/annotate"
-    @ConfigurationParameter(name=PARAM_ENDPOINT, defaultValue = "http://localhost:2222/rest/annotate")
+    @ConfigurationParameter(name=PARAM_ENDPOINT, defaultValue = "http://spotlight.sztaki.hu:2222/rest/annotate")
     private String SPOTLIGHT_ENDPOINT;
 
     // Default values for the web service parameters for the spotlight endpoint

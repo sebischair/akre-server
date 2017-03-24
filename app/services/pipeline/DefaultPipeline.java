@@ -90,12 +90,11 @@ public class DefaultPipeline extends Pipeline {
                     featureAsJson.put(feature.getShortName(), a.getFeatureValueAsString(feature));
                 }
             }
-
+				
             if(featureAsJson.has(StaticFunctions.BEGIN) && featureAsJson.has(StaticFunctions.END))
                 featureAsJson.put(StaticFunctions.TOKEN, this.getDocument().getRawContent().substring(Integer.parseInt(featureAsJson.get(StaticFunctions.BEGIN).asText()), Integer.parseInt(featureAsJson.get(StaticFunctions.END).asText())));
 
             DBpediaToken savedToken = new DBpediaToken().findByName(featureAsJson.get(StaticFunctions.TOKEN).asText());
-
            if(savedToken != null && savedToken.getScore() >= 0) {
                 featureAsJson.put(StaticFunctions.CONCEPTTYPE, savedToken.getType());
            } else if (featureAsJson.has(StaticFunctions.URI.toUpperCase())) {
@@ -123,6 +122,13 @@ public class DefaultPipeline extends Pipeline {
             if(savedToken != null && savedToken.getScore() >= 0) {
                 annotations.add(featureAsJson);
             }
+			
+			//if(featureAsJson.get(StaticFunctions.CONCEPTTYPE).asText().equalsIgnoreCase(StaticFunctions.EXPERTISE) ||
+			//featureAsJson.get(StaticFunctions.CONCEPTTYPE).asText().equalsIgnoreCase(StaticFunctions.METHOD) ||
+			//featureAsJson.get(StaticFunctions.CONCEPTTYPE).asText().equalsIgnoreCase(StaticFunctions.TEMPLATE)
+			//) {
+			//	annotations.add(featureAsJson);
+			//}
         }
         return annotations;
     }

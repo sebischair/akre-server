@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
+import is2.util.Convert;
 import model.Document;
+import model.Paragraph;
 import play.libs.Json;
 import play.libs.ws.WSClient;
 import play.libs.ws.WSResponse;
@@ -16,9 +18,6 @@ import util.StaticFunctions;
 import java.util.Iterator;
 import java.util.concurrent.CompletionStage;
 
-/**
- * Created by mahabaleshwar on 6/23/2016.
- */
 public class DocumentController extends Controller {
 
     @Inject WSClient ws;
@@ -27,8 +26,27 @@ public class DocumentController extends Controller {
 
     public Result processDocument() {
         ObjectNode result = Json.newObject();
+        Paragraph paragraph = new Paragraph();
+
+        int paragraphNumber = Integer.parseInt(request().body().asJson().findValue("parNum").toString());
+        paragraph.setParagraphNum(paragraphNumber);
+
+        //check if request has the sessionId
+        String uuid=session("uuid");
+        //create in session controller
+//        if(uuid==null) {
+//            uuid=java.util.UUID.randomUUID().toString();
+//            session("uuid", uuid);
+//        }
+        //paragraph.setSessionId(uuid);
 
         String content = request().body().asJson().findValue("content").toString().replace("\"", "");
+        paragraph.setContent(content);
+
+        //check version & save
+        //Paragraph.addVersion();
+        //Paragraph.save();
+
         //String content = "The Yummy Inc online application will be deployed onto a J2EE application server Websphere Application Server version 6, as it is already the application server use for internal applications. J2EE security model will be reused. Data persistence will be addressed using a relational database.";
         Document d = new Document(content);
 

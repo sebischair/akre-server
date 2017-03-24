@@ -1,14 +1,19 @@
 package model;
 
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.*;
 import services.HelperService;
 import util.HtmlUtil;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
-/**
- * Created by mahabaleshwar on 6/23/2016.
- */
+@Entity("Document")
 public class Document {
+
+    @Id
+    private ObjectId id;
 
     public TreeMap<String, Integer> totalAmountOfAnnotations = new TreeMap<>();
     public TreeMap<String, TreeMap<String, Integer>> totalAmountOfDistinctAnnotations = new TreeMap<>();
@@ -37,5 +42,12 @@ public class Document {
     public boolean isRawContentInHTML() {
         return HtmlUtil.isHtml(getContent());
     }
+
+    @Reference
+    protected ArrayList<Paragraph> paragraphs;
+
+    private String sessionId;
+
+    private String hash;
 
 }

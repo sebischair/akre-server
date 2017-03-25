@@ -12,3 +12,4 @@ mongodump/
 logs/
 target/
 yajsw
+db/

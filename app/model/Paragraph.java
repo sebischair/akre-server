@@ -1,9 +1,11 @@
 package model;
 
+import controllers.MorphiaObject;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
-@Entity("paragraphs")
+@Entity("paragraph")
 public class Paragraph {
 
     @Id
@@ -15,11 +17,30 @@ public class Paragraph {
 
     private String hash;
 
-    public void setParagraphNum(int paragraphNum) {
+    public Paragraph setParagraphNum(int paragraphNum) {
         this.paragraphNum = paragraphNum;
+        return this;
     }
 
-    public void setContent(String content) {
+    public Paragraph setContent(String content) {
+        generateHash(content);
         this.content = content;
+        return this;
+    }
+
+    private void generateHash(String content) {
+        this.hash = DigestUtils.sha1Hex(content);
+    }
+
+    public int getParagraphNum() {
+        return this.paragraphNum;
+    }
+
+    public String getHash() {
+        return this.hash;
+    }
+
+    public void save() {
+        MorphiaObject.datastore.save(this);
     }
 }

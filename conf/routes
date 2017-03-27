@@ -27,3 +27,4 @@ GET      /codeTokenInProject         controllers.CCAnnotatorController.getAllFor
 GET      /deleteCodeToken            controllers.CCAnnotatorController.delete(id: String ?= "")
 
 POST     /getFileContent             controllers.getFileContent.upload()
+POST     /createSession              controllers.SessionController.createNewSession()

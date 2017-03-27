@@ -16,9 +16,6 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Alex on 21/03/17.
- */
 public class AutoDetectTikaParser implements Parser {
 
     @Override
@@ -36,14 +33,18 @@ public class AutoDetectTikaParser implements Parser {
     }
 
     private JsonNode MetadataToJson(Metadata metadata) {
-        //since Metadata class doesn't return all fields, we need to get each one
+        /*
+        Metadata stores values in a HashMap in private field,
+        since it doesn't return full HashMap
+        we create a json object using names()
+         */
+        ObjectNode node = Json.newObject();
         String[] names = metadata.names();
-        HashMap<String, String> data = new HashMap<>();
         for (String name : names) {
             if(!metadata.get(name).equals("")) {
-                data.put(name, metadata.get(name));
+                node.put(name, metadata.get(name));
             }
         }
-        return Json.toJson(data);
+        return node;
     }
 }

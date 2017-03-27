@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
 import model.Document;
+import model.Paragraph;
+import model.Record;
 import play.libs.Json;
 import play.libs.ws.WSClient;
 import play.libs.ws.WSResponse;
@@ -16,20 +18,36 @@ import util.StaticFunctions;
 import java.util.Iterator;
 import java.util.concurrent.CompletionStage;
 
-/**
- * Created by mahabaleshwar on 6/23/2016.
- */
 public class DocumentController extends Controller {
 
-    @Inject WSClient ws;
+    @Inject
+    WSClient ws;
 
     private JsonNode metaInformation = Json.newObject();
 
+    private final String PARAGRAPH_NUMBER = "parNum";
+    private final String CONTENT = "content";
+    private final String DOCUMENT_HASH = "docHash";
+    private final String PARAGRAPH_MAX = "parMax";
+
     public Result processDocument() {
         ObjectNode result = Json.newObject();
+        JsonNode request = request().body().asJson();
 
-        String content = request().body().asJson().findValue("content").toString().replace("\"", "");
-        //String content = "The Yummy Inc online application will be deployed onto a J2EE application server Websphere Application Server version 6, as it is already the application server use for internal applications. J2EE security model will be reused. Data persistence will be addressed using a relational database.";
+        String uuid = session("uuid");
+        if (uuid != null && request.has(PARAGRAPH_NUMBER) && request.has(DOCUMENT_HASH)) {
+            Record record = Record.getRecord(uuid, request.findValue(DOCUMENT_HASH).asText());
+            if (request.has(PARAGRAPH_MAX) && request.findValue(PARAGRAPH_MAX).asInt() == record.getParagraphs().size()) {
+                //document already in db
+            } else {
+                int paragraphNumber = request.findValue(PARAGRAPH_NUMBER).asInt();
+                Paragraph paragraph = new Paragraph().setParagraphNum(paragraphNumber);
+                paragraph.setContent(request.findValue(CONTENT).toString().replace("\"", ""));
+                record.addParagraph(paragraph).save();
+            }
+        }
+
+        String content = request.findValue(CONTENT).toString().replace("\"", "");
         Document d = new Document(content);
 
         DefaultPipeline dp = new DefaultPipeline();
@@ -37,7 +55,7 @@ public class DocumentController extends Controller {
         ArrayNode annotations = dp.processDocument();
 
         result.put("status", "OK");
-        result.put("data", annotations);
+        result.replace("data", annotations);
 
         return ok(result);
     }
@@ -55,10 +73,10 @@ public class DocumentController extends Controller {
     }
 
     public JsonNode getResource(JsonNode wsResponse, String key) {
-        if(wsResponse.has(key))
+        if (wsResponse.has(key))
             return wsResponse.get(key);
-        if(wsResponse.isObject()) {
-            for(Iterator iterator = wsResponse.fieldNames(); iterator.hasNext();) {
+        if (wsResponse.isObject()) {
+            for (Iterator iterator = wsResponse.fieldNames(); iterator.hasNext(); ) {
                 String k = (String) iterator.next();
                 return getResource(wsResponse.get(k), key);
             }
@@ -67,6 +85,6 @@ public class DocumentController extends Controller {
     }
 
     public CompletionStage<JsonNode> getResponse(String url) {
-        return ws.url(url).get().thenApply(WSResponse:: asJson);
+        return ws.url(url).get().thenApply(WSResponse::asJson);
     }
 }

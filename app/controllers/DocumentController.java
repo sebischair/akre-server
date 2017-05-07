@@ -29,14 +29,14 @@ public class DocumentController extends Controller {
     private final String CONTENT = "content";
     private final String DOCUMENT_HASH = "docHash";
     private final String PARAGRAPH_MAX = "parMax";
+    private final String SESSION = "uuid";
 
     public Result processDocument() {
         ObjectNode result = Json.newObject();
         JsonNode request = request().body().asJson();
 
-        String uuid = session("uuid");
-        if (uuid != null && request.has(PARAGRAPH_NUMBER) && request.has(DOCUMENT_HASH)) {
-            Record record = Record.getRecord(uuid, request.findValue(DOCUMENT_HASH).asText());
+        if (request.has(SESSION) && request.has(PARAGRAPH_NUMBER) && request.has(DOCUMENT_HASH)) {
+            Record record = Record.getRecord(request.findValue(SESSION).asText(), request.findValue(DOCUMENT_HASH).asText());
             if (request.has(PARAGRAPH_MAX) && request.findValue(PARAGRAPH_MAX).asInt() == record.getParagraphs().size()) {
                 //document already in db
             } else {

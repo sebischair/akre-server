@@ -24,7 +24,7 @@ public class AutoDetectTikaParser implements Parser {
     @Override
     public JsonNode parse(File file) throws IOException, TikaException, SAXException {
         AutoDetectParser parser = new AutoDetectParser();
-        ContentHandler handler = new BodyContentHandler();
+        BodyContentHandler handler = new BodyContentHandler(-1);
         Metadata metadata = new Metadata();
         try (InputStream stream = new FileInputStream(file)) {
             parser.parse(stream, handler, metadata);

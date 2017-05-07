@@ -11,7 +11,6 @@ public class SessionController extends Controller {
         ObjectNode result = Json.newObject();
 
         String uuid=java.util.UUID.randomUUID().toString();
-        session("uuid", uuid);
 
         result.put("session", uuid);
         result.put("status", "OK");

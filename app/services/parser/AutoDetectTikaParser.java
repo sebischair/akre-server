@@ -29,7 +29,7 @@ public class AutoDetectTikaParser implements Parser {
         try (InputStream stream = new FileInputStream(file)) {
             parser.parse(stream, handler, metadata);
             ObjectNode node = Json.newObject();
-            node.replace("context", ContextToParagraphs(handler.toString()));
+            node.replace("content", ContextToParagraphs(handler.toString()));
             node.replace("meta", MetadataToJson(metadata));
             return node;
         }

@@ -5,9 +5,12 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
+import org.mongodb.morphia.query.UpdateOperations;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static controllers.MorphiaObject.datastore;
 
 
 @Entity("record")
@@ -37,7 +40,7 @@ public class Record {
 
     public static Record getRecord(String sessionId, String hash) {
         //get the record with the same hash
-        List<Record> list = MorphiaObject.datastore.createQuery(Record.class).field("sessionId").equalIgnoreCase(sessionId).field("hash").equalIgnoreCase(hash).asList();
+        List<Record> list = datastore.createQuery(Record.class).field("sessionId").equalIgnoreCase(sessionId).field("hash").equalIgnoreCase(hash).asList();
         if(!list.isEmpty()) {
             //if record exists
             //we load it
@@ -60,7 +63,7 @@ public class Record {
     }
 
     private void increaseVersion(String sessionId) {
-        List<Record> list = (List<Record>) MorphiaObject.datastore.createQuery(getClass()).field("sessionId").equalIgnoreCase(sessionId).order("-version").asList();
+        List<Record> list = (List<Record>) datastore.createQuery(getClass()).field("sessionId").equalIgnoreCase(sessionId).order("-version").asList();
         version = list.isEmpty() ? 0 : list.get(0).getVersion() + 1;
     }
 
@@ -78,6 +81,11 @@ public class Record {
     }
 
     public void save() {
-        MorphiaObject.datastore.save(this);
+        datastore.save(this);
+    }
+
+    public static void removeAllRecords() {
+        datastore.delete(datastore.createQuery(Record.class));
+        datastore.delete(datastore.createQuery(Paragraph.class));
     }
 }

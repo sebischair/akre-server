@@ -2,7 +2,7 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# An example controller showing a sample home page
+# Ontologie-based recommender
 GET      /                           controllers.ApplicationController.index()
 GET      /addToken                   controllers.AnnotationController.addToken(token: String ?= "")
 GET      /removeToken                controllers.AnnotationController.removeToken(token: String ?= "")
@@ -15,6 +15,11 @@ POST     /addSoftware                controllers.SoftwareRecommendationControlle
 POST     /removeAlternative          controllers.AlternativesController.removeAlternative()
 POST     /addAlternative             controllers.AlternativesController.addAlternative()
 
+# Amelietor specific
+POST     /getFileContent             controllers.getFileContent.upload()
+POST     /createSession              controllers.SessionController.createNewSession()
+
+#cc-annotator rest api
 POST     /processCode                controllers.CodeController.processCode()
 POST     /project                    controllers.ProjectController.create()
 GET      /project                    controllers.ProjectController.getAll()
@@ -26,7 +31,11 @@ GET      /codeTokenInFile            controllers.CCAnnotatorController.getAllFor
 GET      /codeTokenInProject         controllers.CCAnnotatorController.getAllForProjectId(projectId: String ?= "")
 GET      /deleteCodeToken            controllers.CCAnnotatorController.delete(id: String ?= "")
 
-POST     /getFileContent             controllers.getFileContent.upload()
+
+#uncertainty detection
 POST     /upload                     controllers.getFileContent.uploadAndSave()
-POST     /createSession              controllers.SessionController.createNewSession()
-POST     /delete/all                 controllers.getFileContent.deleteAllDocuments()
+GET      /annotate/:paraghraphHash   controllers.SpaCyController.process(paraghraphHash)
+
+POST     /record/delete/all           controllers.RecordController.deleteAllDocuments()
+GET      /record/all                  controllers.RecordController.getAllDocuments()
+

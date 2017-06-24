@@ -36,7 +36,7 @@ public class DocumentController extends Controller {
         JsonNode request = request().body().asJson();
 
         if (request.has(SESSION) && request.has(PARAGRAPH_NUMBER) && request.has(DOCUMENT_HASH)) {
-            Record record = Record.getRecord(request.findValue(SESSION).asText(), request.findValue(DOCUMENT_HASH).asText());
+            Record record = Record.getOrCreateRecord(request.findValue(SESSION).asText(), request.findValue(DOCUMENT_HASH).asText());
             if (request.has(PARAGRAPH_MAX) && request.findValue(PARAGRAPH_MAX).asInt() == record.getParagraphs().size()) {
                 //document already in db
             } else {

@@ -2,24 +2,18 @@ package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.common.base.Charsets;
-import com.google.common.io.Files;
-
+import model.Paragraph;
+import model.Record;
 import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Result;
-import play.Play;
 import services.parser.AutoDetectTikaParser;
 import services.parser.Parser;
 import util.StaticFunctions;
 
-import model.Paragraph;
-import model.Record;
-
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 
@@ -51,7 +45,7 @@ public class getFileContent extends Controller {
             ObjectNode parsed_result = (ObjectNode) parser.parse(file);
             String fakeSessionId=java.util.UUID.randomUUID().toString();
             String fakeDocumentHash=java.util.UUID.randomUUID().toString();
-            Record record = Record.getRecord(fakeSessionId,fakeDocumentHash);
+            Record record = Record.getOrCreateRecord(fakeSessionId,fakeDocumentHash);
             JsonNode parasNode = parsed_result.path("paragraphs");
             Iterator itr = parasNode.elements();
             Integer paragraphNumber = 0;
@@ -66,6 +60,7 @@ public class getFileContent extends Controller {
             response.put("success", true);
             response.put("fakeSessionID", fakeSessionId);
             response.put("fakeDocumentHash", fakeDocumentHash);
+            response.put("status", "unprocessed");
             return StaticFunctions.jsonResult(ok(response));
         }
         catch (Throwable t) {
@@ -74,13 +69,13 @@ public class getFileContent extends Controller {
         }
     }
 
-    public Result deleteAllDocuments(){ //unsafe TODO:replace later on
+    public Result getAllDocuments(){ //unsafe TODO:replace later on
         try {
-            Record.removeAllRecords();
+            Record.getAllRecords();
             return StaticFunctions.jsonResult(ok());
         }
         catch (Throwable t) {
-            Logger.error("Exception in deleteAllDocuments handler", t);
+            Logger.error("Exception in getAllDocuments handler", t);
             return StaticFunctions.jsonResult(badRequest(StaticFunctions.errorAsJson(t)));
         }
     }

@@ -1,9 +1,11 @@
 package model;
 
-import controllers.MorphiaObject;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
+
+import static controllers.MorphiaObject.datastore;
 
 @Entity("paragraph")
 public class Paragraph {
@@ -28,6 +30,10 @@ public class Paragraph {
         return this;
     }
 
+    public String getContent() {
+        return content;
+    }
+
     private void generateHash(String content) {
         this.hash = DigestUtils.sha1Hex(content);
     }
@@ -41,6 +47,10 @@ public class Paragraph {
     }
 
     public void save() {
-        MorphiaObject.datastore.save(this);
+        datastore.save(this);
+    }
+
+    public static Paragraph getParagraph(String paraghraphHash) {
+        return datastore.createQuery(Paragraph.class).field("hash").equalIgnoreCase(paraghraphHash).get();
     }
 }

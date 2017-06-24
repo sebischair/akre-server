@@ -1,11 +1,16 @@
 package model;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import controllers.MorphiaObject;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 import org.mongodb.morphia.query.UpdateOperations;
+import play.libs.Json;
+import util.StaticFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +43,7 @@ public class Record {
         this.increaseVersion(this.sessionId);
     }
 
-    public static Record getRecord(String sessionId, String hash) {
+    public static Record getOrCreateRecord(String sessionId, String hash) {
         //get the record with the same hash
         List<Record> list = datastore.createQuery(Record.class).field("sessionId").equalIgnoreCase(sessionId).field("hash").equalIgnoreCase(hash).asList();
         if(!list.isEmpty()) {
@@ -48,6 +53,18 @@ public class Record {
         } else {
             return new Record(sessionId, hash);
         }
+    }
+
+    public static Record getRecord(String hash){
+        return datastore.createQuery(Record.class).field("hash").equalIgnoreCase(hash).get();
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public String getHash() {
+        return hash;
     }
 
     public List<Paragraph> getParagraphs() {
@@ -87,5 +104,9 @@ public class Record {
     public static void removeAllRecords() {
         datastore.delete(datastore.createQuery(Record.class));
         datastore.delete(datastore.createQuery(Paragraph.class));
+    }
+
+    public static List<Record> getAllRecords() {
+        return datastore.createQuery(Record.class).retrieveKnownFields().asList();
     }
 }

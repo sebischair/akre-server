@@ -22,12 +22,12 @@ public class getFileContent extends Controller {
     public Result upload() {
         try {
             MultipartFormData<File> body = request().body().asMultipartFormData();
-            System.out.println(body);
             MultipartFormData.FilePart<File> f = body.getFile("file");
             File file = f.getFile();
             Parser parser = new AutoDetectTikaParser();
             ObjectNode result = (ObjectNode) parser.parse(file);
             result.put("success", true);
+            result.put("fileName", f.getFilename());
             return StaticFunctions.jsonResult(ok(result));
         }
         catch (Throwable t) {

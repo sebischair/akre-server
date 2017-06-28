@@ -16,7 +16,7 @@ public class Global extends GlobalSettings {
     public void onStart(play.Application arg0) {
         super.beforeStart(arg0);
         Logger.debug("** onStart **");
-        MorphiaObject.mongo = new Mongo("127.0.0.1", 27017);
+        MorphiaObject.mongo = new MongoClient("127.0.0.1", 27017);
         ServerAddress sa = new ServerAddress("127.0.0.1", 27017);
         List<MongoCredential> cl = new ArrayList<MongoCredential>();
         MongoCredential mc = MongoCredential.createCredential("guest", "akrec", "guest".toCharArray());

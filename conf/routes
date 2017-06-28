@@ -35,6 +35,7 @@ GET      /deleteCodeToken            controllers.CCAnnotatorController.delete(id
 #uncertainty detection
 POST     /upload                     controllers.getFileContent.uploadAndSave()
 GET      /annotate/:paraghraphHash   controllers.SpaCyController.process(paraghraphHash)
+POST      /annotate                   controllers.SpaCyController.annotate()
 
 POST     /record/delete/all           controllers.RecordController.deleteAllDocuments()
 GET      /record/all                  controllers.RecordController.getAllDocuments()

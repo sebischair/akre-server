@@ -66,10 +66,10 @@ public class SpaCyController extends Controller{
             }
         }
         String content = request.findValue(CONTENT).toString().replace("\"", "");
-        ArrayNode tags = (ArrayNode) request.findValue("tags");
+        ArrayNode tags   = (ArrayNode) request.findValue("tags");
         ObjectNode json = Json.newObject()
                 .put("text", content);
-        json.put("poses", tags);
+        json.put("tags", tags);
         return ws.url(url).post(json).thenApply(response ->{
                     ObjectNode responseModified = Json.newObject();
                     responseModified.put("data", response.asJson().get("data"));

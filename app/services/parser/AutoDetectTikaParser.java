@@ -39,6 +39,7 @@ public class AutoDetectTikaParser implements Parser {
         String[] paragraphs = context.split("\n\n");
         ArrayNode array = Json.newArray();
         for (String par : paragraphs) {
+            par = par.replace("\n", ""); //delete line separators
             array.add(Json.newObject().put("paragraph", par));
         }
         return array;

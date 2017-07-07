@@ -34,3 +34,6 @@ GET           /paragraph/:paragraphHash/annotations        controllers.Annotatio
 POST          /annotation                                  controllers.AnnotationController.create()
 PUT           /annotation/:annotationId                    controllers.AnnotationController.update(annotationId: String)
 DELETE        /annotation/:annotationId                    controllers.AnnotationController.delete(annotationId: String)
+
+GET           /getQAData                                   controllers.QADataController.getQAData()
+GET           /getConsolidatedQAData                       controllers.QADataController.getConQAData()

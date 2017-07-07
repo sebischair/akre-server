@@ -39,9 +39,11 @@ public class StaticFunctions {
     //List of SC IDs
     public static final String WORKSPACEID = "1iksmphpafkxq";
     public static final String TASKID = "1ercja6vg99i0";
+    public static final String SCCONCEPTSID = "7wpcre3lzkbo";
 
+
+    public static final String CONCEPTS = "concepts";
     public static final String TAGS = "tags";
-
 
     public static Result jsonResult(Result httpResponse) {
         return httpResponse.as("application/json; charset=utf-8");

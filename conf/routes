@@ -37,3 +37,4 @@ DELETE        /annotation/:annotationId                    controllers.Annotatio
 
 GET           /getQAData                                   controllers.QADataController.getQAData()
 GET           /getConsolidatedQAData                       controllers.QADataController.getConQAData()
+GET           /getAE                                       controllers.AEController.getAE()

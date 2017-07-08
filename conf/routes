@@ -39,3 +39,4 @@ GET           /getQAData                                   controllers.QADataCon
 GET           /getConsolidatedQAData                       controllers.QADataController.getConQAData()
 GET           /getAE                                       controllers.AEController.getAE()
 GET           /getAssignee                                 controllers.AssigneeController.getAssignee()
+GET           /predictAssignee                             controllers.PredictionController.predictAssignee()

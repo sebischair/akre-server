@@ -23,10 +23,10 @@ public class QADataController extends Controller {
     public Result getQAData() {
         ArrayNode ja = Json.newArray();
         HelperService hs = new HelperService(ws);
-        hs.entitiesForTypeUid(StaticFunctions.TASKID).thenCompose(qualityAttributes -> hs.executeMxl(StaticFunctions.WORKSPACEID, "QADDCount()").thenApply(values -> {
+        hs.entitiesForTypeUid(StaticFunctions.QUALITYATTRIBUTEID).thenCompose(qualityAttributes -> hs.executeMxl(StaticFunctions.WORKSPACEID, "QADDCount()").thenApply(values -> {
             for (int i = 0; i < qualityAttributes.size(); i++) {
                 ObjectNode jo = Json.newObject();
-                jo.put("id", qualityAttributes.get(i).get("name"));
+                jo.set("id", qualityAttributes.get(i).get("name"));
                 jo.put("value", values.get("value").get(i).asInt());
                 ja.add(jo);
             }

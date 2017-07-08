@@ -27,7 +27,7 @@ public class AssigneeController extends Controller {
         List<String> assigneeList = new ArrayList<>();
 
         hs.executeMxl(StaticFunctions.WORKSPACEID, "getConceptsOfDesignDecisions()").thenApply(tasks -> {
-            tasks.get("value").forEach(task -> {
+            tasks.get(StaticFunctions.VALUE).forEach(task -> {
                 if (task.has(StaticFunctions.ASSIGNEE) && task.get(StaticFunctions.ASSIGNEE) != null) {
                     String assignee = task.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
                     if (!assigneeList.contains(assignee)) {
@@ -45,7 +45,7 @@ public class AssigneeController extends Controller {
                 }
             });
 
-            tasks.get("value").forEach(task -> {
+            tasks.get(StaticFunctions.VALUE).forEach(task -> {
                 String assignee = task.get(StaticFunctions.ASSIGNEE).asText("");
                 JsonNode ca = task.get(StaticFunctions.CONCEPTS);
                 JsonNode personObject = StaticFunctions.getJSONObject("personName", assignee, ja);
@@ -66,7 +66,7 @@ public class AssigneeController extends Controller {
     private ArrayNode transformArrayForD3(ArrayNode ja) {
         ArrayNode newJA = Json.newArray();
         ja.forEach(jo -> {
-            JsonNode ca = jo.get("concepts");
+            JsonNode ca = jo.get(StaticFunctions.CONCEPTS);
             ca.forEach(co -> {
                 ObjectNode newJO = Json.newObject();
                 newJO.put("personName", jo.get("personName"));

@@ -47,6 +47,7 @@ public class StaticFunctions {
     public static final String VALUES = "values";
     public static final String TAGS = "tags";
     public static final String ID = "id";
+    public static final String BELONGSTO = "belongs_to";
 
     public static Result jsonResult(Result httpResponse) {
         return httpResponse.as("application/json; charset=utf-8");

@@ -77,7 +77,7 @@ public class PredictionController extends Controller {
                 pcvja.add(pcvjo);
             });
 
-            ArrayNode decisionsToPredict = getRandomConceptVectors(conceptList, hs);
+            ArrayNode decisionsToPredict = getRandomConceptVectors(conceptList, hs, projectId);
             decisionsToPredict = matching(pcvja, decisionsToPredict, conceptList.size());
             decisionsToPredict = ordering(decisionsToPredict);
 
@@ -175,10 +175,10 @@ public class PredictionController extends Controller {
         return decisionsToPredict;
     }
 
-    private ArrayNode getRandomConceptVectors(List<String> conceptList, HelperService hs) {
+    private ArrayNode getRandomConceptVectors(List<String> conceptList, HelperService hs, String projectId) {
         ArrayNode conceptVectorJSONArray = Json.newArray();
         hs.entitiesForTypeUid(StaticFunctions.TASKID).thenApply(scTasks -> {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 20; i++) {
                 ObjectNode conceptVectorJSONObject = Json.newObject();
                 hs.entityForUid(scTasks.get(i).get(StaticFunctions.ID).asText()).thenApply(project -> {
                     boolean add = false;
@@ -203,6 +203,13 @@ public class PredictionController extends Controller {
 
                         for (int j = 0; j < attributesArray.size(); j++) {
                             JsonNode attribute = attributesArray.get(j);
+
+                            if (attribute.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.BELONGSTO) && attribute.get(StaticFunctions.VALUES).size() > 0 &&
+                                    attribute.get(StaticFunctions.VALUES).get(0).asText("").equalsIgnoreCase(projectId)) {
+                                add = false;
+                                break;
+                            }
+
                             if (attribute.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.CONCEPTS) && attribute.get(StaticFunctions.VALUES).size() > 0) {
                                 add = true;
                                 JsonNode concepts = attribute.get(StaticFunctions.VALUES);

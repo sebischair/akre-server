@@ -21,12 +21,12 @@ public class AssigneeController extends Controller {
     @Inject
     WSClient ws;
 
-    public Result getAssignee() {
+    public Result getAssignee(String projectId) {
         ArrayNode ja = Json.newArray();
         HelperService hs = new HelperService(ws);
         List<String> assigneeList = new ArrayList<>();
 
-        hs.executeMxl(StaticFunctions.WORKSPACEID, "getConceptsOfDesignDecisions()").thenApply(tasks -> {
+        hs.executeMxl(StaticFunctions.WORKSPACEID, "getConceptsOfDesignDecisions(\""+ projectId +"\")").thenApply(tasks -> {
             tasks.get(StaticFunctions.VALUE).forEach(task -> {
                 if (task.has(StaticFunctions.ASSIGNEE) && task.get(StaticFunctions.ASSIGNEE) != null) {
                     String assignee = task.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();

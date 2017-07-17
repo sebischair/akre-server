@@ -20,7 +20,7 @@ public class AEController extends Controller {
     @Inject
     WSClient ws;
 
-    public Result getAE() {
+    public Result getAE(String projectId) {
         HelperService hs = new HelperService(ws);
         Map<String, Integer> conceptMap = new HashMap<String, Integer>();
         hs.entitiesForTypeUid(StaticFunctions.SCCONCEPTSID).thenApply(concepts -> {
@@ -33,7 +33,7 @@ public class AEController extends Controller {
             return ok();
         }).toCompletableFuture().join();
 
-        hs.executeMxl(StaticFunctions.WORKSPACEID, "getConceptsOfDesignDecisions()").thenApply(tasks -> {
+        hs.executeMxl(StaticFunctions.WORKSPACEID, "getConceptsOfDesignDecisions(\""+ projectId +"\")").thenApply(tasks -> {
             tasks.get("value").forEach(task -> {
                 JsonNode ca = task.get(StaticFunctions.CONCEPTS);
                 ca.forEach(c -> {

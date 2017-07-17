@@ -25,14 +25,14 @@ public class PredictionController extends Controller {
     @Inject
     WSClient ws;
 
-    public Result predictAssignee() {
+    public Result predictAssignee(String projectId) {
         ArrayNode ja = Json.newArray();
         ArrayNode results = Json.newArray();
         HelperService hs = new HelperService(ws);
         List<String> conceptList = new ArrayList<>();
         List<String> assigneeList = new ArrayList<>();
 
-        hs.executeMxl(StaticFunctions.WORKSPACEID, "getConceptsOfDesignDecisions()").thenApply(tasks -> {
+        hs.executeMxl(StaticFunctions.WORKSPACEID, "getConceptsOfDesignDecisions(\""+ projectId +"\")").thenApply(tasks -> {
             tasks.get(StaticFunctions.VALUE).forEach(task -> {
                 String assignee = task.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
                 if (!assigneeList.contains(assignee)) {
@@ -100,12 +100,9 @@ public class PredictionController extends Controller {
                     count++;
                     if (count > 10) break;
                 }
-
-                System.out.println(pa);
                 r.set("predictions", pa);
                 results.add(r);
             });
-            System.out.println(results);
             return ok(results);
         }).toCompletableFuture().join();
 

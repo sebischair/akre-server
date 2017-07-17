@@ -20,14 +20,14 @@ public class QADataController extends Controller {
     @Inject
     WSClient ws;
 
-    public Result getQAData() {
+    public Result getQAData(String projectId) {
         ArrayNode ja = Json.newArray();
         HelperService hs = new HelperService(ws);
-        hs.entitiesForTypeUid(StaticFunctions.QUALITYATTRIBUTEID).thenCompose(qualityAttributes -> hs.executeMxl(StaticFunctions.WORKSPACEID, "QADDCount()").thenApply(values -> {
+        hs.entitiesForTypeUid(StaticFunctions.QUALITYATTRIBUTEID).thenCompose(qualityAttributes -> hs.executeMxl(StaticFunctions.WORKSPACEID, "QADDCount(\"" + projectId + "\")").thenApply(values -> {
             for (int i = 0; i < qualityAttributes.size(); i++) {
                 ObjectNode jo = Json.newObject();
-                jo.set("id", qualityAttributes.get(i).get("name"));
-                jo.put("value", values.get("value").get(i).asInt());
+                jo.put("id", qualityAttributes.get(i).get("name").asText(""));
+                jo.put("value", values.get("value").get(i).asInt(0));
                 ja.add(jo);
             }
             return ok();
@@ -35,13 +35,13 @@ public class QADataController extends Controller {
         return ok(ja);
     }
 
-    public Result getConQAData() {
+    public Result getConQAData(String projectId) {
         ArrayNode ja = Json.newArray();
         HelperService hs = new HelperService(ws);
         String[] qa = {"Portability", "Maintainability", "Usability", "Reliability", "Efficiency", "Functionality"};
         //String[] qaId = {"5ljd45ugytp", "4joak01wzwf9", "19wffpavczg4a", "186l7sbqvpozc", "1wjn9ho9rxvgo", "1toyur9yf4udg"};
         List qualityAttributes = Arrays.asList(qa);
-        hs.executeMxl(StaticFunctions.WORKSPACEID, "ConsolidatedQADDCount()").thenApply(values -> {
+        hs.executeMxl(StaticFunctions.WORKSPACEID, "ConsolidatedQADDCount(\"" + projectId + "\")").thenApply(values -> {
             for (int i = 0; i < qualityAttributes.size(); i++) {
                 ObjectNode jo = Json.newObject();
                 jo.put("id", qualityAttributes.get(i).toString());

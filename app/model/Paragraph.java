@@ -1,11 +1,12 @@
 package model;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
 import static controllers.MorphiaObject.datastore;
+import java.util.List;
+
 
 @Entity("paragraph")
 public class Paragraph {
@@ -50,7 +51,11 @@ public class Paragraph {
         datastore.save(this);
     }
 
-    public static Paragraph getParagraph(String paraghraphHash) {
-        return datastore.createQuery(Paragraph.class).field("hash").equalIgnoreCase(paraghraphHash).get();
+    public static Paragraph getParagraph(String paragraphHash) {
+        List<Paragraph> list = datastore.createQuery(Paragraph.class).field("hash").equalIgnoreCase(paragraphHash).asList();
+        if(!list.isEmpty()) {
+            return list.get(0);
+        }
+        return null;
     }
 }

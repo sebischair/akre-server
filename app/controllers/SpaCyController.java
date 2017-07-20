@@ -56,19 +56,18 @@ public class SpaCyController extends Controller{
         configuration = Configuration.load(env);
         String url = configuration.getString("spacy.host");
         JsonNode request = request().body().asJson();
-        if (request.has(SESSION) && request.has(PARAGRAPH_NUMBER) && request.has(DOCUMENT_HASH)) {
-            Record record = Record.getOrCreateRecord(request.findValue(SESSION).asText(), request.findValue(DOCUMENT_HASH).asText());
-            if (!(request.has(PARAGRAPH_MAX) && request.findValue(PARAGRAPH_MAX).asInt() == record.getParagraphs().size())) {
-                int paragraphNumber = request.findValue(PARAGRAPH_NUMBER).asInt();
-                Paragraph paragraph = new Paragraph().setParagraphNum(paragraphNumber);
-                paragraph.setContent(request.findValue(CONTENT).toString().replace("\"", ""));
-                record.addParagraph(paragraph).save();
-            }
-        }
+//        if (request.has(SESSION) && request.has(PARAGRAPH_NUMBER) && request.has(DOCUMENT_HASH)) {
+//            Record record = Record.getOrCreateRecord(request.findValue(SESSION).asText(), request.findValue(DOCUMENT_HASH).asText());
+//            if (!(request.has(PARAGRAPH_MAX) && request.findValue(PARAGRAPH_MAX).asInt() == record.getParagraphs().size())) {
+//                int paragraphNumber = request.findValue(PARAGRAPH_NUMBER).asInt();
+//                Paragraph paragraph = new Paragraph().setParagraphNum(paragraphNumber);
+//                paragraph.setContent(request.findValue(CONTENT).toString().replace("\"", ""));
+//                record.addParagraph(paragraph).save();
+//            }
+//        }
         String content = request.findValue(CONTENT).toString().replace("\"", "");
         ArrayNode tags   = (ArrayNode) request.findValue("tags");
-        ObjectNode json = Json.newObject()
-                .put("text", content);
+        ObjectNode json = Json.newObject().put("text", content);
         json.put("tags", tags);
         return ws.url(url).post(json).thenApply(response ->{
                     ObjectNode responseModified = Json.newObject();

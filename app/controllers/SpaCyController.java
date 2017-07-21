@@ -27,12 +27,6 @@ public class SpaCyController extends Controller{
 
     private Configuration configuration;
 
-    private final String PARAGRAPH_NUMBER = "parNum";
-    private final String CONTENT = "content";
-    private final String DOCUMENT_HASH = "docHash";
-    private final String PARAGRAPH_MAX = "parMax";
-    private final String SESSION = "uuid";
-
     public CompletionStage<Result> process(String paraghraphHash) {
 
         configuration = Configuration.root();
@@ -44,23 +38,6 @@ public class SpaCyController extends Controller{
                 responseWithHash.put("paragraphHash", paraghraphHash);
                 return StaticFunctions.jsonResult(ok(responseWithHash.toString()));
            }
-        );
-    }
-
-    //temporal solution for the demo, similar to processDocument()
-    public CompletionStage<Result> annotate() {
-        configuration = Configuration.root();
-        String url = configuration.getString("spacy.host");
-        JsonNode request = request().body().asJson();
-        String content = request.findValue(CONTENT).toString().replace("\"", "");
-        ArrayNode tags   = (ArrayNode) request.findValue("tags");
-        ObjectNode json = Json.newObject().put("text", content);
-        json.put("tags", tags);
-        return ws.url(url).post(json).thenApply(response ->{
-                    ObjectNode responseModified = Json.newObject();
-                    responseModified.put("data", response.asJson().get("data"));
-                    return StaticFunctions.jsonResult(ok(responseModified.toString()));
-                }
         );
     }
 }

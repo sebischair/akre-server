@@ -49,20 +49,9 @@ public class SpaCyController extends Controller{
 
     //temporal solution for the demo, similar to processDocument()
     public CompletionStage<Result> annotate() {
-        Environment env;
-        env = Environment.simple();
-        configuration = Configuration.load(env);
+        configuration = Configuration.root();
         String url = configuration.getString("spacy.host");
         JsonNode request = request().body().asJson();
-//        if (request.has(SESSION) && request.has(PARAGRAPH_NUMBER) && request.has(DOCUMENT_HASH)) {
-//            Record record = Record.getOrCreateRecord(request.findValue(SESSION).asText(), request.findValue(DOCUMENT_HASH).asText());
-//            if (!(request.has(PARAGRAPH_MAX) && request.findValue(PARAGRAPH_MAX).asInt() == record.getParagraphs().size())) {
-//                int paragraphNumber = request.findValue(PARAGRAPH_NUMBER).asInt();
-//                Paragraph paragraph = new Paragraph().setParagraphNum(paragraphNumber);
-//                paragraph.setContent(request.findValue(CONTENT).toString().replace("\"", ""));
-//                record.addParagraph(paragraph).save();
-//            }
-//        }
         String content = request.findValue(CONTENT).toString().replace("\"", "");
         ArrayNode tags   = (ArrayNode) request.findValue("tags");
         ObjectNode json = Json.newObject().put("text", content);

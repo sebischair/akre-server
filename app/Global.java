@@ -4,6 +4,8 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import controllers.MorphiaObject;
 import org.mongodb.morphia.Morphia;
+import play.Configuration;
+import play.Environment;
 import play.GlobalSettings;
 import play.Logger;
 
@@ -16,17 +18,22 @@ public class Global extends GlobalSettings {
     public void onStart(play.Application arg0) {
         super.beforeStart(arg0);
         Logger.debug("** onStart **");
-        MorphiaObject.mongo = new MongoClient("127.0.0.1", 27017);
-        ServerAddress sa = new ServerAddress("127.0.0.1", 27017);
-        List<MongoCredential> cl = new ArrayList<MongoCredential>();
-        MongoCredential mc = MongoCredential.createCredential("guest", "akrec", "guest".toCharArray());
-        cl.add(mc);
-        MorphiaObject.morphia = new Morphia();
-        MorphiaObject.morphia.mapPackage("app.model");
-        MorphiaObject.datastore = MorphiaObject.morphia.createDatastore(new MongoClient(sa, cl), "akrec");
-        MorphiaObject.datastore.ensureIndexes();
-        MorphiaObject.datastore.ensureCaps();
+        Configuration configuration = Configuration.root();
+        try {
 
-        Logger.debug("** Morphia datastore: " + MorphiaObject.datastore.getDB());
+            MorphiaObject.connect(
+                    configuration.getString("morphia.db.url"),
+                    configuration.getInt("morphia.db.port"),
+                    configuration.getString("morphia.db.name"),
+                    configuration.getString("morphia.db.username"),
+                    configuration.getString("morphia.db.pwd")
+            );
+
+            Logger.debug("** Morphia datastore: " + MorphiaObject.datastore.getDB());
+        } catch (Exception e) {
+            Logger.error("** Morphia datastore: " + e.toString());
+        }
+
+
     }
 }

@@ -11,10 +11,12 @@ import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.InvalidXMLException;
+import play.Configuration;
 import play.libs.Json;
 import services.annotator.ConceptAnnotator;
 import services.annotator.SpotlightAnnotator;
@@ -47,6 +49,7 @@ public class DefaultPipeline extends Pipeline {
         ArrayNode annotations = Json.newArray();
         try {
             AnalysisEngineDescription conceptAnnotatorDesc = createEngineDescription(ConceptAnnotator.class);
+
             AnalysisEngineDescription spotlightDesc = createEngineDescription(SpotlightAnnotator.class);
 
             AnalysisEngineDescription basicPipeDesc = createEngineDescription(spotlightDesc, conceptAnnotatorDesc);

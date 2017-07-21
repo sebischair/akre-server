@@ -7,22 +7,25 @@ import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 
+
+import play.Environment;
 import services.annotationType.spotlight.Annotation;
 import services.annotationType.spotlight.JCasResource;
 import services.annotationType.spotlight.Resource;
 
+import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 
-/**
- * Created by mahabaleshwar on 6/23/2016.
- */
+import play.Configuration;
+
+
 public class SpotlightAnnotator extends JCasAnnotator_ImplBase {
 
     public static final String PARAM_ENDPOINT = "endPoint";
-    //"http://spotlight.sztaki.hu:2222/rest/annotate"
+
     @ConfigurationParameter(name=PARAM_ENDPOINT, defaultValue = "http://spotlight.in.tum.de:2222/rest/annotate")
     private String SPOTLIGHT_ENDPOINT;
 

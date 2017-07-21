@@ -34,11 +34,9 @@ public class SpaCyController extends Controller{
     private final String SESSION = "uuid";
 
     public CompletionStage<Result> process(String paraghraphHash) {
-        Environment env;
-        env = Environment.simple();
-        configuration = Configuration.load(env);
-        String url = configuration.getString("spacy.host");
 
+        configuration = Configuration.root();
+        String url = configuration.getString("spacy.host");
         JsonNode json = Json.newObject()
                 .put("text",  Paragraph.getParagraph(paraghraphHash).getContent());
         return ws.url(url).post(json).thenApply(response ->{

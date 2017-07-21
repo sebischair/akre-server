@@ -1,0 +1,7 @@
+morphia.db.url="127.0.0.1"
+morphia.db.port=27017
+morphia.db.name="<username>"
+morphia.db.username="<dbUsername>"
+morphia.db.pwd="<dbPwd>"
+
+spacy.host="http://131.159.30.9:5000/api"

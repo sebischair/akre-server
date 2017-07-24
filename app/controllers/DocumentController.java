@@ -15,6 +15,7 @@ import play.libs.ws.WSClient;
 import play.libs.ws.WSResponse;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.StatusHeader;
 import services.pipeline.DefaultPipeline;
 import util.StaticFunctions;
 
@@ -22,6 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class DocumentController extends Controller {
 
@@ -35,6 +37,7 @@ public class DocumentController extends Controller {
 
     private final String PARAGRAPH_NUMBER = "parNum";
     private final String CONTENT = "content";
+    private final String SPACY_SERVER_ERROR = "[{}] server error: {}";
     private final String DOCUMENT_HASH = "docHash";
     private final String PARAGRAPH_MAX = "parMax";
     private final String SESSION = "uuid";
@@ -54,7 +57,11 @@ public class DocumentController extends Controller {
                     ws.url(url).post(json).thenApply(response -> {
                         annotations.addAll((ArrayNode) response.asJson().get("data"));
                         return ok();
-                    }).toCompletableFuture().join();
+                    }).toCompletableFuture().exceptionally(th -> {
+                        // will be executed when there is an exception.
+                        Logger.error(SPACY_SERVER_ERROR,url,th.getMessage());
+                        return null;
+                    }).join();
                 }
                 break;
             case  "architectureRecommendations":

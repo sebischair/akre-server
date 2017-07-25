@@ -17,7 +17,6 @@ import java.util.Map;
 
 public class AnnotationController extends Controller {
 
-
     private final String OFFSETS = "offsets";
     private final String BEGIN = "begin";
     private final String END = "end";

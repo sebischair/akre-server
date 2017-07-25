@@ -6,6 +6,7 @@ GET           /                                            controllers.Applicati
 GET           /addToken                                    controllers.AnnotationController.addToken(token: String ?= "")
 GET           /removeToken                                 controllers.AnnotationController.removeToken(token: String ?= "")
 POST          /processDocument                             controllers.DocumentController.processDocument()
+POST          /annotate                                    controllers.DocumentController.processDocument()
 POST          /getMetaInformation                          controllers.DocumentController.getMetaInformation()
 POST          /getSoftwareSolutions                        controllers.SoftwareRecommendationController.getSoftwareSolutions()
 POST          /getAlternatives                             controllers.AlternativesController.getAlternatives()
@@ -36,10 +37,18 @@ POST          /annotation                                  controllers.Annotatio
 PUT           /annotation/:annotationId                    controllers.AnnotationController.update(annotationId: String)
 DELETE        /annotation/:annotationId                    controllers.AnnotationController.delete(annotationId: String)
 
+
 #uncertainty detection
 POST          /upload                                      controllers.getFileContent.uploadAndSave()
 GET           /annotate/:paraghraphHash                    controllers.SpaCyController.process(paraghraphHash)
 
 POST          /record/delete/all                           controllers.RecordController.deleteAllDocuments()
 GET           /record/all                                  controllers.RecordController.getAllDocuments()
+
+=======
+GET           /getQAData                                   controllers.QADataController.getQAData(projectId: String)
+GET           /getConsolidatedQAData                       controllers.QADataController.getConQAData(projectId: String)
+GET           /getAE                                       controllers.AEController.getAE(projectId: String)
+GET           /getAssignee                                 controllers.AssigneeController.getAssignee(projectId: String)
+GET           /predictAssignee                             controllers.PredictionController.predictAssignee(projectId: String)
 

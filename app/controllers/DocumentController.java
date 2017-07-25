@@ -129,7 +129,7 @@ public class DocumentController extends Controller {
         return ok(metaInformation);
     }
 
-    public JsonNode getResource(JsonNode wsResponse, String key) {
+    private JsonNode getResource(JsonNode wsResponse, String key) {
         if (wsResponse.has(key))
             return wsResponse.get(key);
         if (wsResponse.isObject()) {
@@ -141,7 +141,7 @@ public class DocumentController extends Controller {
         return null;
     }
 
-    public CompletionStage<JsonNode> getResponse(String url) {
+    private CompletionStage<JsonNode> getResponse(String url) {
         return ws.url(url).get().thenApply(WSResponse::asJson);
     }
 }

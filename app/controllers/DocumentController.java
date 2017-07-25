@@ -38,6 +38,7 @@ public class DocumentController extends Controller {
     private final String PARAGRAPH_NUMBER = "parNum";
     private final String CONTENT = "content";
     private final String SPACY_SERVER_ERROR = "[{}] server error: {}";
+    private final String SPACY_HOST_MISSING = "spacy.host is not configured. Check application.conf";
     private final String DOCUMENT_HASH = "docHash";
     private final String PARAGRAPH_MAX = "parMax";
     private final String SESSION = "uuid";
@@ -49,7 +50,12 @@ public class DocumentController extends Controller {
         String content = request.findValue(CONTENT).toString().replace("\"", "");
         switch (type){
             case "uncertainty":
-                String url = configuration.getString("spacy.host");
+
+                String url = configuration.getString("spacy.host", null);
+                if (url==null){
+                    Logger.info(SPACY_HOST_MISSING);
+                    break;
+                }
                 ObjectNode json = Json.newObject().put("text", content);
                 if (request.has(TAGS)){
                     ArrayNode tags   = (ArrayNode) request.findValue(TAGS);

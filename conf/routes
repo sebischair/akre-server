@@ -2,7 +2,6 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET           /                                            controllers.ApplicationController.index()
 GET           /addToken                                    controllers.AnnotationController.addToken(token: String ?= "")
 GET           /removeToken                                 controllers.AnnotationController.removeToken(token: String ?= "")
 POST          /processDocument                             controllers.DocumentController.processDocument()
@@ -42,10 +41,9 @@ DELETE        /annotation/:annotationId                    controllers.Annotatio
 POST          /upload                                      controllers.getFileContent.uploadAndSave()
 GET           /annotate/:paraghraphHash                    controllers.SpaCyController.process(paraghraphHash)
 
-POST          /record/delete/all                           controllers.RecordController.deleteAllDocuments()
-GET           /record/all                                  controllers.RecordController.getAllDocuments()
+#POST          /record/delete/all                           controllers.RecordController.deleteAllDocuments()
+#GET           /record/all                                  controllers.RecordController.getAllDocuments()
 
-=======
 GET           /getQAData                                   controllers.QADataController.getQAData(projectId: String)
 GET           /getConsolidatedQAData                       controllers.QADataController.getConQAData(projectId: String)
 GET           /getAE                                       controllers.AEController.getAE(projectId: String)

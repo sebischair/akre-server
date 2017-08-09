@@ -1,8 +1,6 @@
 package services;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 import play.libs.Json;
@@ -32,11 +30,8 @@ public class HelperService {
         return ws.url(url).post(json).thenApply(WSResponse::asJson);
     }
 
-    /**
-     * @return GSON data with correct date format
-     */
-    public static Gson getGson() {
-        return new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+    public CompletionStage<JsonNode> putWSRequest(String url, JsonNode json) {
+        return ws.url(url).put(json).thenApply(WSResponse::asJson);
     }
 
     // Whitelist basic does not allow images in the content
@@ -60,5 +55,10 @@ public class HelperService {
         String url = SC_BASE_URL + "workspaces/" + workspaceId + "/mxlQuery";
         JsonNode json = Json.newObject().put("expression", expression);
         return postWSRequest(url, json);
+    }
+
+    public CompletionStage<JsonNode> editEntity(JsonNode entity, String id) {
+        String url = SC_BASE_URL + "entities/" + id;
+        return putWSRequest(url, entity);
     }
 }

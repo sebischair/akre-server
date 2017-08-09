@@ -38,6 +38,7 @@ public class StaticFunctions {
     public static final String QUALITYATTRIBUTEID = "1ercja6vg99i0";
     public static final String SCCONCEPTSID = "7wpcre3lzkbo";
     public static final String TASKID = "1vk4hqzziw3jp";
+    public static final String SCPATTERNID = "1jobs3uuz3yf0";
 
     public static final String ASSIGNEE = "assignee";
     public static final String CONCEPTS = "concepts";

@@ -43,7 +43,7 @@ GET           /annotate/:paraghraphHash                    controllers.SpaCyCont
 
 #POST          /record/delete/all                           controllers.RecordController.deleteAllDocuments()
 #GET           /record/all                                  controllers.RecordController.getAllDocuments()
-
+GET           /updateTaskWithQA                            controllers.QualityAttributesController.updateTaskWithQA()
 GET           /getQAData                                   controllers.QADataController.getQAData(projectId: String)
 GET           /getConsolidatedQAData                       controllers.QADataController.getConQAData(projectId: String)
 GET           /getAE                                       controllers.AEController.getAE(projectId: String)

@@ -6,20 +6,14 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
-
-
-import play.Environment;
 import services.annotationType.spotlight.Annotation;
 import services.annotationType.spotlight.JCasResource;
 import services.annotationType.spotlight.Resource;
 
-import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-
-import play.Configuration;
 
 
 public class SpotlightAnnotator extends JCasAnnotator_ImplBase {

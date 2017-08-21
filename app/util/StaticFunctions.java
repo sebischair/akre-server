@@ -177,4 +177,19 @@ public class StaticFunctions {
             }
         }
     }
+
+    public static void updateAttributesArray(ArrayNode attributesArray, ArrayNode value, String attributeName) {
+        if(value != null) {
+            ObjectNode newAttribute = Json.newObject();
+            ArrayNode valueNodes = Json.newArray();
+            newAttribute.put(StaticFunctions.NAME, attributeName);
+            for(int i=0; i<value.size(); i++) {
+                ObjectNode valueObject = Json.newObject();
+                valueObject.put("id", value.get(i).asText());
+                valueNodes.add(valueObject);
+            }
+            newAttribute.set(StaticFunctions.VALUES, valueNodes);
+            attributesArray.add(newAttribute);
+        }
+    }
 }

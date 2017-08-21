@@ -23,7 +23,7 @@ public class QualityAttributesController extends Controller {
     @Inject
     WSClient ws;
 
-    public Result updateTaskWithQA() {
+    public Result updateTaskWithQA(String projectId) {
         System.out.println("request to update Tasks");
         HelperService hs = new HelperService(ws);
         Map<String, List<String>> qa_id_keywords = new HashMap<>();
@@ -60,6 +60,7 @@ public class QualityAttributesController extends Controller {
                 hs.entityForUid(id).thenApply(issue -> {
                     String summary = "";
                     String description = "";
+                    boolean belongsToProject = false;
                     boolean isDesignDecision = false;
 
                     ArrayNode attributes = (ArrayNode) issue.get("attributes");
@@ -71,14 +72,16 @@ public class QualityAttributesController extends Controller {
                             description = attr.get("values").get(0).asText("");
                         } else if(attr.get("name").asText("").equalsIgnoreCase("design decision") && attr.get("values").size() > 0) {
                             isDesignDecision = attr.get("values").get(0).asBoolean(false);
+                        } else if(attr.get("name").asText("").equalsIgnoreCase("belongs_to") && attr.get("values").size() > 0) {
+                            belongsToProject = attr.get("values").get(0).get("id").asText().equalsIgnoreCase(projectId);
                         }
                     }
 
-                    if(isDesignDecision) {
+                    if(isDesignDecision && belongsToProject) {
                         ArrayNode qaList = getQAList(summary + " " + description, qa_id_keywords);
                         ArrayNode newAttributes = Json.newArray();
                         if (qaList.size() > 0) {
-                            updateAttributesArray(newAttributes, qaList);
+                            StaticFunctions.updateAttributesArray(newAttributes, qaList, "qualityAttributes");
                             ObjectNode editEntity = Json.newObject();
                             editEntity.set("attributes", newAttributes);
                             hs.editEntity(editEntity, id);
@@ -107,20 +110,4 @@ public class QualityAttributesController extends Controller {
         }
         return result;
     }
-
-    private static void updateAttributesArray(ArrayNode attributesArray, ArrayNode value) {
-        if(value != null) {
-            ObjectNode newAttribute = Json.newObject();
-            ArrayNode valueNodes = Json.newArray();
-            newAttribute.put(StaticFunctions.NAME, "qualityAttributes");
-            for(int i=0; i<value.size(); i++) {
-                ObjectNode valueObject = Json.newObject();
-                valueObject.put("id", value.get(i).asText());
-                valueNodes.add(valueObject);
-            }
-            newAttribute.set(StaticFunctions.VALUES, valueNodes);
-            attributesArray.add(newAttribute);
-        }
-    }
-
 }

@@ -66,4 +66,9 @@ public class HelperService {
         String url = SC_BASE_URL + "entities/" + id;
         return putWSRequest(url, entity);
     }
+
+    public CompletionStage<JsonNode> createEntity(JsonNode entity) {
+        String url = SC_BASE_URL + "entities";
+        return postWSRequest(url, entity);
+    }
 }

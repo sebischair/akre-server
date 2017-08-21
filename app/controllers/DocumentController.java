@@ -46,12 +46,11 @@ public class DocumentController extends Controller {
     private final String ANNOTATION_TYPE = "annotationType";
     private final String TAGS = "tags";
 
-    private void getAnnotations(String type, ArrayNode annotations, Configuration configuration, JsonNode request){
+    public void getAnnotations(String type, ArrayNode annotations, JsonNode request){
         String content = request.findValue(CONTENT).toString().replace("\"", "");
         switch (type){
             case "uncertainty":
-
-                String url = configuration.getString("spacy.host", null);
+                String url = Configuration.root().getString("spacy.host", null);
                 if (url==null){
                     Logger.info(SPACY_HOST_MISSING);
                     break;
@@ -101,14 +100,14 @@ public class DocumentController extends Controller {
 //                record.addParagraph(paragraph).save();
 //            }
 //        }
-        Configuration configuration = Configuration.root();
+
         if (request.has(ANNOTATION_TYPE)) {
             ArrayNode annotationType = (ArrayNode) request.findValue(ANNOTATION_TYPE);
             for (int i = 0; i < annotationType.size(); i++) {
-                getAnnotations(annotationType.get(i).asText(""), annotations, configuration, request);
+                getAnnotations(annotationType.get(i).asText(""), annotations, request);
             }
         } else {
-            getAnnotations("", annotations, configuration, request);
+            getAnnotations("", annotations, request);
         }
 
         result.put("status", "OK");

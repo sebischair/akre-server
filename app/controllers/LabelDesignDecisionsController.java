@@ -56,7 +56,6 @@ public class LabelDesignDecisionsController extends Controller {
 
         issueIds.forEach(id -> {
             hs.entityForUid(id).thenApply(issue -> {
-                System.out.println("/////////////////");
                 System.out.println(id);
                 String summary = "";
                 String description = "";
@@ -117,7 +116,6 @@ public class LabelDesignDecisionsController extends Controller {
                     editEntity.set("attributes", newAttributes);
                     System.out.println(editEntity);
                     hs.editEntity(editEntity, id);
-                    System.exit(1);
                 }
 
                 return ok();

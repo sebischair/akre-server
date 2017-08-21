@@ -5,3 +5,7 @@ morphia.db.username="<dbUsername>"
 morphia.db.pwd="<dbPwd>"
 
 spacy.host="http://131.159.30.9:5000/api"
+predict.url="http://localhost:9000/pipeline/predict"
+sc.userName="<sc_username>"
+sc.password="<sc_password>"
+sc.base.url="https://server.sociocortex.com/api/v1/"

@@ -3,6 +3,7 @@ package services;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
+import play.Configuration;
 import play.libs.Json;
 import play.libs.ws.WSAuthScheme;
 import play.libs.ws.WSClient;
@@ -12,13 +13,17 @@ import java.util.concurrent.CompletionStage;
 
 public class HelperService {
     WSClient ws;
-    public static String SC_BASE_URL = "https://server.sociocortex.com/api/v1/";
+    Configuration configuration = Configuration.root();
+
+    String SC_BASE_URL = configuration.getString("sc.base.url");
+    String userName = configuration.getString("sc.userName");
+    String password = configuration.getString("sc.password");
 
     public HelperService(WSClient ws) {
         this.ws = ws;
     }
 
-    public CompletionStage<JsonNode> getWSResponseWithAuth(String url, String userName, String password) {
+    public CompletionStage<JsonNode> getWSResponseWithAuth(String url) {
         return ws.url(url).setAuth(userName, password, WSAuthScheme.BASIC).get().thenApply(WSResponse::asJson);
     }
 
@@ -27,11 +32,11 @@ public class HelperService {
     }
 
     public CompletionStage<JsonNode> postWSRequest(String url, JsonNode json) {
-        return ws.url(url).post(json).thenApply(WSResponse::asJson);
+        return ws.url(url).setAuth(userName, password, WSAuthScheme.BASIC).post(json).thenApply(WSResponse::asJson);
     }
 
     public CompletionStage<JsonNode> putWSRequest(String url, JsonNode json) {
-        return ws.url(url).put(json).thenApply(WSResponse::asJson);
+        return ws.url(url).setAuth(userName, password, WSAuthScheme.BASIC).put(json).thenApply(WSResponse::asJson);
     }
 
     // Whitelist basic does not allow images in the content

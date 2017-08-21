@@ -50,3 +50,4 @@ GET           /getAE                                       controllers.AEControl
 GET           /getAssignee                                 controllers.AssigneeController.getAssignee(projectId: String)
 GET           /predictAssignee                             controllers.PredictionController.predictAssignee(projectId: String)
 
+GET           /labelDesignDecisions                        controllers.LabelDesignDecisionsController.labelDesignDecisions(projectId: String)

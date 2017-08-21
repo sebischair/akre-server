@@ -39,6 +39,7 @@ public class StaticFunctions {
     public static final String SCCONCEPTSID = "7wpcre3lzkbo";
     public static final String TASKID = "1vk4hqzziw3jp";
     public static final String SCPATTERNID = "1jobs3uuz3yf0";
+    public static final String DECISIONCATEGORYID = "1g46hc4enyc6k";
 
     public static final String ASSIGNEE = "assignee";
     public static final String CONCEPTS = "concepts";

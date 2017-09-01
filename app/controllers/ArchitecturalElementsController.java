@@ -26,7 +26,7 @@ public class ArchitecturalElementsController extends Controller {
     WSClient ws;
 
     public Result updateTaskWithAE(String projectId) {
-        System.out.println("request to update Tasks");
+        System.out.println("request to update Tasks with AEs");
         HelperService hs = new HelperService(ws);
 
         Map<String, String> concepts_id_map = new HashMap<>();
@@ -55,17 +55,17 @@ public class ArchitecturalElementsController extends Controller {
                     boolean belongsToProject = false;
                     boolean isDesignDecision = false;
 
-                    ArrayNode attributes = (ArrayNode) issue.get("attributes");
+                    ArrayNode attributes = (ArrayNode) issue.get(StaticFunctions.ATTRIBUTES);
                     for(int j=0; j<attributes.size(); j++) {
                         JsonNode attr = attributes.get(j);
-                        if(attr.get("name").asText("").equalsIgnoreCase("summary") && attr.get("values").size() > 0) {
-                            summary = attr.get("values").get(0).asText("");
-                        } else if(attr.get("name").asText("").equalsIgnoreCase("description") && attr.get("values").size() > 0) {
-                            description = attr.get("values").get(0).asText("");
-                        } else if(attr.get("name").asText("").equalsIgnoreCase("design decision") && attr.get("values").size() > 0) {
-                            isDesignDecision = attr.get("values").get(0).asBoolean(false);
-                        } else if(attr.get("name").asText("").equalsIgnoreCase("belongs_to") && attr.get("values").size() > 0) {
-                            belongsToProject = attr.get("values").get(0).get("id").asText().equalsIgnoreCase(projectId);
+                        if(attr.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.SUMMARY) && attr.get(StaticFunctions.VALUES).size() > 0) {
+                            summary = attr.get(StaticFunctions.VALUES).get(0).asText("");
+                        } else if(attr.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.DESCRIPTION) && attr.get(StaticFunctions.VALUES).size() > 0) {
+                            description = attr.get(StaticFunctions.VALUES).get(0).asText("");
+                        } else if(attr.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.DESIGNDECISION) && attr.get(StaticFunctions.VALUES).size() > 0) {
+                            isDesignDecision = attr.get(StaticFunctions.VALUES).get(0).asBoolean(false);
+                        } else if(attr.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.BELONGSTO) && attr.get(StaticFunctions.VALUES).size() > 0) {
+                            belongsToProject = attr.get(StaticFunctions.VALUES).get(0).get(StaticFunctions.ID).asText().equalsIgnoreCase(projectId);
                         }
                     }
 
@@ -73,9 +73,9 @@ public class ArchitecturalElementsController extends Controller {
                         ArrayNode conceptList = getConceptsList(summary + " " + description, concepts_id_map, hs);
                         ArrayNode newAttributes = Json.newArray();
                         if (conceptList.size() > 0) {
-                            StaticFunctions.updateAttributesArray(newAttributes, conceptList, "concepts");
+                            StaticFunctions.updateAttributesArray(newAttributes, conceptList, StaticFunctions.CONCEPTS);
                             ObjectNode editEntity = Json.newObject();
-                            editEntity.set("attributes", newAttributes);
+                            editEntity.set(StaticFunctions.ATTRIBUTES, newAttributes);
                             hs.editEntity(editEntity, id);
                         }
                     }
@@ -85,7 +85,10 @@ public class ArchitecturalElementsController extends Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ok("OK");
+        System.out.println("AEs for tasks have been updated");
+        ObjectNode result = Json.newObject();
+        result.put("status", "OK");
+        return ok(result);
     }
 
     private ArrayNode getConceptsList(String text, Map<String, String> concepts_id_map, HelperService hs) {
@@ -93,7 +96,8 @@ public class ArchitecturalElementsController extends Controller {
         ObjectNode request = Json.newObject();
         request.put("content", text);
 
-        hs.postWSRequest("http://localhost:9000/processDocument", request).thenApply(response -> {
+        Configuration config = Configuration.root();
+        hs.postWSRequest(config.getString("akrec.url") + "processDocument", request).thenApply(response -> {
             ArrayNode annotations = (ArrayNode) response.get("data");
             List<String> tokens = new ArrayList<>();
             annotations.forEach(annotation -> {
@@ -108,30 +112,30 @@ public class ArchitecturalElementsController extends Controller {
                         ObjectNode entity = Json.newObject();
 
                         ObjectNode wsObject = Json.newObject();
-                        wsObject.put("id", StaticFunctions.WORKSPACEID);
-                        entity.set("workspace", wsObject);
+                        wsObject.put(StaticFunctions.ID, StaticFunctions.WORKSPACEID);
+                        entity.set(StaticFunctions.WORKSPACE, wsObject);
                         ObjectNode typeObject = Json.newObject();
-                        typeObject.put("id", StaticFunctions.SCCONCEPTSID);
-                        entity.set("entityType", typeObject);
-                        entity.put("name", conceptName);
+                        typeObject.put(StaticFunctions.ID, StaticFunctions.SCCONCEPTSID);
+                        entity.set(StaticFunctions.ENTITYTYPE, typeObject);
+                        entity.put(StaticFunctions.NAME, conceptName);
 
                         ArrayNode attributes = Json.newArray();
                         ObjectNode uriAttribute = Json.newObject();
-                        uriAttribute.put("name", "uri");
+                        uriAttribute.put(StaticFunctions.NAME, StaticFunctions.URI);
                         ArrayNode uriValues = Json.newArray();
-                        uriAttribute.put("values", uriValues.add(annotation.get("URI").asText("")));
+                        uriAttribute.put(StaticFunctions.VALUES, uriValues.add(annotation.get("URI").asText("")));
                         attributes.add(uriAttribute);
 
                         ObjectNode ctAttribute = Json.newObject();
-                        ctAttribute.put("name", "conceptType");
+                        ctAttribute.put(StaticFunctions.NAME, StaticFunctions.CONCEPTTYPE);
                         ArrayNode ctValues = Json.newArray();
-                        ctAttribute.put("values", ctValues.add(annotation.get("conceptType").asText("")));
+                        ctAttribute.put(StaticFunctions.VALUES, ctValues.add(annotation.get(StaticFunctions.CONCEPTTYPE).asText("")));
                         attributes.add(ctAttribute);
-                        entity.set("attributes", attributes);
+                        entity.set(StaticFunctions.ATTRIBUTES, attributes);
 
                         hs.createEntity(entity).thenApply(res -> {
-                            concepts_id_map.put(conceptName, res.get("id").asText(""));
-                            if(!result.has(concepts_id_map.get(res.get("id").asText("").toLowerCase()))) result.add(res.get("id").asText("").toLowerCase());
+                            concepts_id_map.put(conceptName, res.get(StaticFunctions.ID).asText(""));
+                            if(!result.has(concepts_id_map.get(res.get(StaticFunctions.ID).asText("").toLowerCase()))) result.add(res.get(StaticFunctions.ID).asText("").toLowerCase());
                             return ok();
                         }).toCompletableFuture().join();
                     }
@@ -142,5 +146,4 @@ public class ArchitecturalElementsController extends Controller {
 
         return result;
     }
-
 }

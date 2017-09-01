@@ -63,8 +63,8 @@ public class AEController extends Controller {
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             ObjectNode jo = Json.newObject();
-            jo.put("id", pair.getKey().toString());
-            jo.put("value", pair.getValue().toString());
+            jo.put(StaticFunctions.ID, pair.getKey().toString());
+            jo.put(StaticFunctions.VALUE, pair.getValue().toString());
             ja.add(jo);
         }
 

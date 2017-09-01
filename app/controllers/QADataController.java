@@ -26,8 +26,8 @@ public class QADataController extends Controller {
         hs.entitiesForTypeUid(StaticFunctions.QUALITYATTRIBUTEID).thenCompose(qualityAttributes -> hs.executeMxl(StaticFunctions.WORKSPACEID, "QADDCount(\"" + projectId + "\")").thenApply(values -> {
             for (int i = 0; i < qualityAttributes.size(); i++) {
                 ObjectNode jo = Json.newObject();
-                jo.put("id", qualityAttributes.get(i).get("name").asText(""));
-                jo.put("value", values.get("value").get(i).asInt(0));
+                jo.put(StaticFunctions.ID, qualityAttributes.get(i).get(StaticFunctions.NAME).asText(""));
+                jo.put(StaticFunctions.VALUE, values.get(StaticFunctions.VALUE).get(i).asInt(0));
                 ja.add(jo);
             }
             return ok();
@@ -44,8 +44,8 @@ public class QADataController extends Controller {
         hs.executeMxl(StaticFunctions.WORKSPACEID, "ConsolidatedQADDCount(\"" + projectId + "\")").thenApply(values -> {
             for (int i = 0; i < qualityAttributes.size(); i++) {
                 ObjectNode jo = Json.newObject();
-                jo.put("id", qualityAttributes.get(i).toString());
-                jo.put("value", values.get("value").get(i).asInt());
+                jo.put(StaticFunctions.ID, qualityAttributes.get(i).toString());
+                jo.put(StaticFunctions.VALUE, values.get(StaticFunctions.VALUE).get(i).asInt());
                 ja.add(jo);
             }
             return ok();

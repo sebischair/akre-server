@@ -34,12 +34,12 @@ public class StaticFunctions {
     public static final String PATTERN = "pattern";
     public static final String PROJECTID = "projectId";
     //List of SC IDs
-    public static final String WORKSPACEID = "1iksmphpafkxq";
-    public static final String QUALITYATTRIBUTEID = "1ercja6vg99i0";
-    public static final String SCCONCEPTSID = "7wpcre3lzkbo";
-    public static final String TASKID = "1vk4hqzziw3jp";
+    public static final String WORKSPACEID = "1g4i5rvlrfoy4";
+    public static final String QUALITYATTRIBUTEID = "1wrdao63gv80d";
+    public static final String SCCONCEPTSID = "16hlzih5fqtvp";
+    public static final String TASKID = "my76r8p8kyq9";
     public static final String SCPATTERNID = "1jobs3uuz3yf0";
-    public static final String DECISIONCATEGORYID = "1g46hc4enyc6k";
+    public static final String DECISIONCATEGORYID = "1m5haa9zzumqe";
 
     public static final String ASSIGNEE = "assignee";
     public static final String CONCEPTS = "concepts";
@@ -49,7 +49,14 @@ public class StaticFunctions {
     public static final String VALUES = "values";
     public static final String TAGS = "tags";
     public static final String ID = "id";
-    public static final String BELONGSTO = "belongs_to";
+    public static final String BELONGSTO = "belongsTo";
+    public static final String DESIGNDECISION = "designDecision";
+    public static final String DECISIONCATEGORY = "decisionCategory";
+    public static final String LABEL = "label";
+    public static final String KEYWORD = "keyword";
+    public static final String QUALITYATTRIBUTES = "qualityAttributes";
+    public static final String WORKSPACE = "workspace";
+    public static final String ENTITYTYPE = "entityType";
 
     public static Result jsonResult(Result httpResponse) {
         return httpResponse.as("application/json; charset=utf-8");

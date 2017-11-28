@@ -1,5 +1,6 @@
 package model.amelie;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mongodb.BasicDBObject;
@@ -7,6 +8,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import db.AmelieMongoClient;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import play.libs.Json;
 import util.StaticFunctions;
 
@@ -23,6 +25,15 @@ public class Issue {
     public ArrayNode findAllDesignDecisions() {
         ArrayNode issues = Json.newArray();
         MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("designDecision", true)).iterator();
+        while(cursor.hasNext()) {
+            issues.add(getIssueDetails(cursor.next()));
+        }
+        return issues;
+    }
+
+    public ArrayNode findAllDesignDecisionsInAProject(String projectName) {
+        ArrayNode issues = Json.newArray();
+        MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("designDecision", true).append("belongsTo", projectName)).iterator();
         while(cursor.hasNext()) {
             issues.add(getIssueDetails(cursor.next()));
         }
@@ -110,4 +121,7 @@ public class Issue {
         return issues;
     }
 
+    public void updateIssueById(String id, BasicDBObject newConcepts) {
+        issueCollection.updateOne(new BasicDBObject().append("_id", new ObjectId(id)), newConcepts);
+    }
 }

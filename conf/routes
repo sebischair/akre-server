@@ -40,18 +40,18 @@ DELETE        /annotation/:annotationId                     controllers.Annotati
 
 #uncertainty detection
 POST          /upload                                       controllers.getFileContent.uploadAndSave()
-GET           /annotate/:paraghraphHash                     controllers.SpaCyController.process(paraghraphHash)
+GET           /annotate/:paraghraphHash        controllers.SpaCyController.process(paraghraphHash)
 
 #POST          /record/delete/all                           controllers.RecordController.deleteAllDocuments()
 #GET           /record/all                                  controllers.RecordController.getAllDocuments()
-GET           /updateTaskWithQA                             controllers.QualityAttributesController.updateTaskWithQA(projectId: String)
-GET           /updateTaskWithAE                             controllers.ArchitecturalElementsController.updateTaskWithAE(projectId: String)
-GET           /getAssignee                                  controllers.AssigneeController.getAssignee(projectId: String)
-GET           /predictAssignee                              controllers.PredictionController.predictAssignee(projectId: String)
+GET           /updateTaskWithQA                controllers.QualityAttributesController.updateTaskWithQA(projectId: String)
+GET           /updateTaskWithAE                controllers.amelie.ArchitecturalElementsController.updateTaskWithAE(projectId: String)
+GET           /getAssignee                     controllers.AssigneeController.getAssignee(projectId: String)
+GET           /predictAssignee                 controllers.PredictionController.predictAssignee(projectId: String)
 
-GET           /labelDesignDecisions                         controllers.LabelDesignDecisionsController.labelDesignDecisions(projectId: String)
+GET           /labelDesignDecisions            controllers.LabelDesignDecisionsController.labelDesignDecisions(projectId: String)
 
-GET           /getDataForAEV                                controllers.amelie.AEDataController.getAEData(projectName: String)
+GET           /getDataForAEV                   controllers.amelie.AEDataController.getAEData(projectName: String)
 GET           /getDataForQAV                                controllers.amelie.QADataController.getQAData(projectName: String)
 POST          /getDataForDDV                                controllers.amelie.DDDataController.getDDData()
 POST          /project                                      controllers.amelie.ProjectController.create()

@@ -26,28 +26,32 @@ public class Project {
         return projectCollection.find(new BasicDBObject("name", name)).first();
     }
 
-    public Document findById(String id) {
-        return projectCollection.find(new BasicDBObject("_id", new ObjectId(id))).first();
+    public ObjectNode findById(String id) {
+        Document projectDocument = projectCollection.find(new BasicDBObject("_id", new ObjectId(id))).first();
+        return getProjectDetails(projectDocument);
     }
 
     public ArrayNode findAll() {
         ArrayNode projects = Json.newArray();
         MongoCursor<Document> cursor = projectCollection.find().iterator();
         while(cursor.hasNext()) {
-            Document obj = cursor.next();
-            ObjectNode project = Json.newObject();
-            project.put("id", obj.getObjectId("_id").toHexString());
-            project.put("name", obj.getString("name"));
-            project.put("description", obj.getString("description"));
-            project.put("self", obj.getString("self"));
-            project.put("key", obj.getString("key"));
-            project.put("projectCategory", obj.getString("projectCategory"));
-            project.set("concepts", Json.toJson(obj.get("concepts")));
-            project.put("issueCount", getIssueCount(obj.getString("name")));
-            project.put("decisionCount", getDecisionCount(obj.getString("name")));
-            projects.add(project);
+            projects.add(getProjectDetails(cursor.next()));
         }
         return projects;
+    }
+
+    private ObjectNode getProjectDetails(Document obj) {
+        ObjectNode project = Json.newObject();
+        project.put("id", obj.getObjectId("_id").toHexString());
+        project.put("name", obj.getString("name"));
+        project.put("description", obj.getString("description"));
+        project.put("self", obj.getString("self"));
+        project.put("key", obj.getString("key"));
+        project.put("projectCategory", obj.getString("projectCategory"));
+        project.set("concepts", Json.toJson(obj.get("concepts")));
+        project.put("issueCount", getIssueCount(obj.getString("name")));
+        project.put("decisionCount", getDecisionCount(obj.getString("name")));
+        return project;
     }
 
     private long getIssueCount(String projectName) {

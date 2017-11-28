@@ -33,4 +33,9 @@ public class ProjectController extends Controller {
         Project project = new Project();
         return StaticFunctions.jsonResult(ok(project.findAll()));
     }
+
+    public Result getProjectById(String id) {
+        Project project = new Project();
+        return StaticFunctions.jsonResult(ok(project.findById(id)));
+    }
 }

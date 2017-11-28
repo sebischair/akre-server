@@ -49,11 +49,11 @@ GET           /updateTaskWithAE            controllers.amelie.ArchitecturalEleme
 GET           /getAssignee                 controllers.amelie.AssigneeController.getAssignee(projectName: String)
 GET           /predictAssignee             controllers.PredictionController.predictAssignee(projectId: String)
 
-GET           /labelDesignDecisions        controllers.LabelDesignDecisionsController.labelDesignDecisions(projectId: String)
+GET           /labelDesignDecisions        controllers.amelie.LabelDesignDecisionsController.labelDesignDecisions(projectName: String)
 
 GET           /getDataForAEV               controllers.amelie.AEDataController.getAEData(projectName: String)
 GET           /getDataForQAV               controllers.amelie.QADataController.getQAData(projectName: String)
-POST          /getDataForDDV                                controllers.amelie.DDDataController.getDDData()
-POST          /project                                      controllers.amelie.ProjectController.create()
-GET           /project                                      controllers.amelie.ProjectController.getAll()
+POST          /getDataForDDV               controllers.amelie.DDDataController.getDDData()
+POST          /project                     controllers.amelie.ProjectController.create()
+GET           /project                     controllers.amelie.ProjectController.getAll()
 GET           /project/:id                                  controllers.amelie.ProjectController.getProjectById(id: String)

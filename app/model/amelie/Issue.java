@@ -64,4 +64,18 @@ public class Issue {
         return issues;
     }
 
+    public ArrayNode getDesignDecisionsForQAView(String projectName) {
+        ArrayNode issues = Json.newArray();
+        MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("designDecision", true).append("belongsTo", projectName)).iterator();
+        while(cursor.hasNext()) {
+            Document obj = cursor.next();
+            ObjectNode issue = Json.newObject();
+            issue.put("name", obj.getString("name"));
+            issue.put("decisionCategory", obj.getString("decisionCategory"));
+            issue.set("qualityAttributes", Json.toJson(obj.get("qualityAttributes")));
+            issue.put("resolved", obj.getString("resolved"));
+            issues.add(issue);
+        }
+        return issues;
+    }
 }

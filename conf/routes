@@ -48,12 +48,10 @@ GET           /annotate/:paraghraphHash                    controllers.SpaCyCont
 #GET           /record/all                                  controllers.RecordController.getAllDocuments()
 GET           /updateTaskWithQA                            controllers.QualityAttributesController.updateTaskWithQA(projectId: String)
 GET           /updateTaskWithAE                            controllers.ArchitecturalElementsController.updateTaskWithAE(projectId: String)
-GET           /getQAData                                   controllers.QADataController.getQAData(projectId: String)
-GET           /getConsolidatedQAData                       controllers.QADataController.getConQAData(projectId: String)
-GET           /getAE                                       controllers.AEController.getAE(projectId: String)
 GET           /getAssignee                                 controllers.AssigneeController.getAssignee(projectId: String)
 GET           /predictAssignee                             controllers.PredictionController.predictAssignee(projectId: String)
 
 GET           /labelDesignDecisions                        controllers.LabelDesignDecisionsController.labelDesignDecisions(projectId: String)
 
-GET           /getDataForAEV                               controllers.amelie.AEController.getAE(projectName: String)
+GET           /getDataForAEV                               controllers.amelie.AEDataController.getAEData(projectName: String)
+GET           /getDataForQAV                               controllers.amelie.QADataController.getQAData(projectName: String)

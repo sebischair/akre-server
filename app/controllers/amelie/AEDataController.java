@@ -9,14 +9,17 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by Manoj on 4/11/2017.
  */
-public class AEController extends Controller {
-    public Result getAE(String projectName) {
+public class AEDataController extends Controller {
+
+    public Result getAEData(String projectName) {
         List<String> conceptList = new ArrayList();
         List<Integer> yearList = Arrays.asList(2013, 2014, 2015, 2016, 2017);
         ArrayNode results = Json.newArray();

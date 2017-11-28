@@ -1,6 +1,5 @@
 package model.amelie;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mongodb.BasicDBObject;
@@ -10,9 +9,6 @@ import db.AmelieMongoClient;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import play.libs.Json;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Manoj on 11/22/2016.
@@ -27,15 +23,11 @@ public class Project {
     }
 
     public Document findByName(String name) {
-        BasicDBObject whereQuery = new BasicDBObject();
-        whereQuery.put("name", name);
-        return projectCollection.find(whereQuery).first();
+        return projectCollection.find(new BasicDBObject("name", name)).first();
     }
 
     public Document findById(String id) {
-        BasicDBObject whereQuery = new BasicDBObject();
-        whereQuery.put("_id", new ObjectId(id));
-        return projectCollection.find(whereQuery).first();
+        return projectCollection.find(new BasicDBObject("_id", new ObjectId(id))).first();
     }
 
     public ArrayNode findAll() {

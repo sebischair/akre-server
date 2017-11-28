@@ -55,3 +55,5 @@ GET           /getAssignee                                 controllers.AssigneeC
 GET           /predictAssignee                             controllers.PredictionController.predictAssignee(projectId: String)
 
 GET           /labelDesignDecisions                        controllers.LabelDesignDecisionsController.labelDesignDecisions(projectId: String)
+
+GET           /getDataForAEV                               controllers.amelie.AEController.getAE(projectName: String)

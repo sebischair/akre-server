@@ -2,13 +2,13 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET           /updateAllConcepts                            controllers.KeywordExtractorController.updateConceptsForDesignDecisions()
-GET           /updateAllKeywords                            controllers.KeywordExtractorController.updateKeywordsForDesignDecisions()
+GET           /updateAllConcepts        controllers.amelie.KeywordExtractorController.updateConceptsForDesignDecisions(projectName: String)
+GET           /updateAllKeywords        controllers.amelie.KeywordExtractorController.updateKeywordsForDesignDecisions(projectName: String)
 
-GET           /addToken                                     controllers.AnnotationController.addToken(token: String ?= "")
-GET           /removeToken                                  controllers.AnnotationController.removeToken(token: String ?= "")
-POST          /processDocument                              controllers.DocumentController.processDocument()
-POST          /annotate                                     controllers.DocumentController.processDocument()
+GET           /addToken                 controllers.AnnotationController.addToken(token: String ?= "")
+GET           /removeToken              controllers.AnnotationController.removeToken(token: String ?= "")
+POST          /processDocument          controllers.DocumentController.processDocument()
+POST          /annotate                 controllers.DocumentController.processDocument()
 POST          /getMetaInformation                           controllers.DocumentController.getMetaInformation()
 POST          /getSoftwareSolutions                         controllers.SoftwareRecommendationController.getSoftwareSolutions()
 POST          /getAlternatives                              controllers.AlternativesController.getAlternatives()

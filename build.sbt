@@ -17,6 +17,7 @@ libraryDependencies ++= Seq(
   "org.webjars" % "bootstrap" % "3.3.6",
   "org.webjars" % "html5shiv" % "3.7.3",
   "org.mongodb.morphia" % "morphia" % "1.2.1",
+  "org.mongodb" % "mongo-java-driver" % "3.5.0",
 
   // DKPro Core components
   "de.tudarmstadt.ukp.dkpro.core" % "de.tudarmstadt.ukp.dkpro.core-asl" % "1.7.0",

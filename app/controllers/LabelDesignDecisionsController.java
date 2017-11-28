@@ -62,35 +62,29 @@ public class LabelDesignDecisionsController extends Controller {
                 boolean isLabeledAsDesignDecision = false;
                 boolean isDecisionCategoryLabeled = false;
 
-                ArrayNode attributes = (ArrayNode) issue.get("attributes");
+                ArrayNode attributes = (ArrayNode) issue.get(StaticFunctions.ATTRIBUTES);
                 for(int j=0; j<attributes.size(); j++) {
                     JsonNode attr = attributes.get(j);
-                    if(attr.get("name").asText("").equalsIgnoreCase("summary") && attr.get("values").size() > 0) {
-                        summary = attr.get("values").get(0).asText("");
-                    } else if(attr.get("name").asText("").equalsIgnoreCase("description") && attr.get("values").size() > 0) {
-                        description = attr.get("values").get(0).asText("");
-                    } else if(attr.get("name").asText("").equalsIgnoreCase("belongs_to") && attr.get("values").size() > 0) {
-                        belongsToProject = attr.get("values").get(0).get("id").asText().equalsIgnoreCase(projectId);
-                    } else if(attr.get("name").asText("").equalsIgnoreCase("design decision") && attr.get("values").size() > 0) {
-                        isLabeledAsDesignDecision = false;
-                    } else if(attr.get("name").asText("").equalsIgnoreCase("decisionCategory") && attr.get("values").size() > 0) {
+                    if(attr.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.SUMMARY) && attr.get(StaticFunctions.VALUES).size() > 0) {
+                        summary = attr.get(StaticFunctions.VALUES).get(0).asText("");
+                    } else if(attr.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.DESCRIPTION) && attr.get(StaticFunctions.VALUES).size() > 0) {
+                        description = attr.get(StaticFunctions.VALUES).get(0).asText("");
+                    } else if(attr.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.BELONGSTO) && attr.get(StaticFunctions.VALUES).size() > 0) {
+                        belongsToProject = attr.get(StaticFunctions.VALUES).get(0).get(StaticFunctions.ID).asText().equalsIgnoreCase(projectId);
+                    } else if(attr.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.DESIGNDECISION) && attr.get(StaticFunctions.VALUES).size() > 0) {
+                        isLabeledAsDesignDecision = true;
+                    } else if(attr.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.DECISIONCATEGORY) && attr.get(StaticFunctions.VALUES).size() > 0) {
                         isDecisionCategoryLabeled = true;
                     }
                 }
 
                 ArrayNode newAttributes = Json.newArray();
-
-                if(belongsToProject) {
-                    System.out.println(id);
-                    //System.out.println(summary + " " + description);
-
-                    String label = getDesignDecisionLabel(summary + " " + description).get("label").asText();
-                    System.out.println(label);
-
+                if(belongsToProject && !isLabeledAsDesignDecision) {
+                    String label = getDesignDecisionLabel(summary + " " + description).get(StaticFunctions.LABEL).toString();
                     ObjectNode attribute = Json.newObject();
                     ArrayNode valueNodes = Json.newArray();
-                    attribute.put(StaticFunctions.NAME, "design decision");
-                    if (label.equalsIgnoreCase("1")) {
+                    attribute.put(StaticFunctions.NAME, StaticFunctions.DESIGNDECISION);
+                    if (label.equals("1")) {
                         valueNodes.add(true);
                     } else {
                         isDecisionCategoryLabeled = true;
@@ -102,14 +96,14 @@ public class LabelDesignDecisionsController extends Controller {
                     System.out.println(".................");
                 }
 
-                if(belongsToProject) {
-                    String label = getDecisionCategoryLabel(summary + " " + description, dcMap).get("label").asText();
+                if(belongsToProject && !isDecisionCategoryLabeled) {
+                    String label = getDecisionCategoryLabel(summary + " " + description, dcMap).get(StaticFunctions.LABEL).asText();
                     ObjectNode attribute = Json.newObject();
                     ArrayNode valueNodes = Json.newArray();
-                    attribute.put(StaticFunctions.NAME, "decisionCategory");
+                    attribute.put(StaticFunctions.NAME, StaticFunctions.DECISIONCATEGORY);
 
                     ObjectNode valueObject = Json.newObject();
-                    valueObject.put("id", label);
+                    valueObject.put(StaticFunctions.ID, label);
                     valueNodes.add(valueObject);
 
                     attribute.set(StaticFunctions.VALUES, valueNodes);
@@ -118,7 +112,7 @@ public class LabelDesignDecisionsController extends Controller {
 
                 if(newAttributes.size() > 0) {
                     ObjectNode editEntity = Json.newObject();
-                    editEntity.set("attributes", newAttributes);
+                    editEntity.set(StaticFunctions.ATTRIBUTES, newAttributes);
                     System.out.println(editEntity);
                     hs.editEntity(editEntity, id);
                 }

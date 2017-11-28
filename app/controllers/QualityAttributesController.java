@@ -35,9 +35,9 @@ public class QualityAttributesController extends Controller {
                     List<String> keywords = new ArrayList<>();
                     keywords.add(key);
                     hs.entityForUid(id).thenApply(qa -> {
-                        qa.get("attributes").forEach(attr -> {
-                            if (attr.get("name").asText("").equalsIgnoreCase("keyword") && attr.get("values").size() > 0) {
-                                attr.get("values").forEach(a -> keywords.add(a.get("name").asText("").toLowerCase()));
+                        qa.get(StaticFunctions.ATTRIBUTES).forEach(attr -> {
+                            if (attr.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.KEYWORD) && attr.get(StaticFunctions.VALUES).size() > 0) {
+                                attr.get(StaticFunctions.VALUES).forEach(a -> keywords.add(a.get(StaticFunctions.NAME).asText("").toLowerCase()));
                             }
                         });
                        return ok();
@@ -63,17 +63,17 @@ public class QualityAttributesController extends Controller {
                     boolean belongsToProject = false;
                     boolean isDesignDecision = false;
 
-                    ArrayNode attributes = (ArrayNode) issue.get("attributes");
+                    ArrayNode attributes = (ArrayNode) issue.get(StaticFunctions.ATTRIBUTES);
                     for(int j=0; j<attributes.size(); j++) {
                         JsonNode attr = attributes.get(j);
-                        if(attr.get("name").asText("").equalsIgnoreCase("summary") && attr.get("values").size() > 0) {
-                            summary = attr.get("values").get(0).asText("");
-                        } else if(attr.get("name").asText("").equalsIgnoreCase("description") && attr.get("values").size() > 0) {
-                            description = attr.get("values").get(0).asText("");
-                        } else if(attr.get("name").asText("").equalsIgnoreCase("design decision") && attr.get("values").size() > 0) {
-                            isDesignDecision = attr.get("values").get(0).asBoolean(false);
-                        } else if(attr.get("name").asText("").equalsIgnoreCase("belongs_to") && attr.get("values").size() > 0) {
-                            belongsToProject = attr.get("values").get(0).get("id").asText().equalsIgnoreCase(projectId);
+                        if(attr.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.SUMMARY) && attr.get(StaticFunctions.VALUES).size() > 0) {
+                            summary = attr.get(StaticFunctions.VALUES).get(0).asText("");
+                        } else if(attr.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.DESCRIPTION) && attr.get(StaticFunctions.VALUES).size() > 0) {
+                            description = attr.get(StaticFunctions.VALUES).get(0).asText("");
+                        } else if(attr.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.DESIGNDECISION) && attr.get(StaticFunctions.VALUES).size() > 0) {
+                            isDesignDecision = attr.get(StaticFunctions.VALUES).get(0).asBoolean(false);
+                        } else if(attr.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.BELONGSTO) && attr.get(StaticFunctions.VALUES).size() > 0) {
+                            belongsToProject = attr.get(StaticFunctions.VALUES).get(0).get(StaticFunctions.ID).asText().equalsIgnoreCase(projectId);
                         }
                     }
 
@@ -81,9 +81,9 @@ public class QualityAttributesController extends Controller {
                         ArrayNode qaList = getQAList(summary + " " + description, qa_id_keywords);
                         ArrayNode newAttributes = Json.newArray();
                         if (qaList.size() > 0) {
-                            StaticFunctions.updateAttributesArray(newAttributes, qaList, "qualityAttributes");
+                            StaticFunctions.updateAttributesArray(newAttributes, qaList, StaticFunctions.QUALITYATTRIBUTES);
                             ObjectNode editEntity = Json.newObject();
-                            editEntity.set("attributes", newAttributes);
+                            editEntity.set(StaticFunctions.ATTRIBUTES, newAttributes);
                             hs.editEntity(editEntity, id);
                         }
                     }
@@ -94,7 +94,10 @@ public class QualityAttributesController extends Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ok("OK");
+        System.out.println("QA for tasks has been updated");
+        ObjectNode result = Json.newObject();
+        result.put("status", "OK");
+        return ok(result);
     }
 
     private ArrayNode getQAList(String text, Map<String, List<String>> qa_id_keywords) {

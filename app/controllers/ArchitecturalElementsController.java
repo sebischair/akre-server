@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
-import play.Configuration;
 import play.Logger;
 import play.libs.Json;
 import play.libs.ws.WSClient;
@@ -59,9 +58,9 @@ public class ArchitecturalElementsController extends Controller {
                     for(int j=0; j<attributes.size(); j++) {
                         JsonNode attr = attributes.get(j);
                         if(attr.get("name").asText("").equalsIgnoreCase("summary") && attr.get("values").size() > 0) {
-                            summary = attr.get("values").get(0).asText("");
+                            summary = attr.get("values").get(0).asText("").trim().replaceAll(" +", " ");
                         } else if(attr.get("name").asText("").equalsIgnoreCase("description") && attr.get("values").size() > 0) {
-                            description = attr.get("values").get(0).asText("");
+                            description = attr.get("values").get(0).asText("").trim().replaceAll(" +", " ");
                         } else if(attr.get("name").asText("").equalsIgnoreCase("design decision") && attr.get("values").size() > 0) {
                             isDesignDecision = attr.get("values").get(0).asBoolean(false);
                         } else if(attr.get("name").asText("").equalsIgnoreCase("belongs_to") && attr.get("values").size() > 0) {

@@ -50,6 +50,11 @@ public class StaticFunctions {
     public static final String TAGS = "tags";
     public static final String ID = "id";
     public static final String BELONGSTO = "belongs_to";
+    public static final String PERSONNAME= "personName";
+    public static final String KEYWORDS= "keywords";
+    public static final String WORKSPACE = "workspace";
+    public static final String ENTITYTYPE = "entityType";
+    public static final String KEYWORDSID = "h2iqv58q9it2";
 
     public static Result jsonResult(Result httpResponse) {
         return httpResponse.as("application/json; charset=utf-8");

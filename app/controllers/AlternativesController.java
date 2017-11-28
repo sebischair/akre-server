@@ -31,7 +31,7 @@ public class AlternativesController extends Controller {
             Alternative alternative = new Alternative().findByName(uri);
             if (alternative != null)
                 result.addAll(StaticFunctions.sortJsonArray(alternative.getAlternativesAsJsonArray()));
-            else {
+            else if (result.size() > 0 ){
                 String key = "<" + uri + "> ";
                 String queryString = "PREFIX dct: <http://purl.org/dc/terms/>\n" +
                         "PREFIX dbr: <http://dbpedia.org/resource/>\n" +

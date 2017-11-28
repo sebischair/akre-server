@@ -11,10 +11,10 @@ import play.mvc.Result;
 import services.HelperService;
 import util.StaticFunctions;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,12 +31,49 @@ public class PredictionController extends Controller {
         HelperService hs = new HelperService(ws);
         List<String> conceptList = new ArrayList<>();
         List<String> assigneeList = new ArrayList<>();
+        ObjectNode summaryResult = Json.newObject();
+        ArrayNode testingData = Json.newArray();
+        Set<String> allExpertsInDataSet = new HashSet<>();
 
         hs.executeMxl(StaticFunctions.WORKSPACEID, "getConceptsOfDesignDecisions(\""+ projectId +"\")").thenApply(tasks -> {
-            tasks.get(StaticFunctions.VALUE).forEach(task -> {
+            ArrayNode dataset = (ArrayNode) tasks.get(StaticFunctions.VALUE);
+
+            List<ObjectNode> jsonValues = new ArrayList<>();
+            for(int i=0; i<dataset.size(); i++) {
+                jsonValues.add((ObjectNode) dataset.get(i));
+            }
+
+            Collections.sort(jsonValues, new Comparator<ObjectNode>() {
+                private static final String KEY_NAME = "resolved";
+                @Override
+                public int compare(ObjectNode a, ObjectNode b) {
+                    String valA = a.get(KEY_NAME).asText("");
+                    String valB = b.get(KEY_NAME).asText("");
+
+                    if(valA != "" && valB != "") {
+                        DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
+                        try {
+                            Date dateA = format.parse(valA);
+                            Date dateB = format.parse(valB);
+                            return dateA.compareTo(dateB);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    return -1;
+                }
+            });
+
+            summaryResult.put("Total tasks", jsonValues.size());
+            int trainingDataSetSize = (int) Math.floor(jsonValues.size() * 0.9);
+            summaryResult.put("Training dataset size", trainingDataSetSize);
+
+            for(int i=0; i<trainingDataSetSize; i++) {
+                JsonNode task = jsonValues.get(i);
                 String assignee = task.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
                 if (!assigneeList.contains(assignee)) {
                     assigneeList.add(assignee);
+                    allExpertsInDataSet.add(assignee.toLowerCase());
                 }
 
                 task.get(StaticFunctions.CONCEPTS).forEach(ca -> {
@@ -45,21 +82,40 @@ public class PredictionController extends Controller {
                         conceptList.add(key);
                     }
                 });
-            });
+            }
 
-            assigneeList.forEach(assignee -> {
-                if (!StaticFunctions.containsStringValue("personName", assignee, ja)) {
+            for(int i=trainingDataSetSize; i<jsonValues.size(); i++) {
+                JsonNode task = jsonValues.get(i);
+                String assignee = task.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
+                String summary = task.get(StaticFunctions.SUMMARY).asText("").toLowerCase().trim().replaceAll(" +", " ");
+                String description = task.get(StaticFunctions.DESCRIPTION).asText("").toLowerCase().trim().replaceAll(" +", " ");
+                JsonNode concepts = task.get(StaticFunctions.CONCEPTS);
+
+                if(assignee != "" && assignee != "unassigned" && summary + description != "" && concepts.size() > 0) {
                     ObjectNode jo = Json.newObject();
-                    jo.put("personName", assignee.toLowerCase());
-                    jo.set("concepts", Json.newArray());
+                    jo.put(StaticFunctions.ASSIGNEE, assignee.toLowerCase());
+                    jo.set(StaticFunctions.CONCEPTS, task.get(StaticFunctions.CONCEPTS));
+                    jo.put(StaticFunctions.SUMMARY, summary.toLowerCase());
+                    jo.put(StaticFunctions.DESCRIPTION, description.toLowerCase());
+                    jo.put("resolved", task.get("resolved").asText(""));
+                    testingData.add(jo);
+                    allExpertsInDataSet.add(assignee.toLowerCase());
+                }
+            }
+            summaryResult.put("Testing dataset size", testingData.size());
+            assigneeList.forEach(assignee -> {
+                if (!StaticFunctions.containsStringValue(StaticFunctions.PERSONNAME, assignee, ja)) {
+                    ObjectNode jo = Json.newObject();
+                    jo.put(StaticFunctions.PERSONNAME, assignee.toLowerCase());
+                    jo.set(StaticFunctions.CONCEPTS, Json.newArray());
                     ja.add(jo);
                 }
             });
 
             tasks.get(StaticFunctions.VALUE).forEach(task -> {
-                String assignee = task.get(StaticFunctions.ASSIGNEE).asText("");
+                String assignee = task.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
                 JsonNode ca = task.get(StaticFunctions.CONCEPTS);
-                JsonNode personObject = StaticFunctions.getJSONObject("personName", assignee, ja);
+                JsonNode personObject = StaticFunctions.getJSONObject(StaticFunctions.PERSONNAME, assignee, ja);
                 JsonNode conceptArray = personObject != null ? personObject.get(StaticFunctions.CONCEPTS) : Json.newArray();
                 ca.forEach(c -> StaticFunctions.updateConceptArray(c.asText("").replaceAll("s$", "").toLowerCase(), conceptArray));
             });
@@ -68,7 +124,7 @@ public class PredictionController extends Controller {
             ArrayNode pcvja = Json.newArray();
             ja.forEach(jo -> {
                 ObjectNode pcvjo = Json.newObject();
-                pcvjo.put("personName", jo.get("personName").asText(""));
+                pcvjo.put(StaticFunctions.PERSONNAME, jo.get(StaticFunctions.PERSONNAME).asText(""));
                 ArrayNode pcvList = Json.newArray();
                 for (int j = 0; j < conceptList.size(); j++) {
                     pcvList.insert(j, personConceptValue(conceptList.get(j), jo));
@@ -77,36 +133,97 @@ public class PredictionController extends Controller {
                 pcvja.add(pcvjo);
             });
 
-            ArrayNode decisionsToPredict = getRandomConceptVectors(conceptList, hs, projectId);
+            ArrayNode decisionsToPredict = getRandomConceptVectors(conceptList, testingData, hs, projectId);
             decisionsToPredict = matching(pcvja, decisionsToPredict, conceptList.size());
             decisionsToPredict = ordering(decisionsToPredict);
-
-            decisionsToPredict.forEach(dtp -> {
+            /*
+            int correctMatch = 0;
+            for(int n=0; n <decisionsToPredict.size(); n++) {
+                JsonNode dtp = decisionsToPredict.get(n);
                 ArrayNode pa = Json.newArray();
                 ObjectNode r = Json.newObject();
+                String assignee = dtp.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
                 r.put("text", dtp.get(StaticFunctions.SUMMARY).asText("") + " " + dtp.get(StaticFunctions.DESCRIPTION).asText(""));
-                r.put(StaticFunctions.ASSIGNEE, dtp.get(StaticFunctions.ASSIGNEE).asText(""));
+                r.put(StaticFunctions.ASSIGNEE, assignee);
+                //r.set(StaticFunctions.CONCEPTS, dtp.get(StaticFunctions.CONCEPTS));
+                r.put("resolved", dtp.get("resolved").asText(""));
                 ObjectNode jo;
                 JsonNode dtp_jo;
                 JsonNode dtp_pa = dtp.get("predictionArray");
 
-                int count = 0;
-                for (int j = 0; j < dtp_pa.size(); j++) {
+                int max = dtp_pa.size() > 10 ? 10 : dtp_pa.size();
+                for(int j = 0; j < max; j++) {
                     dtp_jo = dtp_pa.get(j);
                     jo = Json.newObject();
-                    jo.put("personName", dtp_jo.get("personName").asText(""));
-                    jo.put("score", dtp_jo.get("score").asInt(0));
+                    String personName = dtp_jo.get(StaticFunctions.PERSONNAME).asText("").toLowerCase();
+                    jo.put(StaticFunctions.PERSONNAME, personName);
+                    int score = dtp_jo.get("score").asInt(0);
+
+                    jo.put("score", score);
                     pa.add(jo);
-                    count++;
-                    if (count > 10) break;
+                    if(personName.toLowerCase().equals(assignee.toLowerCase())) correctMatch +=1;
+
                 }
-                r.set("predictions", pa);
+                summaryResult.put("correctMatch", correctMatch);
+                //r.set("predictions", pa);
                 results.add(r);
-            });
+            }*/
+            ArrayNode correctMatches = Json.newArray();
+            ArrayNode catalogCoverages = Json.newArray();
+            Set<String> allRecommendedExpertsInTestingSet = new HashSet<>();
+            for(int k=1; k<7; k++) {
+                correctMatches.add(computeCorrectMatch(decisionsToPredict, k, allRecommendedExpertsInTestingSet));
+                catalogCoverages.add(allRecommendedExpertsInTestingSet.size() / allExpertsInDataSet.size());
+                allRecommendedExpertsInTestingSet = new HashSet<>();
+            }
+            correctMatches.add(computeCorrectMatch(decisionsToPredict, 0, allRecommendedExpertsInTestingSet));
+            catalogCoverages.add(allRecommendedExpertsInTestingSet.size() / allExpertsInDataSet.size());
+
+            summaryResult.set("catalogCoverages", catalogCoverages);
+
+            int testingDataSetForWhichPredictionsWereMade = 0;
+            for(int n=0; n <decisionsToPredict.size(); n++) {
+                JsonNode dtp = decisionsToPredict.get(n);
+                JsonNode dtp_pa = dtp.get("predictionArray");
+                if(dtp_pa.size() > 0) {
+                    testingDataSetForWhichPredictionsWereMade += 1;
+                }
+            }
+            summaryResult.put("predictionCoverage", testingDataSetForWhichPredictionsWereMade/testingData.size());
+            summaryResult.set("correctMatch", correctMatches);
+            results.add(summaryResult);
             return ok(results);
         }).toCompletableFuture().join();
 
         return ok(results);
+    }
+
+    private int computeCorrectMatch(ArrayNode decisionsToPredict, int run, Set<String> allRecommendedExpertsInTestingSet) {
+        int correctMatch = 0;
+        for(int n=0; n <decisionsToPredict.size(); n++) {
+            JsonNode dtp = decisionsToPredict.get(n);
+            ArrayNode pa = Json.newArray();
+            String assignee = dtp.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
+            ObjectNode jo;
+            JsonNode dtp_jo;
+            JsonNode dtp_pa = dtp.get("predictionArray");
+            int max = dtp_pa.size();
+            if(run != 0) {
+                max = dtp_pa.size() > (run * 5) ? (run * 5) : dtp_pa.size();
+            }
+            for(int j = 0; j < max; j++) {
+                dtp_jo = dtp_pa.get(j);
+                jo = Json.newObject();
+                String personName = dtp_jo.get(StaticFunctions.PERSONNAME).asText("").toLowerCase();
+                jo.put(StaticFunctions.PERSONNAME, personName);
+                int score = dtp_jo.get("score").asInt(0);
+                jo.put("score", score);
+                pa.add(jo);
+                allRecommendedExpertsInTestingSet.add(personName);
+                if(personName.toLowerCase().equals(assignee.toLowerCase())) correctMatch +=1;
+            }
+        }
+        return correctMatch;
     }
 
     private ArrayNode ordering(ArrayNode decisionsToPredict) {
@@ -175,65 +292,34 @@ public class PredictionController extends Controller {
         return decisionsToPredict;
     }
 
-    private ArrayNode getRandomConceptVectors(List<String> conceptList, HelperService hs, String projectId) {
+    private ArrayNode getRandomConceptVectors(List<String> conceptList, ArrayNode testingData, HelperService hs, String projectId) {
         ArrayNode conceptVectorJSONArray = Json.newArray();
-        hs.entitiesForTypeUid(StaticFunctions.TASKID).thenApply(scTasks -> {
-            for (int i = 0; i < 20; i++) {
-                ObjectNode conceptVectorJSONObject = Json.newObject();
-                hs.entityForUid(scTasks.get(i).get(StaticFunctions.ID).asText()).thenApply(project -> {
-                    boolean add = false;
-                    if (project.has(StaticFunctions.ATTRIBUTES)) {
-                        JsonNode attributesArray = project.get(StaticFunctions.ATTRIBUTES);
-                        ArrayNode conceptVector = Json.newArray();
-                        for (int k = 0; k < conceptList.size(); k++) {
-                            conceptVector.insert(k, 0);
-                        }
+        for(int i=0; i<testingData.size(); i++) {
+            JsonNode data =  testingData.get(i);
+            ObjectNode conceptVectorJSONObject = Json.newObject();
 
-                        attributesArray.forEach(attribute -> {
-                            if (attribute.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.SUMMARY) && attribute.get(StaticFunctions.VALUES).size() > 0) {
-                                conceptVectorJSONObject.put(StaticFunctions.SUMMARY, attribute.get(StaticFunctions.VALUES).get(0).toString().toLowerCase());
-                            }
-                            if (attribute.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.DESCRIPTION) && attribute.get(StaticFunctions.VALUES).size() > 0) {
-                                conceptVectorJSONObject.put(StaticFunctions.DESCRIPTION, attribute.get(StaticFunctions.VALUES).get(0).toString());
-                            }
-                            if (attribute.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.ASSIGNEE) && attribute.get(StaticFunctions.VALUES).size() > 0) {
-                                conceptVectorJSONObject.put(StaticFunctions.ASSIGNEE, attribute.get(StaticFunctions.VALUES).get(0).toString());
-                            }
-                        });
+            conceptVectorJSONObject.put(StaticFunctions.SUMMARY, data.get(StaticFunctions.SUMMARY).asText(""));
+            conceptVectorJSONObject.put(StaticFunctions.DESCRIPTION, data.get(StaticFunctions.DESCRIPTION).asText(""));
+            conceptVectorJSONObject.put(StaticFunctions.ASSIGNEE, data.get(StaticFunctions.ASSIGNEE).asText(""));
+            conceptVectorJSONObject.put("resolved", data.get("resolved").asText(""));
 
-                        for (int j = 0; j < attributesArray.size(); j++) {
-                            JsonNode attribute = attributesArray.get(j);
-
-                            if (attribute.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.BELONGSTO) && attribute.get(StaticFunctions.VALUES).size() > 0 &&
-                                    attribute.get(StaticFunctions.VALUES).get(0).asText("").equalsIgnoreCase(projectId)) {
-                                add = false;
-                                break;
-                            }
-
-                            if (attribute.get(StaticFunctions.NAME).asText("").equalsIgnoreCase(StaticFunctions.CONCEPTS) && attribute.get(StaticFunctions.VALUES).size() > 0) {
-                                add = true;
-                                JsonNode concepts = attribute.get(StaticFunctions.VALUES);
-                                concepts.forEach(conceptItr -> {
-                                    String concept = conceptItr.get(StaticFunctions.NAME).asText("").replaceAll("s$", "").toLowerCase();
-                                    if (conceptList.contains(concept)) {
-                                        int value = getConceptValue(concept, conceptVectorJSONObject.get(StaticFunctions.DESCRIPTION).asText("") + " " + conceptVectorJSONObject.get(StaticFunctions.SUMMARY).asText(""));
-                                        conceptVector.insert(conceptList.indexOf(concept), value);
-                                    }
-                                });
-                            }
-                        }
-
-                        if (add) {
-                            conceptVectorJSONObject.set("conceptVector", conceptVector);
-                            conceptVectorJSONArray.add(conceptVectorJSONObject);
-                        }
-                    }
-                    return ok();
-                }).toCompletableFuture().join();
+            ArrayNode conceptVector = Json.newArray();
+            for (int k = 0; k < conceptList.size(); k++) {
+                conceptVector.insert(k, 0);
             }
-            return ok();
-        }).toCompletableFuture().join();
+            JsonNode concepts = data.get(StaticFunctions.CONCEPTS);
+            conceptVectorJSONObject.set(StaticFunctions.CONCEPTS, concepts);
+            concepts.forEach(concept -> {
+                String c = concept.asText("").replaceAll("s$", "").toLowerCase();
+                if (conceptList.contains(c)) {
+                    int value = getConceptValue(c, data.get(StaticFunctions.SUMMARY).asText("") + " " + data.get(StaticFunctions.DESCRIPTION).asText(""));
+                    conceptVector.insert(conceptList.indexOf(concept), value);
+                }
+            });
 
+            conceptVectorJSONObject.set("conceptVector", conceptVector);
+            conceptVectorJSONArray.add(conceptVectorJSONObject);
+        }
         return conceptVectorJSONArray;
     }
 

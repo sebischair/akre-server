@@ -56,7 +56,6 @@ public class LabelDesignDecisionsController extends Controller {
 
         issueIds.forEach(id -> {
             hs.entityForUid(id).thenApply(issue -> {
-                System.out.println(id);
                 String summary = "";
                 String description = "";
                 boolean belongsToProject = false;
@@ -73,7 +72,7 @@ public class LabelDesignDecisionsController extends Controller {
                     } else if(attr.get("name").asText("").equalsIgnoreCase("belongs_to") && attr.get("values").size() > 0) {
                         belongsToProject = attr.get("values").get(0).get("id").asText().equalsIgnoreCase(projectId);
                     } else if(attr.get("name").asText("").equalsIgnoreCase("design decision") && attr.get("values").size() > 0) {
-                        isLabeledAsDesignDecision = true;
+                        isLabeledAsDesignDecision = false;
                     } else if(attr.get("name").asText("").equalsIgnoreCase("decisionCategory") && attr.get("values").size() > 0) {
                         isDecisionCategoryLabeled = true;
                     }
@@ -81,13 +80,17 @@ public class LabelDesignDecisionsController extends Controller {
 
                 ArrayNode newAttributes = Json.newArray();
 
-                if(belongsToProject && !isLabeledAsDesignDecision) {
-                    String label = getDesignDecisionLabel(summary + " " + description).get("label").toString();
+                if(belongsToProject) {
+                    System.out.println(id);
+                    //System.out.println(summary + " " + description);
+
+                    String label = getDesignDecisionLabel(summary + " " + description).get("label").asText();
+                    System.out.println(label);
 
                     ObjectNode attribute = Json.newObject();
                     ArrayNode valueNodes = Json.newArray();
                     attribute.put(StaticFunctions.NAME, "design decision");
-                    if (label.equals("1")) {
+                    if (label.equalsIgnoreCase("1")) {
                         valueNodes.add(true);
                     } else {
                         isDecisionCategoryLabeled = true;
@@ -95,9 +98,11 @@ public class LabelDesignDecisionsController extends Controller {
                     }
                     attribute.set(StaticFunctions.VALUES, valueNodes);
                     newAttributes.add(attribute);
+                    System.out.println(newAttributes);
+                    System.out.println(".................");
                 }
 
-                if(belongsToProject && !isDecisionCategoryLabeled) {
+                if(belongsToProject) {
                     String label = getDecisionCategoryLabel(summary + " " + description, dcMap).get("label").asText();
                     ObjectNode attribute = Json.newObject();
                     ArrayNode valueNodes = Json.newArray();

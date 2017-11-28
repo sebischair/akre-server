@@ -47,5 +47,8 @@ libraryDependencies ++= Seq(
   "commons-httpclient" % "commons-httpclient" % "3.1",
 
   //Apache TIKA
-  "org.apache.tika" % "tika-parsers" % "1.4"
+  "org.apache.tika" % "tika-parsers" % "1.4",
+
+  //AYLIEN
+  "com.aylien.textapi" % "client" % "0.6.1"
 )

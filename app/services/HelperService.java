@@ -49,11 +49,12 @@ public class HelperService {
     }
 
     public CompletionStage<JsonNode> entitiesForTypeUid(String typeId) {
-        return getWSResponse(SC_BASE_URL + "entityTypes/" + typeId + "/entities");
+        System.out.println(SC_BASE_URL + "entityTypes/" + typeId + "/entities");
+        return getWSResponseWithAuth(SC_BASE_URL + "entityTypes/" + typeId + "/entities");
     }
 
     public CompletionStage<JsonNode> entityForUid(String entityId) {
-        return getWSResponse(SC_BASE_URL + "entities/" + entityId);
+        return getWSResponseWithAuth(SC_BASE_URL + "entities/" + entityId);
     }
 
     public CompletionStage<JsonNode> executeMxl(String workspaceId, String expression) {

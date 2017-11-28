@@ -2,6 +2,9 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+GET           /updateAllConcepts                           controllers.KeywordExtractorController.updateConceptsForDesignDecisions()
+GET           /updateAllKeywords                           controllers.KeywordExtractorController.updateKeywordsForDesignDecisions()
+
 GET           /addToken                                    controllers.AnnotationController.addToken(token: String ?= "")
 GET           /removeToken                                 controllers.AnnotationController.removeToken(token: String ?= "")
 POST          /processDocument                             controllers.DocumentController.processDocument()

@@ -1,4 +1,4 @@
-package controllers;
+package controllers.amelie;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import model.amelie.Project;

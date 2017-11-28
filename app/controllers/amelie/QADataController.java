@@ -8,6 +8,7 @@ import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import util.StaticFunctions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +51,7 @@ public class QADataController extends Controller {
             results.add(res);
         });
 
-        return ok(results);
+        return StaticFunctions.jsonResult(ok(results));
     }
 
     private ArrayNode getDecisionCount(String qualityAttribute, int year, ArrayNode issues) {
@@ -67,16 +68,9 @@ public class QADataController extends Controller {
                 try{
                     int resolvedYear = Integer.parseInt(date.split("-")[0]);
                     if(year >= resolvedYear) {
-                        JsonNode qas = Json.toJson(issue.get("qualityAttributes"));
-                        ArrayNode qaList = Json.newArray();
+                        JsonNode qas = issue.get("qualityAttributes");
                         String decisionCategory = issue.get("decisionCategory").asText();
-                        if(!qas.isArray()) {
-                            qaList.add(qas.asText(""));
-                        } else {
-                            qaList = (ArrayNode) qas;
-                        }
-
-                        qaList.forEach(qa -> {
+                        qas.forEach(qa -> {
                             String key = qa.asText("");
                             if(key.equalsIgnoreCase(qualityAttribute)) {
                                 if(dcs.indexOf(decisionCategory) == 0)

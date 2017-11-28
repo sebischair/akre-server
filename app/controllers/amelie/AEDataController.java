@@ -8,6 +8,7 @@ import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import util.StaticFunctions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,7 +48,7 @@ public class AEDataController extends Controller {
             results.add(res);
         });
 
-        return ok(results);
+        return StaticFunctions.jsonResult(ok(results));
     }
 
     private int getDecisionCount(String ae, int year, ArrayNode issues) {

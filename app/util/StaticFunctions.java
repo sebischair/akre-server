@@ -3,6 +3,7 @@ package util;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.bson.Document;
 import play.libs.Json;
 import play.mvc.Result;
 
@@ -202,5 +203,15 @@ public class StaticFunctions {
             newAttribute.set(StaticFunctions.VALUES, valueNodes);
             attributesArray.add(newAttribute);
         }
+    }
+
+    public static ArrayNode getArrayNodeFromJsonNode(Document obj, String attr) {
+        ArrayNode arrayNode = Json.newArray();
+        if(obj.containsKey(attr) && obj.get(attr) != null && !Json.toJson(obj.get(attr)).isArray()) {
+            arrayNode.add(obj.getString(attr));
+        } else {
+            arrayNode = (ArrayNode) Json.toJson(obj.get(attr));
+        }
+        return arrayNode;
     }
 }

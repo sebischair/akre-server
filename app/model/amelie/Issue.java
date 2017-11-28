@@ -1,6 +1,5 @@
 package model.amelie;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mongodb.BasicDBObject;
@@ -11,6 +10,9 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 import play.libs.Json;
 import util.StaticFunctions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Manoj on 11/28/2017.
@@ -123,5 +125,36 @@ public class Issue {
 
     public void updateIssueById(String id, BasicDBObject newConcepts) {
         issueCollection.updateOne(new BasicDBObject().append("_id", new ObjectId(id)), newConcepts);
+    }
+
+    public List<String> getConceptList(String projectName) {
+        List<String> conceptList = new ArrayList();
+        MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("belongsTo", projectName).append("designDecision", true)).iterator();
+        while(cursor.hasNext()) {
+            Document obj = cursor.next();
+            ArrayNode conceptsNode = StaticFunctions.getArrayNodeFromJsonNode(obj, "concepts");
+            conceptsNode.forEach(node -> {
+                if(!conceptList.contains(node.asText("").toLowerCase())) {
+                    conceptList.add(node.asText("").toLowerCase());
+                }
+            });
+        }
+        return conceptList;
+    }
+
+    public ArrayNode getConceptsOfDesignDecisions(String projectName) {
+        ArrayNode result = Json.newArray();
+        MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("belongsTo", projectName).append("designDecision", true)).iterator();
+        while(cursor.hasNext()) {
+            Document obj = cursor.next();
+            ObjectNode temp = Json.newObject();
+            ArrayNode concepts = Json.newArray();
+            concepts.addAll(StaticFunctions.getArrayNodeFromJsonNode(obj, "concepts"));
+            concepts.addAll(StaticFunctions.getArrayNodeFromJsonNode(obj, "qualityAttributes"));
+            temp.set("concepts", concepts);
+            temp.put("assignee", obj.getString("assignee"));
+            result.add(temp);
+        }
+        return result;
     }
 }

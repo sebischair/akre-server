@@ -207,6 +207,9 @@ public class StaticFunctions {
 
     public static ArrayNode getArrayNodeFromJsonNode(Document obj, String attr) {
         ArrayNode arrayNode = Json.newArray();
+        if(obj.get(attr) == null) {
+            return arrayNode;
+        }
         if(obj.containsKey(attr) && obj.get(attr) != null && !Json.toJson(obj.get(attr)).isArray()) {
             arrayNode.add(obj.getString(attr));
         } else {

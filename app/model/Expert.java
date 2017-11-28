@@ -1,6 +1,6 @@
 package model;
 
-import controllers.MorphiaObject;
+import db.DefaultMongoClient;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
@@ -32,7 +32,7 @@ public class Expert {
     private List<String> expertise;
 
     public List<String> findAllExpertiseTokens() {
-        List<Expert> experts = (List<Expert>) MorphiaObject.datastore.createQuery(this.getClass()).asList();
+        List<Expert> experts = (List<Expert>) DefaultMongoClient.datastore.createQuery(this.getClass()).asList();
         Set<String> expertise = new HashSet<String>();
         for(Expert expert: experts) {
             expertise.addAll(expert.getExpertise());

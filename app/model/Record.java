@@ -1,21 +1,14 @@
 package model;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import controllers.MorphiaObject;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
-import org.mongodb.morphia.query.UpdateOperations;
-import play.libs.Json;
-import util.StaticFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static controllers.MorphiaObject.datastore;
+import static db.DefaultMongoClient.datastore;
 
 
 @Entity("record")

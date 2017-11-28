@@ -1,6 +1,6 @@
 package model;
 
-import controllers.MorphiaObject;
+import db.DefaultMongoClient;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.*;
@@ -37,20 +37,20 @@ public class Code {
     }
 
     public Key<Code> save() {
-        return MorphiaObject.datastore.save(this);
+        return DefaultMongoClient.datastore.save(this);
     }
 
     public Code findByFileName(String name) {
-        List<? extends Code> code = MorphiaObject.datastore.createQuery(this.getClass()).field("fileName").equalIgnoreCase(name).asList();
+        List<? extends Code> code = DefaultMongoClient.datastore.createQuery(this.getClass()).field("fileName").equalIgnoreCase(name).asList();
         if(code.size() > 0) return code.get(0);
         return null;
     }
 
     public boolean updateCode(String fileName, String content, String progLanguage) {
         try {
-            Query<Code> query = (Query<Code>) MorphiaObject.datastore.createQuery(this.getClass()).field("fileName").equalIgnoreCase(fileName);
-            UpdateOperations<Code> ops = (UpdateOperations<Code>) MorphiaObject.datastore.createUpdateOperations(this.getClass()).set("content", content).set("progLanguage", progLanguage);
-            MorphiaObject.datastore.update(query, ops);
+            Query<Code> query = (Query<Code>) DefaultMongoClient.datastore.createQuery(this.getClass()).field("fileName").equalIgnoreCase(fileName);
+            UpdateOperations<Code> ops = (UpdateOperations<Code>) DefaultMongoClient.datastore.createUpdateOperations(this.getClass()).set("content", content).set("progLanguage", progLanguage);
+            DefaultMongoClient.datastore.update(query, ops);
             return true;
         } catch(Exception e) {
             e.printStackTrace();

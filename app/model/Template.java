@@ -1,6 +1,6 @@
 package model;
 
-import controllers.MorphiaObject;
+import db.DefaultMongoClient;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
@@ -28,7 +28,7 @@ public class Template {
     private String path;
 
     public List<String> findAllTemplateNames() {
-        List<Template> templates = (List<Template>) MorphiaObject.datastore.createQuery(this.getClass()).asList();
+        List<Template> templates = (List<Template>) DefaultMongoClient.datastore.createQuery(this.getClass()).asList();
         Set<String> templateNames = new HashSet<String>();
         for(Template template: templates) {
             templateNames.add(template.getKeyword());

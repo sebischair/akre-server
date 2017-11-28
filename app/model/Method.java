@@ -1,6 +1,6 @@
 package model;
 
-import controllers.MorphiaObject;
+import db.DefaultMongoClient;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
@@ -26,7 +26,7 @@ public class Method {
     private String description;
 
     public List<String> findAllMethodNames() {
-        List<Method> methods = (List<Method>) MorphiaObject.datastore.createQuery(this.getClass()).asList();
+        List<Method> methods = (List<Method>) DefaultMongoClient.datastore.createQuery(this.getClass()).asList();
         Set<String> methodNames = new HashSet<String>();
         for(Method method: methods) {
             methodNames.add(method.getMethodName());

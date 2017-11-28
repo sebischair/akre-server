@@ -2,7 +2,7 @@ package model;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import controllers.MorphiaObject;
+import db.DefaultMongoClient;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.query.Query;
@@ -128,7 +128,7 @@ public class CustomCodeAnnotation {
     }
 
     public void save() {
-        MorphiaObject.datastore.save(this);
+        DefaultMongoClient.datastore.save(this);
     }
 
     public Date getCreatedAt() {
@@ -177,28 +177,28 @@ public class CustomCodeAnnotation {
     }
 
     public static ArrayNode getAll() {
-        Query<CustomCodeAnnotation> query = MorphiaObject.datastore.createQuery(CustomCodeAnnotation.class);
+        Query<CustomCodeAnnotation> query = DefaultMongoClient.datastore.createQuery(CustomCodeAnnotation.class);
         return searalize(query.asList());
     }
 
     public static ArrayNode getAllAnnotationsForProject(String projectId) {
-        List<CustomCodeAnnotation> annotations = MorphiaObject.datastore.createQuery(CustomCodeAnnotation.class).field("projectId").equalIgnoreCase(projectId).asList();
+        List<CustomCodeAnnotation> annotations = DefaultMongoClient.datastore.createQuery(CustomCodeAnnotation.class).field("projectId").equalIgnoreCase(projectId).asList();
         return searalize(annotations);
     }
 
     public static ArrayNode getAllAnnotationsForFile(String fileId) {
-        List<CustomCodeAnnotation> annotations = MorphiaObject.datastore.createQuery(CustomCodeAnnotation.class).field("fileId").equalIgnoreCase(fileId).asList();
+        List<CustomCodeAnnotation> annotations = DefaultMongoClient.datastore.createQuery(CustomCodeAnnotation.class).field("fileId").equalIgnoreCase(fileId).asList();
         return searalize(annotations);
     }
 
     public static CustomCodeAnnotation findById(String id) {
         ObjectId objectId = new ObjectId(id);
-        return MorphiaObject.datastore.get(CustomCodeAnnotation.class, objectId);
+        return DefaultMongoClient.datastore.get(CustomCodeAnnotation.class, objectId);
     }
 
     public static boolean delete(String id) {
         try{
-            MorphiaObject.datastore.delete(findById(id));
+            DefaultMongoClient.datastore.delete(findById(id));
             return true;
         } catch(Exception e) {
             e.printStackTrace();

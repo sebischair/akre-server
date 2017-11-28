@@ -1,6 +1,6 @@
 package model;
 
-import controllers.MorphiaObject;
+import db.DefaultMongoClient;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.*;
@@ -29,18 +29,18 @@ public class Project {
     }
 
     public Key<Project> save() {
-        return MorphiaObject.datastore.save(this);
+        return DefaultMongoClient.datastore.save(this);
     }
 
     public Project findByName(String name) {
-        List<? extends Project> projects = MorphiaObject.datastore.createQuery(this.getClass()).field("name").equalIgnoreCase(name).asList();
+        List<? extends Project> projects = DefaultMongoClient.datastore.createQuery(this.getClass()).field("name").equalIgnoreCase(name).asList();
         if(projects.size() > 0) return projects.get(0);
         return null;
     }
 
     public Project findById(String id) {
         ObjectId objectId = new ObjectId(id);
-        return MorphiaObject.datastore.get(this.getClass(), objectId);
+        return DefaultMongoClient.datastore.get(this.getClass(), objectId);
     }
 
     public ObjectId get_id() {

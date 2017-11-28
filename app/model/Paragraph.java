@@ -4,7 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
-import static controllers.MorphiaObject.datastore;
+import static db.DefaultMongoClient.datastore;
 import java.util.List;
 
 

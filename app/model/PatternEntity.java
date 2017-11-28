@@ -2,7 +2,7 @@ package model;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import controllers.MorphiaObject;
+import db.DefaultMongoClient;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.*;
@@ -53,12 +53,12 @@ public class PatternEntity {
     }
 
     public Key<PatternEntity> save() {
-        return MorphiaObject.datastore.save(this);
+        return DefaultMongoClient.datastore.save(this);
     }
 
     public PatternEntity findByProjectId(String projectId) {
         try {
-            List<? extends PatternEntity> pattern = MorphiaObject.datastore.createQuery(this.getClass()).field(StaticFunctions.PROJECTID).equalIgnoreCase(projectId).asList();
+            List<? extends PatternEntity> pattern = DefaultMongoClient.datastore.createQuery(this.getClass()).field(StaticFunctions.PROJECTID).equalIgnoreCase(projectId).asList();
             if (pattern.size() > 0) {
                 return pattern.get(0);
             } else {
@@ -80,9 +80,9 @@ public class PatternEntity {
 
     public boolean updatePattern(String projectId, List<Regex> regex) {
         try {
-            Query<PatternEntity> query = (Query<PatternEntity>) MorphiaObject.datastore.createQuery(this.getClass()).field(StaticFunctions.PROJECTID).equalIgnoreCase(projectId);
-            UpdateOperations<PatternEntity> ops = (UpdateOperations<PatternEntity>) MorphiaObject.datastore.createUpdateOperations(this.getClass()).set("regex", regex);
-            MorphiaObject.datastore.update(query, ops);
+            Query<PatternEntity> query = (Query<PatternEntity>) DefaultMongoClient.datastore.createQuery(this.getClass()).field(StaticFunctions.PROJECTID).equalIgnoreCase(projectId);
+            UpdateOperations<PatternEntity> ops = (UpdateOperations<PatternEntity>) DefaultMongoClient.datastore.createUpdateOperations(this.getClass()).set("regex", regex);
+            DefaultMongoClient.datastore.update(query, ops);
             return true;
         } catch(Exception e) {
             e.printStackTrace();

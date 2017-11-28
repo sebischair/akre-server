@@ -2,7 +2,7 @@ package model;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import controllers.MorphiaObject;
+import db.DefaultMongoClient;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.query.Query;
@@ -44,12 +44,12 @@ public class Genre {
     }
 
     public void save() {
-        MorphiaObject.datastore.save(this);
+        DefaultMongoClient.datastore.save(this);
     }
 
     public Genre findByName(String name) {
         name = name.replaceAll("\\(", "\\\\(").replaceAll("\\)","\\\\)").replaceAll("\\+", "\\\\+");
-        List<? extends Genre> genres = MorphiaObject.datastore.createQuery(this.getClass()).field("genreName").equalIgnoreCase(name).asList();
+        List<? extends Genre> genres = DefaultMongoClient.datastore.createQuery(this.getClass()).field("genreName").equalIgnoreCase(name).asList();
         if(genres.size() > 0) return genres.get(0);
         return null;
     }
@@ -75,9 +75,9 @@ public class Genre {
         try {
             softwareName = softwareName.replaceAll("\\(", "\\\\(").replaceAll("\\)","\\\\)").replaceAll("\\+", "\\\\+");
             genreName = genreName.replaceAll("\\(", "\\\\(").replaceAll("\\)","\\\\)").replaceAll("\\+", "\\\\+");
-            Query<Genre> query = (Query<Genre>) MorphiaObject.datastore.createQuery(this.getClass()).field("genreName").equalIgnoreCase(genreName).field("software.title").equalIgnoreCase(softwareName);
-            UpdateOperations<Genre> ops = (UpdateOperations<Genre>) MorphiaObject.datastore.createUpdateOperations(this.getClass()).set("software.$.score", score).set("software.$.description", description);
-            MorphiaObject.datastore.update(query, ops);
+            Query<Genre> query = (Query<Genre>) DefaultMongoClient.datastore.createQuery(this.getClass()).field("genreName").equalIgnoreCase(genreName).field("software.title").equalIgnoreCase(softwareName);
+            UpdateOperations<Genre> ops = (UpdateOperations<Genre>) DefaultMongoClient.datastore.createUpdateOperations(this.getClass()).set("software.$.score", score).set("software.$.description", description);
+            DefaultMongoClient.datastore.update(query, ops);
             return true;
         } catch(Exception e) {
             e.printStackTrace();
@@ -86,16 +86,16 @@ public class Genre {
     }
 
     public boolean hasSoftware(String genreName, String softwareName) {
-        List<? extends Genre> genres = MorphiaObject.datastore.createQuery(this.getClass()).field("genreName").equalIgnoreCase(genreName).field("software.title").equalIgnoreCase(softwareName).asList();
+        List<? extends Genre> genres = DefaultMongoClient.datastore.createQuery(this.getClass()).field("genreName").equalIgnoreCase(genreName).field("software.title").equalIgnoreCase(softwareName).asList();
         if(genres.size() > 0) return true;
         return false;
     }
 
     public boolean addSoftware(String genreName, Software software) {
         try {
-            Query<Genre> query = (Query<Genre>) MorphiaObject.datastore.createQuery(this.getClass()).field("genreName").equalIgnoreCase(genreName);
-            UpdateOperations<Genre> ops = (UpdateOperations<Genre>) MorphiaObject.datastore.createUpdateOperations(this.getClass()).add("software", software, false);
-            MorphiaObject.datastore.update(query, ops);
+            Query<Genre> query = (Query<Genre>) DefaultMongoClient.datastore.createQuery(this.getClass()).field("genreName").equalIgnoreCase(genreName);
+            UpdateOperations<Genre> ops = (UpdateOperations<Genre>) DefaultMongoClient.datastore.createUpdateOperations(this.getClass()).add("software", software, false);
+            DefaultMongoClient.datastore.update(query, ops);
             return true;
         } catch(Exception e) {
             e.printStackTrace();;

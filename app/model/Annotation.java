@@ -1,6 +1,6 @@
 package model;
 
-import controllers.MorphiaObject;
+import db.DefaultMongoClient;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.query.UpdateOperations;
@@ -46,7 +46,7 @@ public class Annotation {
     }
 
     public void save() {
-        MorphiaObject.datastore.save(this);
+        DefaultMongoClient.datastore.save(this);
     }
 
 
@@ -79,30 +79,30 @@ public class Annotation {
     }
 
     public static List<Annotation> getAllAnnotations() {
-        return MorphiaObject.datastore.createQuery(Annotation.class).asList();
+        return DefaultMongoClient.datastore.createQuery(Annotation.class).asList();
     }
 
     public static boolean delete(String annotationId) {
-        return MorphiaObject.datastore.delete(Annotation.class, new ObjectId(annotationId)).wasAcknowledged();
+        return DefaultMongoClient.datastore.delete(Annotation.class, new ObjectId(annotationId)).wasAcknowledged();
     }
 
     public static boolean update(Map<String, String> update, String annotationId) {
-        UpdateOperations ops = MorphiaObject.datastore
+        UpdateOperations ops = DefaultMongoClient.datastore
                 .createUpdateOperations(Annotation.class);
 
         for (String key : update.keySet()) {
             ops.set(key, update.get(key));
         }
 
-        Annotation annotation = MorphiaObject.datastore.get(Annotation.class, new ObjectId(annotationId));
-        return annotation != null && MorphiaObject.datastore.update(annotation, ops).getUpdatedExisting();
+        Annotation annotation = DefaultMongoClient.datastore.get(Annotation.class, new ObjectId(annotationId));
+        return annotation != null && DefaultMongoClient.datastore.update(annotation, ops).getUpdatedExisting();
     }
 
     public static List<Annotation> getAllByParagraph(String paragraphHash){
-        List<Paragraph> paragraphs = MorphiaObject.datastore.createQuery(Paragraph.class).field("hash").equalIgnoreCase(paragraphHash).asList();
+        List<Paragraph> paragraphs = DefaultMongoClient.datastore.createQuery(Paragraph.class).field("hash").equalIgnoreCase(paragraphHash).asList();
         if(paragraphs.isEmpty()) {
             return new ArrayList<Annotation>();
         }
-        return MorphiaObject.datastore.createQuery(Annotation.class).filter("paragraph", paragraphs.get(0)).asList();
+        return DefaultMongoClient.datastore.createQuery(Annotation.class).filter("paragraph", paragraphs.get(0)).asList();
     }
 }

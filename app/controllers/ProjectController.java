@@ -2,6 +2,7 @@ package controllers;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import db.DefaultMongoClient;
 import model.Project;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.Query;
@@ -32,7 +33,7 @@ public class ProjectController extends Controller {
     }
 
     public Result getAll() {
-        Query<Project> query = MorphiaObject.datastore.createQuery(Project.class);
+        Query<Project> query = DefaultMongoClient.datastore.createQuery(Project.class);
         List<Project> projects= query.asList();
         ArrayNode result = Json.newArray();
         for(Project project: projects) {

@@ -1,6 +1,6 @@
 package model;
 
-import controllers.MorphiaObject;
+import db.DefaultMongoClient;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 import org.mongodb.morphia.query.Query;
@@ -33,24 +33,24 @@ public class DBpediaToken {
     }
 
     public void save() {
-        MorphiaObject.datastore.save(this);
+        DefaultMongoClient.datastore.save(this);
     }
 
     public List<DBpediaToken> findAllCustomTokens() {
-        return (List<DBpediaToken>) MorphiaObject.datastore.createQuery(this.getClass()).field("type").equalIgnoreCase("custom").field("score").greaterThanOrEq(0).asList();
+        return (List<DBpediaToken>) DefaultMongoClient.datastore.createQuery(this.getClass()).field("type").equalIgnoreCase("custom").field("score").greaterThanOrEq(0).asList();
     }
 
     public DBpediaToken findByName(String name) {
-        List<? extends DBpediaToken> tokens = MorphiaObject.datastore.createQuery(this.getClass()).field("name").equalIgnoreCase(name).asList();
+        List<? extends DBpediaToken> tokens = DefaultMongoClient.datastore.createQuery(this.getClass()).field("name").equalIgnoreCase(name).asList();
         if(tokens.size() > 0) return tokens.get(0);
         return null;
     }
 
     public boolean updateTokenScore(String tokenName, int value) {
         try {
-            Query<DBpediaToken> query = (Query<DBpediaToken>) MorphiaObject.datastore.createQuery(this.getClass()).field("name").equalIgnoreCase(tokenName);
-            UpdateOperations<DBpediaToken> ops = (UpdateOperations<DBpediaToken>) MorphiaObject.datastore.createUpdateOperations(this.getClass()).set("score", value);
-            MorphiaObject.datastore.update(query, ops);
+            Query<DBpediaToken> query = (Query<DBpediaToken>) DefaultMongoClient.datastore.createQuery(this.getClass()).field("name").equalIgnoreCase(tokenName);
+            UpdateOperations<DBpediaToken> ops = (UpdateOperations<DBpediaToken>) DefaultMongoClient.datastore.createUpdateOperations(this.getClass()).set("score", value);
+            DefaultMongoClient.datastore.update(query, ops);
             return true;
         } catch(Exception e) {
             e.printStackTrace();

@@ -1,16 +1,7 @@
-import com.mongodb.Mongo;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
-import controllers.MorphiaObject;
-import org.mongodb.morphia.Morphia;
-import play.Configuration;
-import play.Environment;
+import db.AmelieMongoClient;
+import db.DefaultMongoClient;
 import play.GlobalSettings;
 import play.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Global extends GlobalSettings {
 
@@ -18,22 +9,12 @@ public class Global extends GlobalSettings {
     public void onStart(play.Application arg0) {
         super.beforeStart(arg0);
         Logger.debug("** onStart **");
-        Configuration configuration = Configuration.root();
         try {
-
-            MorphiaObject.connect(
-                    configuration.getString("morphia.db.url"),
-                    configuration.getInt("morphia.db.port"),
-                    configuration.getString("morphia.db.name"),
-                    configuration.getString("morphia.db.username"),
-                    configuration.getString("morphia.db.pwd")
-            );
-
-            Logger.debug("** Morphia datastore: " + MorphiaObject.datastore.getDB());
+            DefaultMongoClient.connect();
+            AmelieMongoClient.connect();
+            Logger.debug("** Connected to datastore: " + DefaultMongoClient.datastore.getDB() + "and " + AmelieMongoClient.amelieDataStore.getDB());
         } catch (Exception e) {
-            Logger.error("** Morphia datastore: " + e.toString());
+            Logger.error("** Cannot connect to mongo: " + e.toString());
         }
-
-
     }
 }

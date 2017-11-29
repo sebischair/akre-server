@@ -38,10 +38,12 @@ public class PredictionController extends Controller {
         List<ObjectNode> testingIssues = orderedIssues.subList(trainingDataSetSize, orderedIssues.size());
 
         trainingIssues.forEach(issue -> {
-            String assignee = issue.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
-            if (!assigneeList.contains(assignee)) {
-                assigneeList.add(assignee);
-                allExpertsInDataSet.add(assignee.toLowerCase());
+            if(issue.has(StaticFunctions.ASSIGNEE)) {
+                String assignee = issue.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
+                if (!assigneeList.contains(assignee)) {
+                    assigneeList.add(assignee);
+                    allExpertsInDataSet.add(assignee.toLowerCase());
+                }
             }
 
             issue.get(StaticFunctions.CONCEPTS).forEach(ca -> {
@@ -53,20 +55,22 @@ public class PredictionController extends Controller {
         });
 
         testingIssues.forEach(issue -> {
-            String assignee = issue.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
-            String summary = issue.get(StaticFunctions.SUMMARY).asText("").toLowerCase().trim().replaceAll(" +", " ");
-            String description = issue.get(StaticFunctions.DESCRIPTION).asText("").toLowerCase().trim().replaceAll(" +", " ");
-            JsonNode concepts = issue.get(StaticFunctions.CONCEPTS);
+            if (issue.has(StaticFunctions.ASSIGNEE)) {
+                String assignee = issue.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
+                String summary = issue.get(StaticFunctions.SUMMARY).asText("").toLowerCase().trim().replaceAll(" +", " ");
+                String description = issue.get(StaticFunctions.DESCRIPTION).asText("").toLowerCase().trim().replaceAll(" +", " ");
+                JsonNode concepts = issue.get(StaticFunctions.CONCEPTS);
 
-            if(assignee != "" && assignee != "unassigned" && summary + description != "" && concepts.size() > 0) {
-                ObjectNode jo = Json.newObject();
-                jo.put(StaticFunctions.ASSIGNEE, assignee.toLowerCase());
-                jo.set(StaticFunctions.CONCEPTS, issue.get(StaticFunctions.CONCEPTS));
-                jo.put(StaticFunctions.SUMMARY, summary.toLowerCase());
-                jo.put(StaticFunctions.DESCRIPTION, description.toLowerCase());
-                jo.put("resolved", issue.get("resolved").asText(""));
-                testingData.add(jo);
-                allExpertsInDataSet.add(assignee.toLowerCase());
+                if (assignee != "" && assignee != "unassigned" && summary + description != "" && concepts.size() > 0) {
+                    ObjectNode jo = Json.newObject();
+                    jo.put(StaticFunctions.ASSIGNEE, assignee.toLowerCase());
+                    jo.set(StaticFunctions.CONCEPTS, issue.get(StaticFunctions.CONCEPTS));
+                    jo.put(StaticFunctions.SUMMARY, summary.toLowerCase());
+                    jo.put(StaticFunctions.DESCRIPTION, description.toLowerCase());
+                    jo.put("resolved", issue.get("resolved").asText(""));
+                    testingData.add(jo);
+                    allExpertsInDataSet.add(assignee.toLowerCase());
+                }
             }
         });
 
@@ -81,11 +85,13 @@ public class PredictionController extends Controller {
         });
 
         orderedIssues.forEach(issue -> {
-            String assignee = issue.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
-            JsonNode ca = issue.get(StaticFunctions.CONCEPTS);
-            JsonNode personObject = StaticFunctions.getJSONObject(StaticFunctions.PERSONNAME, assignee, ja);
-            JsonNode conceptArray = personObject != null ? personObject.get(StaticFunctions.CONCEPTS) : Json.newArray();
-            ca.forEach(c -> StaticFunctions.updateConceptArray(c.asText("").replaceAll("s$", "").toLowerCase(), conceptArray));
+            if(issue.has(StaticFunctions.ASSIGNEE)) {
+                String assignee = issue.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
+                JsonNode ca = issue.get(StaticFunctions.CONCEPTS);
+                JsonNode personObject = StaticFunctions.getJSONObject(StaticFunctions.PERSONNAME, assignee, ja);
+                JsonNode conceptArray = personObject != null ? personObject.get(StaticFunctions.CONCEPTS) : Json.newArray();
+                ca.forEach(c -> StaticFunctions.updateConceptArray(c.asText("").replaceAll("s$", "").toLowerCase(), conceptArray));
+            }
         });
 
         StaticFunctions.removeItemsFromJSONArray(ja, StaticFunctions.getItemsToRemove(ja));

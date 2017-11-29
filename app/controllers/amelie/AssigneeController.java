@@ -42,14 +42,16 @@ public class AssigneeController extends Controller {
         });
 
         issues.forEach(issue-> {
-            String assignee = issue.get(StaticFunctions.ASSIGNEE).asText("");
-            JsonNode ca = issue.get(StaticFunctions.CONCEPTS);
-            JsonNode personObject = StaticFunctions.getJSONObject("personName", assignee, ja);
-            JsonNode conceptArray = personObject.get(StaticFunctions.CONCEPTS);
-            ca.forEach(concept -> {
-                String key = concept.asText("").replaceAll("s$", "");
-                StaticFunctions.updateConceptArray(key.toLowerCase(), conceptArray);
-            });
+            if(issue.has(StaticFunctions.ASSIGNEE)) {
+                String assignee = issue.get(StaticFunctions.ASSIGNEE).asText("");
+                JsonNode ca = issue.get(StaticFunctions.CONCEPTS);
+                JsonNode personObject = StaticFunctions.getJSONObject("personName", assignee, ja);
+                JsonNode conceptArray = personObject.get(StaticFunctions.CONCEPTS);
+                ca.forEach(concept -> {
+                    String key = concept.asText("").replaceAll("s$", "");
+                    StaticFunctions.updateConceptArray(key.toLowerCase(), conceptArray);
+                });
+            }
         });
         StaticFunctions.removeItemsFromJSONArray(ja, StaticFunctions.getItemsToRemove(ja));
 

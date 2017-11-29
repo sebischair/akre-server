@@ -15,7 +15,7 @@ public class DDDataController  extends Controller {
 
     public Result getDDData() {
         JsonNode request = request().body().asJson();
-        String projectName = request.findValue("projectName").toString().replaceAll("\"", "");
+        String projectKey = request.findValue("projectKey").toString().replaceAll("\"", "");
         String viz = request.findValue("viz").toString().replaceAll("\"", "");
         String attrName = request.findValue("attrName").toString().replaceAll("\"", "");
         String segmentName = "";
@@ -26,9 +26,9 @@ public class DDDataController  extends Controller {
         ArrayNode results = Json.newArray();
         Issue issueModel = new Issue();
         if(viz.equalsIgnoreCase("qa")) {
-            results = issueModel.getDesignDecisionsRelatedToQA(projectName, attrName, segmentName);
+            results = issueModel.getDesignDecisionsRelatedToQA(projectKey, attrName, segmentName);
         } else if(viz.equalsIgnoreCase("ae")) {
-            results = issueModel.getDesignDecisionsRelatedToAE(projectName, attrName);
+            results = issueModel.getDesignDecisionsRelatedToAE(projectKey, attrName);
         }
         return StaticFunctions.jsonResult(ok(results));
     }

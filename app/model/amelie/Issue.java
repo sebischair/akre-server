@@ -134,9 +134,10 @@ public class Issue {
 
     public ArrayNode getDesignDecisionsRelatedToAE(String projectKey, String conceptName) {
         ArrayNode issues = Json.newArray();
-        BasicDBObject whereQuery = new BasicDBObject("designDecision", true)
+        BasicDBObject whereQuery = new BasicDBObject("amelie.designDecision", true)
                 .append("fields.project.key", projectKey)
                 .append("amelie.concepts", conceptName);
+        System.out.println(whereQuery);
         MongoCursor<Document> cursor = issueCollection.find(whereQuery).iterator();
         while(cursor.hasNext()) {
             issues.add(getIssueDetails(Json.toJson(cursor.next())));

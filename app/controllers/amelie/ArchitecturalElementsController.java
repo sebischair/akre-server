@@ -23,18 +23,18 @@ public class ArchitecturalElementsController extends Controller {
     @Inject
     WSClient ws;
 
-    public Result updateTaskWithAE(String projectName) {
+    public Result updateTaskWithAE(String projectKey) {
         Logger.debug("request to update Tasks with AEs");
         HelperService hs = new HelperService(ws);
 
         Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectName);
+        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
         issues.forEach(issue -> {
             List<String> conceptList = getConceptsList(issue.get("summary").asText("") + " " + issue.get("description").asText(""), hs);
             if(conceptList.size() > 0) {
                 BasicDBObject newConcepts = new BasicDBObject();
                 newConcepts.append("$set", new BasicDBObject().append("concepts", conceptList));
-                issueModel.updateIssueById(issue.get("id").asText(), newConcepts);
+                issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
             }
         });
 

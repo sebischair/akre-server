@@ -20,12 +20,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class AEDataController extends Controller {
 
-    public Result getAEData(String projectName) {
+    public Result getAEData(String projectKey) {
         List<String> conceptList = new ArrayList();
         List<Integer> yearList = Arrays.asList(2013, 2014, 2015, 2016, 2017);
         ArrayNode results = Json.newArray();
         Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.getDesignDecisionsForAEView(projectName);
+        ArrayNode issues = issueModel.getDesignDecisionsForAEView(projectKey);
         issues.forEach(issue -> {
             JsonNode concepts = issue.get("concepts");
             concepts.forEach(concept -> {

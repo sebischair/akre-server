@@ -205,15 +205,15 @@ public class StaticFunctions {
         }
     }
 
-    public static ArrayNode getArrayNodeFromJsonNode(Document obj, String attr) {
+    public static ArrayNode getArrayNodeFromJsonNode(JsonNode obj, String attr) {
         ArrayNode arrayNode = Json.newArray();
         if(obj.get(attr) == null) {
             return arrayNode;
         }
-        if(obj.containsKey(attr) && obj.get(attr) != null && !Json.toJson(obj.get(attr)).isArray()) {
-            arrayNode.add(obj.getString(attr));
+        if(obj.has(attr) && obj.get(attr) != null && !obj.get(attr).isArray()) {
+            arrayNode.add(obj.get(attr).asText(""));
         } else {
-            arrayNode = (ArrayNode) Json.toJson(obj.get(attr));
+            arrayNode = (ArrayNode) obj.get(attr);
         }
         return arrayNode;
     }

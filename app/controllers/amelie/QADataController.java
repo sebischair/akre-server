@@ -20,12 +20,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class QADataController extends Controller {
 
-    public Result getQAData(String projectName) {
+    public Result getQAData(String projectKey) {
         List<String> qaList = new ArrayList();
         List<Integer> yearList = Arrays.asList(2013, 2014, 2015, 2016, 2017);
         ArrayNode results = Json.newArray();
         Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.getDesignDecisionsForQAView(projectName);
+        ArrayNode issues = issueModel.getDesignDecisionsForQAView(projectKey);
         issues.forEach(issue -> {
             JsonNode qualityAttributes = issue.get("qualityAttributes");
             qualityAttributes.forEach(qa -> {
@@ -41,12 +41,12 @@ public class QADataController extends Controller {
             res.put("id", qa);
             res.set("value", getDecisionCount(qa, 2017, issues));
             ArrayNode values = Json.newArray();
-            for(int i=0; i<yearList.size(); i++) {
+            yearList.forEach(year -> {
                 ObjectNode v = Json.newObject();
-                v.put("year", yearList.get(i));
-                v.set("value", getDecisionCount(qa, yearList.get(i), issues));
+                v.put("year", year);
+                v.set("value", getDecisionCount(qa, year, issues));
                 values.add(v);
-            }
+            });
             res.set("values", values);
             results.add(res);
         });

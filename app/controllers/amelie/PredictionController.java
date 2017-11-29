@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
  */
 public class PredictionController extends Controller {
 
-    public Result predictAssignee(String projectName) {
+    public Result predictAssignee(String projectKey) {
         ArrayNode ja = Json.newArray();
         ArrayNode results = Json.newArray();
         List<String> conceptList = new ArrayList<>();
@@ -28,7 +28,7 @@ public class PredictionController extends Controller {
         Set<String> allExpertsInDataSet = new HashSet<>();
 
         Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.getConceptsOfDesignDecisions(projectName);
+        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
         List<ObjectNode> orderedIssues = issueModel.orderIssuesByResolutionDate(issues);
         summaryResult.put("Total tasks", orderedIssues.size());
         int trainingDataSetSize = (int) Math.floor(issues.size() * 0.9);

@@ -1,6 +1,7 @@
 package controllers.amelie;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import model.amelie.Issue;
 import model.amelie.Project;
 import org.bson.Document;
 import play.Logger;
@@ -37,5 +38,9 @@ public class ProjectController extends Controller {
     public Result getProjectById(String id) {
         Project project = new Project();
         return StaticFunctions.jsonResult(ok(project.findById(id)));
+    }
+
+    public Result getAllDesignDecisions(String projectKey) {
+        return StaticFunctions.jsonResult(ok(new Issue().findAllDesignDecisionsInAProject(projectKey)));
     }
 }

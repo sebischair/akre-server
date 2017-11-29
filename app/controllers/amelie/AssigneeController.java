@@ -17,11 +17,11 @@ import java.util.List;
  */
 public class AssigneeController extends Controller {
 
-    public Result getAssignee(String projectName) {
+    public Result getAssignee(String projectKey) {
         ArrayNode ja = Json.newArray();
         List<String> assigneeList = new ArrayList<>();
         Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.getConceptsOfDesignDecisions(projectName);
+        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
 
         issues.forEach(issue-> {
             if(issue.has(StaticFunctions.ASSIGNEE) && issue.get(StaticFunctions.ASSIGNEE) != null) {

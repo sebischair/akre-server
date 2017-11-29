@@ -2,8 +2,8 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET           /updateAllConcepts        controllers.amelie.KeywordExtractorController.updateConceptsForDesignDecisions(projectName: String)
-GET           /updateAllKeywords        controllers.amelie.KeywordExtractorController.updateKeywordsForDesignDecisions(projectName: String)
+GET           /updateAllConcepts        controllers.amelie.KeywordExtractorController.updateConceptsForDesignDecisions(projectKey: String)
+GET           /updateAllKeywords        controllers.amelie.KeywordExtractorController.updateKeywordsForDesignDecisions(projectKey: String)
 
 GET           /addToken                 controllers.AnnotationController.addToken(token: String ?= "")
 GET           /removeToken              controllers.AnnotationController.removeToken(token: String ?= "")
@@ -44,16 +44,17 @@ GET           /annotate/:paraghraphHash        controllers.SpaCyController.proce
 
 #POST          /record/delete/all                           controllers.RecordController.deleteAllDocuments()
 #GET           /record/all                                  controllers.RecordController.getAllDocuments()
-GET           /updateTaskWithQA            controllers.amelie.QualityAttributesController.updateTaskWithQA(projectName: String)
-GET           /updateTaskWithAE            controllers.amelie.ArchitecturalElementsController.updateTaskWithAE(projectName: String)
-GET           /getAssignee                 controllers.amelie.AssigneeController.getAssignee(projectName: String)
-GET           /predictAssignee             controllers.amelie.PredictionController.predictAssignee(projectName: String)
+GET           /updateTaskWithQA            controllers.amelie.QualityAttributesController.updateTaskWithQA(projectKey: String)
+GET           /updateTaskWithAE            controllers.amelie.ArchitecturalElementsController.updateTaskWithAE(projectKey: String)
+GET           /getAssignee                 controllers.amelie.AssigneeController.getAssignee(projectKey: String)
+GET           /predictAssignee             controllers.amelie.PredictionController.predictAssignee(projectKey: String)
 
-GET           /labelDesignDecisions        controllers.amelie.LabelDesignDecisionsController.labelDesignDecisions(projectName: String)
+GET           /labelDesignDecisions        controllers.amelie.LabelDesignDecisionsController.labelDesignDecisions(projectKey: String)
 
-GET           /getDataForAEV               controllers.amelie.AEDataController.getAEData(projectName: String)
-GET           /getDataForQAV               controllers.amelie.QADataController.getQAData(projectName: String)
+GET           /getDataForAEV               controllers.amelie.AEDataController.getAEData(projectKey: String)
+GET           /getDataForQAV               controllers.amelie.QADataController.getQAData(projectKey: String)
 POST          /getDataForDDV               controllers.amelie.DDDataController.getDDData()
 POST          /project                     controllers.amelie.ProjectController.create()
 GET           /project                     controllers.amelie.ProjectController.getAll()
-GET           /project/:id                                  controllers.amelie.ProjectController.getProjectById(id: String)
+GET           /project/:id                 controllers.amelie.ProjectController.getProjectById(id: String)
+GET           /designDecision              controllers.amelie.ProjectController.getAllDesignDecisions(projectKey: String)

@@ -31,7 +31,7 @@ public class QualityAttribute {
     private ObjectNode getQADetails(Document obj) {
         ObjectNode qa = Json.newObject();
         qa.put("name", obj.getString("name"));
-        ArrayNode keywords = StaticFunctions.getArrayNodeFromJsonNode(obj, "keywords");
+        ArrayNode keywords = StaticFunctions.getArrayNodeFromJsonNode(Json.toJson(obj), "keywords");
         keywords.add(obj.getString("name"));
         keywords.add(obj.getString("factor"));
         qa.set("keywords", keywords);

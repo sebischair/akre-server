@@ -22,11 +22,11 @@ import java.util.List;
  */
 public class KeywordExtractorController extends Controller {
 
-    public Result updateConceptsForDesignDecisions(String projectName) {
+    public Result updateConceptsForDesignDecisions(String projectKey) {
         TextAnalysisClient tac = new TextAnalysisClient();
 
         Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectName);
+        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
         issues.forEach(issue -> {
             JsonNode ca = issue.get(StaticFunctions.CONCEPTS);
             if(ca.size() == 0) {
@@ -46,7 +46,7 @@ public class KeywordExtractorController extends Controller {
                 if(conceptList.size() > 0) {
                     BasicDBObject newConcepts = new BasicDBObject();
                     newConcepts.append("$set", new BasicDBObject().append("concepts", conceptList));
-                    issueModel.updateIssueById(issue.get("id").asText(), newConcepts);
+                    issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
                 }
             }
         });
@@ -57,10 +57,10 @@ public class KeywordExtractorController extends Controller {
         return ok(result);
     }
 
-    public Result updateKeywordsForDesignDecisions(String projectName) {
+    public Result updateKeywordsForDesignDecisions(String projectKey) {
         TextAnalysisClient tac = new TextAnalysisClient();
         Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectName);
+        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
         issues.forEach(issue -> {
             JsonNode ca = issue.get(StaticFunctions.KEYWORDS);
             if(ca.size() == 0) {
@@ -80,7 +80,7 @@ public class KeywordExtractorController extends Controller {
                 if(keywordsList.size() > 0) {
                     BasicDBObject newConcepts = new BasicDBObject();
                     newConcepts.append("$set", new BasicDBObject().append("keywords", keywordsList));
-                    issueModel.updateIssueById(issue.get("id").asText(), newConcepts);
+                    issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
                 }
             }
         });

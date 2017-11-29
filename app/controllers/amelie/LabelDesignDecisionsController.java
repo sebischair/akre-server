@@ -31,12 +31,12 @@ public class LabelDesignDecisionsController extends Controller {
         this.configuration = conf;
     }
 
-    public Result labelDesignDecisions(String projectName) {
+    public Result labelDesignDecisions(String projectKey) {
         setHS(new HelperService(ws));
         setConf(Configuration.root());
 
         Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectName);
+        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
 
         issues.forEach(issue -> {
             String summary = issue.get("summary").asText("");
@@ -48,12 +48,12 @@ public class LabelDesignDecisionsController extends Controller {
             }
             BasicDBObject decisionObject = new BasicDBObject();
             decisionObject.append("$set", new BasicDBObject().append("designDecision", isDesignDecision));
-            issueModel.updateIssueById(issue.get("id").asText(), decisionObject);
+            issueModel.updateIssueByKey(issue.get("name").asText(), decisionObject);
 
             String decisionCategoryLabel = getDecisionCategoryLabel(summary + " " + description).get(StaticFunctions.LABEL).asText();
             BasicDBObject categoryObject = new BasicDBObject();
             categoryObject.append("$set", new BasicDBObject().append("decisionCategory", decisionCategoryLabel));
-            issueModel.updateIssueById(issue.get("id").asText(), categoryObject);
+            issueModel.updateIssueByKey(issue.get("name").asText(), categoryObject);
         });
 
         ObjectNode result = Json.newObject();

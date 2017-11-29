@@ -18,10 +18,10 @@ import java.util.List;
  */
 public class QualityAttributesController extends Controller {
 
-    public Result updateTaskWithQA(String projectName) {
+    public Result updateTaskWithQA(String projectKey) {
         System.out.println("request to update Tasks with QAs");
         Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectName);
+        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
 
         QualityAttribute qaModel = new QualityAttribute();
         ArrayNode qas = qaModel.getAllQAs();
@@ -31,7 +31,7 @@ public class QualityAttributesController extends Controller {
             if(qaList.size() > 0) {
                 BasicDBObject newConcepts = new BasicDBObject();
                 newConcepts.append("$set", new BasicDBObject().append("qualityAttributes", qaList));
-                issueModel.updateIssueById(issue.get("id").asText(), newConcepts);
+                issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
             }
         });
 

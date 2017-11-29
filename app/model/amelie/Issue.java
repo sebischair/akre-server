@@ -11,8 +11,10 @@ import org.bson.types.ObjectId;
 import play.libs.Json;
 import util.StaticFunctions;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by Manoj on 11/28/2017.
@@ -153,8 +155,38 @@ public class Issue {
             concepts.addAll(StaticFunctions.getArrayNodeFromJsonNode(obj, "qualityAttributes"));
             temp.set("concepts", concepts);
             temp.put("assignee", obj.getString("assignee"));
+            temp.put("resolved", obj.getString("resolved"));
+            temp.put("summary", obj.getString("summary"));
+            temp.put("description", obj.getString("description"));
             result.add(temp);
         }
         return result;
+    }
+
+    public List<ObjectNode> orderIssuesByResolutionDate(ArrayNode issues) {
+        List<ObjectNode> jsonValues = new ArrayList<>();
+        issues.forEach(issue -> jsonValues.add((ObjectNode) issue));
+
+        Collections.sort(jsonValues, new Comparator<ObjectNode>() {
+            private static final String KEY_NAME = "resolved";
+            @Override
+            public int compare(ObjectNode a, ObjectNode b) {
+                String valA = a.get(KEY_NAME).asText("");
+                String valB = b.get(KEY_NAME).asText("");
+
+                if(valA != "" && valB != "") {
+                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                    try {
+                        Date dateA = format.parse(valA);
+                        Date dateB = format.parse(valB);
+                        return dateA.compareTo(dateB);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return -1;
+            }
+        });
+        return jsonValues;
     }
 }

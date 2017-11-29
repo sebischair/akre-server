@@ -47,7 +47,7 @@ GET           /annotate/:paraghraphHash        controllers.SpaCyController.proce
 GET           /updateTaskWithQA            controllers.amelie.QualityAttributesController.updateTaskWithQA(projectName: String)
 GET           /updateTaskWithAE            controllers.amelie.ArchitecturalElementsController.updateTaskWithAE(projectName: String)
 GET           /getAssignee                 controllers.amelie.AssigneeController.getAssignee(projectName: String)
-GET           /predictAssignee             controllers.PredictionController.predictAssignee(projectId: String)
+GET           /predictAssignee             controllers.amelie.PredictionController.predictAssignee(projectName: String)
 
 GET           /labelDesignDecisions        controllers.amelie.LabelDesignDecisionsController.labelDesignDecisions(projectName: String)
 

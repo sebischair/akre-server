@@ -40,11 +40,14 @@ public class AEDataController extends Controller {
             ObjectNode res = Json.newObject();
             res.put("id", concept);
             res.put("value", getDecisionCount(concept, 2017, issues));
-            int[] values = new int[yearList.size()];
-            for(int i=0; i<yearList.size(); i++) {
-                values[i] = getDecisionCount(concept, yearList.get(i), issues);
-            }
-            res.set("values", Json.toJson(values));
+            ArrayNode values = Json.newArray();
+            yearList.forEach(year -> {
+                ObjectNode valueObject = Json.newObject();
+                valueObject.put("year", year);
+                valueObject.put("value", getDecisionCount(concept, year, issues));
+                values.add(valueObject);
+            });
+            res.set("values", values);
             results.add(res);
         });
 

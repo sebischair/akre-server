@@ -17,30 +17,33 @@ public class ProjectController extends Controller {
     public Result create() {
         ObjectNode result = Json.newObject();
         String name = request().body().asJson().findValue(StaticFunctions.NAME).toString().replaceAll("\"", "");
+        String key = request().body().asJson().findValue("key").toString().replaceAll("\"", "");
         String description = "";
         if(request().body().asJson().hasNonNull(StaticFunctions.DESCRIPTION))
             description = request().body().asJson().findValue(StaticFunctions.DESCRIPTION).toString().replaceAll("\"", "");
         Project p = new Project();
-        Document d = new Document("name", name).append("description", description);
+        Document d = new Document("name", name).append("description", description).append("key", key);
         p.save(d);
         result.put(StaticFunctions.NAME, name);
         result.put(StaticFunctions.DESCRIPTION, description);
-        result.put("id", p.findByName(name).getString("_id"));
+        result.put("id", d.getObjectId("_id").toHexString());
         Logger.debug("result={}", result);
         return StaticFunctions.jsonResult(ok(result));
     }
 
     public Result getAll() {
-        Project project = new Project();
-        return StaticFunctions.jsonResult(ok(project.findAll()));
+        return StaticFunctions.jsonResult(ok(new Project().findAll()));
     }
 
-    public Result getProjectById(String id) {
-        Project project = new Project();
-        return StaticFunctions.jsonResult(ok(project.findById(id)));
+    public Result getProjectByKey(String key) {
+        return StaticFunctions.jsonResult(ok(new Project().findByKey(key)));
     }
 
     public Result getAllDesignDecisions(String projectKey) {
         return StaticFunctions.jsonResult(ok(new Issue().findAllDesignDecisionsInAProject(projectKey)));
+    }
+
+    public Result getDesignDecision(String issueKey) {
+        return StaticFunctions.jsonResult(ok(new Issue().getDesignDecisionByKey(issueKey)));
     }
 }

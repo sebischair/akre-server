@@ -9,6 +9,7 @@ import db.AmelieMongoClient;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import play.libs.Json;
+import util.StaticFunctions;
 
 /**
  * Created by Manoj on 11/22/2016.
@@ -22,13 +23,12 @@ public class Project {
         issueCollection = AmelieMongoClient.amelieDatabase.getCollection("issues");
     }
 
-    public Document findByName(String name) {
-        return projectCollection.find(new BasicDBObject("name", name)).first();
+    public ObjectNode findByKey(String key) {
+        return getProjectDetails(projectCollection.find(new BasicDBObject("key", key)).first());
     }
 
     public ObjectNode findById(String id) {
-        Document projectDocument = projectCollection.find(new BasicDBObject("_id", new ObjectId(id))).first();
-        return getProjectDetails(projectDocument);
+        return getProjectDetails(projectCollection.find(new BasicDBObject("_id", new ObjectId(id))).first());
     }
 
     public ArrayNode findAll() {
@@ -42,24 +42,60 @@ public class Project {
 
     private ObjectNode getProjectDetails(Document obj) {
         ObjectNode project = Json.newObject();
-        project.put("id", obj.getObjectId("_id").toHexString());
         project.put("name", obj.getString("name"));
-        project.put("description", obj.getString("description"));
+        String description = obj.getString("description") != null ? obj.getString("description") : "";
+        project.put("description", description);
+        if(description != null) { project.put("shortDescription", StaticFunctions.truncate(description)); }
+        else { project.put("shortDescription", ""); }
         project.put("self", obj.getString("self"));
-        project.put("key", obj.getString("key"));
-        project.put("projectCategory", obj.getString("projectCategory"));
+        String key = obj.getString("key");
+        project.put("key", key);
+        String projectCategory = obj.getString("projectCategory") != null ? obj.getString("projectCategory") : "";
+        project.put("projectCategory", projectCategory);
         project.set("concepts", Json.toJson(obj.get("concepts")));
-        project.put("issueCount", getIssueCount(obj.getString("name")));
-        project.put("decisionCount", getDecisionCount(obj.getString("name")));
+        project.put("preProcessed", obj.getBoolean("preProcessed"));
+        if(!obj.containsKey("preProcessed") && !obj.containsKey("issueCount") || !obj.containsKey("decisionCount")) {
+            int issueCount = getIssueCount(obj.getString("key"));
+            int decisionCount = getDecisionCount(obj.getString("key"));
+
+            project.put("issuesCount", issueCount);
+            project.put("decisionCount", decisionCount);
+
+            BasicDBObject newValue = new BasicDBObject();
+            newValue.append("$set", new BasicDBObject().append("issueCount", issueCount));
+            updateProjectByKey(key, newValue);
+
+            newValue = new BasicDBObject();
+            newValue.append("$set", new BasicDBObject().append("decisionCount", decisionCount));
+            updateProjectByKey(key, newValue);
+
+            if(issueCount > 0 || decisionCount > 0) {
+                newValue = new BasicDBObject();
+                newValue.append("$set", new BasicDBObject().append("preProcessed", true));
+                updateProjectByKey(key, newValue);
+            } else {
+                newValue = new BasicDBObject();
+                newValue.append("$set", new BasicDBObject().append("preProcessed", false));
+                updateProjectByKey(key, newValue);
+            }
+        } else {
+            project.put("issuesCount", obj.getInteger("issueCount"));
+            project.put("decisionCount", obj.getInteger("decisionCount"));
+        }
+
         return project;
     }
 
-    private long getIssueCount(String projectName) {
-        return issueCollection.count(new BasicDBObject("belongsTo", projectName));
+    private int getIssueCount(String projectKey) {
+        return (int) issueCollection.count(new BasicDBObject("fields.project.key", projectKey));
     }
 
-    private long getDecisionCount(String projectName) {
-        return issueCollection.count(new BasicDBObject("belongsTo", projectName).append("designDecision", true));
+    private int getDecisionCount(String projectKey) {
+        return (int) issueCollection.count(new BasicDBObject("fields.project.key", projectKey).append("amelie.designDecision", true));
+    }
+
+    public void updateProjectByKey(String key, BasicDBObject newConcepts) {
+        projectCollection.updateOne(new BasicDBObject().append("key", key), newConcepts);
     }
 
     public void save(Document document) {

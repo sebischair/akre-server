@@ -29,6 +29,8 @@ public class DDDataController  extends Controller {
             results = issueModel.getDesignDecisionsRelatedToQA(projectKey, attrName, segmentName);
         } else if(viz.equalsIgnoreCase("ae")) {
             results = issueModel.getDesignDecisionsRelatedToAE(projectKey, attrName);
+        } else {
+            results = issueModel.findAllDesignDecisionsInAProject(projectKey);
         }
         return StaticFunctions.jsonResult(ok(results));
     }

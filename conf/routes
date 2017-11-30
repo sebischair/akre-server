@@ -56,5 +56,6 @@ GET           /getDataForQAV               controllers.amelie.QADataController.g
 POST          /getDataForDDV               controllers.amelie.DDDataController.getDDData()
 POST          /project                     controllers.amelie.ProjectController.create()
 GET           /project                     controllers.amelie.ProjectController.getAll()
-GET           /project/:id                 controllers.amelie.ProjectController.getProjectById(id: String)
-GET           /designDecision              controllers.amelie.ProjectController.getAllDesignDecisions(projectKey: String)
+GET           /project/:key                controllers.amelie.ProjectController.getProjectByKey(key: String)
+GET           /designDecisions             controllers.amelie.ProjectController.getAllDesignDecisions(projectKey: String)
+GET           /designDecision              controllers.amelie.ProjectController.getDesignDecision(issueKey: String)

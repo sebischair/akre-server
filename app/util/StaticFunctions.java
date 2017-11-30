@@ -18,12 +18,10 @@ public class StaticFunctions {
     public static final String SCORE = "averageScore";
     public static final String BEGIN = "begin";
     public static final String END = "end";
-    //public static final String TYPE = "type";
     public static final String TOKEN = "token";
     public static final String CUSTOM = "custom";
     public static final String DESCRIPTION = "description";
     public static final String CONCEPTTYPE = "conceptType";
-    //public static final String DBPEDIA = "dbpedia";
     public static final String EXPERTISE = "expertise";
     public static final String METHOD = "knowledgeMethod";
     public static final String TEMPLATE = "template";
@@ -34,13 +32,6 @@ public class StaticFunctions {
     public static final String PROGLANGUAGE = "progLanguage";
     public static final String PATTERN = "pattern";
     public static final String PROJECTID = "projectId";
-    //List of SC IDs
-    public static final String WORKSPACEID = "1g4i5rvlrfoy4";
-    public static final String QUALITYATTRIBUTEID = "1wrdao63gv80d";
-    public static final String SCCONCEPTSID = "16hlzih5fqtvp";
-    public static final String TASKID = "my76r8p8kyq9";
-    public static final String SCPATTERNID = "1jobs3uuz3yf0";
-    public static final String DECISIONCATEGORYID = "1m5haa9zzumqe";
 
     public static final String ASSIGNEE = "assignee";
     public static final String CONCEPTS = "concepts";
@@ -216,5 +207,12 @@ public class StaticFunctions {
             arrayNode = (ArrayNode) obj.get(attr);
         }
         return arrayNode;
+    }
+
+    public static String truncate(String text){
+        if (text.length() > 50)
+            return text.substring(0, 50) + " ...";
+        else
+            return text;
     }
 }

@@ -45,13 +45,22 @@ public class Issue {
         return issues;
     }
 
+    public ObjectNode getDesignDecisionByKey(String projectKey) {
+        return getIssueDetails(Json.toJson(issueCollection.find(new BasicDBObject().append("name", projectKey)).first()));
+    }
+
     private ObjectNode getIssueDetails(JsonNode obj) {
         ObjectNode issue = Json.newObject();
         issue.put("name", obj.get("name"));
         if(obj.has("fields")) {
             JsonNode fields = obj.get("fields");
             issue.put("summary", fields.get("summary").asText(""));
-            issue.put("description", fields.get("description").asText(""));
+
+            String description = fields.get("description") != null ? fields.get("description").asText("") : "";
+            issue.put("description", description);
+            if(description != null) { issue.put("shortDescription", StaticFunctions.truncate(description)); }
+            else { issue.put("shortDescription", ""); }
+
             issue.put("created", fields.get("created").asText(""));
             issue.put("resolved", fields.get("resolutiondate").asText(""));
 
@@ -74,9 +83,17 @@ public class Issue {
             JsonNode amelie = obj.get("amelie");
             issue.put("designDecision", amelie.get("designDecision"));
             issue.put("decisionCategory", amelie.get("decisionCategory"));
-            issue.set("concepts", amelie.get("concepts"));
+            if(amelie.hasNonNull("concepts")) {
+                System.out.println(amelie.get("concepts"));
+                issue.set("concepts", amelie.get("concepts"));
+            }
+            else
+                issue.put("concepts", "");
             issue.set("keywords", amelie.get("keywords"));
-            issue.set("qualityAttributes", amelie.get("qualityAttributes"));
+            if(amelie.hasNonNull("qualityAttributes"))
+                issue.set("qualityAttributes", amelie.get("qualityAttributes"));
+            else
+                issue.put("qualityAttributes", "");
         }
         return issue;
     }

@@ -12,6 +12,5 @@ mongodump/
 logs/
 target/
 yajsw
-db/
 conf/application.local.conf
 out/

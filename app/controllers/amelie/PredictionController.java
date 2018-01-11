@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 public class PredictionController extends Controller {
 
     public Result predictAssignee(String projectKey) {
+        System.out.println(projectKey);
         ArrayNode ja = Json.newArray();
         ArrayNode results = Json.newArray();
         List<String> conceptList = new ArrayList<>();
@@ -28,7 +29,7 @@ public class PredictionController extends Controller {
         Set<String> allExpertsInDataSet = new HashSet<>();
 
         Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
+        ArrayNode issues = issueModel.findAllDesignDecisionsForPredictionInAProject(projectKey);
         List<ObjectNode> orderedIssues = issueModel.orderIssuesByResolutionDate(issues);
         summaryResult.put("Total tasks", orderedIssues.size());
         int trainingDataSetSize = (int) Math.floor(issues.size() * 0.9);
@@ -133,7 +134,7 @@ public class PredictionController extends Controller {
                 int score = dtp_jo.get("score").asInt(0);
 
                 jo.put("score", score);
-                pa.add(jo);
+                if(pa.size() < 5) pa.add(jo);
                 if(personName.toLowerCase().equals(assignee.toLowerCase())) correctMatch +=1;
 
             }
@@ -141,8 +142,9 @@ public class PredictionController extends Controller {
             r.set("predictions", pa);
             results.add(r);
         }
+/*
+        System.out.println(allExpertsInDataSet.size());
 
-        /*ArrayNode dataset = (ArrayNode) tasks.get(StaticFunctions.VALUE);
             ArrayNode correctMatches = Json.newArray();
             ArrayNode catalogCoverages = Json.newArray();
             Set<String> allRecommendedExpertsInTestingSet = new HashSet<>();
@@ -166,12 +168,11 @@ public class PredictionController extends Controller {
             }
             summaryResult.put("predictionCoverage", testingDataSetForWhichPredictionsWereMade/testingData.size());
             summaryResult.set("correctMatch", correctMatches);
-            results.add(summaryResult);*/
-
+            results.add(summaryResult);
+*/
         return ok(results);
     }
 
-    /*
     private int computeCorrectMatch(ArrayNode decisionsToPredict, int run, Set<String> allRecommendedExpertsInTestingSet) {
         int correctMatch = 0;
         for(int n=0; n <decisionsToPredict.size(); n++) {
@@ -183,7 +184,8 @@ public class PredictionController extends Controller {
             JsonNode dtp_pa = dtp.get("predictionArray");
             int max = dtp_pa.size();
             if(run != 0) {
-                max = dtp_pa.size() > (run * 5) ? (run * 5) : dtp_pa.size();
+                max = dtp_pa.size() > (run * 2) ? (run * 2) : dtp_pa.size();
+                //max = dtp_pa.size() > (run * 5) ? (run * 5) : dtp_pa.size();
             }
             for(int j = 0; j < max; j++) {
                 dtp_jo = dtp_pa.get(j);
@@ -199,7 +201,7 @@ public class PredictionController extends Controller {
         }
         return correctMatch;
     }
-*/
+
     private ArrayNode ordering(ArrayNode decisionsToPredict) {
         decisionsToPredict.forEach(decisionsToPredictItr -> {
             JsonNode predArray = decisionsToPredictItr.get("predictionArray");
@@ -270,7 +272,6 @@ public class PredictionController extends Controller {
         ArrayNode conceptVectorJSONArray = Json.newArray();
         testingData.forEach(issue -> {
             ObjectNode conceptVectorJSONObject = Json.newObject();
-
             conceptVectorJSONObject.put(StaticFunctions.SUMMARY, issue.get(StaticFunctions.SUMMARY).asText(""));
             conceptVectorJSONObject.put(StaticFunctions.DESCRIPTION, issue.get(StaticFunctions.DESCRIPTION).asText(""));
             conceptVectorJSONObject.put(StaticFunctions.ASSIGNEE, issue.get(StaticFunctions.ASSIGNEE).asText(""));

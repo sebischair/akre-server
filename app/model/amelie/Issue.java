@@ -45,6 +45,27 @@ public class Issue {
         return issues;
     }
 
+    public ArrayNode findAllDesignDecisionsForPredictionInAProject(String projectKey) {
+        ArrayNode issues = Json.newArray();
+        MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("fields.project.key", projectKey).append("amelie.designDecision", true)).iterator();
+        while(cursor.hasNext()) {
+            ObjectNode issueNode = getIssueDetailsForPrediction(Json.toJson(cursor.next()));
+            if(issueNode.get("assignee").asText("") != "unassigned")
+                issues.add(issueNode);
+        }
+        return issues;
+    }
+
+    public ArrayNode findAllIssuesInAProject(String projectKey) {
+        ArrayNode issues = Json.newArray();
+        MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("fields.project.key", projectKey)).iterator();
+        while(cursor.hasNext()) {
+            issues.add(getIssueDetails(Json.toJson(cursor.next())));
+        }
+        return issues;
+    }
+
+
     public ObjectNode getDesignDecisionByKey(String projectKey) {
         return getIssueDetails(Json.toJson(issueCollection.find(new BasicDBObject().append("name", projectKey)).first()));
     }
@@ -70,12 +91,12 @@ public class Issue {
                 issue.put("issueType", fields.get("issuetype").get("name").asText(""));
             if(fields.has("status"))
                 issue.put("status", fields.get("status").get("name").asText(""));
-            if(fields.has("resolution"))
+            if(fields.has("resolution") && fields.get("resolution").get("name") != null)
                 issue.put("resolution", fields.get("resolution").get("name").asText(""));
             if(fields.has("priority"))
                 issue.put("priority", fields.get("priority").get("name").asText(""));
-            if(fields.has("assignee") && fields.get("assignee").has("name"))
-                issue.put("assignee", fields.get("assignee").get("name").asText(""));
+            if(fields.has("assignee") && fields.get("assignee").has("displayName"))
+                issue.put("assignee", fields.get("assignee").get("displayName").asText(""));
             if(fields.has("reporter"))
                 issue.put("reporter", fields.get("reporter").get("name").asText(""));
         }
@@ -84,7 +105,6 @@ public class Issue {
             issue.put("designDecision", amelie.get("designDecision"));
             issue.put("decisionCategory", amelie.get("decisionCategory"));
             if(amelie.hasNonNull("concepts")) {
-                System.out.println(amelie.get("concepts"));
                 issue.set("concepts", amelie.get("concepts"));
             }
             else
@@ -94,6 +114,52 @@ public class Issue {
                 issue.set("qualityAttributes", amelie.get("qualityAttributes"));
             else
                 issue.put("qualityAttributes", "");
+        }
+        return issue;
+    }
+
+    private ObjectNode getIssueDetailsForPrediction(JsonNode obj) {
+        ObjectNode issue = Json.newObject();
+        issue.put("name", obj.get("name"));
+        if(obj.has("fields")) {
+            JsonNode fields = obj.get("fields");
+            issue.put("summary", fields.get("summary").asText(""));
+
+            String description = fields.get("description") != null ? fields.get("description").asText("") : "";
+            issue.put("description", description);
+
+            issue.put("created", fields.get("created").asText(""));
+            issue.put("resolved", fields.get("resolutiondate").asText(""));
+
+            if(fields.has("project"))
+                issue.put("belongsTo", fields.get("project").get("key").asText(""));
+            if(fields.has("issuetype"))
+                issue.put("issueType", fields.get("issuetype").get("name").asText(""));
+            if(fields.has("status"))
+                issue.put("status", fields.get("status").get("name").asText(""));
+            if(fields.has("resolution") && fields.get("resolution").get("name") != null)
+                issue.put("resolution", fields.get("resolution").get("name").asText(""));
+            if(fields.has("priority"))
+                issue.put("priority", fields.get("priority").get("name").asText(""));
+            if(fields.has("assignee") && fields.get("assignee").has("displayName")) {
+                issue.put("assignee", fields.get("assignee").get("displayName").asText(""));
+            } else {
+                issue.put("assignee", "unassigned");
+            }
+        }
+        if(obj.has("amelie")) {
+            JsonNode amelie = obj.get("amelie");
+            issue.put("designDecision", amelie.get("designDecision"));
+            issue.put("decisionCategory", amelie.get("decisionCategory"));
+            ArrayNode concepts = Json.newArray();
+            if(amelie.hasNonNull("concepts") && amelie.get("concepts").size() > 0)
+                concepts.addAll((ArrayNode) amelie.get("concepts"));
+            if(amelie.hasNonNull("keywords") && amelie.get("keywords").size() > 0)
+                concepts.addAll((ArrayNode) amelie.get("keywords"));
+            if(amelie.hasNonNull("qualityAttributes") && amelie.get("qualityAttributes").size() > 0)
+                concepts.addAll((ArrayNode) amelie.get("qualityAttributes"));
+
+            issue.set("concepts", concepts);
         }
         return issue;
     }
@@ -154,7 +220,6 @@ public class Issue {
         BasicDBObject whereQuery = new BasicDBObject("amelie.designDecision", true)
                 .append("fields.project.key", projectKey)
                 .append("amelie.concepts", conceptName);
-        System.out.println(whereQuery);
         MongoCursor<Document> cursor = issueCollection.find(whereQuery).iterator();
         while(cursor.hasNext()) {
             issues.add(getIssueDetails(Json.toJson(cursor.next())));

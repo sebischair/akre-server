@@ -77,7 +77,8 @@ public class DocumentController extends Controller {
         }
 
     }
-    private void dbpediaDocAnnotations(ArrayNode annotations, String content){
+
+    public void dbpediaDocAnnotations(ArrayNode annotations, String content){
         Document d = new Document(content);
         DefaultPipeline dp = new DefaultPipeline();
         dp.setDocument(d);

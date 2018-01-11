@@ -25,7 +25,7 @@ public class DefaultMongoClient {
 
         ServerAddress sa = new ServerAddress(dbUrl, dbPort);
         List<MongoCredential> cl = new ArrayList<MongoCredential>();
-        MongoCredential mc = MongoCredential.createCredential(userName, dbName, password.toCharArray());
+        MongoCredential mc = MongoCredential.createCredential(userName, "admin", password.toCharArray());
         cl.add(mc);
 
         morphia = new Morphia();

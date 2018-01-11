@@ -4,14 +4,14 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
 import com.mongodb.BasicDBObject;
+import controllers.DocumentController;
 import model.amelie.Issue;
-import play.Configuration;
+import model.amelie.Keyword;
 import play.Logger;
 import play.libs.Json;
-import play.libs.ws.WSClient;
 import play.mvc.Controller;
 import play.mvc.Result;
-import services.HelperService;
+import util.HtmlUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,19 +21,31 @@ import java.util.List;
  */
 public class ArchitecturalElementsController extends Controller {
     @Inject
-    WSClient ws;
+    private DocumentController docController;
 
     public Result updateTaskWithAE(String projectKey) {
         Logger.debug("request to update Tasks with AEs");
-        HelperService hs = new HelperService(ws);
 
         Issue issueModel = new Issue();
         ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
         issues.forEach(issue -> {
-            List<String> conceptList = getConceptsList(issue.get("summary").asText("") + " " + issue.get("description").asText(""), hs);
+            System.out.println(issue.get("name").asText());
+            String text = HtmlUtil.convertToPlaintext((issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " "));
+            List<String> conceptList = getConceptsList(text);
             if(conceptList.size() > 0) {
                 BasicDBObject newConcepts = new BasicDBObject();
-                newConcepts.append("$set", new BasicDBObject().append("concepts", conceptList));
+                newConcepts.append("$set", new BasicDBObject().append("amelie.concepts", conceptList));
+                issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
+            }
+        });
+
+        Keyword keywordModel = new Keyword();
+        issues.forEach(issue -> {
+            String text = HtmlUtil.convertToPlaintext((issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " "));
+            List<String> keywordList = getKeywordsList(text, keywordModel.getAllKeywords());
+            if(keywordList.size() > 0) {
+                BasicDBObject newConcepts = new BasicDBObject();
+                newConcepts.append("$set", new BasicDBObject().append("amelie.keywords", keywordList));
                 issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
             }
         });
@@ -45,23 +57,25 @@ public class ArchitecturalElementsController extends Controller {
         return ok(result);
     }
 
-    private List<String> getConceptsList(String text, HelperService hs) {
+    private List<String> getKeywordsList(String text, List<String> keys) {
         List<String> tokens = new ArrayList<>();
-        ObjectNode request = Json.newObject();
-        request.put("content", text);
+        keys.forEach(key -> {
+            String k = key.toLowerCase();
+            if(text.contains(k) && !tokens.contains(k)) tokens.add(k);
+        });
+        return tokens;
+    }
 
-        Configuration config = Configuration.root();
-        hs.postWSRequest(config.getString("akrec.url") + "processDocument", request).thenApply(response -> {
-            ArrayNode annotations = (ArrayNode) response.get("data");
-            annotations.forEach(annotation -> {
-                String conceptName = annotation.get("token").asText("").toLowerCase();
-                if(!tokens.contains(conceptName)) {
-                    tokens.add(conceptName);
-                }
-            });
-            return ok();
-        }).toCompletableFuture().join();
-
+    private List<String> getConceptsList(String text) {
+        List<String> tokens = new ArrayList<>();
+        ArrayNode annotations = Json.newArray();
+        docController.dbpediaDocAnnotations(annotations, text.toLowerCase());
+        annotations.forEach(annotation -> {
+            String conceptName = annotation.get("token").asText("").toLowerCase();
+            if(!tokens.contains(conceptName)) {
+                tokens.add(conceptName);
+            }
+        });
         return tokens;
     }
 }

@@ -55,8 +55,8 @@ public class Project {
         project.set("concepts", Json.toJson(obj.get("concepts")));
         project.put("preProcessed", obj.getBoolean("preProcessed"));
         if(!obj.containsKey("preProcessed") && !obj.containsKey("issueCount") || !obj.containsKey("decisionCount")) {
-            int issueCount = getIssueCount(obj.getString("key"));
-            int decisionCount = getDecisionCount(obj.getString("key"));
+            int issueCount = getIssueCount(key);
+            int decisionCount = getDecisionCount(key);
 
             project.put("issuesCount", issueCount);
             project.put("decisionCount", decisionCount);
@@ -84,6 +84,18 @@ public class Project {
         }
 
         return project;
+    }
+
+    public void updateIssueCount(String projectKey) {
+        BasicDBObject newValue = new BasicDBObject();
+        newValue.append("$set", new BasicDBObject().append("issueCount", getIssueCount(projectKey)));
+        updateProjectByKey(projectKey, newValue);
+    }
+
+    public void updateDecisionCount(String projectKey) {
+        BasicDBObject newValue = new BasicDBObject();
+        newValue.append("$set", new BasicDBObject().append("decisionCount", getDecisionCount(projectKey)));
+        updateProjectByKey(projectKey, newValue);
     }
 
     private int getIssueCount(String projectKey) {

@@ -25,12 +25,12 @@ public class QualityAttributesController extends Controller {
 
         QualityAttribute qaModel = new QualityAttribute();
         ArrayNode qas = qaModel.getAllQAs();
-
         issues.forEach(issue -> {
             List<String> qaList = getQAList(issue.get("summary").asText("") + " " + issue.get("description").asText(""), qas);
+            System.out.println(qaList.size());
             if(qaList.size() > 0) {
                 BasicDBObject newConcepts = new BasicDBObject();
-                newConcepts.append("$set", new BasicDBObject().append("qualityAttributes", qaList));
+                newConcepts.append("$set", new BasicDBObject().append("amelie.qualityAttributes", qaList));
                 issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
             }
         });

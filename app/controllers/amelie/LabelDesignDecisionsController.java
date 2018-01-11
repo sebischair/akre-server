@@ -35,25 +35,33 @@ public class LabelDesignDecisionsController extends Controller {
         setHS(new HelperService(ws));
         setConf(Configuration.root());
 
+        System.out.println(projectKey);
         Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
-
+        ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
+        System.out.println(issues.size());
         issues.forEach(issue -> {
             String summary = issue.get("summary").asText("");
             String description = issue.get("description").asText("");
             String isDesignDecisionLabel = getDesignDecisionLabel(summary + " " + description).get(StaticFunctions.LABEL).toString();
+            System.out.println("................");
+            System.out.println(isDesignDecisionLabel);
             boolean isDesignDecision = false;
-            if (isDesignDecisionLabel.equals("1")) {
+            if (isDesignDecisionLabel.toLowerCase().contains("yes")) {
                 isDesignDecision = true;
             }
             BasicDBObject decisionObject = new BasicDBObject();
-            decisionObject.append("$set", new BasicDBObject().append("designDecision", isDesignDecision));
+            decisionObject.append("$set", new BasicDBObject().append("amelie.designDecision", isDesignDecision));
             issueModel.updateIssueByKey(issue.get("name").asText(), decisionObject);
-
-            String decisionCategoryLabel = getDecisionCategoryLabel(summary + " " + description).get(StaticFunctions.LABEL).asText();
-            BasicDBObject categoryObject = new BasicDBObject();
-            categoryObject.append("$set", new BasicDBObject().append("decisionCategory", decisionCategoryLabel));
-            issueModel.updateIssueByKey(issue.get("name").asText(), categoryObject);
+            if(isDesignDecision) {
+                String decisionCategoryLabel = getDecisionCategoryLabel(summary + " " + description).get(StaticFunctions.LABEL).asText();
+                System.out.println(decisionCategoryLabel);
+                if(decisionCategoryLabel.split("Class predicted: ").length > 1) {
+                    String dcl = decisionCategoryLabel.split("Class predicted: ")[1];
+                    BasicDBObject categoryObject = new BasicDBObject();
+                    categoryObject.append("$set", new BasicDBObject().append("amelie.decisionCategory", dcl));
+                    issueModel.updateIssueByKey(issue.get("name").asText(), categoryObject);
+                }
+            }
         });
 
         ObjectNode result = Json.newObject();

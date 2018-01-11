@@ -32,7 +32,7 @@ public class HelperService {
     }
 
     public CompletionStage<JsonNode> postWSRequest(String url, JsonNode json) {
-        return ws.url(url).setAuth(userName, password, WSAuthScheme.BASIC).post(json).thenApply(WSResponse::asJson);
+        return ws.url(url).post(json).thenApply(WSResponse::asJson);
     }
 
     public CompletionStage<JsonNode> putWSRequest(String url, JsonNode json) {

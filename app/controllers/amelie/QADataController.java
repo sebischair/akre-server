@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import model.amelie.Issue;
+import model.amelie.QualityAttribute;
 import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -21,6 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class QADataController extends Controller {
 
     public Result getQAData(String projectKey) {
+        Logger.debug("request to get QA data for " + projectKey);
         List<String> qaList = new ArrayList();
         List<Integer> yearList = Arrays.asList(2013, 2014, 2015, 2016, 2017);
         ArrayNode results = Json.newArray();
@@ -34,6 +36,13 @@ public class QADataController extends Controller {
                     qaList.add(key);
                 }
             });
+        });
+
+        QualityAttribute qaModel = new QualityAttribute();
+        qaModel.getAllQAs().forEach(qa -> {
+            if(!qaList.contains(qa.get("name").asText())) {
+                qaList.add(qa.get("name").asText());
+            }
         });
 
         qaList.forEach(qa -> {

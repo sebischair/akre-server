@@ -1,6 +1,7 @@
 package controllers.amelie;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.mongodb.BasicDBObject;
 import model.amelie.Issue;
 import model.amelie.Project;
 import org.bson.Document;
@@ -45,5 +46,30 @@ public class ProjectController extends Controller {
 
     public Result getDesignDecision(String issueKey) {
         return StaticFunctions.jsonResult(ok(new Issue().getDesignDecisionByKey(issueKey)));
+    }
+
+    public Result updateProjectProcessState(String projectKey) {
+        Project p = new Project();
+        BasicDBObject preProcessedObject = new BasicDBObject();
+        preProcessedObject.append("$set", new BasicDBObject().append("preProcessed", true));
+        p.updateProjectByKey(projectKey, preProcessedObject);
+
+        p.updateDecisionCount(projectKey);
+
+        ObjectNode result = Json.newObject();
+        result.put("status", "OK");
+        result.put("message", "Project has been preprocessed!");
+        result.put("statusCode", "200");
+        return ok(result);
+    }
+
+    public Result updateProjectIssueCount(String projectKey) {
+        Project p = new Project();
+        p.updateIssueCount(projectKey);
+        ObjectNode result = Json.newObject();
+        result.put("status", "OK");
+        result.put("message", "Project's issue count has been updated!");
+        result.put("statusCode", "200");
+        return ok(result);
     }
 }

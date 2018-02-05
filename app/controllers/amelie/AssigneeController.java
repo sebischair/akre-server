@@ -49,7 +49,9 @@ public class AssigneeController extends Controller {
                 JsonNode conceptArray = personObject.get(StaticFunctions.CONCEPTS);
                 ca.forEach(concept -> {
                     String key = concept.asText("").replaceAll("s$", "");
-                    StaticFunctions.updateConceptArray(key.toLowerCase(), conceptArray);
+                    if(key!= null && !(key.equalsIgnoreCase("isa") || key.equalsIgnoreCase("test") || key.toLowerCase().contains("apache") || key.equalsIgnoreCase("cros") || key.equalsIgnoreCase("repo") || key.equalsIgnoreCase("kurtosi"))) {
+                        StaticFunctions.updateConceptArray(key.toLowerCase(), conceptArray);
+                    }
                 });
             }
         });

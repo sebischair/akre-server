@@ -75,15 +75,16 @@ public class Issue {
         issue.put("name", obj.get("name"));
         if(obj.has("fields")) {
             JsonNode fields = obj.get("fields");
-            issue.put("summary", fields.get("summary").asText(""));
+            issue.put("summary", fields.get("summary").asText("").replaceAll("\\$", ""));
 
-            String description = fields.get("description") != null ? fields.get("description").asText("") : "";
+            String description = fields.get("description") != null ? fields.get("description").asText("").replaceAll("\\$", "") : "";
             issue.put("description", description);
             if(description != null) { issue.put("shortDescription", StaticFunctions.truncate(description)); }
             else { issue.put("shortDescription", ""); }
 
             issue.put("created", fields.get("created").asText(""));
-            issue.put("resolved", fields.get("resolutiondate").asText(""));
+            if(fields.has("resolutiondate"))
+                issue.put("resolved", fields.get("resolutiondate").asText(""));
 
             if(fields.has("project"))
                 issue.put("belongsTo", fields.get("project").get("key").asText(""));
@@ -114,6 +115,12 @@ public class Issue {
                 issue.set("qualityAttributes", amelie.get("qualityAttributes"));
             else
                 issue.put("qualityAttributes", "");
+
+            if(amelie.has("similarDocuments")) {
+                issue.put("similarDocuments", amelie.get("similarDocuments"));
+            } else {
+                issue.put("similarDocuments", Json.newArray());
+            }
         }
         return issue;
     }

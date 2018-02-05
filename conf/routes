@@ -61,3 +61,4 @@ GET           /designDecisions             controllers.amelie.ProjectController.
 GET           /designDecision              controllers.amelie.ProjectController.getDesignDecision(issueKey: String)
 GET           /updateProjectProcessState   controllers.amelie.ProjectController.updateProjectProcessState(projectKey: String)
 GET           /updateProjectIssueCount     controllers.amelie.ProjectController.updateProjectIssueCount(projectKey: String)
+GET           /updateSimilarDocuments      controllers.SimilarDocumentsController.updateSimilarDocuments(projectKey: String)

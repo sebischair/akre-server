@@ -14,6 +14,7 @@ import play.mvc.Result;
 import util.HtmlUtil;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -27,12 +28,23 @@ public class ArchitecturalElementsController extends Controller {
         Logger.debug("request to update Tasks with AEs");
 
         Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
+        //ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
+        ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
         issues.forEach(issue -> {
             System.out.println(issue.get("name").asText());
-            String text = HtmlUtil.convertToPlaintext((issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " "));
+            String text = (issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " ").replaceAll("\\*", "");
+            text = text.replaceAll("^\\w{1,20}\\b", " ").replaceAll("\\r\\n|\\r|\\n", " ").replaceAll("\\$", "");
             List<String> conceptList = getConceptsList(text);
+
+            for (Iterator<String> iter = conceptList.listIterator(); iter.hasNext(); ) {
+                String a = iter.next();
+                if(a.equalsIgnoreCase("-")) {
+                    iter.remove();
+                }
+            }
+
             if(conceptList.size() > 0) {
+                System.out.println(conceptList);
                 BasicDBObject newConcepts = new BasicDBObject();
                 newConcepts.append("$set", new BasicDBObject().append("amelie.concepts", conceptList));
                 issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
@@ -41,7 +53,8 @@ public class ArchitecturalElementsController extends Controller {
 
         Keyword keywordModel = new Keyword();
         issues.forEach(issue -> {
-            String text = HtmlUtil.convertToPlaintext((issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " "));
+            String text = (issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " ").replaceAll("\\*", "");
+            text = text.replaceAll("[^a-zA-Z0-9\\s]", " ").replaceAll("^\\w{1,10}\\b", " ").replaceAll("\\r\\n|\\r|\\n", " ").replaceAll("\\$", "");
             List<String> keywordList = getKeywordsList(text, keywordModel.getAllKeywords());
             if(keywordList.size() > 0) {
                 BasicDBObject newConcepts = new BasicDBObject();
@@ -68,14 +81,18 @@ public class ArchitecturalElementsController extends Controller {
 
     private List<String> getConceptsList(String text) {
         List<String> tokens = new ArrayList<>();
-        ArrayNode annotations = Json.newArray();
-        docController.dbpediaDocAnnotations(annotations, text.toLowerCase());
-        annotations.forEach(annotation -> {
-            String conceptName = annotation.get("token").asText("").toLowerCase();
-            if(!tokens.contains(conceptName)) {
-                tokens.add(conceptName);
-            }
-        });
+        try{
+            ArrayNode annotations = Json.newArray();
+            docController.dbpediaDocAnnotations(annotations, text.toLowerCase());
+            annotations.forEach(annotation -> {
+                String conceptName = annotation.get("token").asText("").toLowerCase();
+                if(!tokens.contains(conceptName)) {
+                    tokens.add(conceptName);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return tokens;
     }
 }

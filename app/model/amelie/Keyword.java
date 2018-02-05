@@ -14,7 +14,7 @@ public class Keyword {
     private MongoCollection<Document> keywordCollection;
 
     public Keyword() {
-        keywordCollection = AmelieMongoClient.amelieDatabase.getCollection("keywords");
+        keywordCollection = AmelieMongoClient.amelieDatabase.getCollection("keywordsDE");
     }
 
     public ArrayList<String> getAllKeywords() {

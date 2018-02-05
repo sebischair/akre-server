@@ -21,7 +21,8 @@ public class AssigneeController extends Controller {
         ArrayNode ja = Json.newArray();
         List<String> assigneeList = new ArrayList<>();
         Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
+        //ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
+        ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
 
         issues.forEach(issue-> {
             if(issue.has(StaticFunctions.ASSIGNEE) && issue.get(StaticFunctions.ASSIGNEE) != null) {
@@ -31,6 +32,8 @@ public class AssigneeController extends Controller {
                 }
             }
         });
+
+        System.out.println(assigneeList.size());
 
         assigneeList.forEach(assignee -> {
             if (!StaticFunctions.containsStringValue("personName", assignee, ja)) {
@@ -47,12 +50,14 @@ public class AssigneeController extends Controller {
                 JsonNode ca = issue.get(StaticFunctions.CONCEPTS);
                 JsonNode personObject = StaticFunctions.getJSONObject("personName", assignee, ja);
                 JsonNode conceptArray = personObject.get(StaticFunctions.CONCEPTS);
-                ca.forEach(concept -> {
-                    String key = concept.asText("").replaceAll("s$", "");
-                    if(key!= null && !(key.equalsIgnoreCase("isa") || key.equalsIgnoreCase("test") || key.toLowerCase().contains("apache") || key.equalsIgnoreCase("cros") || key.equalsIgnoreCase("repo") || key.equalsIgnoreCase("kurtosi"))) {
-                        StaticFunctions.updateConceptArray(key.toLowerCase(), conceptArray);
-                    }
-                });
+                if(ca !=null && ca.isArray()) {
+                    ca.forEach(concept -> {
+                        String key = concept.asText("").replaceAll("s$", "");
+                        if(key!= null) {
+                            StaticFunctions.updateConceptArray(key.toLowerCase(), conceptArray);
+                        }
+                    });
+                }
             }
         });
         StaticFunctions.removeItemsFromJSONArray(ja, StaticFunctions.getItemsToRemove(ja));

@@ -21,8 +21,8 @@ public class QualityAttributesController extends Controller {
     public Result updateTaskWithQA(String projectKey) {
         System.out.println("request to update Tasks with QAs");
         Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
-
+        //ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
+        ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
         QualityAttribute qaModel = new QualityAttribute();
         ArrayNode qas = qaModel.getAllQAs();
         issues.forEach(issue -> {

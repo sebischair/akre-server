@@ -54,11 +54,13 @@ public class ArchitecturalElementsController extends Controller {
         Keyword keywordModel = new Keyword();
         issues.forEach(issue -> {
             String text = (issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " ").replaceAll("\\*", "");
-            text = text.replaceAll("[^a-zA-Z0-9\\s]", " ").replaceAll("^\\w{1,10}\\b", " ").replaceAll("\\r\\n|\\r|\\n", " ").replaceAll("\\$", "");
+            text = text.replaceAll("\\r\\n|\\r|\\n", " ").replaceAll("\\$", "");
             List<String> keywordList = getKeywordsList(text, keywordModel.getAllKeywords());
             if(keywordList.size() > 0) {
+                System.out.println(keywordList);
+                System.out.println(issue.get("name"));
                 BasicDBObject newConcepts = new BasicDBObject();
-                newConcepts.append("$set", new BasicDBObject().append("amelie.keywords", keywordList));
+                newConcepts.append("$set", new BasicDBObject().append("amelie.concepts", keywordList));
                 issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
             }
         });
@@ -94,5 +96,44 @@ public class ArchitecturalElementsController extends Controller {
             e.printStackTrace();
         }
         return tokens;
+    }
+
+    public Result fixTasks(String projectKey) {
+        Logger.debug("request to update Tasks with AEs");
+
+        Issue issueModel = new Issue();
+        //ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
+        ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
+
+        issues.forEach(issue -> {
+            if(issue.has("concepts") && issue.get("concepts") != null) {
+                List<String> allConcepts = new ArrayList<>();
+                if(issue.get("concepts").isArray()) {
+                    ArrayNode concepts = (ArrayNode) issue.get("concepts");
+                    concepts.forEach(concept -> {
+                        if(concept.isArray()) {
+                            concept.forEach(c -> {
+                                if(!allConcepts.contains(c.asText(""))) {
+                                    allConcepts.add(c.asText(""));
+                                }
+                            });
+                        } else {
+                            if(!allConcepts.contains(concept.asText(""))) {
+                                allConcepts.add(concept.asText(""));
+                            }
+                        }
+                    });
+
+                    BasicDBObject newConcepts = new BasicDBObject();
+                    newConcepts.append("$set", new BasicDBObject().append("amelie.concepts", allConcepts));
+                    issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
+                }
+            }
+        });
+
+        ObjectNode result = Json.newObject();
+        result.put("status", "OK");
+        result.put("statusCode", "200");
+        return ok(result);
     }
 }

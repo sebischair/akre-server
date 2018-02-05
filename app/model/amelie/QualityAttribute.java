@@ -16,7 +16,7 @@ public class QualityAttribute {
     private MongoCollection<Document> qaCollection;
 
     public QualityAttribute() {
-        qaCollection = AmelieMongoClient.amelieDatabase.getCollection("qualityAttributes");
+        qaCollection = AmelieMongoClient.amelieDatabase.getCollection("qualityAttributesDE");
     }
 
     public ArrayNode getAllQAs() {
@@ -33,7 +33,8 @@ public class QualityAttribute {
         qa.put("name", obj.getString("name"));
         ArrayNode keywords = StaticFunctions.getArrayNodeFromJsonNode(Json.toJson(obj), "keywords");
         keywords.add(obj.getString("name"));
-        keywords.add(obj.getString("factor"));
+        if(obj.containsKey("factor"))
+            keywords.add(obj.getString("factor"));
         qa.set("keywords", keywords);
         return qa;
     }

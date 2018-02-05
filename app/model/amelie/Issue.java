@@ -96,8 +96,13 @@ public class Issue {
                 issue.put("resolution", fields.get("resolution").get("name").asText(""));
             if(fields.has("priority"))
                 issue.put("priority", fields.get("priority").get("name").asText(""));
-            if(fields.has("assignee") && fields.get("assignee").has("displayName"))
-                issue.put("assignee", fields.get("assignee").get("displayName").asText(""));
+            if(fields.has("assignee") && fields.get("assignee").has("name")) {
+                String name = fields.get("assignee").get("name").asText("");
+                if(name.contains("(")) {
+                    name = name.split("\\(")[0];
+                }
+                issue.put("assignee", name);
+            }
             if(fields.has("reporter"))
                 issue.put("reporter", fields.get("reporter").get("name").asText(""));
         }
@@ -173,15 +178,17 @@ public class Issue {
 
     public ArrayNode getDesignDecisionsForAEView(String projectKey) {
         ArrayNode issues = Json.newArray();
-        MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("fields.project.key", projectKey).append("amelie.designDecision", true)).iterator();
+        MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("fields.project.key", projectKey).append("amelie.concepts", new BasicDBObject("$exists", true))).iterator();
         while(cursor.hasNext()) {
             JsonNode obj = Json.toJson(cursor.next());
             ObjectNode issue = Json.newObject();
             issue.put("name", obj.get("name").asText(""));
-            if(obj.has("amelie"))
+            if(obj.has("amelie") && obj.get("amelie").has("concepts"))
                 issue.set("concepts", obj.get("amelie").get("concepts"));
-            if(obj.has("fields"))
+            if(obj.has("fields") && obj.get("fields").has("resolutiondate"))
                 issue.put("resolved", obj.get("fields").get("resolutiondate").asText(""));
+            else
+                issue.put("resolved", "");
             issues.add(issue);
         }
         return issues;
@@ -189,7 +196,7 @@ public class Issue {
 
     public ArrayNode getDesignDecisionsForQAView(String projectKey) {
         ArrayNode issues = Json.newArray();
-        MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("fields.project.key", projectKey).append("amelie.designDecision", true)).iterator();
+        MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("fields.project.key", projectKey)).iterator();
         while(cursor.hasNext()) {
             JsonNode obj = Json.toJson(cursor.next());
             ObjectNode issue = Json.newObject();
@@ -197,11 +204,13 @@ public class Issue {
             if(obj.has("amelie")) {
                 JsonNode amelie = obj.get("amelie");
                 issue.set("concepts", amelie.get("concepts"));
-                issue.put("decisionCategory", amelie.get("decisionCategory"));
+                //issue.put("decisionCategory", amelie.get("decisionCategory"));
                 issue.set("qualityAttributes", amelie.get("qualityAttributes"));
             }
-            if(obj.has("fields"))
+            if(obj.has("fields") && obj.get("fields").has("resolutiondate"))
                 issue.put("resolved", obj.get("fields").get("resolutiondate").asText(""));
+            else
+                issue.put("resolved", "");
             issues.add(issue);
         }
         return issues;

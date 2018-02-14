@@ -33,8 +33,6 @@ public class AssigneeController extends Controller {
             }
         });
 
-        System.out.println(assigneeList.size());
-
         assigneeList.forEach(assignee -> {
             if (!StaticFunctions.containsStringValue("personName", assignee, ja)) {
                 ObjectNode jo = Json.newObject();
@@ -60,8 +58,8 @@ public class AssigneeController extends Controller {
                 }
             }
         });
-        StaticFunctions.removeItemsFromJSONArray(ja, StaticFunctions.getItemsToRemove(ja));
 
+        StaticFunctions.removeItemsFromJSONArray(ja, StaticFunctions.getItemsToRemove(ja));
         return ok(transformArrayForD3(ja));
     }
 

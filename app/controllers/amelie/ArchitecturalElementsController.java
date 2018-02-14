@@ -31,7 +31,6 @@ public class ArchitecturalElementsController extends Controller {
         //ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
         ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
         issues.forEach(issue -> {
-            System.out.println(issue.get("name").asText());
             String text = (issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " ").replaceAll("\\*", "");
             text = text.replaceAll("^\\w{1,20}\\b", " ").replaceAll("\\r\\n|\\r|\\n", " ").replaceAll("\\$", "");
             List<String> conceptList = getConceptsList(text);
@@ -44,21 +43,17 @@ public class ArchitecturalElementsController extends Controller {
             }
 
             if(conceptList.size() > 0) {
-                System.out.println(conceptList);
                 BasicDBObject newConcepts = new BasicDBObject();
                 newConcepts.append("$set", new BasicDBObject().append("amelie.concepts", conceptList));
                 issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
             }
         });
 
-        Keyword keywordModel = new Keyword();
         issues.forEach(issue -> {
             String text = (issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " ").replaceAll("\\*", "");
             text = text.replaceAll("\\r\\n|\\r|\\n", " ").replaceAll("\\$", "");
-            List<String> keywordList = getKeywordsList(text, keywordModel.getAllKeywords());
+            List<String> keywordList = getKeywordsList(text);
             if(keywordList.size() > 0) {
-                System.out.println(keywordList);
-                System.out.println(issue.get("name"));
                 BasicDBObject newConcepts = new BasicDBObject();
                 newConcepts.append("$set", new BasicDBObject().append("amelie.concepts", keywordList));
                 issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
@@ -72,7 +67,9 @@ public class ArchitecturalElementsController extends Controller {
         return ok(result);
     }
 
-    private List<String> getKeywordsList(String text, List<String> keys) {
+    public List<String> getKeywordsList(String text) {
+        Keyword keywordModel = new Keyword();
+        List<String> keys = keywordModel.getAllKeywords();
         List<String> tokens = new ArrayList<>();
         keys.forEach(key -> {
             String k = key.toLowerCase();
@@ -81,7 +78,7 @@ public class ArchitecturalElementsController extends Controller {
         return tokens;
     }
 
-    private List<String> getConceptsList(String text) {
+    public List<String> getConceptsList(String text) {
         List<String> tokens = new ArrayList<>();
         try{
             ArrayNode annotations = Json.newArray();

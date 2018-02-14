@@ -65,6 +65,16 @@ public class Issue {
         return issues;
     }
 
+    public ArrayNode findAllIssuesInAProjectWithQAs(String projectKey) {
+        ArrayNode issues = Json.newArray();
+        BasicDBObject dbObject = new BasicDBObject("fields.project.key", projectKey);
+        dbObject.append("amelie.qualityAttributes", new BasicDBObject("$exists", true));
+        MongoCursor<Document> cursor = issueCollection.find(dbObject).iterator();
+        while(cursor.hasNext()) {
+            issues.add(getIssueDetails(Json.toJson(cursor.next())));
+        }
+        return issues;
+    }
 
     public ObjectNode getDesignDecisionByKey(String projectKey) {
         return getIssueDetails(Json.toJson(issueCollection.find(new BasicDBObject().append("name", projectKey)).first()));
@@ -259,7 +269,7 @@ public class Issue {
                 String valB = b.get(KEY_NAME).asText("");
 
                 if(valA != "" && valB != "") {
-                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                    DateFormat format = new SimpleDateFormat("dd.MM.YYYY", Locale.ENGLISH);
                     try {
                         Date dateA = format.parse(valA);
                         Date dateB = format.parse(valB);

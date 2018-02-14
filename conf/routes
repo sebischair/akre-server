@@ -63,5 +63,9 @@ GET           /updateProjectProcessState   controllers.amelie.ProjectController.
 GET           /updateProjectIssueCount     controllers.amelie.ProjectController.updateProjectIssueCount(projectKey: String)
 GET           /updateSimilarDocuments      controllers.SimilarDocumentsController.updateSimilarDocuments(projectKey: String)
 
+#for DFMC
+GET          /get-quality-attributes       controllers.amelie.QualityAttributesController.getAllQAs()
+POST         /search-issue                 controllers.amelie.QualityAttributesController.getAllIssuesForQAs()
+POST         /search-expert                controllers.amelie.PredictionController.getExpertsForText()
 
-GET /fixTasks controllers.amelie.ArchitecturalElementsController.fixTasks(projectKey: String)
+GET          /fixTasks                     controllers.amelie.ArchitecturalElementsController.fixTasks(projectKey: String)

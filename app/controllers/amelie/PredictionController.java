@@ -3,7 +3,9 @@ package controllers.amelie;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.inject.Inject;
 import model.amelie.Issue;
+import model.amelie.QualityAttribute;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -17,9 +19,175 @@ import java.util.regex.Pattern;
  * Created by Manoj on 7/7/2017.
  */
 public class PredictionController extends Controller {
+    @Inject
+    ArchitecturalElementsController aeController;
+
+    @Inject
+    QualityAttributesController qaController;
+
+    public Result getExpertsForText() {
+        JsonNode request = request().body().asJson();
+        ObjectNode result = Json.newObject();
+        if(request.has("project-key") && request.has("text")) {
+            ArrayNode ja = Json.newArray();
+
+            String projectKey = request.get("project-key").asText("");
+            String text = request.get("text").asText("");
+
+            text = text.toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " ").replaceAll("\\*", "")
+                    .replaceAll("^\\w{1,20}\\b", " ").replaceAll("\\r\\n|\\r|\\n", " ").replaceAll("\\$", "");
+
+            List<String> conceptList = new ArrayList<>();
+            List<String> assigneeList = new ArrayList<>();
+
+            Issue issueModel = new Issue();
+            ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
+            //List<ObjectNode> orderedIssues = issueModel.orderIssuesByResolutionDate(issues);
+
+            List<ObjectNode> orderedIssues = new ArrayList<>();
+            issues.forEach(i -> orderedIssues.add((ObjectNode) i));
+
+            orderedIssues.forEach(issue -> {
+                if(issue.has(StaticFunctions.ASSIGNEE)) {
+                    String assignee = issue.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
+                    if (!assigneeList.contains(assignee)) {
+                        assigneeList.add(assignee);
+                    }
+                }
+
+                if(issue.has(StaticFunctions.CONCEPTS)) {
+                    issue.get(StaticFunctions.CONCEPTS).forEach(ca -> {
+                        String key = ca.asText("").replaceAll("s$", "").toLowerCase();
+                        if (!conceptList.contains(key)) {
+                            conceptList.add(key);
+                        }
+                    });
+                }
+
+                if(issue.has(StaticFunctions.KEYWORDS)) {
+                    issue.get(StaticFunctions.KEYWORDS).forEach(ca -> {
+                        String key = ca.asText("").replaceAll("s$", "").toLowerCase();
+                        if (!conceptList.contains(key)) {
+                            conceptList.add(key);
+                        }
+                    });
+                }
+
+                if(issue.has(StaticFunctions.QUALITYATTRIBUTES)) {
+                    issue.get(StaticFunctions.QUALITYATTRIBUTES).forEach(ca -> {
+                        String key = ca.asText("").replaceAll("s$", "").toLowerCase();
+                        if (!conceptList.contains(key)) {
+                            conceptList.add(key);
+                        }
+                    });
+                }
+            });
+
+            createEmptyEM(assigneeList, ja);
+            initializeEM(orderedIssues, ja);
+            ArrayNode pcvja = Json.newArray();
+            createExpertVectors(conceptList, pcvja, ja);
+
+            ArrayNode decisionsToPredict = getConceptVector(conceptList, text);
+            decisionsToPredict = matching(pcvja, decisionsToPredict, conceptList.size());
+            decisionsToPredict = ordering(decisionsToPredict);
+            ArrayNode pa = Json.newArray();
+
+            if(decisionsToPredict.size() > 0) {
+                JsonNode dtp = decisionsToPredict.get(0);
+                ObjectNode jo;
+                JsonNode dtp_jo;
+                JsonNode dtp_pa = dtp.get("predictionArray");
+
+                int max = dtp_pa.size() > 10 ? 10 : dtp_pa.size();
+                for(int j = 0; j < max; j++) {
+                    dtp_jo = dtp_pa.get(j);
+                    jo = Json.newObject();
+                    String personName = dtp_jo.get(StaticFunctions.PERSONNAME).asText("").toLowerCase();
+                    jo.put(StaticFunctions.NAME, personName);
+                    int score = dtp_jo.get("score").asInt(0);
+
+                    jo.put("score", score);
+                    if(pa.size() < 10) pa.add(jo);
+                }
+            }
+
+            result.put("status", "OK");
+            result.put("statusCode", "200");
+            result.set("data", pa);
+        } else {
+            result.put("status", "Bad request - missing request parameters");
+            result.put("statusCode", "400");
+        }
+        return ok(result);
+    }
+
+    private ArrayNode getConceptVector(List<String> conceptList, String text) {
+        ArrayNode conceptVectorJSONArray = Json.newArray();
+        ObjectNode conceptVectorJSONObject = Json.newObject();
+        ArrayNode conceptVector = Json.newArray();
+        for(int k = 0; k < conceptList.size(); k++) {
+            conceptVector.insert(k, 0);
+        }
+        ArrayNode concepts = Json.newArray();
+        aeController.getConceptsList(text).forEach(c -> concepts.add(c));
+        aeController.getKeywordsList(text).forEach(c -> concepts.add(c));
+        qaController.getQAList(text, new QualityAttribute().getAllQAs()).forEach(c -> concepts.add(c));
+
+        conceptVectorJSONObject.set(StaticFunctions.CONCEPTS, concepts);
+
+        concepts.forEach(concept -> {
+            String c = concept.asText("").replaceAll("s$", "").toLowerCase();
+            if(conceptList.contains(c)) {
+                int value = getConceptValue(c, text);
+                conceptVector.insert(conceptList.indexOf(concept), value);
+            }
+        });
+
+        conceptVectorJSONObject.set("conceptVector", conceptVector);
+        conceptVectorJSONArray.add(conceptVectorJSONObject);
+        return conceptVectorJSONArray;
+    }
+
+    private void createEmptyEM(List<String> assigneeList, ArrayNode ja) {
+        assigneeList.forEach(assignee -> {
+            if(!StaticFunctions.containsStringValue(StaticFunctions.PERSONNAME, assignee, ja)) {
+                ObjectNode jo = Json.newObject();
+                jo.put(StaticFunctions.PERSONNAME, assignee.toLowerCase());
+                jo.set(StaticFunctions.CONCEPTS, Json.newArray());
+                ja.add(jo);
+            }
+        });
+    }
+
+    private void initializeEM(List<ObjectNode> orderedIssues, ArrayNode ja) {
+        orderedIssues.forEach(issue -> {
+            if(issue.has(StaticFunctions.ASSIGNEE)) {
+                String assignee = issue.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
+                JsonNode ca = issue.get(StaticFunctions.CONCEPTS);
+                JsonNode personObject = StaticFunctions.getJSONObject(StaticFunctions.PERSONNAME, assignee, ja);
+                JsonNode conceptArray = personObject != null ? personObject.get(StaticFunctions.CONCEPTS) : Json.newArray();
+                if(ca!=null) ca.forEach(c -> StaticFunctions.updateConceptArray(c.asText("").replaceAll("s$", "").toLowerCase(), conceptArray));
+            }
+        });
+
+        StaticFunctions.removeItemsFromJSONArray(ja, StaticFunctions.getItemsToRemove(ja));
+    }
+
+    private void createExpertVectors(List<String> conceptList, ArrayNode pcvja, ArrayNode ja){
+        ja.forEach(jo -> {
+            ObjectNode pcvjo = Json.newObject();
+            pcvjo.put(StaticFunctions.PERSONNAME, jo.get(StaticFunctions.PERSONNAME).asText(""));
+            ArrayNode pcvList = Json.newArray();
+            for (int j = 0; j < conceptList.size(); j++) {
+                pcvList.insert(j, personConceptValue(conceptList.get(j), jo));
+            }
+            pcvjo.set("pcvList", pcvList);
+            pcvja.add(pcvjo);
+        });
+    }
 
     public Result predictAssignee(String projectKey) {
-        System.out.println(projectKey);
         ArrayNode ja = Json.newArray();
         ArrayNode results = Json.newArray();
         List<String> conceptList = new ArrayList<>();
@@ -76,37 +244,10 @@ public class PredictionController extends Controller {
         });
 
         summaryResult.put("Testing dataset size", testingData.size());
-        assigneeList.forEach(assignee -> {
-            if (!StaticFunctions.containsStringValue(StaticFunctions.PERSONNAME, assignee, ja)) {
-                ObjectNode jo = Json.newObject();
-                jo.put(StaticFunctions.PERSONNAME, assignee.toLowerCase());
-                jo.set(StaticFunctions.CONCEPTS, Json.newArray());
-                ja.add(jo);
-            }
-        });
-
-        orderedIssues.forEach(issue -> {
-            if(issue.has(StaticFunctions.ASSIGNEE)) {
-                String assignee = issue.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
-                JsonNode ca = issue.get(StaticFunctions.CONCEPTS);
-                JsonNode personObject = StaticFunctions.getJSONObject(StaticFunctions.PERSONNAME, assignee, ja);
-                JsonNode conceptArray = personObject != null ? personObject.get(StaticFunctions.CONCEPTS) : Json.newArray();
-                ca.forEach(c -> StaticFunctions.updateConceptArray(c.asText("").replaceAll("s$", "").toLowerCase(), conceptArray));
-            }
-        });
-
-        StaticFunctions.removeItemsFromJSONArray(ja, StaticFunctions.getItemsToRemove(ja));
+        createEmptyEM(assigneeList, ja);
+        initializeEM(orderedIssues, ja);
         ArrayNode pcvja = Json.newArray();
-        ja.forEach(jo -> {
-            ObjectNode pcvjo = Json.newObject();
-            pcvjo.put(StaticFunctions.PERSONNAME, jo.get(StaticFunctions.PERSONNAME).asText(""));
-            ArrayNode pcvList = Json.newArray();
-            for (int j = 0; j < conceptList.size(); j++) {
-                pcvList.insert(j, personConceptValue(conceptList.get(j), jo));
-            }
-            pcvjo.set("pcvList", pcvList);
-            pcvja.add(pcvjo);
-        });
+        createExpertVectors(conceptList, pcvja, ja);
 
         ArrayNode decisionsToPredict = getRandomConceptVectors(conceptList, testingIssues);
         decisionsToPredict = matching(pcvja, decisionsToPredict, conceptList.size());

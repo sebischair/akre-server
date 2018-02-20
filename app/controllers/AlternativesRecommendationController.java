@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by mahabaleshwar on 8/31/2016.
  */
-public class AlternativesController extends Controller {
+public class AlternativesRecommendationController extends Controller {
 
     public Result getAlternatives() {
         String uri = request().body().asJson().findValue(StaticFunctions.URI).toString().replace("\"", "");

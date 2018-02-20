@@ -15,6 +15,7 @@ import util.StaticFunctions;
  * Created by Manoj on 1/22/2017.
  */
 public class ProjectController extends Controller {
+
     public Result create() {
         ObjectNode result = Json.newObject();
         String name = request().body().asJson().findValue(StaticFunctions.NAME).toString().replaceAll("\"", "");
@@ -38,14 +39,6 @@ public class ProjectController extends Controller {
 
     public Result getProjectByKey(String key) {
         return StaticFunctions.jsonResult(ok(new Project().findByKey(key)));
-    }
-
-    public Result getAllDesignDecisions(String projectKey) {
-        return StaticFunctions.jsonResult(ok(new Issue().findAllDesignDecisionsInAProject(projectKey)));
-    }
-
-    public Result getDesignDecision(String issueKey) {
-        return StaticFunctions.jsonResult(ok(new Issue().getDesignDecisionByKey(issueKey)));
     }
 
     public Result updateProjectProcessState(String projectKey) {

@@ -6,7 +6,7 @@ import model.Document;
 /**
  * Created by mahabaleshwar on 6/23/2016.
  */
-public abstract class Pipeline {
+public abstract class UIMAPipeline {
     private Document document;
 
     public Document getDocument() { return document; }

@@ -33,7 +33,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 /**
  * Created by mahabaleshwar on 6/23/2016.
  */
-public class DefaultPipeline extends Pipeline {
+public class ConceptAnnotatorPipeline extends UIMAPipeline {
     Map<String, Object> result = new HashMap<String, Object>();
 
     @Override

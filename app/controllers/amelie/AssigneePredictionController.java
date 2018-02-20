@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Manoj on 7/7/2017.
  */
-public class PredictionController extends Controller {
+public class AssigneePredictionController extends Controller {
 
     public Result predictAssignee(String projectKey) {
         System.out.println(projectKey);

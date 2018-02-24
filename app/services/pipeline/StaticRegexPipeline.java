@@ -30,7 +30,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 /**
  * Created by mahabaleshwar on 11/2/2016.
  */
-public class StaticRegexPipeline extends Pipeline {
+public class StaticRegexPipeline extends UIMAPipeline {
     private String projectId;
 
     public String getProjectId() {

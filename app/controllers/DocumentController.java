@@ -6,8 +6,6 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
 import model.Document;
-import model.Paragraph;
-import model.Record;
 import play.Configuration;
 import play.Logger;
 import play.libs.Json;
@@ -15,15 +13,11 @@ import play.libs.ws.WSClient;
 import play.libs.ws.WSResponse;
 import play.mvc.Controller;
 import play.mvc.Result;
-import play.mvc.StatusHeader;
-import services.pipeline.DefaultPipeline;
+import services.pipeline.ConceptAnnotatorPipeline;
 import util.StaticFunctions;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.CompletionStage;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class DocumentController extends Controller {
 
@@ -80,7 +74,7 @@ public class DocumentController extends Controller {
 
     public void dbpediaDocAnnotations(ArrayNode annotations, String content){
         Document d = new Document(content);
-        DefaultPipeline dp = new DefaultPipeline();
+        ConceptAnnotatorPipeline dp = new ConceptAnnotatorPipeline();
         dp.setDocument(d);
         annotations.addAll(dp.processDocument());
     }

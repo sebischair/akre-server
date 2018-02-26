@@ -77,4 +77,22 @@ public class AssigneeController extends Controller {
         });
         return newJA;
     }
+
+    public Result getUniqueAssignees(String projectKey) {
+        ArrayNode ja = Json.newArray();
+        List<String> assigneeList = new ArrayList<>();
+        Issue issueModel = new Issue();
+        ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
+        issues.forEach(issue-> {
+            if(issue.has(StaticFunctions.ASSIGNEE) && issue.get(StaticFunctions.ASSIGNEE) != null) {
+                String assignee = issue.get(StaticFunctions.ASSIGNEE).asText("").toLowerCase();
+                if (!assigneeList.contains(assignee)) {
+                    assigneeList.add(assignee);
+                    ja.add(assignee);
+                }
+            }
+        });
+        return ok(ja);
+    }
+
 }

@@ -67,5 +67,6 @@ GET           /updateSimilarDocuments      controllers.SimilarDocumentsControlle
 GET          /get-quality-attributes       controllers.amelie.QualityAttributesController.getAllQAs()
 POST         /search-issue                 controllers.amelie.QualityAttributesController.getAllIssuesForQAs()
 POST         /search-expert                controllers.amelie.PredictionController.getExpertsForText()
+GET          /getUniqueAssignees           controllers.amelie.AssigneeController.getUniqueAssignees(projectKey: String)
 
 GET          /fixTasks                     controllers.amelie.ArchitecturalElementsController.fixTasks(projectKey: String)

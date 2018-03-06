@@ -28,7 +28,7 @@ public class PredictionController extends Controller {
     public Result getExpertsForText() {
         JsonNode request = request().body().asJson();
         ObjectNode result = Json.newObject();
-        if(request.has("project-key") && request.has("text")) {
+        if(request != null && request.has("project-key") && request.has("text")) {
             ArrayNode ja = Json.newArray();
 
             String projectKey = request.get("project-key").asText("");

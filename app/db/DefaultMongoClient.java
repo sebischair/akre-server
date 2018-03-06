@@ -30,7 +30,7 @@ public class DefaultMongoClient {
 
         morphia = new Morphia();
         morphia.mapPackage("app.model");
-        datastore = morphia.createDatastore(new MongoClient(sa), dbName);
+        datastore = morphia.createDatastore(new MongoClient(sa, cl), dbName);
         datastore.ensureIndexes();
         datastore.ensureCaps();
     }

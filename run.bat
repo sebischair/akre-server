@@ -1,1 +1,1 @@
- activator "run -Dhttp.port=9999"
+activator run

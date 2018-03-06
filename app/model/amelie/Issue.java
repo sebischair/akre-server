@@ -8,7 +8,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import db.AmelieMongoClient;
 import org.bson.Document;
-import org.bson.types.ObjectId;
 import play.libs.Json;
 import util.StaticFunctions;
 
@@ -25,6 +24,10 @@ public class Issue {
 
     public Issue() {
         issueCollection = AmelieMongoClient.amelieDatabase.getCollection("issues");
+    }
+
+    public MongoCollection<Document> getIssueCollection() {
+        return issueCollection;
     }
 
     public ArrayNode findAllDesignDecisions() {

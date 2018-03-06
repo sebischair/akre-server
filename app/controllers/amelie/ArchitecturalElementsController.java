@@ -1,21 +1,21 @@
 package controllers.amelie;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
 import com.mongodb.BasicDBObject;
+import com.mongodb.client.MongoCollection;
 import controllers.DocumentController;
 import model.amelie.Issue;
 import model.amelie.Keyword;
+import org.bson.Document;
 import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import util.HtmlUtil;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Manoj on 8/8/2017.
@@ -124,6 +124,50 @@ public class ArchitecturalElementsController extends Controller {
                     BasicDBObject newConcepts = new BasicDBObject();
                     newConcepts.append("$set", new BasicDBObject().append("amelie.concepts", allConcepts));
                     issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
+                }
+            }
+        });
+
+        ObjectNode result = Json.newObject();
+        result.put("status", "OK");
+        result.put("statusCode", "200");
+        return ok(result);
+    }
+
+    public Result removeConceptsThatOccourOnlyOnce(String projectKey) {
+        Issue issueModel = new Issue();
+        ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
+
+        Map<String, Integer> cv = new HashMap<>();
+        List<String> conceptList = new ArrayList();
+        issues.forEach(issue -> {
+            JsonNode concepts = issue.get("concepts");
+            if(concepts != null && concepts.isArray()) {
+                concepts.forEach(concept -> {
+                    String key = concept.asText("").toLowerCase();
+                    if(!cv.containsKey(key)) {
+                        conceptList.add(key);
+                        cv.put(key, 1);
+                    } else {
+                        Integer value = cv.get(key);
+                        cv.replace(key, value+1);
+                    }
+                });
+            }
+        });
+        MongoCollection<Document> issueCollection = issueModel.getIssueCollection();
+        cv.forEach((k, v) -> {
+            if(v == 3) {
+                try{
+                    System.out.println(k);
+                    BasicDBObject searchObject = new BasicDBObject();
+                    searchObject.append("amelie.concepts", k);
+
+                    BasicDBObject newConcepts = new BasicDBObject();
+                    newConcepts.append("$pull", new BasicDBObject().append("amelie.concepts", k));
+                    issueCollection.updateMany(searchObject, newConcepts);
+                } catch (Exception e) {
+                    Logger.error("Not an array: " + k);
                 }
             }
         });

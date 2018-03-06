@@ -68,5 +68,7 @@ GET          /get-quality-attributes       controllers.amelie.QualityAttributesC
 POST         /search-issue                 controllers.amelie.QualityAttributesController.getAllIssuesForQAs()
 POST         /search-expert                controllers.amelie.PredictionController.getExpertsForText()
 GET          /getUniqueAssignees           controllers.amelie.AssigneeController.getUniqueAssignees(projectKey: String)
+GET          /removeConceptsThatOccourOnlyOnce controllers.amelie.ArchitecturalElementsController.removeConceptsThatOccourOnlyOnce(projectKey: String)
+POST         /getExpertForATopic           controllers.amelie.AssigneeController.getExpertForATopic()
 
 GET          /fixTasks                     controllers.amelie.ArchitecturalElementsController.fixTasks(projectKey: String)

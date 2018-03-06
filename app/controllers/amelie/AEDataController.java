@@ -31,7 +31,7 @@ public class AEDataController extends Controller {
             JsonNode concepts = issue.get("concepts");
             if(concepts != null && concepts.isArray()) {
                 concepts.forEach(concept -> {
-                    String key = concept.asText("").replaceAll("s$", "");
+                    String key = concept.asText("");
                     if(!cv.containsKey(key)) {
                         conceptList.add(key);
                         cv.put(key, 1);
@@ -68,7 +68,7 @@ public class AEDataController extends Controller {
                             JsonNode concepts = Json.toJson(issue.get("concepts"));
                             if(concepts != null && concepts.isArray()) {
                                 concepts.forEach(concept -> {
-                                    String key = concept.asText("").replaceAll("s$", "");
+                                    String key = concept.asText("");
                                     if (key.equalsIgnoreCase(ae)) {
                                         count.getAndIncrement();
                                     }

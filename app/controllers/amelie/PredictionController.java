@@ -57,7 +57,7 @@ public class PredictionController extends Controller {
 
                 if(issue.has(StaticFunctions.CONCEPTS)) {
                     issue.get(StaticFunctions.CONCEPTS).forEach(ca -> {
-                        String key = ca.asText("").replaceAll("s$", "").toLowerCase();
+                        String key = ca.asText("").toLowerCase();
                         if (!conceptList.contains(key)) {
                             conceptList.add(key);
                         }
@@ -66,7 +66,7 @@ public class PredictionController extends Controller {
 
                 if(issue.has(StaticFunctions.KEYWORDS)) {
                     issue.get(StaticFunctions.KEYWORDS).forEach(ca -> {
-                        String key = ca.asText("").replaceAll("s$", "").toLowerCase();
+                        String key = ca.asText("").toLowerCase();
                         if (!conceptList.contains(key)) {
                             conceptList.add(key);
                         }
@@ -75,7 +75,7 @@ public class PredictionController extends Controller {
 
                 if(issue.has(StaticFunctions.QUALITYATTRIBUTES)) {
                     issue.get(StaticFunctions.QUALITYATTRIBUTES).forEach(ca -> {
-                        String key = ca.asText("").replaceAll("s$", "").toLowerCase();
+                        String key = ca.asText("").toLowerCase();
                         if (!conceptList.contains(key)) {
                             conceptList.add(key);
                         }
@@ -133,11 +133,10 @@ public class PredictionController extends Controller {
         aeController.getConceptsList(text).forEach(c -> concepts.add(c));
         aeController.getKeywordsList(text).forEach(c -> concepts.add(c));
         qaController.getQAList(text, new QualityAttribute().getAllQAs()).forEach(c -> concepts.add(c));
-
         conceptVectorJSONObject.set(StaticFunctions.CONCEPTS, concepts);
 
         concepts.forEach(concept -> {
-            String c = concept.asText("").replaceAll("s$", "").toLowerCase();
+            String c = concept.asText("").toLowerCase();
             if(conceptList.contains(c)) {
                 int value = getConceptValue(c, text);
                 conceptVector.insert(conceptList.indexOf(concept), value);
@@ -167,7 +166,7 @@ public class PredictionController extends Controller {
                 JsonNode ca = issue.get(StaticFunctions.CONCEPTS);
                 JsonNode personObject = StaticFunctions.getJSONObject(StaticFunctions.PERSONNAME, assignee, ja);
                 JsonNode conceptArray = personObject != null ? personObject.get(StaticFunctions.CONCEPTS) : Json.newArray();
-                if(ca!=null) ca.forEach(c -> StaticFunctions.updateConceptArray(c.asText("").replaceAll("s$", "").toLowerCase(), conceptArray));
+                if(ca!=null) ca.forEach(c -> StaticFunctions.updateConceptArray(c.asText("").toLowerCase(), conceptArray));
             }
         });
 

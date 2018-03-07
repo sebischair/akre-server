@@ -104,6 +104,7 @@ public class AssigneeController extends Controller {
         ObjectNode result = Json.newObject();
         if(request.has("project-key") && request.has("topic") && request.get("topic").isTextual()) {
             ArrayNode expertArray = Json.newArray();
+            List<String> assigneeList = new ArrayList<>();
             String projectKey = request.get("project-key").asText("");
             String topic = request.get("topic").asText("").toLowerCase();
             ArrayNode em = getExpertiseMatrix(projectKey);
@@ -112,7 +113,10 @@ public class AssigneeController extends Controller {
                     ObjectNode expertObject = Json.newObject();
                     expertObject.put("name", eo.get("personName").asText(""));
                     expertObject.put("score", eo.get("value").asInt(0));
-                    expertArray.add(expertObject);
+                    if(!assigneeList.contains(eo.get("personName").asText(""))) {
+                        expertArray.add(expertObject);
+                        assigneeList.add(eo.get("personName").asText(""));
+                    }
                 }
             });
             result.put("status", "OK");

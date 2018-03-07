@@ -76,8 +76,7 @@ public class AssigneeController extends Controller {
                 newJO.put("personName", jo.get("personName"));
                 newJO.put("conceptName", co.get("conceptName"));
                 newJO.put("value", co.get("value"));
-                if(co.get("value").asInt() > 10)
-                    newJA.add(newJO);
+                newJA.add(newJO);
             });
         });
         return newJA;

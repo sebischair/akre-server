@@ -1,8 +1,9 @@
 morphia.db.url="127.0.0.1"
 morphia.db.port=27017
-morphia.db.name="<username>"
+morphia.db.name="<dbName>"
 morphia.db.username="<dbUsername>"
 morphia.db.pwd="<dbPwd>"
+morphia.amelie.db.name="<amelieDBName>"
 
 spacy.host="http://131.159.30.9:5000/api"
 
@@ -10,3 +11,8 @@ predict.url="http://localhost:9000/pipeline/predict"
 sc.userName="<sc_username>"
 sc.password="<sc_password>"
 sc.base.url="https://server.sociocortex.com/api/v1/"
+
+aylien.api.key="<aylienKey>"
+aylien.api.id="<aylienId>"
+
+docclustering.url="http://127.0.0.1:9001/"

@@ -22,10 +22,10 @@ public class AmelieMongoClient {
         int dbPort = configuration.getInt("morphia.db.port");
         String userName = configuration.getString("morphia.db.username");
         String password = configuration.getString("morphia.db.pwd");
-        String dbName = configuration.getString("morphia.db.name");
+        String dbName = configuration.getString("morphia.amelie.db.name");
 
         ServerAddress sa = new ServerAddress(dbUrl, dbPort);
-        MongoCredential credential = MongoCredential.createCredential(userName, dbName, password.toCharArray());
+        MongoCredential credential = MongoCredential.createCredential(userName, "admin", password.toCharArray());
         MongoClient mongoClient = new MongoClient(sa, Arrays.asList(credential));
 
         amelieMorphia = new Morphia();

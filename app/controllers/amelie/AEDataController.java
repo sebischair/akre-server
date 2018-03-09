@@ -20,36 +20,35 @@ public class AEDataController extends Controller {
 
     public Result getAEData(String projectKey) {
         List<String> conceptList = new ArrayList();
-        List<Integer> yearList = Arrays.asList(2017);
+        List<Integer> yearList = Arrays.asList(2013, 2014, 2015, 2016, 2017);
         ArrayNode results = Json.newArray();
         Issue issueModel = new Issue();
         ArrayNode issues = issueModel.getDesignDecisionsForAEView(projectKey);
-
-        Map<String, Integer> cv = new HashMap<>();
-
         issues.forEach(issue -> {
             JsonNode concepts = issue.get("concepts");
             if(concepts != null && concepts.isArray()) {
                 concepts.forEach(concept -> {
                     String key = concept.asText("").replaceAll("s$", "");
-                    if(!cv.containsKey(key)) {
+                    if(!conceptList.contains(key)) {
                         conceptList.add(key);
-                        cv.put(key, 1);
-                    } else {
-                        Integer value = cv.get(key);
-                        cv.replace(key, value+1);
                     }
                 });
             }
         });
 
-        cv.forEach((k, v) -> {
-            if(v > 50) {
-                ObjectNode res = Json.newObject();
-                res.put("id", k);
-                res.put("value", v);
-                results.add(res);
-            }
+        conceptList.forEach(concept -> {
+            ObjectNode res = Json.newObject();
+            res.put("id", concept);
+            res.put("value", getDecisionCount(concept, 2017, issues));
+            ArrayNode values = Json.newArray();
+            yearList.forEach(year -> {
+                ObjectNode valueObject = Json.newObject();
+                valueObject.put("year", year);
+                valueObject.put("value", getDecisionCount(concept, year, issues));
+                values.add(valueObject);
+            });
+            res.set("values", values);
+            results.add(res);
         });
 
         return StaticFunctions.jsonResult(ok(results));
@@ -59,12 +58,12 @@ public class AEDataController extends Controller {
         AtomicInteger count = new AtomicInteger();
         issues.forEach(issue -> {
             String date = issue.get("resolved").asText("");
-            if(date.contains(".") && date.contains(" ")) {
+            if(date.contains("-")) {
                 try{
                     String simpleDate = date.split(" ")[0];
-                    if(simpleDate.split("\\.").length > 2) {
-                        int resolvedYear = Integer.parseInt(simpleDate.split("\\.")[2]);
-                        //if (year >= resolvedYear) {
+                    if(simpleDate.split("-").length > 2) {
+                        int resolvedYear = Integer.parseInt(simpleDate.split("-")[0]);
+                        if (year >= resolvedYear) {
                             JsonNode concepts = Json.toJson(issue.get("concepts"));
                             if(concepts != null && concepts.isArray()) {
                                 concepts.forEach(concept -> {
@@ -74,7 +73,7 @@ public class AEDataController extends Controller {
                                     }
                                 });
                             }
-                        //}
+                        }
                     }
                 } catch (Exception e) {
                     Logger.error("Cannot get resolved date!");

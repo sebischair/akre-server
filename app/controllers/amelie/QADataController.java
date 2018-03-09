@@ -78,11 +78,11 @@ public class QADataController extends Controller {
 
         issues.forEach(issue -> {
             String date = issue.get("resolved").asText("");
-            if(date.contains(".") && date.contains(" ")) {
+            if(date.contains("-")) {
                 try{
                     String simpleDate = date.split(" ")[0];
-                    if(simpleDate.split("\\.").length > 2) {
-                        int resolvedYear = Integer.parseInt(simpleDate.split("\\.")[2]);
+                    if(simpleDate.split("-").length > 2) {
+                        int resolvedYear = Integer.parseInt(simpleDate.split("-")[0]);
                         if(year >= resolvedYear) {
                             JsonNode qas = issue.get("qualityAttributes");
                             //String decisionCategory = issue.get("decisionCategory").asText();

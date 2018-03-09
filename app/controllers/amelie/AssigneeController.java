@@ -21,8 +21,8 @@ public class AssigneeController extends Controller {
         ArrayNode ja = Json.newArray();
         List<String> assigneeList = new ArrayList<>();
         Issue issueModel = new Issue();
-        //ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
-        ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
+        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
+        //ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
 
         issues.forEach(issue-> {
             if(issue.has(StaticFunctions.ASSIGNEE) && issue.get(StaticFunctions.ASSIGNEE) != null) {

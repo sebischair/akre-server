@@ -94,7 +94,7 @@ public class Issue {
                 issue.put("status", fields.get("status").get("name").asText(""));
             if(fields.has("resolution") && fields.get("resolution").get("name") != null)
                 issue.put("resolution", fields.get("resolution").get("name").asText(""));
-            if(fields.has("priority"))
+            if(fields.has("priority") && fields.get("priority").has("name"))
                 issue.put("priority", fields.get("priority").get("name").asText(""));
             if(fields.has("assignee") && fields.get("assignee").has("name")) {
                 String name = fields.get("assignee").get("name").asText("");
@@ -103,7 +103,7 @@ public class Issue {
                 }
                 issue.put("assignee", name);
             }
-            if(fields.has("reporter"))
+            if(fields.has("reporter") && fields.get("reporter").has("name"))
                 issue.put("reporter", fields.get("reporter").get("name").asText(""));
         }
         if(obj.has("amelie")) {
@@ -178,7 +178,7 @@ public class Issue {
 
     public ArrayNode getDesignDecisionsForAEView(String projectKey) {
         ArrayNode issues = Json.newArray();
-        MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("fields.project.key", projectKey).append("amelie.concepts", new BasicDBObject("$exists", true))).iterator();
+        MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("fields.project.key", projectKey).append("amelie.designDecision", true).append("amelie.concepts", new BasicDBObject("$exists", true))).iterator();
         while(cursor.hasNext()) {
             JsonNode obj = Json.toJson(cursor.next());
             ObjectNode issue = Json.newObject();
@@ -196,7 +196,7 @@ public class Issue {
 
     public ArrayNode getDesignDecisionsForQAView(String projectKey) {
         ArrayNode issues = Json.newArray();
-        MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("fields.project.key", projectKey)).iterator();
+        MongoCursor<Document> cursor = issueCollection.find(new BasicDBObject("fields.project.key", projectKey).append("amelie.designDecision", true).append("amelie.qualityAttributes", new BasicDBObject("$ne", null))).iterator();
         while(cursor.hasNext()) {
             JsonNode obj = Json.toJson(cursor.next());
             ObjectNode issue = Json.newObject();

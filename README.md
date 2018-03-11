@@ -12,6 +12,12 @@ Run run.bat
 Ensure mongodb is running on port 27017  
   User: "guest" with password: "guest" has access to "akrec" collection
   
+## Configuration
+1. Rename `application.local.conf.back` to `application.local.conf`
+1. Fill in database credentials
+1. `morphia.db.name` is the database that stores SyncPipes related information
+1. `morphia.amelie.db.name` is the database that sotres projects, issues, etc.
+
 ## MongoDB settings with auth
 
 ### Create a guest user for syncpipes collection

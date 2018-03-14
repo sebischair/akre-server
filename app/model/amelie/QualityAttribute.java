@@ -16,7 +16,8 @@ public class QualityAttribute {
     private MongoCollection<Document> qaCollection;
 
     public QualityAttribute() {
-        qaCollection = AmelieMongoClient.amelieDatabase.getCollection("qualityAttributesDE");
+        qaCollection = AmelieMongoClient.amelieDatabase.getCollection("qualityAttributes");
+        // qaCollection = AmelieMongoClient.amelieDatabase.getCollection("qualityAttributesDE");
     }
 
     public ArrayNode getAllQAs() {

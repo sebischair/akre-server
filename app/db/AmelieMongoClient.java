@@ -25,7 +25,7 @@ public class AmelieMongoClient {
         String dbName = configuration.getString("morphia.amelie.db.name");
 
         ServerAddress sa = new ServerAddress(dbUrl, dbPort);
-        MongoCredential credential = MongoCredential.createCredential(userName, "admin", password.toCharArray());
+        MongoCredential credential = MongoCredential.createCredential(userName, dbName, password.toCharArray());
         MongoClient mongoClient = new MongoClient(sa, Arrays.asList(credential));
 
         amelieMorphia = new Morphia();

@@ -204,7 +204,7 @@ public class Issue {
             if(obj.has("amelie")) {
                 JsonNode amelie = obj.get("amelie");
                 issue.set("concepts", amelie.get("concepts"));
-                //issue.put("decisionCategory", amelie.get("decisionCategory"));
+                issue.put("decisionCategory", amelie.get("decisionCategory"));
                 issue.set("qualityAttributes", amelie.get("qualityAttributes"));
             }
             if(obj.has("fields") && obj.get("fields").has("resolutiondate"))

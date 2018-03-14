@@ -73,6 +73,8 @@ public class QADataController extends Controller {
         List<String> dcs = Arrays.asList("Structural decision", "Behavioral decision", "Non-existence - ban decision");
 
         AtomicInteger countA = new AtomicInteger();
+        AtomicInteger countB = new AtomicInteger();
+        AtomicInteger countC = new AtomicInteger();
 
         //DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
@@ -85,12 +87,17 @@ public class QADataController extends Controller {
                         int resolvedYear = Integer.parseInt(simpleDate.split("-")[0]);
                         if(year >= resolvedYear) {
                             JsonNode qas = issue.get("qualityAttributes");
-                            //String decisionCategory = issue.get("decisionCategory").asText();
+                            String decisionCategory = issue.get("decisionCategory").asText();
                             if(qas != null && qas.isArray()) {
                                 qas.forEach(qa -> {
                                     String key = qa.asText("");
                                     if(key.equalsIgnoreCase(qualityAttribute)) {
-                                        countA.getAndIncrement();
+                                        if(dcs.indexOf(decisionCategory) == 0)
+                                            countA.getAndIncrement();
+                                        else if(dcs.indexOf(decisionCategory) == 1)
+                                            countB.getAndIncrement();
+                                        else if(dcs.indexOf(decisionCategory) == 2)
+                                            countC.getAndIncrement();
                                     }
                                 });
                             }
@@ -104,6 +111,8 @@ public class QADataController extends Controller {
         });
 
         ja.add(countA.intValue());
+        ja.add(countB.intValue());
+        ja.add(countC.intValue());
 
         return ja;
     }

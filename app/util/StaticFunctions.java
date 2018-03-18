@@ -210,8 +210,9 @@ public class StaticFunctions {
     }
 
     public static String truncate(String text){
-        if (text.length() > 50)
-            return text.substring(0, 50) + " ...";
+        int limit = 150;
+        if (text.length() > limit)
+            return text.substring(0, limit) + " \u2026";
         else
             return text;
     }

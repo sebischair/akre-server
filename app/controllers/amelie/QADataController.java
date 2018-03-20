@@ -68,6 +68,18 @@ public class QADataController extends Controller {
         return StaticFunctions.jsonResult(ok(results));
     }
 
+    public Result getAllQA() {
+        Logger.debug("request to get all Quality Attributes");
+        ArrayNode results = Json.newArray();
+        QualityAttribute qaModel = new QualityAttribute();
+
+        qaModel.getAllQAs().forEach(qa -> {
+            results.add(qa.get("name").asText());
+        });
+
+        return StaticFunctions.jsonResult(ok(results));
+    }
+
     private ArrayNode getDecisionCount(String qualityAttribute, int year, ArrayNode issues) {
         ArrayNode ja = Json.newArray();
         List<String> dcs = Arrays.asList("Structural decision", "Behavioral decision", "Non-existence - ban decision");

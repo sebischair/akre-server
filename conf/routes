@@ -50,6 +50,7 @@ GET           /labelDesignDecisions             controllers.amelie.LabelDesignDe
 
 GET           /getDataForAEV                    controllers.amelie.AEDataController.getAEData(projectKey: String)
 GET           /getDataForQAV                    controllers.amelie.QADataController.getQAData(projectKey: String)
+GET           /getAllQAV                        controllers.amelie.QADataController.getAllQA()
 POST          /getDataForDDV                    controllers.amelie.DDDataController.getDDData()
 POST          /project                          controllers.amelie.ProjectController.create()
 GET           /project                          controllers.amelie.ProjectController.getAll()

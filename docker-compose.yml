@@ -1,0 +1,23 @@
+version: '3'
+services:
+  app:
+    tty: true
+    build: ./
+    ports:
+      - "9000:9000"
+      - "9999:9999"
+      - "8888:8888"
+    volumes:
+    - ".:/home/play/Code"
+    - "./.ivy2:/home/play/Code/.ivy2"
+    depends_on:
+      - mongo
+    links:
+      - mongo:mongo
+  mongo:
+    image: 'mongo:3.6.2'
+    ports:
+        - 27017:27017
+    # environment:
+    #   - MONGO_DATA_DIR=/data/db
+    #   - MONGO_LOG_DIR=/dev/null

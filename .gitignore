@@ -14,3 +14,7 @@ target/
 yajsw
 conf/application.local.conf
 out/
+
+.ivy2
+.oracle_jre_usage
+.sbt

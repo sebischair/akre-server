@@ -9,7 +9,7 @@ morphia.amelie.db.name="<amelieDBName>"
 
 # Use the following configurations when you start the app in docker
 # Notice: this will connect to a mongoDB image without any data.
-# morphia.db.url="mongodb://mongo"
+# morphia.db.url="mongo"
 # morphia.db.port=27017
 # morphia.db.name="admin"
 # morphia.db.username="guest"

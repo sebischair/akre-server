@@ -17,16 +17,22 @@ public class AmelieMongoClient {
 
 
     static public void connect() throws Exception {
+        String dockerHost = "mongo";    // For docker, don't provide credentials to database
         Configuration configuration = Configuration.root();
         String dbUrl = configuration.getString("morphia.db.url");
         int dbPort = configuration.getInt("morphia.db.port");
         String userName = configuration.getString("morphia.db.username");
         String password = configuration.getString("morphia.db.pwd");
         String dbName = configuration.getString("morphia.amelie.db.name");
+        MongoClient mongoClient;
 
         ServerAddress sa = new ServerAddress(dbUrl, dbPort);
         MongoCredential credential = MongoCredential.createCredential(userName, dbName, password.toCharArray());
-        MongoClient mongoClient = new MongoClient(sa, Arrays.asList(credential));
+        if (dbUrl.equals(dockerHost)) {
+            mongoClient = new MongoClient(sa);
+        } else {
+            mongoClient = new MongoClient(sa, Arrays.asList(credential));
+        }
 
         amelieMorphia = new Morphia();
         amelieMorphia.mapPackage("app.model.amelie");

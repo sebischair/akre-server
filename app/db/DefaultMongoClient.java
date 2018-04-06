@@ -16,6 +16,7 @@ public class DefaultMongoClient {
 
 
     static public void connect() throws Exception{
+        String dockerHost = "mongo";    // For docker, don't provide credentials to database
         Configuration configuration = Configuration.root();
         String dbUrl = configuration.getString("morphia.db.url");
         int dbPort = configuration.getInt("morphia.db.port");
@@ -30,7 +31,11 @@ public class DefaultMongoClient {
 
         morphia = new Morphia();
         morphia.mapPackage("app.model");
-        datastore = morphia.createDatastore(new MongoClient(sa, cl), dbName);
+        if (dbUrl.equals(dockerHost)) {
+            datastore = morphia.createDatastore(new MongoClient(sa), dbName);
+        } else {
+            datastore = morphia.createDatastore(new MongoClient(sa, cl), dbName);
+        }
         datastore.ensureIndexes();
         datastore.ensureCaps();
     }

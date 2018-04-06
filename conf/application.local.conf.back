@@ -1,3 +1,5 @@
+# Database configurations
+# Use the following configurations when you run the app locally
 morphia.db.url="127.0.0.1"
 morphia.db.port=27017
 morphia.db.name="<dbName>"
@@ -5,7 +7,7 @@ morphia.db.username="<dbUsername>"
 morphia.db.pwd="<dbPwd>"
 morphia.amelie.db.name="<amelieDBName>"
 
-# Use the following configurations when you start the app in docker:
+# Use the following configurations when you start the app in docker
 # Notice: this will connect to a mongoDB image without any data.
 # morphia.db.url="mongodb://mongo"
 # morphia.db.port=27017

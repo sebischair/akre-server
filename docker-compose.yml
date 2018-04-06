@@ -9,7 +9,6 @@ services:
       - "8888:8888"
     volumes:
     - ".:/home/play/Code"
-    - "./.ivy2:/home/play/Code/.ivy2"
     depends_on:
       - mongo
     links:

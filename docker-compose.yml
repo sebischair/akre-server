@@ -8,7 +8,14 @@ services:
       - "9999:9999"
       - "8888:8888"
     volumes:
-    - ".:/home/play/Code"
+    - ".:/home/sebis/projects/akrec"
+    depends_on:
+      - mongo
+      - mongo-seed
+    links:
+      - mongo:mongo
+  mongo-seed:
+    build: ./mongo-seed
     depends_on:
       - mongo
     links:

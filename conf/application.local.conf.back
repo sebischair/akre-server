@@ -7,6 +7,9 @@ morphia.db.username="<dbUsername>"
 morphia.db.pwd="<dbPwd>"
 morphia.amelie.db.name="<amelieDBName>"
 
+# use this flag to indicate if authentication is enabled on mongo
+morphia.db.isAuthEnabled=false
+
 # Use the following configurations when you start the app in docker
 # Notice: this will connect to a mongoDB image without any data.
 # morphia.db.url="mongo"

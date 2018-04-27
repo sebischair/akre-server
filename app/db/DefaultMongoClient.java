@@ -23,6 +23,7 @@ public class DefaultMongoClient {
         String userName = configuration.getString("morphia.db.username");
         String password = configuration.getString("morphia.db.pwd");
         String dbName = configuration.getString("morphia.db.name");
+        boolean isAuthEnabled = configuration.getBoolean("morphia.db.isAuthEnabled");
 
         ServerAddress sa = new ServerAddress(dbUrl, dbPort);
         List<MongoCredential> cl = new ArrayList<MongoCredential>();
@@ -31,7 +32,7 @@ public class DefaultMongoClient {
 
         morphia = new Morphia();
         morphia.mapPackage("app.model");
-        if (dbUrl.equals(dockerHost)) {
+        if (dbUrl.equals(dockerHost) || !isAuthEnabled) {
             datastore = morphia.createDatastore(new MongoClient(sa), dbName);
         } else {
             datastore = morphia.createDatastore(new MongoClient(sa, cl), dbName);

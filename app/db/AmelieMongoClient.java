@@ -24,11 +24,12 @@ public class AmelieMongoClient {
         String userName = configuration.getString("morphia.db.username");
         String password = configuration.getString("morphia.db.pwd");
         String dbName = configuration.getString("morphia.amelie.db.name");
+        boolean isAuthEnabled = configuration.getBoolean("morphia.db.isAuthEnabled");
         MongoClient mongoClient;
 
         ServerAddress sa = new ServerAddress(dbUrl, dbPort);
         MongoCredential credential = MongoCredential.createCredential(userName, dbName, password.toCharArray());
-        if (dbUrl.equals(dockerHost)) {
+        if (dbUrl.equals(dockerHost) || !isAuthEnabled) {
             mongoClient = new MongoClient(sa);
         } else {
             mongoClient = new MongoClient(sa, Arrays.asList(credential));

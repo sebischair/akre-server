@@ -14,8 +14,8 @@ services:
       - mongo-seed
     links:
       - mongo:mongo
-  mongo-seed:
-    build: ./mongo-seed
+  mongoforamelie:
+    image: 'sebischair/amelie:mongoforamelie'
     depends_on:
       - mongo
     links:

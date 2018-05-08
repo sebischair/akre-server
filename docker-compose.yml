@@ -11,11 +11,56 @@ services:
     - ".:/home/sebis/projects/akrec"
     depends_on:
       - mongo
-      - mongo-seed
+      - mongoforamelie
+      - docclustering
+      - docclassification
+      - syncpipes-server
     links:
       - mongo:mongo
-  mongo-seed:
-    build: ./mongo-seed
+      - docclustering:docclustering
+      - docclassification:docclassification
+      - syncpipes-server:syncpipes-server
+  syncpipes-server:
+    image: 'sebischair/amelie:syncpipes-server'
+    ports:
+      - "3010:3010"
+    depends_on:
+      - mongo
+      - rabbit
+    links:
+      - mongo:mongo
+      - rabbit:rabbit
+    environment:
+      SYNCPIPES_PORT: 3010
+      SYNCPIPES_MONGO_HOST: 'mongo'
+      SYNCPIPES_MONGO_URL: 'mongodb://mongo/syncpipes'
+      SYNCPIPES_RABBIT_HOST: rabbit
+      SYNCPIPES_RABBIT_PORT: 5672
+      SYNCPIPES_RABBIT_USER: guest
+      SYNCPIPES_RABBIT_PASSWORD: guest
+      SYNCPIPES_RABBIT_VHOST: '/'
+  syncpipes-client:
+    image: 'sebischair/amelie:syncpipes-client'
+    ports:
+      - "3011:80"
+  docclassification:
+    image: 'sebischair/amelie:docclassification'
+    ports:
+      - "3005:3005"
+    depends_on:
+      - mongo
+    links:
+      - mongo:mongo
+  docclustering:
+    image: 'sebischair/amelie:docclustering'
+    ports:
+      - "3006:3006"
+    depends_on:
+      - mongo
+    links:
+      - mongo:mongo
+  mongoforamelie:
+    image: 'sebischair/amelie:mongoforamelie'
     depends_on:
       - mongo
     links:
@@ -24,3 +69,15 @@ services:
     image: 'mongo:3.6.2'
     ports:
         - 27017:27017
+  rabbit:
+    image: rabbitmq:management
+    ports:
+      - "15671:15671"
+      - "15672:15672" # management gui
+      - "25672:25672"
+      - "5672:5672"
+      - "5671:5671"
+      - "4369:4369"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest

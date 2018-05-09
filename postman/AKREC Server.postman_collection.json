@@ -1,0 +1,660 @@
+{
+	"info": {
+		"_postman_id": "adae372b-abdb-4d8b-9b03-cb19ebb39fae",
+		"name": "AKREC Server",
+		"description": "AKREC Server is an open source project responsible for handling requests from the [AMELIE](https://github.com/sebischair/amelietor) project. \n\nYou can find out more about this project [on GitHub](https://github.com/sebischair/akre-server/).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Amelietor",
+			"description": null,
+			"item": [
+				{
+					"name": "Add architectural element",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/addToken?token={{EXAMPLE_ADD_TOKEN}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"addToken"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{EXAMPLE_ADD_TOKEN}}"
+								}
+							]
+						},
+						"description": "This endpoint accepts a token name as part of URL parameters of a `GET` request. This token will be saved and can be annotated as a DBpedia entity during document processing."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove architectural element",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/removeToken?token={{EXAMPLE_REMOVE_TOKEN}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"removeToken"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{EXAMPLE_REMOVE_TOKEN}}"
+								}
+							]
+						},
+						"description": "This endpoint accepts a token name as part of URL parameters of a `GET` request. The token will be removed from DBpedia and won't be annotated as architectural elements anymore."
+					},
+					"response": []
+				},
+				{
+					"name": "Annotate document",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"The Yummy Inc online application will be deployed onto a J2EE application server Websphere Application Server version 6, as it is already the application server use for internal applications. J2EE security model will be reused. Data persistence will be addressed using a relational database.\"\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/processDocument",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"processDocument"
+							]
+						},
+						"description": "This endpoint accepts a JSON object as the request body. In the JSON object, there should be a key `content`, whose value is the text to be annotated.\n\nA list of annotations will be sent back in `response.data`."
+					},
+					"response": []
+				},
+				{
+					"name": "Get meta-information",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uri\": \"http://dbpedia.org/resource/Java_Platform,_Enterprise_Edition\"\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/getMetaInformation",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"getMetaInformation"
+							]
+						},
+						"description": "This endpoint retrieves the meta-information of an architectural element from Dbpedia ontology. \n\n//Why sending a URI? What does the response JSON mean?"
+					},
+					"response": []
+				},
+				{
+					"name": "Get software solutions",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uri\": \"http://dbpedia.org/resource/Relational_database\"\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/getSoftwareSolutions",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"getSoftwareSolutions"
+							]
+						},
+						"description": "This endpoint is used to find software solutions inplement an architectural topic. It accepts a JSON object containing an architectural element in the uri. A list of software solutions will be returned."
+					},
+					"response": [
+						{
+							"id": "afec6646-d16a-4bc1-8630-f7d34a027d82",
+							"name": "Get relational database solutions",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"uri\": \"http://dbpedia.org/resource/Relational_database\"\n}"
+								},
+								"url": {
+									"raw": "{{SERVER_URL}}/getSoftwareSolutions",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"getSoftwareSolutions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "27000",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 08 May 2018 17:40:57 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								}
+							],
+							"cookie": [],
+							"body": "[{\"uri\":\"http://dbpedia.org/resource/R:Base\",\"title\":\"R:Base\",\"description\":\"<span class=\\\"searchmatch\\\">R:BASE</span> (or RBASE) was the first relational database program for the PC. Created by Wayne Erickson in 1981, on November 13, 1981, Erickson and his brother\",\"averageScore\":267581.0},{\"uri\":\"http://dbpedia.org/resource/PointBase\",\"title\":\"PointBase\",\"description\":\" &quot;IBM Grabs DataMirror Technology&quot;. eWeek. Retrieved 12 May 2011.     History of <span class=\\\"searchmatch\\\">PointBase</span> Guide to <span class=\\\"searchmatch\\\">PointBase</span> Oracle BEA WebLogic <span class=\\\"searchmatch\\\">Pointbase</span> Reference\",\"averageScore\":223874.0},{\"uri\":\"http://dbpedia.org/resource/TimesTen\",\"title\":\"TimesTen\",\"description\":\"<span class=\\\"searchmatch\\\">TimesTen</span> is an in-memory, relational database management system with persistence and recoverability. Originally designed and implemented at Hewlett-Packard\",\"averageScore\":133078.0},{\"uri\":\"http://dbpedia.org/resource/FrontBase\",\"title\":\"FrontBase\",\"description\":\"<span class=\\\"searchmatch\\\">FrontBase</span> is a relational database management system written in ANSI C. <span class=\\\"searchmatch\\\">FrontBase</span> uses the Unicode character encoding.   <span class=\\\"searchmatch\\\">FrontBase</span> complies with SQL 92\",\"averageScore\":123838.0},{\"uri\":\"http://dbpedia.org/resource/ObjectDatabase++\",\"title\":\"ObjectDatabase++\",\"description\":\"An <span class=\\\"searchmatch\\\">object</span> <span class=\\\"searchmatch\\\">database</span> is a database management system in which information is represented in the form of objects as used in object-oriented programming.\",\"averageScore\":24400.0},{\"uri\":\"http://dbpedia.org/resource/ObjectStore\",\"title\":\"ObjectStore\",\"description\":\"&quot;The <span class=\\\"searchmatch\\\">Objectstore</span> Database System&quot;, Communications of the ACM, 34 (10): 50–63, doi:10.1145/125223.125244   Progress Software divests <span class=\\\"searchmatch\\\">ObjectStore</span>,completes\",\"averageScore\":15654.0},{\"uri\":\"http://dbpedia.org/resource/Diesel_engine\",\"title\":\"Diesel engine\",\"description\":\"The <span class=\\\"searchmatch\\\">diesel</span> <span class=\\\"searchmatch\\\">engine</span> (also known as a compression-ignition or CI engine), named after Rudolf Diesel, is an internal combustion engine in which ignition of\",\"averageScore\":12756.0},{\"uri\":\"http://dbpedia.org/resource/Db4o\",\"title\":\"Db4o\",\"description\":\"<span class=\\\"searchmatch\\\">db4o</span> (database for objects) was an embeddable open source object database for Java and .NET developers. It was developed, commercially licensed and supported\",\"averageScore\":12001.0},{\"uri\":\"http://dbpedia.org/resource/U1DB\",\"title\":\"U1DB\",\"description\":\"<span class=\\\"searchmatch\\\">U1DB</span> is a cross-platform, cross-device, syncable database application programming interface (API). It allows applications to store JSON documents and synchronize\",\"averageScore\":11536.0},{\"uri\":\"http://dbpedia.org/resource/The_Eureka\",\"title\":\"The Eureka\",\"description\":\"<span class=\\\"searchmatch\\\">The</span> <span class=\\\"searchmatch\\\">Eureka</span> is a machine for generating Latin verses, created and exhibited in the mid nineteenth century by the Quaker inventor John Clark of Bridgwater\",\"averageScore\":9595.0},{\"uri\":\"http://dbpedia.org/resource/DatabaseSpy\",\"title\":\"DatabaseSpy\",\"description\":\"<span class=\\\"searchmatch\\\">DatabaseSpy</span> is a multi-database query, design, and database comparison tool from Altova, the creator of XMLSpy. <span class=\\\"searchmatch\\\">DatabaseSpy</span> connects to many major relational\",\"averageScore\":7227.0},{\"uri\":\"http://dbpedia.org/resource/BigCouch\",\"title\":\"BigCouch\",\"description\":\"<span class=\\\"searchmatch\\\">BigCouch</span> is an open source, highly available, fault-tolerant, clustered &amp; API-compliant version of Apache CouchDB, which was maintained by Cloudant. On\",\"averageScore\":3520.0},{\"uri\":\"http://dbpedia.org/resource/Jet_engine\",\"title\":\"Jet engine\",\"description\":\"airbreathing <span class=\\\"searchmatch\\\">jet</span> <span class=\\\"searchmatch\\\">engines</span> (turbojets, turbofans, ramjets, and pulse jets) and non-airbreathing <span class=\\\"searchmatch\\\">jet</span> <span class=\\\"searchmatch\\\">engines</span> (such as rocket engines). In general, <span class=\\\"searchmatch\\\">jet</span> <span class=\\\"searchmatch\\\">engines</span> are\",\"averageScore\":2491.0},{\"uri\":\"http://dbpedia.org/resource/ObjectDB\",\"title\":\"ObjectDB\",\"description\":\"Adds <span class=\\\"searchmatch\\\">ObjectDB</span> as a BIRT data source and JPQL / JDOQL queries as data sets.     http://www.<span class=\\\"searchmatch\\\">objectdb</span>.com/<span class=\\\"searchmatch\\\">object</span>/<span class=\\\"searchmatch\\\">db</span>/database/license  http://www.<span class=\\\"searchmatch\\\">objectdb</span>.com/\",\"averageScore\":2230.0},{\"uri\":\"http://dbpedia.org/resource/MariaDB\",\"title\":\"MariaDB\",\"description\":\"systems    &quot;<span class=\\\"searchmatch\\\">MariaDB</span> 10.2.13 Release Notes&quot;. <span class=\\\"searchmatch\\\">mariadb</span>.com. 2018-02-13. Retrieved 2018-02-15.   <span class=\\\"searchmatch\\\">MariaDB</span> 10.3.5 Release Notes,<span class=\\\"searchmatch\\\">Maria</span> <span class=\\\"searchmatch\\\">DB</span>.com  &quot;<span class=\\\"searchmatch\\\">MariaDB</span> 10.0.20 Stable&quot;\",\"averageScore\":1929.0},{\"uri\":\"http://dbpedia.org/resource/Turbojet\",\"title\":\"Turbojet\",\"description\":\"The <span class=\\\"searchmatch\\\">turbojet</span> is an airbreathing jet engine, typically used in aircraft. It consists of a gas turbine with a propelling nozzle. The gas turbine has an air\",\"averageScore\":1778.0},{\"uri\":\"http://dbpedia.org/resource/Sewing_machine\",\"title\":\"Sewing machine\",\"description\":\"A <span class=\\\"searchmatch\\\">sewing</span> <span class=\\\"searchmatch\\\">machine</span> is a machine used to stitch fabric and other materials together with thread. <span class=\\\"searchmatch\\\">Sewing</span> <span class=\\\"searchmatch\\\">machines</span> were invented during the first Industrial\",\"averageScore\":1670.0},{\"uri\":\"http://dbpedia.org/resource/MySQL\",\"title\":\"MySQL\",\"description\":\"January 2018.   &quot;<span class=\\\"searchmatch\\\">MySQL</span>: <span class=\\\"searchmatch\\\">MySQL</span> 5.6 Release Notes&quot;. dev.<span class=\\\"searchmatch\\\">mysql</span>.com. Retrieved 15 January 2018.   &quot;<span class=\\\"searchmatch\\\">MySQL</span>: <span class=\\\"searchmatch\\\">MySQL</span> 5.7 Release Notes&quot;. dev.<span class=\\\"searchmatch\\\">mysql</span>.com. Retrieved\",\"averageScore\":1632.0},{\"uri\":\"http://dbpedia.org/resource/Washing_machine\",\"title\":\"Washing machine\",\"description\":\"A <span class=\\\"searchmatch\\\">washing</span> <span class=\\\"searchmatch\\\">machine</span> (laundry machine, clothes washer, or washer) is a device used to wash laundry. The term is mostly applied to machines that use water\",\"averageScore\":1627.0},{\"uri\":\"http://dbpedia.org/resource/OrientDB\",\"title\":\"OrientDB\",\"description\":\"&quot;orientechnologies/<span class=\\\"searchmatch\\\">orientdb</span>&quot;.   &quot;Multi-Model Database - <span class=\\\"searchmatch\\\">OrientDB</span> Manual&quot;.   &quot;DB-Engines Ranking - popularity ranking of graph DBMS&quot;.   &quot;orientechnologies/<span class=\\\"searchmatch\\\">orientdb</span>&quot;. \",\"averageScore\":1365.0},{\"uri\":\"http://dbpedia.org/resource/Turing_machine\",\"title\":\"Turing machine\",\"description\":\"A <span class=\\\"searchmatch\\\">Turing</span> <span class=\\\"searchmatch\\\">machine</span> is a mathematical model of computation that defines an abstract machine, which manipulates symbols on a strip of tape according to a table\",\"averageScore\":655.0},{\"uri\":\"http://dbpedia.org/resource/WinFax\",\"title\":\"WinFax\",\"description\":\"<span class=\\\"searchmatch\\\">WinFax</span> (also known as <span class=\\\"searchmatch\\\">WinFax</span> PRO) is a Microsoft Windows-based software product designed to let computers equipped with fax-modems to communicate directly\",\"averageScore\":612.0},{\"uri\":\"http://dbpedia.org/resource/WebScaleSQL\",\"title\":\"WebScaleSQL\",\"description\":\"and friends create <span class=\\\"searchmatch\\\">WebScaleSQL</span> from MySQL 5.6&quot;. The Register. Retrieved April 1, 2014.   &quot;Frequently Asked Questions&quot;. <span class=\\\"searchmatch\\\">webscalesql</span>.org. March 27, 2014\",\"averageScore\":596.0},{\"uri\":\"http://dbpedia.org/resource/Lawn_mower\",\"title\":\"Lawn mower\",\"description\":\"A <span class=\\\"searchmatch\\\">lawn</span> <span class=\\\"searchmatch\\\">mower</span> (mower) is a machine utilizing one or more revolving blades to cut a grass surface to an even height. The height of the cut grass may be fixed\",\"averageScore\":570.0},{\"uri\":\"http://dbpedia.org/resource/Microsoft_SQL_Server\",\"title\":\"Microsoft SQL Server\",\"description\":\"<span class=\\\"searchmatch\\\">Microsoft</span> <span class=\\\"searchmatch\\\">SQL</span> <span class=\\\"searchmatch\\\">Server</span> is a relational database management system developed by Microsoft. As a database server, it is a software product with the primary\",\"averageScore\":512.0},{\"uri\":\"http://dbpedia.org/resource/SQLite\",\"title\":\"SQLite\",\"description\":\"<span class=\\\"searchmatch\\\">SQLite</span> (/ˌɛskjuːɛlˈlaɪt/ or /ˈsiːkwəl.laɪt/) is a relational database management system contained in a C programming library. In contrast to many other\",\"averageScore\":383.0},{\"uri\":\"http://dbpedia.org/resource/CouchDB\",\"title\":\"CouchDB\",\"description\":\"Apache <span class=\\\"searchmatch\\\">CouchDB</span> is open source database software that focuses on ease of use and having a scalable architecture. It has a document-oriented NoSQL database\",\"averageScore\":233.0},{\"uri\":\"http://dbpedia.org/resource/MongoDB\",\"title\":\"MongoDB\",\"description\":\"documents!  <span class=\\\"searchmatch\\\">MongoDB</span>. &quot;GitHub - <span class=\\\"searchmatch\\\">mongodb</span>/mongo&quot;. GitHub.   Ma, Jason. &quot;Visualizing Your Data With <span class=\\\"searchmatch\\\">MongoDB</span> Compass&quot;. Dzone. Dzone.com.   <span class=\\\"searchmatch\\\">MongoDB</span>. &quot;The AGPL&quot;\",\"averageScore\":230.0},{\"uri\":\"http://dbpedia.org/resource/VoltDB\",\"title\":\"VoltDB\",\"description\":\"html  http://community.<span class=\\\"searchmatch\\\">voltdb</span>.com/node/118#comment-271    Official website <span class=\\\"searchmatch\\\">VoltDB</span> at Open Hub Curt Monash (25 May 2010). &quot;<span class=\\\"searchmatch\\\">VoltDB</span> finally launches&quot;. DBMS\",\"averageScore\":225.0},{\"uri\":\"http://dbpedia.org/resource/IBM_DB2\",\"title\":\"IBM DB2\",\"description\":\"<span class=\\\"searchmatch\\\">IBM</span> <span class=\\\"searchmatch\\\">Db2</span> contains database-server products developed by IBM. These products all support the relational model, but in recent years, some products have been\",\"averageScore\":195.0},{\"uri\":\"http://dbpedia.org/resource/Spinning_mule\",\"title\":\"Spinning mule\",\"description\":\"Play media         The <span class=\\\"searchmatch\\\">spinning</span> <span class=\\\"searchmatch\\\">mule</span> is a machine used to spin cotton and other fibres. They were used extensively from the late 18th to the early 20th\",\"averageScore\":121.0},{\"uri\":\"http://dbpedia.org/resource/Iris_recognition\",\"title\":\"Iris recognition\",\"description\":\"<span class=\\\"searchmatch\\\">Iris</span> <span class=\\\"searchmatch\\\">recognition</span> is an automated method of biometric identification that uses mathematical pattern-recognition techniques on video images of one or both\",\"averageScore\":73.0},{\"uri\":\"http://dbpedia.org/resource/MonetDB\",\"title\":\"MonetDB\",\"description\":\"<span class=\\\"searchmatch\\\">MonetDB</span> is an open source column-oriented database management system developed at the Centrum Wiskunde &amp; Informatica (CWI) in the Netherlands. It was\",\"averageScore\":58.0},{\"uri\":\"http://dbpedia.org/resource/Hot-bulb_engine\",\"title\":\"Hot-bulb engine\",\"description\":\"Play media    The <span class=\\\"searchmatch\\\">hot</span>-<span class=\\\"searchmatch\\\">bulb</span> <span class=\\\"searchmatch\\\">engine</span> is a type of internal combustion engine in which fuel ignites by coming in contact with a red-hot metal surface inside\",\"averageScore\":55.0},{\"uri\":\"http://dbpedia.org/resource/HSQLDB\",\"title\":\"HSQLDB\",\"description\":\"&quot;Software using <span class=\\\"searchmatch\\\">HSQLDB</span>&quot;. <span class=\\\"searchmatch\\\">hsqldb</span>.org.   &quot;<span class=\\\"searchmatch\\\">HSQLDB</span> Documentation&quot;. <span class=\\\"searchmatch\\\">hsqldb</span>.org.   &quot;<span class=\\\"searchmatch\\\">HSQLDB</span> Documentation&quot;. <span class=\\\"searchmatch\\\">hsqldb</span>.org.   &quot;The new <span class=\\\"searchmatch\\\">HSQLDB</span>&quot;. <span class=\\\"searchmatch\\\">hsqldb</span>.org.    Official\",\"averageScore\":47.0},{\"uri\":\"http://dbpedia.org/resource/Stocking_frame\",\"title\":\"Stocking frame\",\"description\":\"A <span class=\\\"searchmatch\\\">stocking</span> <span class=\\\"searchmatch\\\">frame</span> was a mechanical knitting machine used in the textiles industry. It was invented by William Lee of Calverton near Nottingham in 1589.\",\"averageScore\":46.0},{\"uri\":\"http://dbpedia.org/resource/Holden_V8_engine\",\"title\":\"Holden V8 engine\",\"description\":\"The <span class=\\\"searchmatch\\\">Holden</span> <span class=\\\"searchmatch\\\">V8</span> <span class=\\\"searchmatch\\\">engine</span> is an overhead valve (OHV) V8 engine that was produced by the Australian General Motors subsidiary, Holden between 1969 and 2000.\",\"averageScore\":35.0},{\"uri\":\"http://dbpedia.org/resource/IBM_Informix\",\"title\":\"IBM Informix\",\"description\":\"<span class=\\\"searchmatch\\\">IBM</span> <span class=\\\"searchmatch\\\">Informix</span> is a product family within IBM's Information Management division that is centered on several relational database management system (RDBMS)\",\"averageScore\":35.0},{\"uri\":\"http://dbpedia.org/resource/MemSQL\",\"title\":\"MemSQL\",\"description\":\"http://highscalability.com/blog/2012/8/14/<span class=\\\"searchmatch\\\">memsql</span>-architecture-the-fast-mvcc-inmem-lockfree-codegen-and.html (article sponsored by <span class=\\\"searchmatch\\\">MemSQL</span>)  &quot;<span class=\\\"searchmatch\\\">MemSQL</span>&quot;. Retrieved 2017-09-29\",\"averageScore\":32.0},{\"uri\":\"http://dbpedia.org/resource/SQL_Server_Express\",\"title\":\"SQL Server Express\",\"description\":\"Microsoft <span class=\\\"searchmatch\\\">SQL</span> <span class=\\\"searchmatch\\\">Server</span> <span class=\\\"searchmatch\\\">Express</span> is a version of Microsoft's SQL Server relational database management system that is free to download, distribute and use\",\"averageScore\":30.0},{\"uri\":\"http://dbpedia.org/resource/Couchbase_Server\",\"title\":\"Couchbase Server\",\"description\":\"<span class=\\\"searchmatch\\\">Couchbase</span> <span class=\\\"searchmatch\\\">Server</span>, originally known as Membase, is an open-source, distributed (shared-nothing architecture) multi-model NoSQL document-oriented database\",\"averageScore\":23.0},{\"uri\":\"http://dbpedia.org/resource/Cloudant\",\"title\":\"Cloudant\",\"description\":\"<span class=\\\"searchmatch\\\">Cloudant</span> is an IBM software product, which is primarily delivered as a cloud-based service. <span class=\\\"searchmatch\\\">Cloudant</span> is a non-relational, distributed database service\",\"averageScore\":20.0},{\"uri\":\"http://dbpedia.org/resource/Perst\",\"title\":\"Perst\",\"description\":\"versions of <span class=\\\"searchmatch\\\">Perst</span> are <span class=\\\"searchmatch\\\">Perst</span> for .NET, <span class=\\\"searchmatch\\\">Perst</span> for Java and <span class=\\\"searchmatch\\\">Perst</span> Lite. <span class=\\\"searchmatch\\\">Perst</span> for Java and <span class=\\\"searchmatch\\\">Perst</span> Lite are bundled in a single software distribution. <span class=\\\"searchmatch\\\">Perst</span> for \",\"averageScore\":20.0},{\"uri\":\"http://dbpedia.org/resource/Adaptive_Server_Enterprise\",\"title\":\"Adaptive Server Enterprise\",\"description\":\"SAP ASE (<span class=\\\"searchmatch\\\">Adaptive</span> <span class=\\\"searchmatch\\\">Server</span> <span class=\\\"searchmatch\\\">Enterprise</span>), originally known as Sybase SQL Server, and also commonly known as Sybase DB or Sybase ASE, is a relational model\",\"averageScore\":19.0},{\"uri\":\"http://dbpedia.org/resource/Aerial_steam_carriage\",\"title\":\"Aerial steam carriage\",\"description\":\"The <span class=\\\"searchmatch\\\">aerial</span> <span class=\\\"searchmatch\\\">steam</span> <span class=\\\"searchmatch\\\">carriage</span>, also named Ariel, was a flying machine patented in 1842 that was supposed to carry passengers into the air. It was, in practice\",\"averageScore\":18.0},{\"uri\":\"http://dbpedia.org/resource/CUBRID\",\"title\":\"CUBRID\",\"description\":\"<span class=\\\"searchmatch\\\">CUBRID</span> (/ˈkjuːbrɪd/ &quot;cube-rid&quot;) is an open source SQL-based relational database management system (RDBMS) with object extensions developed by Naver Corporation\",\"averageScore\":17.0},{\"uri\":\"http://dbpedia.org/resource/Virtuoso_Universal_Server\",\"title\":\"Virtuoso Universal Server\",\"description\":\"<span class=\\\"searchmatch\\\">Virtuoso</span> <span class=\\\"searchmatch\\\">Universal</span> <span class=\\\"searchmatch\\\">Server</span> is a middleware and database engine hybrid that combines the functionality of a traditional Relational database management system\",\"averageScore\":16.0},{\"uri\":\"http://dbpedia.org/resource/MySQL_Enterprise\",\"title\":\"MySQL Enterprise\",\"description\":\"on <span class=\\\"searchmatch\\\">MySQL</span> <span class=\\\"searchmatch\\\">Enterprise</span>. <span class=\\\"searchmatch\\\">MySQL</span> <span class=\\\"searchmatch\\\">Enterprise</span> contains <span class=\\\"searchmatch\\\">MySQL</span> <span class=\\\"searchmatch\\\">Enterprise</span> Server software, a distribution of the MySQL Server <span class=\\\"searchmatch\\\">MySQL</span> <span class=\\\"searchmatch\\\">Enterprise</span> Monitor <span class=\\\"searchmatch\\\">MySQL</span> Enterprise\",\"averageScore\":16.0},{\"uri\":\"http://dbpedia.org/resource/Oracle_NoSQL_Database\",\"title\":\"Oracle NoSQL Database\",\"description\":\"<span class=\\\"searchmatch\\\">Oracle</span> <span class=\\\"searchmatch\\\">NoSQL</span> <span class=\\\"searchmatch\\\">Database</span> is a NoSQL-type distributed key-value database from Oracle Corporation. It provides transactional semantics for data manipulation\",\"averageScore\":16.0},{\"uri\":\"http://dbpedia.org/resource/Advantage_Database_Server\",\"title\":\"Advantage Database Server\",\"description\":\"<span class=\\\"searchmatch\\\">Advantage</span> <span class=\\\"searchmatch\\\">Database</span> <span class=\\\"searchmatch\\\">Server</span> is a relational database management system (RDBMS) for small to medium-sized businesses by SAP SE (formerly Sybase iAnywhere\",\"averageScore\":15.0},{\"uri\":\"http://dbpedia.org/resource/Ingres_(database)\",\"title\":\"Ingres (database)\",\"description\":\"<span class=\\\"searchmatch\\\">Ingres</span> <span class=\\\"searchmatch\\\">Database</span> (/ɪŋˈɡrɛs/ ing-GRESS) is a commercially supported, open-source SQL relational database management system intended to support large commercial\",\"averageScore\":15.0},{\"uri\":\"http://dbpedia.org/resource/MySQL_Cluster\",\"title\":\"MySQL Cluster\",\"description\":\"<span class=\\\"searchmatch\\\">MySQL</span> <span class=\\\"searchmatch\\\">Cluster</span> is a technology providing shared-nothing clustering and auto-sharding for the MySQL database management system. It is designed to provide\",\"averageScore\":14.0},{\"uri\":\"http://dbpedia.org/resource/Tibero\",\"title\":\"Tibero\",\"description\":\"cluster, TAC. The main products are <span class=\\\"searchmatch\\\">Tibero</span>, <span class=\\\"searchmatch\\\">Tibero</span> MMDB, <span class=\\\"searchmatch\\\">Tibero</span> ProSync, <span class=\\\"searchmatch\\\">Tibero</span> InfiniData and <span class=\\\"searchmatch\\\">Tibero</span> DataHub. <span class=\\\"searchmatch\\\">Tibero</span>, a Relational Database Management\",\"averageScore\":14.0},{\"uri\":\"http://dbpedia.org/resource/MSQL\",\"title\":\"MSQL\",\"description\":\"<span class=\\\"searchmatch\\\">mSQL</span> or Mini SQL is a lightweight database management system from Hughes Technologies.   In 1993–94 David Hughes developed a network monitoring and management\",\"averageScore\":13.0},{\"uri\":\"http://dbpedia.org/resource/Percona_Server\",\"title\":\"Percona Server\",\"description\":\"<span class=\\\"searchmatch\\\">Percona</span> <span class=\\\"searchmatch\\\">Server</span> for MySQL is a distribution of the MySQL relational database management system created by <span class=\\\"searchmatch\\\">Percona</span>. <span class=\\\"searchmatch\\\">Percona</span> <span class=\\\"searchmatch\\\">Server</span> for MySQL is an open source\",\"averageScore\":13.0},{\"uri\":\"http://dbpedia.org/resource/Vectorwise\",\"title\":\"Vectorwise\",\"description\":\"Actian Vector (formerly known as <span class=\\\"searchmatch\\\">VectorWise</span>) is an SQL relational database management system designed for high performance in analytical database applications\",\"averageScore\":12.0},{\"uri\":\"http://dbpedia.org/resource/Apache_Marmotta\",\"title\":\"Apache Marmotta\",\"description\":\"<span class=\\\"searchmatch\\\">Apache</span> <span class=\\\"searchmatch\\\">Marmotta</span> is a linked data platform that comprises several components. In its most basic configuration it is a Linked Data server. Marmotta is one\",\"averageScore\":12.0},{\"uri\":\"http://dbpedia.org/resource/Druid_(open-source_data_store)\",\"title\":\"Druid (open-source data store)\",\"description\":\"Novet, Jordan. &quot;Imply launches with $2M to commercialize the <span class=\\\"searchmatch\\\">Druid</span> <span class=\\\"searchmatch\\\">open</span>-<span class=\\\"searchmatch\\\">source</span> <span class=\\\"searchmatch\\\">data</span> <span class=\\\"searchmatch\\\">store</span>&quot;, VentureBeat, 19 October 2015  Druid Project Documentation \",\"averageScore\":9.0},{\"uri\":\"http://dbpedia.org/resource/Zope_Object_Database\",\"title\":\"Zope Object Database\",\"description\":\"The <span class=\\\"searchmatch\\\">Zope</span> <span class=\\\"searchmatch\\\">Object</span> <span class=\\\"searchmatch\\\">Database</span> (ZODB) is an object-oriented database for transparently and persistently storing Python objects. It is included as part of the\",\"averageScore\":9.0},{\"uri\":\"http://dbpedia.org/resource/Throstle_frame\",\"title\":\"Throstle frame\",\"description\":\"The <span class=\\\"searchmatch\\\">throstle</span> <span class=\\\"searchmatch\\\">frame</span> was a spinning machine for cotton, wool, and other fibers, differing from a mule in having a continuous action, the processes of drawing\",\"averageScore\":8.0},{\"uri\":\"http://dbpedia.org/resource/CSQL\",\"title\":\"CSQL\",\"description\":\"<span class=\\\"searchmatch\\\">CSQL</span> is an open source main memory high-performance relational database management system developed at sourceforge.net. It is designed to provide high\",\"averageScore\":7.0},{\"uri\":\"http://dbpedia.org/resource/Adabas_D\",\"title\":\"Adabas D\",\"description\":\"<span class=\\\"searchmatch\\\">Adabas</span> <span class=\\\"searchmatch\\\">D</span> is a relational database management system owned by Software AG since 1994, when Software AG acquired SQL-Datenbanksysteme GmbH from Siemens Nixdorf\",\"averageScore\":6.0},{\"uri\":\"http://dbpedia.org/resource/Heath_Robinson_(codebreaking_machine)\",\"title\":\"Heath Robinson (codebreaking machine)\",\"description\":\"Heath Robinson was a machine used by British codebreakers at the Government Code and Cypher School (GC&amp;CS) at Bletchley Park during World War II in Cryptanalysis\",\"averageScore\":5.0},{\"uri\":\"http://dbpedia.org/resource/OpenEdge_Advanced_Business_Language\",\"title\":\"OpenEdge Advanced Business Language\",\"description\":\"<span class=\\\"searchmatch\\\">OpenEdge</span> <span class=\\\"searchmatch\\\">Advanced</span> <span class=\\\"searchmatch\\\">Business</span> <span class=\\\"searchmatch\\\">Language</span>, or OpenEdge ABL for short, is a business application development language created and maintained by Progress Software\",\"averageScore\":5.0},{\"uri\":\"http://dbpedia.org/resource/DBEdit\",\"title\":\"DBEdit\",\"description\":\"<span class=\\\"searchmatch\\\">DBEdit</span> 2 is a database editor, which can connect to an Oracle, DB2, MySQL and any database that provides a JDBC driver. It runs on Windows, Linux and Solaris\",\"averageScore\":4.0},{\"uri\":\"http://dbpedia.org/resource/SQream_DB\",\"title\":\"SQream DB\",\"description\":\"<span class=\\\"searchmatch\\\">SQream</span> <span class=\\\"searchmatch\\\">DB</span> is a relational database management system (RDBMS) that uses graphics processing units (GPUs) from Nvidia. <span class=\\\"searchmatch\\\">SQream</span> <span class=\\\"searchmatch\\\">DB</span> is designed for big data\",\"averageScore\":4.0},{\"uri\":\"http://dbpedia.org/resource/Single_Table_Inheritance\",\"title\":\"Single Table Inheritance\",\"description\":\"<span class=\\\"searchmatch\\\">Single</span> <span class=\\\"searchmatch\\\">table</span> <span class=\\\"searchmatch\\\">inheritance</span> is a way to emulate object-oriented inheritance in a relational database. When mapping from a database table to an object in an\",\"averageScore\":3.0},{\"uri\":\"http://dbpedia.org/resource/Dakeyne_hydraulic_disc_engine\",\"title\":\"Dakeyne hydraulic disc engine\",\"description\":\"The <span class=\\\"searchmatch\\\">Dakeyne</span> <span class=\\\"searchmatch\\\">hydraulic</span> <span class=\\\"searchmatch\\\">disc</span> <span class=\\\"searchmatch\\\">engine</span> was a high pressure hydraulic engine built in the 19th century to power a flax mill in Ladygrove, Derbyshire, England\",\"averageScore\":3.0},{\"uri\":\"http://dbpedia.org/resource/Apache_Trafodion\",\"title\":\"Apache Trafodion\",\"description\":\"<span class=\\\"searchmatch\\\">Apache</span> <span class=\\\"searchmatch\\\">Trafodion</span> is an open-source Top-Level Project at the Apache Software Foundation. It was originally developed by the information technology division\",\"averageScore\":3.0},{\"uri\":\"http://dbpedia.org/resource/Cornerstone_(software)\",\"title\":\"Cornerstone (software)\",\"description\":\"Cornerstone is a relational database for MS-DOS by Infocom. It was widely hailed upon its release in 1985 for its ease of use, but is generally considered\",\"averageScore\":2.0},{\"uri\":\"http://dbpedia.org/resource/IBM_DB2_Express-C\",\"title\":\"IBM DB2 Express-C\",\"description\":\"Workgroup Server Edition, Direct and Developer Editions and Express-C.  <span class=\\\"searchmatch\\\">IBM</span> <span class=\\\"searchmatch\\\">DB2</span> <span class=\\\"searchmatch\\\">Express</span>-<span class=\\\"searchmatch\\\">C</span> is a free to download, use and redistribute edition of the IBM DB2\",\"averageScore\":2.0},{\"uri\":\"http://dbpedia.org/resource/Hector_(API)\",\"title\":\"Hector (API)\",\"description\":\"Hector is a high-level client API for Apache Cassandra. Named after Hector, a warrior of Troy in Greek mythology, it is a substitute for the Cassandra\",\"averageScore\":2.0},{\"uri\":\"http://dbpedia.org/resource/Transbase\",\"title\":\"Transbase\",\"description\":\"<span class=\\\"searchmatch\\\">Transbase</span> is a relational database management system, developed and maintained by Transaction Software GmbH, Munich. The development of <span class=\\\"searchmatch\\\">Transbase</span> was\",\"averageScore\":2.0},{\"uri\":\"http://dbpedia.org/resource/Strozzi_NoSQL\",\"title\":\"Strozzi NoSQL\",\"description\":\"<span class=\\\"searchmatch\\\">Strozzi</span> <span class=\\\"searchmatch\\\">NoSQL</span> is a shell-based relational database management system initialized and developed by Carlo Strozzi that runs under Unix-like operating systems\",\"averageScore\":2.0}]"
+						}
+					]
+				},
+				{
+					"name": "Add software solution",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uri\" : \"http://dbpedia.org/resource/Relational_database\",\n    \"title\": \"testDB\",\n    \"description\": \"This is a testing relational database.\"\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/addSoftware",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"addSoftware"
+							]
+						},
+						"description": "This endpoint is used to create a new software solution. It accepts a JSON object describing the solution. The solution will be saved and can be retrieved."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove software solution",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uri\" : \"http://dbpedia.org/resource/Relational_database\",\n    \"title\": \"testDB\"\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/removeSoftware",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"removeSoftware"
+							]
+						},
+						"description": "This endpoint is used to delete a software solution. It accepts a JSON object of the solution to be deleted. After deletion, the software solution will not be suggested anymore."
+					},
+					"response": []
+				},
+				{
+					"name": "Get alternative solutions",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uri\": \"http://dbpedia.org/resource/Java_Platform,_Enterprise_Edition\"\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/getAlternatives",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"getAlternatives"
+							]
+						},
+						"description": "This endpoint is used to find alternative solutions for an architectural topic. It receives a JSON object containing an architectural element in the uri. A list of alternative solutions will be returned.\n\n//Example returns an empty array."
+					},
+					"response": []
+				},
+				{
+					"name": "Add alternative solution",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uri\" : \"http://dbpedia.org/resource/Relational_database\",\n    \"title\": \"Test Alternative\",\n    \"description\": \"Test Alternative description\"\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/addAlternative",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"addAlternative"
+							]
+						},
+						"description": "This endpoint is used to create a new alternative solution. It accepts a JSON object describing the solution. The solution will be saved and can be retrieved."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove alternative solution",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"uri\": \"http://dbpedia.org/resource/Relational_database\",\n    \"title\": \"Test Alternative\"\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/removeAlternative",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"removeAlternative"
+							]
+						},
+						"description": "This endpoint is used to delete an alternative solution. It accepts a JSON object of the solution to be deleted. After deletion, the solution will not be suggested anymore."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Amelietor specific",
+			"description": null,
+			"item": [
+				{
+					"name": "Upload file",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"value": ""
+								}
+							]
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/getFileContent",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"getFileContent"
+							]
+						},
+						"description": "This endpoint is used to upload a file for annotation."
+					},
+					"response": []
+				},
+				{
+					"name": "Create session",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/createSession",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"createSession"
+							]
+						},
+						"description": "This endpoint is used to create a new session."
+					},
+					"response": [
+						{
+							"id": "fa9663ea-3ab1-4eba-8d95-d806ee4427aa",
+							"name": "Create session example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{SERVER_URL}}/createSession",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"createSession"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "64",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 08 May 2018 20:12:06 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								}
+							],
+							"cookie": [],
+							"body": "{\"session\":\"661b2fa5-e713-4468-a1c9-6a1a6be670d0\",\"status\":\"OK\"}"
+						}
+					]
+				},
+				{
+					"name": "Get all annotations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/annotations",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"annotations"
+							]
+						},
+						"description": "This endpoint is used to retrieve all annotations of the uploaded file."
+					},
+					"response": []
+				},
+				{
+					"name": "Get annotation by hash",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/paragraph/:paragraphHash/annotations",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"paragraph",
+								":paragraphHash",
+								"annotations"
+							],
+							"variable": [
+								{
+									"key": "paragraphHash",
+									"value": "{{PARAGRAPH_HASH}}"
+								}
+							]
+						},
+						"description": "This endpoint is used to retrieve annotations by file hash."
+					},
+					"response": []
+				},
+				{
+					"name": "Create annotation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"paragraphHash\": \"testHash\",\n\t\"token\": \"testToken\",\n\t\"type\": \"test\",\n\t\"offsets\": null\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/annotation",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"annotation"
+							]
+						},
+						"description": "This endpoint is used to create an annotation for the uploaded file. It accepts a JSON object with `paragraphHash`, `token`, `type`, `offsets`. `offsets` can have `begin` and `end` values. This annotation will be retrieved when annotating the same file."
+					},
+					"response": []
+				},
+				{
+					"name": "Update annotation",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"token\": \"testToken\",\n  \"type\": \"test\",\n  \"offsets\": null\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/annotation/:annotationId",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"annotation",
+								":annotationId"
+							],
+							"variable": [
+								{
+									"key": "annotationId",
+									"value": "{{ANNOTATION_ID}}",
+									"description": "This is a hexadecimal value."
+								}
+							]
+						},
+						"description": "This endpoint is used to update an annotation of the uploaded file. The request body is a JSON object with `token`, `type`, `offsets`. `offsets` can have `begin` and `end` values."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete annotation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/annotation/:annotationId",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"annotation",
+								":annotationId"
+							],
+							"variable": [
+								{
+									"key": "annotationId",
+									"value": "{{ANNOTATION_ID}}",
+									"description": "This is a hexadecimal value."
+								}
+							]
+						},
+						"description": "This endpoint is used to delete an annotation of the uploaded file. It accepts annotationId as a path parameter."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create project",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"testProject\",\n    \"description\": \"This is a test project\",\n    \"key\": \"testKey\"\n}"
+				},
+				"url": {
+					"raw": "{{SERVER_URL}}/project",
+					"host": [
+						"{{SERVER_URL}}"
+					],
+					"path": [
+						"project"
+					]
+				},
+				"description": "This endpoint is used to create a project. It accepts a JSON object with `name`, `description` and `key`."
+			},
+			"response": [
+				{
+					"id": "cd69cf84-b1d4-49bb-b28c-d2f015383046",
+					"name": "Create project example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"testProject\",\n    \"description\": \"This is a test project\",\n    \"key\": \"testKey\"\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/project",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"project"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "93",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 08 May 2018 18:39:57 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						}
+					],
+					"cookie": [],
+					"body": "{\"name\":\"testProject\",\"description\":\"This is a test project\",\"id\":\"5af1eefdd7631322d1ea5676\"}"
+				}
+			]
+		}
+	]
+}

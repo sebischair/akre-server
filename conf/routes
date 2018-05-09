@@ -1,17 +1,17 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
-# ~~~~
+# TBD: group the following APIs into related groups
 GET           /addToken                         controllers.AnnotationController.addToken(token: String ?= "")
 GET           /removeToken                      controllers.AnnotationController.removeToken(token: String ?= "")
 POST          /processDocument                  controllers.DocumentController.processDocument()
 POST          /annotate                         controllers.DocumentController.processDocument()
 POST          /getMetaInformation               controllers.DocumentController.getMetaInformation()
 POST          /getSoftwareSolutions             controllers.SoftwareRecommendationController.getSoftwareSolutions()
-POST          /getAlternatives                  controllers.AlternativesRecommendationController.getAlternatives()
-POST          /removeSoftware                   controllers.SoftwareRecommendationController.removeSoftwareSolution()
 POST          /addSoftware                      controllers.SoftwareRecommendationController.addSoftwareSolution()
-POST          /removeAlternative                controllers.AlternativesRecommendationController.removeAlternative()
+POST          /removeSoftware                   controllers.SoftwareRecommendationController.removeSoftwareSolution()
+POST          /getAlternatives                  controllers.AlternativesRecommendationController.getAlternatives()
 POST          /addAlternative                   controllers.AlternativesRecommendationController.addAlternative()
+POST          /removeAlternative                controllers.AlternativesRecommendationController.removeAlternative()
 
 #cc-annotator rest api
 POST          /processCode                      controllers.CodeController.processCode()
@@ -23,10 +23,9 @@ GET           /codeTokenInFile                  controllers.CCAnnotatorControlle
 GET           /codeTokenInProject               controllers.CCAnnotatorController.getAllForProjectId(projectId: String ?= "")
 GET           /deleteCodeToken                  controllers.CCAnnotatorController.delete(id: String ?= "")
 
-# Amelietor specific
+# AMELIE editor
 POST          /getFileContent                   controllers.getFileContent.upload()
 POST          /createSession                    controllers.SessionController.createNewSession()
-
 GET           /annotations                      controllers.AnnotationController.getAll()
 GET           /paragraph/:paragraphHash/annotations         controllers.AnnotationController.getAnnotationsByHash(paragraphHash: String)
 POST          /annotation                       controllers.AnnotationController.create()
@@ -41,27 +40,30 @@ GET           /annotate/:paraghraphHash         controllers.SpaCyController.proc
 #POST          /record/delete/all                           controllers.RecordController.deleteAllDocuments()
 #GET           /record/all                                  controllers.RecordController.getAllDocuments()
 
+# AMELIE data processing
 GET           /updateTaskWithQA                 controllers.amelie.QualityAttributesController.updateTaskWithQA(projectKey: String)
 GET           /updateTaskWithAE                 controllers.amelie.ArchitecturalElementsController.updateTaskWithAE(projectKey: String)
-GET           /getAssignee                      controllers.amelie.AssigneeController.getAssignee(projectKey: String)
-GET           /predictAssignee                  controllers.amelie.AssigneePredictionController.predictAssignee(projectKey: String)
-
 GET           /labelDesignDecisions             controllers.amelie.LabelDesignDecisionsController.labelDesignDecisions(projectKey: String)
+GET           /updateSimilarDocuments           controllers.amelie.SimilarDocumentsController.updateSimilarDocuments(projectKey: String)
 
-GET           /getDataForAEV                    controllers.amelie.AEDataController.getAEData(projectKey: String)
+# AMELIE views
 GET           /getDataForQAV                    controllers.amelie.QADataController.getQAData(projectKey: String)
 GET           /getAllQAV                        controllers.amelie.QADataController.getAllQA()
+GET           /getDataForAEV                    controllers.amelie.AEDataController.getAEData(projectKey: String)
+GET           /getAssignee                      controllers.amelie.AssigneeController.getAssignee(projectKey: String)
+GET           /predictAssignee                  controllers.amelie.AssigneePredictionController.predictAssignee(projectKey: String)
 POST          /getDataForDDV                    controllers.amelie.DDDataController.getDDData()
+GET           /designDecisions                  controllers.amelie.DesignDecisionController.getAllDesignDecisions(projectKey: String)
+GET           /designDecision                   controllers.amelie.DesignDecisionController.getDesignDecision(issueKey: String)
 POST          /project                          controllers.amelie.ProjectController.create()
 GET           /project                          controllers.amelie.ProjectController.getAll()
 GET           /project/:key                     controllers.amelie.ProjectController.getProjectByKey(key: String)
-GET           /designDecisions                  controllers.amelie.DesignDecisionController.getAllDesignDecisions(projectKey: String)
-GET           /designDecision                   controllers.amelie.DesignDecisionController.getDesignDecision(issueKey: String)
+
+# Import projects
 GET           /updateProjectProcessState        controllers.amelie.ProjectController.updateProjectProcessState(projectKey: String)
 GET           /updateProjectIssueCount          controllers.amelie.ProjectController.updateProjectIssueCount(projectKey: String)
-GET           /updateSimilarDocuments           controllers.amelie.SimilarDocumentsController.updateSimilarDocuments(projectKey: String)
 
+# Testing APIs
 GET           /updateAllConcepts                controllers.amelie.KeywordExtractorController.updateConceptsForDesignDecisions(projectKey: String)
 GET           /updateAllKeywords                controllers.amelie.KeywordExtractorController.updateKeywordsForDesignDecisions(projectKey: String)
-
 GET           /fixTasks                         controllers.amelie.ArchitecturalElementsController.fixTasks(projectKey: String)

@@ -30,3 +30,6 @@ aylien.api.key="<aylienKey>"
 aylien.api.id="<aylienId>"
 
 docclustering.url="http://127.0.0.1:9001/"
+
+# add a secret in application.local.conf when you start the app in docker or run in production mode
+# play.crypto.secret="changeme"

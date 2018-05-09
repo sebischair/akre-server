@@ -1,14 +1,15 @@
-name := """07AKRec"""
+name := """Akre"""
 
-version := "1.0-SNAPSHOT"
+version := "1.0"
 
-lazy val root = (project in file(".")).enablePlugins(PlayJava)
+lazy val root = (project in file(".")).enablePlugins(PlayJava, LauncherJarPlugin)
 
-scalaVersion := "2.11.7"
+scalaVersion := "2.11.11"
+
+lazy val webJarsPlay = file("..").getAbsoluteFile.toURI
 
 libraryDependencies ++= Seq(
   filters,
-  javaJdbc,
   cache,
   javaWs,
   "com.google.code.gson" % "gson" % "2.8.0",
@@ -53,3 +54,7 @@ libraryDependencies ++= Seq(
   //AYLIEN
   "com.aylien.textapi" % "client" % "0.6.1"
 )
+
+unmanagedResourceDirectories in (Compile, runMain) <+=  baseDirectory ( _ /"../myresources")
+
+routesGenerator := InjectedRoutesGenerator

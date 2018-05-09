@@ -20,9 +20,12 @@ Ensure mongodb is running on port 27017
 
 ## Docker support
 1. Change the database configurations according to the instructions in `application.local.conf`
-1. Start the complete application stack using `docker-compose up`
+2. Start the complete application stack using `docker-compose up`
 
-Notice: the current docker uses a mongoDB image without any data. This will be dealt with in the future work.
+### To deploy all related subprojects related to AMELIE
+1. Copy docker-compose-all.yml
+2. Rename it to docker-compose.yml
+3. Start the complete application stack using `docker-compose up`
 
 ## MongoDB settings with auth
 

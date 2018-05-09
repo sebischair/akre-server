@@ -19,3 +19,4 @@ out/
 .oracle_jre_usage
 .sbt
 cert/
+dist/akre-1.0.zip

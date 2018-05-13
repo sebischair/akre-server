@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Amelietor",
+			"name": "AMELIE",
 			"description": null,
 			"item": [
 				{
@@ -147,7 +147,7 @@
 					},
 					"response": [
 						{
-							"id": "afec6646-d16a-4bc1-8630-f7d34a027d82",
+							"id": "91bb00eb-035a-431c-95c5-a5025b1a81f4",
 							"name": "Get relational database solutions",
 							"originalRequest": {
 								"method": "POST",
@@ -337,7 +337,7 @@
 			]
 		},
 		{
-			"name": "Amelietor specific",
+			"name": "Editor",
 			"description": null,
 			"item": [
 				{
@@ -371,7 +371,7 @@
 				{
 					"name": "Create session",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -390,7 +390,7 @@
 					},
 					"response": [
 						{
-							"id": "fa9663ea-3ab1-4eba-8d95-d806ee4427aa",
+							"id": "06253b8a-749c-42cf-bfa9-faded8026750",
 							"name": "Create session example",
 							"originalRequest": {
 								"method": "POST",
@@ -578,35 +578,118 @@
 			]
 		},
 		{
-			"name": "Create project",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\": \"testProject\",\n    \"description\": \"This is a test project\",\n    \"key\": \"testKey\"\n}"
-				},
-				"url": {
-					"raw": "{{SERVER_URL}}/project",
-					"host": [
-						"{{SERVER_URL}}"
-					],
-					"path": [
-						"project"
-					]
-				},
-				"description": "This endpoint is used to create a project. It accepts a JSON object with `name`, `description` and `key`."
-			},
-			"response": [
+			"name": "Data processing",
+			"description": "",
+			"item": [
 				{
-					"id": "cd69cf84-b1d4-49bb-b28c-d2f015383046",
-					"name": "Create project example",
-					"originalRequest": {
+					"name": "Update task with quality attributes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/updateTaskWithQA?projectKey={{PROJECT_KEY}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"updateTaskWithQA"
+							],
+							"query": [
+								{
+									"key": "projectKey",
+									"value": "{{PROJECT_KEY}}"
+								}
+							]
+						},
+						"description": "This endpoint is used to extract quality attributes from all design decisions. Quality attributes will be extracted from `summary` and `description` fields of each design decision. This information will be stored in the database and can be retrieved in the project analysis views.\n\nIt accepts the project key as the parameter."
+					},
+					"response": []
+				},
+				{
+					"name": "Update task with architectural elements",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/updateTaskWithAE?projectKey={{PROJECT_KEY}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"updateTaskWithAE"
+							],
+							"query": [
+								{
+									"key": "projectKey",
+									"value": "{{PROJECT_KEY}}"
+								}
+							]
+						},
+						"description": "This endpoint is used to extract architectural elements from all design decisions. Architectural elements will be extracted from `summary` and `description` fields of each design decision. This information will be stored in the database and can be retrieved in the project analysis views.\n\nIt accepts the project key as the parameter."
+					},
+					"response": []
+				},
+				{
+					"name": "Label design decisions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/labelDesignDecisions?projectKey={{PROJECT_KEY}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"labelDesignDecisions"
+							],
+							"query": [
+								{
+									"key": "projectKey",
+									"value": "{{PROJECT_KEY}}"
+								}
+							]
+						},
+						"description": "This endpoint is used to categorize all design decisions. Each design decision will be categorized into structural, behavioral or no-existence decision. This information will be stored in the database and can be retrieved in the project analysis views.\n\nIt accepts the project key as the parameter."
+					},
+					"response": []
+				},
+				{
+					"name": "Update similar documents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/updateSimilarDocuments?projectKey={{PROJECT_KEY}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"updateSimilarDocuments"
+							],
+							"query": [
+								{
+									"key": "projectKey",
+									"value": "{{PROJECT_KEY}}"
+								}
+							]
+						},
+						"description": "This endpoint is used to cluster similar design decisions. Design decisions will be clustered based on the marchine learning pipeline established in [DocClustering](https://github.com/sebischair/DocClusteringWorkbench) component. This information will be stored in the database and can be retrieved in the design decision analysis view.\n\nIt accepts the project key as the parameter."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Views",
+			"description": "",
+			"item": [
+				{
+					"name": "Create project",
+					"request": {
 						"method": "POST",
 						"header": [
 							{
@@ -626,33 +709,118 @@
 							"path": [
 								"project"
 							]
-						}
+						},
+						"description": "This endpoint is used to create a project. It accepts a JSON object with `name`, `description` and `key`."
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "Content-Length",
-							"value": "93",
-							"name": "Content-Length",
-							"description": "The length of the response body in octets (8-bit bytes)"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8",
-							"name": "Content-Type",
-							"description": "The mime type of this content"
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 08 May 2018 18:39:57 GMT",
-							"name": "Date",
-							"description": "The date and time that the message was sent"
+							"id": "1a80898b-2f04-48fc-9ada-0e18ac178e54",
+							"name": "Create project example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"testProject\",\n    \"description\": \"This is a test project\",\n    \"key\": \"testKey\"\n}"
+								},
+								"url": {
+									"raw": "{{SERVER_URL}}/project",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"project"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "93",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 08 May 2018 18:39:57 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								}
+							],
+							"cookie": [],
+							"body": "{\"name\":\"testProject\",\"description\":\"This is a test project\",\"id\":\"5af1eefdd7631322d1ea5676\"}"
 						}
-					],
-					"cookie": [],
-					"body": "{\"name\":\"testProject\",\"description\":\"This is a test project\",\"id\":\"5af1eefdd7631322d1ea5676\"}"
+					]
+				}
+			]
+		},
+		{
+			"name": "Import projects",
+			"description": "",
+			"item": [
+				{
+					"name": "Update project import state",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/updateProjectProcessState?projectKey={{PROJECT_KEY}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"updateProjectProcessState"
+							],
+							"query": [
+								{
+									"key": "projectKey",
+									"value": "{{PROJECT_KEY}}"
+								}
+							]
+						},
+						"description": "This endpoint is used to update the process state of a project. In the `projects` collection, `preProcessed` and `decisionCount` fields will be updated.\n\nIt accepts the project key as parameter."
+					},
+					"response": []
+				},
+				{
+					"name": "Update project issue count",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/updateProjectIssueCount?projectKey={{PROJECT_KEY}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"updateProjectIssueCount"
+							],
+							"query": [
+								{
+									"key": "projectKey",
+									"value": "{{PROJECT_KEY}}"
+								}
+							]
+						},
+						"description": "This endpoint is used to update the issue count of a project. In the `projects` collection, `issueCount` field will be updated.\n\nIt accepts the project key as parameter."
+					},
+					"response": []
 				}
 			]
 		}

@@ -13,7 +13,7 @@ POST          /getAlternatives                  controllers.AlternativesRecommen
 POST          /addAlternative                   controllers.AlternativesRecommendationController.addAlternative()
 POST          /removeAlternative                controllers.AlternativesRecommendationController.removeAlternative()
 
-#cc-annotator rest api
+# cc-annotator rest api - not documented
 POST          /processCode                      controllers.CodeController.processCode()
 GET           /pattern                          controllers.CodeController.pattern(projectId: String ?= "")
 POST          /pattern                          controllers.CodeController.updatePattern()
@@ -33,7 +33,7 @@ PUT           /annotation/:annotationId         controllers.AnnotationController
 DELETE        /annotation/:annotationId         controllers.AnnotationController.delete(annotationId: String)
 
 
-#uncertainty detection
+# uncertainty detection - not documented
 POST          /upload                           controllers.getFileContent.uploadAndSave()
 GET           /annotate/:paraghraphHash         controllers.SpaCyController.process(paraghraphHash)
 
@@ -47,6 +47,9 @@ GET           /labelDesignDecisions             controllers.amelie.LabelDesignDe
 GET           /updateSimilarDocuments           controllers.amelie.SimilarDocumentsController.updateSimilarDocuments(projectKey: String)
 
 # AMELIE views
+GET           /project                          controllers.amelie.ProjectController.getAll()
+GET           /project/:key                     controllers.amelie.ProjectController.getProjectByKey(key: String)
+POST          /project                          controllers.amelie.ProjectController.create()
 GET           /getDataForQAV                    controllers.amelie.QADataController.getQAData(projectKey: String)
 GET           /getAllQAV                        controllers.amelie.QADataController.getAllQA()
 GET           /getDataForAEV                    controllers.amelie.AEDataController.getAEData(projectKey: String)
@@ -55,9 +58,6 @@ GET           /predictAssignee                  controllers.amelie.AssigneePredi
 POST          /getDataForDDV                    controllers.amelie.DDDataController.getDDData()
 GET           /designDecisions                  controllers.amelie.DesignDecisionController.getAllDesignDecisions(projectKey: String)
 GET           /designDecision                   controllers.amelie.DesignDecisionController.getDesignDecision(issueKey: String)
-POST          /project                          controllers.amelie.ProjectController.create()
-GET           /project                          controllers.amelie.ProjectController.getAll()
-GET           /project/:key                     controllers.amelie.ProjectController.getProjectByKey(key: String)
 
 # Import projects
 GET           /updateProjectProcessState        controllers.amelie.ProjectController.updateProjectProcessState(projectKey: String)

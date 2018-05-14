@@ -34,7 +34,7 @@
 								}
 							]
 						},
-						"description": "This endpoint accepts a token name as part of URL parameters of a `GET` request. This token will be saved and can be annotated as a DBpedia entity during document processing."
+						"description": "This endpoint is used to create a new architectural element. The newly created token will be saved and can be annotated as a DBpedia entity during document processing.\n\nIt accepts a token name as part of URL parameters of a `GET` request."
 					},
 					"response": []
 				},
@@ -62,7 +62,7 @@
 								}
 							]
 						},
-						"description": "This endpoint accepts a token name as part of URL parameters of a `GET` request. The token will be removed from DBpedia and won't be annotated as architectural elements anymore."
+						"description": "This endpoint is used to delete an existing architectural element. The element will be removed from DBpedia and won't be annotated as architectural elements anymore.\n\nIt accepts a token name as part of URL parameters of a `GET` request."
 					},
 					"response": []
 				},
@@ -89,7 +89,7 @@
 								"processDocument"
 							]
 						},
-						"description": "This endpoint accepts a JSON object as the request body. In the JSON object, there should be a key `content`, whose value is the text to be annotated.\n\nA list of annotations will be sent back in `response.data`."
+						"description": "This endpoint is used to annotate a text.\n\nIt accepts a JSON object as the request body. In the JSON object, key `content` contains the text to be annotated. A list of annotations will be sent back in the `data` field of the response."
 					},
 					"response": []
 				},
@@ -116,9 +116,62 @@
 								"getMetaInformation"
 							]
 						},
-						"description": "This endpoint retrieves the meta-information of an architectural element from Dbpedia ontology. \n\n//Why sending a URI? What does the response JSON mean?"
+						"description": "This endpoint retrieves the meta-information of an architectural element from Dbpedia ontology. \n\nThe body of request contains an `uri`, pointing to the element on DBpedia. A JSON object of meta-information will be returned."
 					},
-					"response": []
+					"response": [
+						{
+							"id": "ee56f807-4082-44dc-ab86-64bb4a3e90b0",
+							"name": "Get meta-information example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"uri\": \"http://dbpedia.org/resource/Java_Platform,_Enterprise_Edition\"\n}"
+								},
+								"url": {
+									"raw": "{{SERVER_URL}}/getMetaInformation",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"getMetaInformation"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "26806",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 May 2018 11:38:49 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								}
+							],
+							"cookie": [],
+							"body": "{\"http://www.w3.org/1999/02/22-rdf-syntax-ns#type\":[{\"type\":\"uri\",\"value\":\"http://dbpedia.org/class/yago/Communication100033020\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/class/yago/Hypothesis105888929\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/class/yago/WikicatWebApplicationFrameworks\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/class/yago/WikicatJavaSpecificationRequests\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/class/yago/Model105890249\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/class/yago/Abstraction100002137\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/class/yago/Request106513366\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/class/yago/Concept105835747\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/class/yago/Content105809192\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/class/yago/Idea105833840\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/class/yago/Cognition100023271\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/class/yago/PsychologicalFeature100023100\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/class/yago/Message106598915\"}],\"http://www.w3.org/2000/01/rdf-schema#label\":[{\"type\":\"literal\",\"value\":\"Java EE\",\"lang\":\"fr\"},{\"type\":\"literal\",\"value\":\"Java EE\",\"lang\":\"es\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition\",\"lang\":\"ru\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition\",\"lang\":\"de\"},{\"type\":\"literal\",\"value\":\"Java EE\",\"lang\":\"it\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition\",\"lang\":\"en\"},{\"type\":\"literal\",\"value\":\"Java 2 Enterprise Edition\",\"lang\":\"nl\"},{\"type\":\"literal\",\"value\":\"منصة جافا النسخة التجارية\",\"lang\":\"ar\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition\",\"lang\":\"pt\"},{\"type\":\"literal\",\"value\":\"Java EE\",\"lang\":\"zh\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition\",\"lang\":\"ja\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition\",\"lang\":\"pl\"}],\"http://www.w3.org/2000/01/rdf-schema#comment\":[{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition, abgekürzt Java EE oder früher J2EE, ist die Spezifikation einer Softwarearchitektur für die transaktionsbasierte Ausführung von in Java programmierten Anwendungen und insbesondere Web-Anwendungen. Sie ist eine der großen Plattformen, die um den Middleware-Markt kämpfen. Größter Konkurrent ist dabei die .NET-Plattform von Microsoft. Bestandteile der Spezifikation werden innerhalb des Java Community Process von diversen Unternehmen erarbeitet und schließlich der Öffentlichkeit in Form eines Dokuments und einer Referenzimplementierung zur Verfügung gestellt.\",\"lang\":\"de\"},{\"type\":\"literal\",\"value\":\"In informatica la Java Platform, Enterprise Edition o Java EE (conosciuta, prima della versione 5, col nome di Java 2 Enterprise Edition o J2EE) è una specifica le cui implementazioni vengono principalmente sviluppate in linguaggio di programmazione Java e ampiamente utilizzata nella programmazione Web. I software che implementano tale specifica vengono detti Application Server Java EE. L'implementazione può essere totale o limitata al Web Profile ovvero il sottoinsieme delle specifiche che è stato pensato appositamente per le applicazioni web.\",\"lang\":\"it\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition o Java EE (anteriormente conocido como Java 2 Platform, Enterprise Edition o J2EE hasta la versión 1.4; traducido informalmente como Java Empresarial), es una plataforma de programación—parte de la Plataforma Java—para desarrollar y ejecutar software de aplicaciones en el lenguaje de programación Java. Permite utilizar arquitecturas de N capas distribuidas y se apoya ampliamente en componentes de software modulares ejecutándose sobre un servidor de aplicaciones. La plataforma Java EE está definida por una especificación. Similar a otras especificaciones del Java Community Process, Java EE es también considerada informalmente como un estándar debido a que los proveedores deben cumplir ciertos requisitos de conformidad para declarar que sus productos son con\",\"lang\":\"es\"},{\"type\":\"literal\",\"value\":\"Java 2 Enterprise Edition (J2EE) is een ontwikkelplatform van het softwarebedrijf Sun Microsystems. J2EE biedt een methode voor het ontwerpen, ontwikkelen, samenstellen en gebruiken van bedrijfsapplicaties. Het platform biedt een multi-tier, gedistribueerd model, herbruikbare componenten, een beveiligingsmodel, flexibel transactiebeheer en ondersteuning voor webservices door middel van een geïntegreerde data-uitwisseling gebaseerd op XML.\",\"lang\":\"nl\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition (również jako Java Enterprise, J2EE oraz Java EE czasami tłumaczona jako Java Korporacyjna) jest szeroko rozpowszechnioną serwerową platformą programistyczną języka Java. Definiuje standard tworzenia aplikacji w języku programowania Java opartych o wielowarstwową architekturę komponentową. Komponenty są zwykle osadzane na serwerze aplikacyjnym obsługującym Java Enterprise. Standard ten określa zestaw interfejsów programistycznych jakich musi dostarczać zgodny serwer aplikacyjny.\",\"lang\":\"pl\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition (ou Java EE, ou EE, ou em português Plataforma Java, Edição Empresarial) é uma plataforma de programação para servidores na linguagem de programação Java. A plataforma fornece uma API e um ambiente de tempo de execução para o desenvolvimento e execução de softwares corporativos, incluindo serviços de rede e web, e outras aplicações de rede de larga escala, multicamadas, escaláveis, confiáveis e seguras. Java EE estende a Java Platform, Standard Edition (Java SE), fornecendo uma API para mapeamento objeto-relacional, arquiteturas multicamada e distribuídas e web services. A plataforma incorpora um desenho amplamente baseado em componentes modulares rodando em um servidor de aplicação. Softwares para Java EE são primeiramente desenvolvidos na linguagem de pr\",\"lang\":\"pt\"},{\"type\":\"literal\",\"value\":\"Java Enterprise Edition, ou Java EE (anciennement J2EE), est une spécification pour la technique Java d'Oracle plus particulièrement destinée aux applications d’entreprise. Ces applications sont considérées dans une approche multi-niveaux. Dans ce but, toutes les implémentations de cette spécification contiennent un ensemble d’extensions au framework Java standard (JSE, Java Standard Edition) afin de faciliter notamment la création d’applications réparties. Pour ce faire, Java EE définit les éléments suivants :\",\"lang\":\"fr\"},{\"type\":\"literal\",\"value\":\"Java EE，Java平台企业版（Java Platform Enterprise Edition），是Sun公司为企业级应用推出的标准平台。Java平台共分为三个主要版本Java EE、Java SE和Java ME。 Sun公司在1998年发表JDK1.2版本的时候，使用了新名称Java 2 Platform，即“Java2平台”，修改后的JDK称为Java 2 Platform Software Developing Kit，即J2SDK。并分为标准版（Standard Edition，J2SE），企业版（Enterprise Edition，J2EE），微型版（MicroEdition，J2ME）。J2EE便由此诞生。 2005年6月，JavaOne大会召开，SUN公司公开Java SE 6。此时，Java的各种版本已经更名以取消其中的数字“2”：J2EE更名为Java EE, J2SE更名为Java SE，J2ME更名为Java ME。 随着Java技术的发展，J2EE平台得到了迅速的发展，成为Java语言中最活跃的体系之一。现如今，J2EE不仅仅是指一种标准平台，它更多的表达着一种软件架构和设计思想。\",\"lang\":\"zh\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition or Java EE is a widely used computing platform for enterprise software. The platform provides an API and runtime environment for developing and running enterprise software, including network and web services, and other large-scale, multi-tiered, scalable, reliable, and secure network applications. Java EE extends the Java Platform, Standard Edition (Java SE), providing an API for object-relational mapping, distributed and multi-tier architectures, and web services. The platform incorporates a design based largely on modular components running on an application server. Software for Java EE is primarily developed in the Java programming language. The platform emphasizes convention over configuration and annotations for configuration. Optionally XML can be us\",\"lang\":\"en\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition (Java EE) は、Javaの企業用機能セット。Java Platform, Standard Edition (Java SE) の拡張機能の形で提供される。\",\"lang\":\"ja\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition, сокращенно Java EE (до версии 5.0 — Java 2 Enterprise Edition или J2EE) — набор спецификаций и соответствующей документации для языка Java, описывающей архитектуру серверной платформы для задач средних и крупных предприятий. JEE является промышленной технологией и в основном используется в высокопроизводительных проектах, в которых необходима надежность, масштабируемость, гибкость.\",\"lang\":\"ru\"},{\"type\":\"literal\",\"value\":\"منصة جافا الإصدار التجاري أو منصة جافا التجارية أو جافا EE هي منصة مستخدم على نطاق واسع لبرمجة الخوادم بلغة البرمجة جافا. منصة جافا التجارية تختلف عن جافا القياسية (Java SE) من حيث مكتبات الإضافات التي توفر الوظائف لتوزيع تحمل الخطأ، موزع، برنامج جافا متعدد المستويات، ويستند إلى حد كبير على مكونات معيارية تعمل على خوادم التطبيق. النسخ التي صدرت عن جافاMicro Edition (ME)النسخة الميكروStandard Edition (SE)النسخة الأساسيةEnterprise Edition (EE) النسخة التجارية PersonalJava (discontinued)جافا الشخصي (أعلن عن توقف استخدامها)\",\"lang\":\"ar\"}],\"http://www.w3.org/2002/07/owl#sameAs\":[{\"type\":\"uri\",\"value\":\"http://pl.dbpedia.org/resource/Java_Platform,_Enterprise_Edition\"},{\"type\":\"uri\",\"value\":\"http://it.dbpedia.org/resource/Java_EE\"},{\"type\":\"uri\",\"value\":\"http://rdf.freebase.com/ns/m.0bs6x\"},{\"type\":\"uri\",\"value\":\"http://el.dbpedia.org/resource/Java_Platform,_Enterprise_Edition\"},{\"type\":\"uri\",\"value\":\"http://ja.dbpedia.org/resource/Java_Platform,_Enterprise_Edition\"},{\"type\":\"uri\",\"value\":\"http://fr.dbpedia.org/resource/Java_EE\"},{\"type\":\"uri\",\"value\":\"http://es.dbpedia.org/resource/Java_EE\"},{\"type\":\"uri\",\"value\":\"http://de.dbpedia.org/resource/Java_Platform,_Enterprise_Edition\"},{\"type\":\"uri\",\"value\":\"http://nl.dbpedia.org/resource/Java_2_Enterprise_Edition\"},{\"type\":\"uri\",\"value\":\"http://www.wikidata.org/entity/Q193247\"},{\"type\":\"uri\",\"value\":\"http://wikidata.dbpedia.org/resource/Q193247\"},{\"type\":\"uri\",\"value\":\"http://pt.dbpedia.org/resource/Java_Platform,_Enterprise_Edition\"},{\"type\":\"uri\",\"value\":\"http://cs.dbpedia.org/resource/Java_EE\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/resource/Java_Platform,_Enterprise_Edition\"},{\"type\":\"uri\",\"value\":\"http://yago-knowledge.org/resource/Java_Platform,_Enterprise_Edition\"},{\"type\":\"uri\",\"value\":\"http://ko.dbpedia.org/resource/자바_플랫폼,_엔터프라이즈_에디션\"}],\"http://purl.org/dc/terms/subject\":[{\"type\":\"uri\",\"value\":\"http://dbpedia.org/resource/Category:Articles_with_example_Java_code\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/resource/Category:Java_enterprise_platform\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/resource/Category:Web_frameworks\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/resource/Category:Computing_platforms\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/resource/Category:Java_specification_requests\"},{\"type\":\"uri\",\"value\":\"http://dbpedia.org/resource/Category:Java_platform\"}],\"http://xmlns.com/foaf/0.1/isPrimaryTopicOf\":[{\"type\":\"uri\",\"value\":\"http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition\"}],\"http://www.w3.org/ns/prov#wasDerivedFrom\":[{\"type\":\"uri\",\"value\":\"http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition?oldid=739925086\"}],\"http://dbpedia.org/ontology/wikiPageExternalLink\":[{\"type\":\"uri\",\"value\":\"http://java.sun.com/blueprints/corej2eepatterns/Patterns/index.html\"},{\"type\":\"uri\",\"value\":\"http://jcp.org/en/jsr/detail?id=299\"},{\"type\":\"uri\",\"value\":\"http://www.turngeek.press/javaeeinaday\"},{\"type\":\"uri\",\"value\":\"http://geronimo.apache.org\"},{\"type\":\"uri\",\"value\":\"http://www.oracle.com/technetwork/java/javaee/overview/compatibility-jsp-136984.html\"},{\"type\":\"uri\",\"value\":\"http://www.oracle.com/technetwork/java/javaee/overview/index.html\"},{\"type\":\"uri\",\"value\":\"http://docs.oracle.com/javaee/6/firstcup/doc/index.html\"}],\"http://dbpedia.org/ontology/abstract\":[{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition, сокращенно Java EE (до версии 5.0 — Java 2 Enterprise Edition или J2EE) — набор спецификаций и соответствующей документации для языка Java, описывающей архитектуру серверной платформы для задач средних и крупных предприятий. Спецификации детализированы настолько, чтобы обеспечить переносимость программ с одной реализации платформы на другую. Основная цель спецификаций — обеспечить масштабируемость приложений и целостность данных во время работы системы. JEE во многом ориентирована на использование её через веб, как в интернете, так и в локальных сетях. Вся спецификация создаётся и утверждается через JCP (Java Community Process) в рамках инициативы Sun Microsystems Inc. JEE является промышленной технологией и в основном используется в высокопроизводительных проектах, в которых необходима надежность, масштабируемость, гибкость. Популярности JEE также способствует то, что Sun предлагает бесплатный комплект разработки, SDK, позволяющий предприятиям разрабатывать свои системы, не тратя больших средств. В этот комплект входит сервер приложений GlassFish с лицензией для разработки.\",\"lang\":\"ru\"},{\"type\":\"literal\",\"value\":\"Java 2 Enterprise Edition (J2EE) is een ontwikkelplatform van het softwarebedrijf Sun Microsystems. J2EE biedt een methode voor het ontwerpen, ontwikkelen, samenstellen en gebruiken van bedrijfsapplicaties. Het platform biedt een multi-tier, gedistribueerd model, herbruikbare componenten, een beveiligingsmodel, flexibel transactiebeheer en ondersteuning voor webservices door middel van een geïntegreerde data-uitwisseling gebaseerd op XML. Bij het gebruik van Javaprogramma's op servers, wordt vaak J2EE gebruikt. J2EE is een uitbreiding van de J2SDK, Java 2-standaardeditie, met bibliotheken die een groot aantal klassen bevatten voor het programmeren van serverapplicaties, het communiceren met databases en het gebruik van allerlei generieke diensten. Het J2EE-platform is een platformonafhankelijke, volledig geïntegreerde oplossing die een open markt creëert waarin elke leverancier kan leveren aan elke klant. Zo'n soort markt moedigt leveranciers aan om te innoveren en voorkomt dat klanten afhankelijk worden gemaakt van een eigen technologie. Op deze manier profiteren klanten meer door verbeterde producten en betere ondersteuning.\",\"lang\":\"nl\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition (również jako Java Enterprise, J2EE oraz Java EE czasami tłumaczona jako Java Korporacyjna) jest szeroko rozpowszechnioną serwerową platformą programistyczną języka Java. Definiuje standard tworzenia aplikacji w języku programowania Java opartych o wielowarstwową architekturę komponentową. Komponenty są zwykle osadzane na serwerze aplikacyjnym obsługującym Java Enterprise. Standard ten określa zestaw interfejsów programistycznych jakich musi dostarczać zgodny serwer aplikacyjny. Standard Java Enterprise aktualnie tworzony jest przez Oracle, które wykupiło oryginalnego twórcę - Sun Microsystems. Firma ta dostarcza poza definicją interfejsów programistycznych, wzorcową implementację serwera aplikacyjnego (otwarta wersja: GlassFish, komercyjna Sun Java System Application Server). Rozwiązanie oparte na Java Enterprise powinno poprawnie funkcjonować na dowolnej platformie sprzętowej, systemie operacyjnym czy też serwerze aplikacji Java Enterprise. Zdarza się, iż aplikacje wymagają pewnych zmian przy przenoszeniu na inny serwer. Wynika to z faktu, iż nie wszystkie aspekty funkcjonowania aplikacji są objęte specyfikacją.\",\"lang\":\"pl\"},{\"type\":\"literal\",\"value\":\"In informatica la Java Platform, Enterprise Edition o Java EE (conosciuta, prima della versione 5, col nome di Java 2 Enterprise Edition o J2EE) è una specifica le cui implementazioni vengono principalmente sviluppate in linguaggio di programmazione Java e ampiamente utilizzata nella programmazione Web. I software che implementano tale specifica vengono detti Application Server Java EE. L'implementazione può essere totale o limitata al Web Profile ovvero il sottoinsieme delle specifiche che è stato pensato appositamente per le applicazioni web. La specifica è incoraggiare la creazione di applicazioni che seguono una architettura multi-tier. Tale architettura ha come scopo la separazione delle funzionalità relative alla visualizzazione delle pagine web da quelle per la gestione della logica di business e del salvataggio delle informazioni sulla base dati.\",\"lang\":\"it\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition, abgekürzt Java EE oder früher J2EE, ist die Spezifikation einer Softwarearchitektur für die transaktionsbasierte Ausführung von in Java programmierten Anwendungen und insbesondere Web-Anwendungen. Sie ist eine der großen Plattformen, die um den Middleware-Markt kämpfen. Größter Konkurrent ist dabei die .NET-Plattform von Microsoft. In der Spezifikation werden Softwarekomponenten und Dienste definiert, die hauptsächlich in der Programmiersprache Java erstellt werden. Die Spezifikation dient dazu, einen allgemein akzeptierten Rahmen zur Verfügung zu stellen, um auf dessen Basis aus modularen Komponenten verteilte, mehrschichtige Anwendungen entwickeln zu können. Klar definierte Schnittstellen zwischen den Komponenten und Containern sollen dafür sorgen, dass Softwarekomponenten unterschiedlicher Hersteller interoperabel sind, wenn sie sich an die Spezifikation halten, und dass die verteilte Anwendung gut skalierbar ist. Bestandteile der Spezifikation werden innerhalb des Java Community Process von diversen Unternehmen erarbeitet und schließlich der Öffentlichkeit in Form eines Dokuments und einer Referenzimplementierung zur Verfügung gestellt.\",\"lang\":\"de\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition o Java EE (anteriormente conocido como Java 2 Platform, Enterprise Edition o J2EE hasta la versión 1.4; traducido informalmente como Java Empresarial), es una plataforma de programación—parte de la Plataforma Java—para desarrollar y ejecutar software de aplicaciones en el lenguaje de programación Java. Permite utilizar arquitecturas de N capas distribuidas y se apoya ampliamente en componentes de software modulares ejecutándose sobre un servidor de aplicaciones. La plataforma Java EE está definida por una especificación. Similar a otras especificaciones del Java Community Process, Java EE es también considerada informalmente como un estándar debido a que los proveedores deben cumplir ciertos requisitos de conformidad para declarar que sus productos son conformes a Java EE; estandarizado por The Java Community Process / JCP. Java EE tiene varias especificaciones de API, tales como JDBC, RMI, e-mail, JMS, Servicios Web, XML, etc y define cómo coordinarlos. Java EE también configura algunas especificaciones únicas para Java EE para componentes. Estas incluyen Enterprise JavaBeans, servlets, portlets (siguiendo la especificación de Portlets Java), JavaServer Pages y varias tecnologías de servicios web. Ello permite al desarrollador crear una Aplicación de Empresa portable entre plataformas y escalable, a la vez que integrable con tecnologías anteriores. Otros beneficios añadidos son, por ejemplo, que el servidor de aplicaciones puede manejar transacciones, la seguridad, escalabilidad, concurrencia y gestión de los componentes desplegados, significando que los desarrolladores pueden concentrarse más en la lógica de negocio de los componentes en lugar de en tareas de mantenimiento de bajo nivel.\",\"lang\":\"es\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition or Java EE is a widely used computing platform for enterprise software. The platform provides an API and runtime environment for developing and running enterprise software, including network and web services, and other large-scale, multi-tiered, scalable, reliable, and secure network applications. Java EE extends the Java Platform, Standard Edition (Java SE), providing an API for object-relational mapping, distributed and multi-tier architectures, and web services. The platform incorporates a design based largely on modular components running on an application server. Software for Java EE is primarily developed in the Java programming language. The platform emphasizes convention over configuration and annotations for configuration. Optionally XML can be used to override annotations or to deviate from the platform defaults. Java EE is developed under the Java Community Process.\",\"lang\":\"en\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition (Java EE) は、Javaの企業用機能セット。Java Platform, Standard Edition (Java SE) の拡張機能の形で提供される。\",\"lang\":\"ja\"},{\"type\":\"literal\",\"value\":\"منصة جافا الإصدار التجاري أو منصة جافا التجارية أو جافا EE هي منصة مستخدم على نطاق واسع لبرمجة الخوادم بلغة البرمجة جافا. منصة جافا التجارية تختلف عن جافا القياسية (Java SE) من حيث مكتبات الإضافات التي توفر الوظائف لتوزيع تحمل الخطأ، موزع، برنامج جافا متعدد المستويات، ويستند إلى حد كبير على مكونات معيارية تعمل على خوادم التطبيق. النسخ التي صدرت عن جافاMicro Edition (ME)النسخة الميكروStandard Edition (SE)النسخة الأساسيةEnterprise Edition (EE) النسخة التجارية PersonalJava (discontinued)جافا الشخصي (أعلن عن توقف استخدامها)\",\"lang\":\"ar\"},{\"type\":\"literal\",\"value\":\"Java Platform, Enterprise Edition (ou Java EE, ou EE, ou em português Plataforma Java, Edição Empresarial) é uma plataforma de programação para servidores na linguagem de programação Java. A plataforma fornece uma API e um ambiente de tempo de execução para o desenvolvimento e execução de softwares corporativos, incluindo serviços de rede e web, e outras aplicações de rede de larga escala, multicamadas, escaláveis, confiáveis e seguras. Java EE estende a Java Platform, Standard Edition (Java SE), fornecendo uma API para mapeamento objeto-relacional, arquiteturas multicamada e distribuídas e web services. A plataforma incorpora um desenho amplamente baseado em componentes modulares rodando em um servidor de aplicação. Softwares para Java EE são primeiramente desenvolvidos na linguagem de programação Java. A plataforma enfatiza a convenção sobre configuração e anotações para configuração.\",\"lang\":\"pt\"},{\"type\":\"literal\",\"value\":\"Java EE，Java平台企业版（Java Platform Enterprise Edition），是Sun公司为企业级应用推出的标准平台。Java平台共分为三个主要版本Java EE、Java SE和Java ME。 Sun公司在1998年发表JDK1.2版本的时候，使用了新名称Java 2 Platform，即“Java2平台”，修改后的JDK称为Java 2 Platform Software Developing Kit，即J2SDK。并分为标准版（Standard Edition，J2SE），企业版（Enterprise Edition，J2EE），微型版（MicroEdition，J2ME）。J2EE便由此诞生。 2005年6月，JavaOne大会召开，SUN公司公开Java SE 6。此时，Java的各种版本已经更名以取消其中的数字“2”：J2EE更名为Java EE, J2SE更名为Java SE，J2ME更名为Java ME。 随着Java技术的发展，J2EE平台得到了迅速的发展，成为Java语言中最活跃的体系之一。现如今，J2EE不仅仅是指一种标准平台，它更多的表达着一种软件架构和设计思想。\",\"lang\":\"zh\"},{\"type\":\"literal\",\"value\":\"Java Enterprise Edition, ou Java EE (anciennement J2EE), est une spécification pour la technique Java d'Oracle plus particulièrement destinée aux applications d’entreprise. Ces applications sont considérées dans une approche multi-niveaux. Dans ce but, toutes les implémentations de cette spécification contiennent un ensemble d’extensions au framework Java standard (JSE, Java Standard Edition) afin de faciliter notamment la création d’applications réparties. Pour ce faire, Java EE définit les éléments suivants : \\n*  Une plate-forme (Java EE Platform), pour héberger et exécuter les applications, incluant outre Java SE des bibliothèques logicielles additionnelles du Java Development Kit (JDK) ; \\n*  Une suite de tests (Java EE Compatibility Test Suite) pour vérifier la compatibilité ; \\n*  Une réalisation de référence (Java EE Reference Implementation), dénommée GlassFish ; \\n*  Un catalogue de bonnes pratiques (Java EE BluePrints). \\n*  code scripte\",\"lang\":\"fr\"}],\"http://dbpedia.org/ontology/wikiPageRevisionID\":[{\"type\":\"literal\",\"value\":739925086,\"datatype\":\"http://www.w3.org/2001/XMLSchema#integer\"}],\"http://dbpedia.org/ontology/wikiPageID\":[{\"type\":\"literal\",\"value\":42869,\"datatype\":\"http://www.w3.org/2001/XMLSchema#integer\"}]}"
+						}
+					]
 				},
 				{
 					"name": "Get software solutions",
@@ -143,11 +196,11 @@
 								"getSoftwareSolutions"
 							]
 						},
-						"description": "This endpoint is used to find software solutions inplement an architectural topic. It accepts a JSON object containing an architectural element in the uri. A list of software solutions will be returned."
+						"description": "This endpoint is used to find software solutions inplement an architectural topic. \n\nIt accepts a JSON object containing an architectural element in the uri. A list of software solutions will be returned."
 					},
 					"response": [
 						{
-							"id": "91bb00eb-035a-431c-95c5-a5025b1a81f4",
+							"id": "fffdfc2d-72ab-40bb-8cbb-df8efe031149",
 							"name": "Get relational database solutions",
 							"originalRequest": {
 								"method": "POST",
@@ -222,7 +275,7 @@
 								"addSoftware"
 							]
 						},
-						"description": "This endpoint is used to create a new software solution. It accepts a JSON object describing the solution. The solution will be saved and can be retrieved."
+						"description": "This endpoint is used to create a new software solution. \n\nIt accepts a JSON object describing the solution. The solution will be saved and can be retrieved."
 					},
 					"response": []
 				},
@@ -249,7 +302,7 @@
 								"removeSoftware"
 							]
 						},
-						"description": "This endpoint is used to delete a software solution. It accepts a JSON object of the solution to be deleted. After deletion, the software solution will not be suggested anymore."
+						"description": "This endpoint is used to delete a software solution. \n\nIt accepts a JSON object of the solution to be deleted. After deletion, the software solution will not be suggested anymore."
 					},
 					"response": []
 				},
@@ -276,7 +329,7 @@
 								"getAlternatives"
 							]
 						},
-						"description": "This endpoint is used to find alternative solutions for an architectural topic. It receives a JSON object containing an architectural element in the uri. A list of alternative solutions will be returned.\n\n//Example returns an empty array."
+						"description": "This endpoint is used to find alternative solutions for an architectural topic. \n\nIt accepts a JSON object containing an architectural element in the `uri`. A list of alternative solutions will be returned.\n\n//Add an example response"
 					},
 					"response": []
 				},
@@ -303,7 +356,7 @@
 								"addAlternative"
 							]
 						},
-						"description": "This endpoint is used to create a new alternative solution. It accepts a JSON object describing the solution. The solution will be saved and can be retrieved."
+						"description": "This endpoint is used to create a new alternative solution. \n\nIt accepts a JSON object describing the solution. The solution will be saved and can be retrieved."
 					},
 					"response": []
 				},
@@ -330,7 +383,7 @@
 								"removeAlternative"
 							]
 						},
-						"description": "This endpoint is used to delete an alternative solution. It accepts a JSON object of the solution to be deleted. After deletion, the solution will not be suggested anymore."
+						"description": "This endpoint is used to delete an alternative solution. \n\nIt accepts a JSON object of the solution to be deleted. After deletion, the solution will not be suggested anymore."
 					},
 					"response": []
 				}
@@ -390,7 +443,7 @@
 					},
 					"response": [
 						{
-							"id": "06253b8a-749c-42cf-bfa9-faded8026750",
+							"id": "5725e418-6d09-4861-a373-78be668cbf04",
 							"name": "Create session example",
 							"originalRequest": {
 								"method": "POST",
@@ -506,7 +559,7 @@
 								"annotation"
 							]
 						},
-						"description": "This endpoint is used to create an annotation for the uploaded file. It accepts a JSON object with `paragraphHash`, `token`, `type`, `offsets`. `offsets` can have `begin` and `end` values. This annotation will be retrieved when annotating the same file."
+						"description": "This endpoint is used to create a new annotation for the uploaded file. This annotation will be retrieved when annotating the same file.\n\nIt accepts a JSON object with `paragraphHash`, `token`, `type`, `offsets`. `offsets` can have `begin` and `end` values."
 					},
 					"response": []
 				},
@@ -541,7 +594,7 @@
 								}
 							]
 						},
-						"description": "This endpoint is used to update an annotation of the uploaded file. The request body is a JSON object with `token`, `type`, `offsets`. `offsets` can have `begin` and `end` values."
+						"description": "This endpoint is used to update an annotation of the uploaded file. \n\nThe request body is a JSON object with `token`, `type`, `offsets`. `offsets` can have `begin` and `end` values."
 					},
 					"response": []
 				},
@@ -571,7 +624,7 @@
 								}
 							]
 						},
-						"description": "This endpoint is used to delete an annotation of the uploaded file. It accepts annotationId as a path parameter."
+						"description": "This endpoint is used to delete an annotation of the uploaded file.\n\nIt accepts `annotationId` as a path parameter."
 					},
 					"response": []
 				}
@@ -688,6 +741,102 @@
 			"description": "",
 			"item": [
 				{
+					"name": "Get projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/project",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"project"
+							]
+						},
+						"description": "This endpoint is used to retrieve all projects. \n\nAn array of objects will be returned. Each object represents a project. In each project, there are `name`, `description`, `shortDescription`, `self`, `key`, `projectCategory`, `concepts`, `preProcessed`, `issuesCount`, `decisionCount` fields."
+					},
+					"response": []
+				},
+				{
+					"name": "Get project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/project/:key",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"project",
+								":key"
+							],
+							"variable": [
+								{
+									"key": "key",
+									"value": "{{PROJECT_KEY}}"
+								}
+							]
+						},
+						"description": "This endpoint is used to retrieve data of one project. \n\nIt accepts the project key as a parameter. The project information will be returned as a JSON object, which has `name`, `description`, `shortDescription`, `self`, `key`, `projectCategory`, `concepts`, `preProcessed`, `issuesCount`, `decisionCount` fields."
+					},
+					"response": [
+						{
+							"id": "4d5cd0ed-1dd6-49bf-abdb-d35b9c2a41d5",
+							"name": "Get project example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{SERVER_URL}}/project/:key",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"project",
+										":key"
+									],
+									"variable": [
+										{
+											"key": "key",
+											"value": "{{PROJECT_KEY}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "891",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 May 2018 09:36:13 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								}
+							],
+							"cookie": [],
+							"body": "{\"name\":\"Spark\",\"description\":\"Apache Spark is a fast and general cluster computing system. It provides high-level APIs in Scala, Java, Python and R, and an optimized engine that supports general computation graphs. It also supports a rich set of higher-level tools including Spark SQL for SQL and structured data processing, MLLib for machine learning, GraphX for graph processing, and Spark Streaming.\",\"shortDescription\":\"Apache Spark is a fast and general cluster computing system. It provides high-level APIs in Scala, Java, Python and R, and an optimized engine that su …\",\"self\":\"https://issues.apache.org/jira/rest/api/2/project/12315420\",\"key\":\"SPARK\",\"projectCategory\":\"Apache Software Foundation\",\"concepts\":[\"machine learning\",\"SQL\",\"Apache Spark\",\"Java\",\"Scala\",\"Python\",\"graph\",\"application programming interface\"],\"preProcessed\":true,\"issuesCount\":22279,\"decisionCount\":463}"
+						}
+					]
+				},
+				{
 					"name": "Create project",
 					"request": {
 						"method": "POST",
@@ -710,11 +859,11 @@
 								"project"
 							]
 						},
-						"description": "This endpoint is used to create a project. It accepts a JSON object with `name`, `description` and `key`."
+						"description": "This endpoint is used to create a project. \n\nIt accepts a JSON object with `name`, `description` and `key`. The project information plus the project id will be returned."
 					},
 					"response": [
 						{
-							"id": "1a80898b-2f04-48fc-9ada-0e18ac178e54",
+							"id": "8fa5fd74-9b0a-43e0-a5af-ad779e79ab4f",
 							"name": "Create project example",
 							"originalRequest": {
 								"method": "POST",
@@ -763,6 +912,599 @@
 							],
 							"cookie": [],
 							"body": "{\"name\":\"testProject\",\"description\":\"This is a test project\",\"id\":\"5af1eefdd7631322d1ea5676\"}"
+						}
+					]
+				},
+				{
+					"name": "Get quality attributes for project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/getDataForQAV?projectKey={{PROJECT_KEY}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"getDataForQAV"
+							],
+							"query": [
+								{
+									"key": "projectKey",
+									"value": "{{PROJECT_KEY}}"
+								}
+							]
+						},
+						"description": "This endpoint is used to retrieve quality attributes information of a project. Example of quality attributes: availability, performance, security, etc.\n\nIt accepts the project key as a parameter. An array of objects will be returned. Each object represents one quality attribute, including how many design decisions address it each year as well as the total number."
+					},
+					"response": [
+						{
+							"id": "aec94743-41a8-482e-b857-06a98d693997",
+							"name": "Get quality attributes for project example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{SERVER_URL}}/getDataForQAV?projectKey={{PROJECT_KEY}}",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"getDataForQAV"
+									],
+									"query": [
+										{
+											"key": "projectKey",
+											"value": "{{PROJECT_KEY}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "3789",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 May 2018 22:10:32 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								}
+							],
+							"cookie": [],
+							"body": "[\n\t{\n        \"id\": \"Availability\",\n        \"value\": [\n            5,\n            12,\n            4\n        ],\n        \"values\": [\n            {\n                \"year\": 2013,\n                \"value\": [\n                    0,\n                    0,\n                    0\n                ]\n            },\n            {\n                \"year\": 2014,\n                \"value\": [\n                    0,\n                    0,\n                    0\n                ]\n            },\n            {\n                \"year\": 2015,\n                \"value\": [\n                    0,\n                    4,\n                    1\n                ]\n            },\n            {\n                \"year\": 2016,\n                \"value\": [\n                    4,\n                    10,\n                    4\n                ]\n            },\n            {\n                \"year\": 2017,\n                \"value\": [\n                    5,\n                    12,\n                    4\n                ]\n            }\n        ]\n    },\n    {\n        \"id\": \"Maintainability\",\n        \"value\": [\n            4,\n            1,\n            1\n        ],\n        \"values\": [\n            {\n                \"year\": 2013,\n                \"value\": [\n                    0,\n                    0,\n                    0\n                ]\n            },\n            {\n                \"year\": 2014,\n                \"value\": [\n                    0,\n                    0,\n                    0\n                ]\n            },\n            {\n                \"year\": 2015,\n                \"value\": [\n                    2,\n                    0,\n                    1\n                ]\n            },\n            {\n                \"year\": 2016,\n                \"value\": [\n                    4,\n                    1,\n                    1\n                ]\n            },\n            {\n                \"year\": 2017,\n                \"value\": [\n                    4,\n                    1,\n                    1\n                ]\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get all quality attributes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/getAllQAV",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"getAllQAV"
+							]
+						},
+						"description": "This endpoint is used to retrieve all quality attributes from the database."
+					},
+					"response": [
+						{
+							"id": "b5eee55a-9670-4d0e-9e1d-e0de23808f53",
+							"name": "Get all quality attributes example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{SERVER_URL}}/getAllQAV",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"getAllQAV"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "284",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 May 2018 10:28:11 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								}
+							],
+							"cookie": [],
+							"body": "[\"Analyzability\",\"Adaptability\",\"Suitability\",\"Scalability\",\"Composability\",\"Availability\",\"Accuracy\",\"Portability\",\"Functionality\",\"Maintainability\",\"Understandability\",\"Testability\",\"Security\",\"Usability\",\"Extensibility\",\"Performance\",\"Reliability\",\"Interoperability\",\"Reusability\"]"
+						}
+					]
+				},
+				{
+					"name": "Get architectural elements for project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/getDataForAEV?projectKey={{PROJECT_KEY}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"getDataForAEV"
+							],
+							"query": [
+								{
+									"key": "projectKey",
+									"value": "{{PROJECT_KEY}}"
+								}
+							]
+						},
+						"description": "This endpoint is used to retrieve architectural elements information of a project. Example of architectural elements: SQL, API, Java, etc.\n\nIt accepts the project key as a parameter. An array of objects will be returned. Each object represents one architectural element, including how many design decisions address it each year as well as the total number."
+					},
+					"response": [
+						{
+							"id": "f6db202d-99e0-433e-8c24-e9cce29327ba",
+							"name": "Get architectural elements for project example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{SERVER_URL}}/getDataForAEV?projectKey={{PROJECT_KEY}}",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"getDataForAEV"
+									],
+									"query": [
+										{
+											"key": "projectKey",
+											"value": "{{PROJECT_KEY}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "21289",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 May 2018 10:14:40 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								}
+							],
+							"cookie": [],
+							"body": "[\n\t {\n        \"id\": \"Apache Spark\",\n        \"value\": 13,\n        \"values\": [\n            {\n                \"year\": 2013,\n                \"value\": 0\n            },\n            {\n                \"year\": 2014,\n                \"value\": 0\n            },\n            {\n                \"year\": 2015,\n                \"value\": 4\n            },\n            {\n                \"year\": 2016,\n                \"value\": 12\n            },\n            {\n                \"year\": 2017,\n                \"value\": 13\n            }\n        ]\n    },\n    {\n        \"id\": \"backward compatibility\",\n        \"value\": 3,\n        \"values\": [\n            {\n                \"year\": 2013,\n                \"value\": 0\n            },\n            {\n                \"year\": 2014,\n                \"value\": 0\n            },\n            {\n                \"year\": 2015,\n                \"value\": 0\n            },\n            {\n                \"year\": 2016,\n                \"value\": 2\n            },\n            {\n                \"year\": 2017,\n                \"value\": 3\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get developer expertise",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/getAssignee?projectKey={{PROJECT_KEY}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"getAssignee"
+							],
+							"query": [
+								{
+									"key": "projectKey",
+									"value": "{{PROJECT_KEY}}"
+								}
+							]
+						},
+						"description": "This endpoint is used to retrieve developer expertise information of a project. The expertise score is calculated based on assignees of design decisions.\n\nIt accepts the project key as a parameter. An array of objects will be returned. Each object contains `personName`, `conceptName` and `value`."
+					},
+					"response": [
+						{
+							"id": "3bdc92bd-4656-4415-a634-6b8f2f05732a",
+							"name": "Get developer expertise example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{SERVER_URL}}/getAssignee?projectKey={{PROJECT_KEY}}",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"getAssignee"
+									],
+									"query": [
+										{
+											"key": "projectKey",
+											"value": "{{PROJECT_KEY}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "26676",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 May 2018 10:38:39 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								}
+							],
+							"cookie": [],
+							"body": "[\n\t    {\n        \"personName\": \"cody@koeninger.org\",\n        \"conceptName\": \"apache spark\",\n        \"value\": 1\n    },\n    {\n        \"personName\": \"cody@koeninger.org\",\n        \"conceptName\": \"backward compatibility\",\n        \"value\": 1\n    },\n    {\n        \"personName\": \"cody@koeninger.org\",\n        \"conceptName\": \"kafka\",\n        \"value\": 1\n    },\n    {\n        \"personName\": \"cody@koeninger.org\",\n        \"conceptName\": \"api\",\n        \"value\": 1\n    },\n    {\n        \"personName\": \"joshrosen\",\n        \"conceptName\": \"java\",\n        \"value\": 1\n    },\n    {\n        \"personName\": \"joshrosen\",\n        \"conceptName\": \"oss\",\n        \"value\": 1\n    },\n    {\n        \"personName\": \"joshrosen\",\n        \"conceptName\": \"git\",\n        \"value\": 2\n    },\n    {\n        \"personName\": \"joshrosen\",\n        \"conceptName\": \"doc\",\n        \"value\": 1\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Recommend experts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/predictAssignee?projectKey={{PROJECT_KEY}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"predictAssignee"
+							],
+							"query": [
+								{
+									"key": "projectKey",
+									"value": "{{PROJECT_KEY}}"
+								}
+							]
+						},
+						"description": "This endpoint is used to get expert recommendations for design decisions of a project. For each design decision, five experts will be recommended based on their expertise score.\n\nIt accepts the project key as a parameter. An array of objects will be returned. Each object represents one design decision, with `predictions` field containing an array of five expert recommendations."
+					},
+					"response": [
+						{
+							"id": "46071bd4-3797-4064-bb41-f8dc180cca8b",
+							"name": "Recommend experts example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{SERVER_URL}}/predictAssignee?projectKey={{PROJECT_KEY}}",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"predictAssignee"
+									],
+									"query": [
+										{
+											"key": "projectKey",
+											"value": "{{PROJECT_KEY}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "28965",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json;charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 May 2018 10:47:03 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								}
+							],
+							"cookie": [],
+							"body": "[\n\t{\n        \"text\": \"Implement code generation for Generate {{Generate}} currently does not support code generation. Lets add support for CG and for it and its most important generators: {{explode}} and {{json_tuple}}.\",\n        \"assignee\": \"herman van hovell\",\n        \"resolved\": \"2016-11-20T07:54:22.000+0000\",\n        \"predictions\": [\n            {\n                \"personName\": \"reynold xin\",\n                \"score\": 156\n            },\n            {\n                \"personName\": \"davies liu\",\n                \"score\": 84\n            },\n            {\n                \"personName\": \"josh rosen\",\n                \"score\": 76\n            },\n            {\n                \"personName\": \"yanbo liang\",\n                \"score\": 72\n            },\n            {\n                \"personName\": \"xiao li\",\n                \"score\": 44\n            }\n        ]\n    },\n    {\n        \"text\": \"Add --conf to mesos dispatcher process Sometimes we simply need to add a property in Spark Config for the Mesos Dispatcher. The only option right now is to created a property file\",\n        \"assignee\": \"stavros kontopoulos\",\n        \"resolved\": \"2016-11-20T00:05:37.000+0000\",\n        \"predictions\": [\n            {\n                \"personName\": \"reynold xin\",\n                \"score\": 162\n            },\n            {\n                \"personName\": \"yanbo liang\",\n                \"score\": 99\n            },\n            {\n                \"personName\": \"davies liu\",\n                \"score\": 82\n            },\n            {\n                \"personName\": \"josh rosen\",\n                \"score\": 74\n            },\n            {\n                \"personName\": \"xiao li\",\n                \"score\": 61\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get filtered design decisions",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"projectKey\": \"SPARK\",\n\t\"viz\": \"qa\",\n\t\"attrName\": \"Security\",\n\t\"segmentName\": \"Structural decision\"\n}"
+						},
+						"url": {
+							"raw": "{{SERVER_URL}}/getDataForDDV",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"getDataForDDV"
+							]
+						},
+						"description": "This endpoint is used to get filtered design decisions. They can be filtered by project, quality attributes or architectural elements. \n\nIt accepts a JSON object as request body. This object contains `projectKey`, `viz`, which can be either `qa`(quality attributes), or `ae`(architectural elements). \n\nTo filter quality attributes, set `attrName` to the quality attribute you want to filter, and set `segmentName` to \"Structural decision\", \"Behavioral decision\" or \"Non-existence - ban decision\".\n\nTO filter architectural elements, set `attrName` to the element you want to filter."
+					},
+					"response": [
+						{
+							"id": "44feb0a2-12c6-4054-bc47-09afa6238cbb",
+							"name": "Get filtered design decisions example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"disabled": false
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"projectKey\": \"SPARK\",\n\t\"viz\": \"qa\",\n\t\"attrName\": \"Security\",\n\t\"segmentName\": \"Structural decision\"\n}"
+								},
+								"url": {
+									"raw": "{{SERVER_URL}}/getDataForDDV",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"getDataForDDV"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "11686",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 May 2018 11:28:35 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								}
+							],
+							"cookie": [],
+							"body": "[{\"name\":\"SPARK-12585\",\"summary\":\"The numFields of UnsafeRow should not changed by pointTo()\",\"description\":\"Right now, numFields will be passed in by pointTo(), then bitSetWidthInBytes is calculated, making pointTo() a little bit heavy.\\n\\nIt should be part of constructor of UnsafeRow.\",\"shortDescription\":\"Right now, numFields will be passed in by pointTo(), then bitSetWidthInBytes is calculated, making pointTo() a little bit heavy.\\n\\nIt should be part of …\",\"created\":\"2015-12-30T18:26:49.000+0000\",\"resolved\":\"2015-12-31T06:16:50.000+0000\",\"belongsTo\":\"SPARK\",\"issueType\":\"Improvement\",\"status\":\"Resolved\",\"resolution\":\"Fixed\",\"priority\":\"Major\",\"assignee\":\"apachespark\",\"reporter\":\"davies\",\"designDecision\":true,\"decisionCategory\":\"Structural decision\",\"concepts\":\"bitset\",\"keywords\":[\"pointto\",\"unsaferow\",\"heavy\",\"constructor\",\"numfields\",\"C\",\"struct\",\"byte\",\"bitset\",\"bits\",\"field\",\"bytes\",\"fields\",\"EL\",\"thin\",\"late\",\"point\",\"unsafe\",\"Change\",\"safe\"],\"qualityAttributes\":\"Security\",\"similarDocuments\":[{\"summary\":\"numFields of UnsafeRow should not changed by pointTo\",\"name\":\"SPARK-12585\",\"description\":\"now  numFields will be passed in by pointTo    then bitSetWidthInBytes is calculated  making pointTo   a little bit heavy   It should be part of constructor of UnsafeRow\",\"jaccardsimilarity\":\"92.86\",\"cosinesimilarity\":\"100.00\"}]},{\"name\":\"SPARK-7131\",\"summary\":\"Move tree,forest implementation from spark.mllib to spark.ml\",\"description\":\"We want to change and improve the spark.ml API for trees and ensembles, but we cannot change the old API in spark.mllib.  To support the changes we want to make, we should move the implementation from spark.mllib to spark.ml.  We will generalize and modify it, but will also ensure that we do not change the behavior of the old API.\\n\\nThere are several steps to this:\\n1. Copy the implementation over to spark.ml and change the spark.ml classes to use that implementation, rather than calling the spark.mllib implementation.  The current spark.ml tests will ensure that the 2 implementations learn exactly the same models.  Note: This should include performance testing to make sure the updated code does not have any regressions. --> *UPDATE*: I have run tests using spark-perf, and there were no regressions.\\n2. Remove the spark.mllib implementation, and make the spark.mllib APIs wrappers around the spark.ml implementation.  The spark.ml tests will again ensure that we do not change any behavior.\\n3. Move the unit tests to spark.ml, and change the spark.mllib unit tests to verify model equivalence.\\n\\nThis JIRA is now for step 1 only.  Steps 2 and 3 will be in separate JIRAs.\\n\\nAfter these updates, we can more safely generalize and improve the spark.ml implementation.\",\"shortDescription\":\"We want to change and improve the spark.ml API for trees and ensembles, but we cannot change the old API in spark.mllib.  To support the changes we wa …\",\"created\":\"2015-04-24T19:28:30.000+0000\",\"resolved\":\"2015-07-17T05:27:13.000+0000\",\"belongsTo\":\"SPARK\",\"issueType\":\"Improvement\",\"status\":\"Resolved\",\"resolution\":\"Fixed\",\"priority\":\"Major\",\"assignee\":\"josephkb\",\"reporter\":\"josephkb\",\"designDecision\":true,\"decisionCategory\":\"Structural decision\",\"concepts\":[\"Steps\",\"API\",\"APIs\",\"JIRA\"],\"keywords\":[\"implementation rather than calling the spark mllib implementation\",\"mllib implementation and make the spark mllib\",\"tests will ensure that the implementations learn exactly the same models\",\"implementation from spark mllib\",\"implementation\",\"mllib\",\"steps\",\"models\",\"tests\",\"JIRA\",\"unit\",\"equivalence\",\"behavior\",\"separate\",\"regressions\",\"updates\",\"performance\",\"tree\",\"perf\",\"code\",\"C\",\"impl\",\"Test\",\"trees\",\"step\",\"APIs\",\"wrappers\",\"classes\",\"gain\",\"EL\",\"rate\",\"class\",\"form\",\"implementations\",\"support\",\"ensembles\",\"copy\",\"Note\",\"wrap\",\"General\",\"regression\",\"DO NOT\",\"port\",\"testing\",\"mode\",\"call\",\"wrapper\",\"REST\",\"move\",\"model\",\"Change\",\"current\"],\"qualityAttributes\":[\"Performance\",\"Maintainability\",\"Accuracy\",\"Security\"],\"similarDocuments\":[{\"summary\":\"tree forest implementation from spark mllib to spark ml\",\"name\":\"SPARK-7131\",\"description\":\"want to change and improve the spark ml API for trees and ensembles  but we cannot change the old API in spark mllib   To support the changes we want to make  we should move the implementation from spark mllib to spark ml   We will generalize and modify it  but will also ensure that we do not change the behavior of the old API   There are several steps to this  1  Copy the implementation over to spark ml and change the spark ml classes to use that implementation  rather than calling the spark mllib implementation   The current spark ml tests will ensure that the 2 implementations learn exactly the same models   Note  This should include performance testing to make sure the updated code does not have any regressions       UPDATE   I have run tests using spark perf  and there were no regressions  2  Remove the spark mllib implementation  and make the spark mllib APIs wrappers around the spark ml implementation   The spark ml tests will again ensure that we do not change any behavior  3  Move the unit tests to spark ml  and change the spark mllib unit tests to verify model equivalence   This JIRA is now for step 1 only   Steps 2 and 3 will be in separate JIRAs   After these updates  we can more safely generalize and improve the spark ml implementation\",\"jaccardsimilarity\":\"98.18\",\"cosinesimilarity\":\"100.00\"}]},{\"name\":\"SPARK-9815\",\"summary\":\"Rename PlatformDependent.UNSAFE -> Platform\",\"description\":\"PlatformDependent.UNSAFE is way too verbose.\\n\",\"shortDescription\":\"PlatformDependent.UNSAFE is way too verbose.\\n\",\"created\":\"2015-08-11T05:01:19.000+0000\",\"resolved\":\"2015-08-11T15:41:51.000+0000\",\"belongsTo\":\"SPARK\",\"issueType\":\"Improvement\",\"status\":\"Resolved\",\"resolution\":\"Fixed\",\"priority\":\"Major\",\"assignee\":\"rxin\",\"reporter\":\"rxin\",\"designDecision\":true,\"decisionCategory\":\"Structural decision\",\"concepts\":\"\",\"keywords\":[\"unsafe\",\"platformdependent\",\"platform\",\"verbose\",\"form\",\"OS\"],\"qualityAttributes\":\"Security\",\"similarDocuments\":[{\"summary\":\"PlatformDependent UNSAFE    Platform\",\"name\":\"SPARK-9815\",\"description\":\"PlatformDependent UNSAFE is way too verbose\",\"jaccardsimilarity\":\"83.33\",\"cosinesimilarity\":\"100.00\"}]},{\"name\":\"SPARK-16751\",\"summary\":\"Upgrade derby to 10.12.1.1 from 10.11.1.1\",\"description\":\"This JIRA is to upgrade the derby version from 10.11.1.1 to 10.12.1.1\\n\\nSean and I figured that we only use derby for tests and so the initial pull request was to not include it in the jars folder for Spark. I now believe it is required based on comments for the pull request and so this is only a dependency upgrade.\\n\\nThe upgrade is due to an already disclosed vulnerability (CVE-2015-1832) in derby 10.11.1.1. We used https://www.versioneye.com/search and will be checking for any other problems in a variety of libraries too: investigating if we can set up a Jenkins job to check our pom on a regular basis so we can stay ahead of the game for matters like this.\\n\\nThis was raised on the mailing list at http://apache-spark-developers-list.1001551.n3.nabble.com/VOTE-Release-Apache-Spark-2-0-0-RC5-tp18367p18465.html by Stephen Hellberg and replied to by Sean Owen.\\n\\nI've checked the impact to previous Spark releases and this particular version of derby is the only relatively recent and without vulnerabilities version (I checked up to the 1.3 branch) so ideally we'd backport this for all impacted Spark releases.\\n\\nI've marked this as critical and ticked the important checkbox as it's going to impact every user, there isn't a security component (should we add one?) and hence the build tag.\",\"shortDescription\":\"This JIRA is to upgrade the derby version from 10.11.1.1 to 10.12.1.1\\n\\nSean and I figured that we only use derby for tests and so the initial pull req …\",\"created\":\"2016-07-27T12:52:36.000+0000\",\"resolved\":\"2016-07-29T11:46:39.000+0000\",\"belongsTo\":\"SPARK\",\"issueType\":\"Bug\",\"status\":\"Resolved\",\"resolution\":\"Fixed\",\"priority\":\"Major\",\"assignee\":\"aroberts\",\"reporter\":\"aroberts\",\"designDecision\":true,\"decisionCategory\":\"Structural decision\",\"concepts\":[\"Owen I\",\"backport\",\"JIRA\",\"Apache\",\"Test\",\"HTTP\",\"port\",\"HTTPS\",\"URI\",\"KB\",\"Apache Spark\",\"ant\",\"IDE\",\"REPL\",\"HTML\",\"Job\",\"Derby\"],\"keywords\":[\"releases i ve marked this as critical and ticked the important checkbox\",\"list at http apache\",\"release apache\",\"libraries too investigating if we can set up a jenkins job to check our pom on a regular\",\"derby we used https\",\"release\",\"derby\",\"Apache\",\"https\",\"list\",\"checkbox\",\"jenkins\",\"regular\",\"critical\",\"libraries\",\"version\",\"user\",\"basis\",\"variety\",\"vulnerability\",\"C\",\"component\",\"check\",\"comments\",\"vote\",\"mailing\",\"Request\",\"ease\",\"impact\",\"Test\",\"nabble\",\"init\",\"Mail\",\"problems\",\"based\",\"releases\",\"IDE\",\"step\",\"comment\",\"mark\",\"base\",\"HTML\",\"JIRA\",\"branch\",\"upgrade\",\"close\",\"tests\",\"port\",\"HTTP\",\"jars\",\"Read\",\"vulnerabilities\",\"developers\",\"marked\",\"search\",\"EL\",\"developer\",\"VERY\",\"Dependency\",\"ability\",\"head\",\"OS\",\"checking\",\"idea\",\"previous\",\"problem\",\"security\"],\"qualityAttributes\":\"Security\",\"similarDocuments\":[]},{\"name\":\"SPARK-18034\",\"summary\":\"Upgrade to MiMa 0.1.11\",\"description\":\"We should upgrade to the latest release of MiMa (0.1.11) in order to include my fix for a bug which led to flakiness in the MiMa checks (https://github.com/typesafehub/migration-manager/issues/115)\",\"shortDescription\":\"We should upgrade to the latest release of MiMa (0.1.11) in order to include my fix for a bug which led to flakiness in the MiMa checks (https://githu …\",\"created\":\"2016-10-20T20:04:40.000+0000\",\"resolved\":\"2016-10-21T18:25:33.000+0000\",\"belongsTo\":\"SPARK\",\"issueType\":\"Bug\",\"status\":\"Resolved\",\"resolution\":\"Fixed\",\"priority\":\"Major\",\"assignee\":\"joshrosen\",\"reporter\":\"joshrosen\",\"designDecision\":true,\"decisionCategory\":\"Structural decision\",\"concepts\":[\"Test\",\"HTTP\",\"GitHub\",\"HTTPS\",\"Git\"],\"keywords\":[\"typesafehub\",\"GitHub\",\"mima\",\"migration\",\"checks\",\"manager\",\"flakiness\",\"Issues\",\"order\",\"release\",\"upgrade\",\"C\",\"check\",\"late\",\"Test\",\"HTTP\",\"EL\",\"https\",\"issue\",\"types\",\"type\"],\"qualityAttributes\":\"Security\",\"similarDocuments\":[]},{\"name\":\"SPARK-14897\",\"summary\":\"Upgrade Jetty to latest version of 8/9\",\"description\":\"It looks like the head/master branch of Spark uses quite an old version of Jetty: 8.1.14.v20131031\\n\\nThere have been some announcement of security vulnerabilities, notably in 2015 and there are versions of both 8 and 9 that address those. We recently left a web-ui port open and had the server compromised within days. Albeit, this upgrade shouldn't be the only security improvement made, the current version is clearly vulnerable, as-is.\\n\",\"shortDescription\":\"It looks like the head/master branch of Spark uses quite an old version of Jetty: 8.1.14.v20131031\\n\\nThere have been some announcement of security vuln …\",\"created\":\"2016-04-25T18:14:48.000+0000\",\"resolved\":\"2016-05-12T19:07:58.000+0000\",\"belongsTo\":\"SPARK\",\"issueType\":\"Improvement\",\"status\":\"Resolved\",\"resolution\":\"Fixed\",\"priority\":\"Major\",\"assignee\":\"mengbo\",\"reporter\":\"adamjk\",\"designDecision\":true,\"decisionCategory\":\"Structural decision\",\"concepts\":[\"Test\",\"port\",\"URI\",\"web ui\"],\"keywords\":[\"security vulnerabilities notably in and there are versions\",\"upgrade jetty to latest version\",\"version is clearly vulnerable\",\"version of jetty\",\"version\",\"security\",\"upgrade\",\"vulnerabilities\",\"jetty\",\"days\",\"Server\",\"open\",\"shouldn\",\"port\",\"address\",\"improvement\",\"current\",\"announcement\",\"head\",\"branch\",\"C\",\"late\",\"clear\",\"Test\",\"master\",\"versions\",\"Web\",\"OS\",\"thin\"],\"qualityAttributes\":[\"Understandability\",\"Availability\",\"Security\"],\"similarDocuments\":[]}]"
+						}
+					]
+				},
+				{
+					"name": "Get all design decisions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/designDecisions?projectKey={{PROJECT_KEY}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"designDecisions"
+							],
+							"query": [
+								{
+									"key": "projectKey",
+									"value": "{{PROJECT_KEY}}"
+								}
+							]
+						},
+						"description": "This endpoint is used to retrieve all processed design decisions of a project.\n\nIt accepts the project key as a parameter. An array of objects will be returned. Each object represents one processed design decision with all important data, including `decisionCategory`, `concepts`, `qualityAttributes`, `similarDocuments`."
+					},
+					"response": [
+						{
+							"id": "6ddfacff-8b49-4961-86ca-31ea3790c1a9",
+							"name": "Get all design decisions example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{SERVER_URL}}/designDecisions?projectKey={{PROJECT_KEY}}",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"designDecisions"
+									],
+									"query": [
+										{
+											"key": "projectKey",
+											"value": "{{PROJECT_KEY}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "962627",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 May 2018 10:55:20 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								}
+							],
+							"cookie": [],
+							"body": "[\n\t {\n        \"name\": \"SPARK-12177\",\n        \"summary\": \"Update KafkaDStreams to new Kafka 0.10 Consumer API\",\n        \"description\": \"Kafka 0.9 already released and it introduce new consumer API that not compatible with old one. So, I added new consumer api. I made separate classes in package org.apache.spark.streaming.kafka.v09 with changed API. I didn't remove old classes for more backward compatibility. User will not need to change his old spark applications when he uprgade to new Spark version.\\nPlease rewiew my changes\",\n        \"shortDescription\": \"Kafka 0.9 already released and it introduce new consumer API that not compatible with old one. So, I added new consumer api. I made separate classes i …\",\n        \"created\": \"2015-12-07T11:26:41.000+0000\",\n        \"resolved\": \"2016-06-30T06:21:56.000+0000\",\n        \"belongsTo\": \"SPARK\",\n        \"issueType\": \"Improvement\",\n        \"status\": \"Resolved\",\n        \"resolution\": \"Fixed\",\n        \"priority\": \"Major\",\n        \"assignee\": \"cody@koeninger.org\",\n        \"reporter\": \"ntarasenko\",\n        \"designDecision\": true,\n        \"decisionCategory\": \"Structural decision\",\n        \"concepts\": [\n            \"Apache Spark\",\n            \"backward compatibility\",\n            \"kafka\",\n            \"API\",\n            \"Apache\"\n        ],\n        \"keywords\": [\n            \"compatible\",\n            \"classes\",\n            \"user\",\n            \"streaming\",\n            \"applications\",\n            \"Apache\",\n            \"separate\",\n            \"consumer\",\n            \"package\",\n            \"version\",\n            \"kafkadstreams\",\n            \"C\",\n            \"ease\",\n            \"stream\",\n            \"release\",\n            \"dstreams\",\n            \"didn\",\n            \"EL\",\n            \"rate\",\n            \"class\",\n            \"streams\",\n            \"Kafka\",\n            \"Compatibility\",\n            \"Read\",\n            \"application\",\n            \"move\",\n            \"Change\"\n        ],\n        \"qualityAttributes\": \"\",\n        \"similarDocuments\": [\n            {\n                \"summary\": \"Python API for ml feature CountVectorizer\",\n                \"name\": \"SPARK-9769\",\n                \"description\": \"Python API  user guide and example for ml feature CountVectorizerModel\",\n                \"jaccardsimilarity\": \"5.71\",\n                \"cosinesimilarity\": \"46.39\"\n            },\n            {\n                \"summary\": \"Python API for ml regression IsotonicRegression\",\n                \"name\": \"SPARK-9774\",\n                \"description\": \"Python API  user guide and example for ml regression IsotonicRegression\",\n                \"jaccardsimilarity\": \"5.88\",\n                \"cosinesimilarity\": \"51.27\"\n            },\n            {\n                \"summary\": \"KafkaDStreams to new Kafka 0 10 Consumer API\",\n                \"name\": \"SPARK-12177\",\n                \"description\": \"0 9 already released and it introduce new consumer API that not compatible with old one  So  I added new consumer api  I made separate classes in package org apache spark streaming kafka v09 with changed API  I didn t remove old classes for more backward compatibility  User will not need to change his old spark applications when he uprgade to new Spark version  Please rewiew my changes\",\n                \"jaccardsimilarity\": \"96.67\",\n                \"cosinesimilarity\": \"99.34\"\n            }\n        ]\n    },\n    {\n        \"name\": \"SPARK-13671\",\n        \"summary\": \"Use different physical plan for existing RDD and data sources\",\n        \"description\": \"Right now, we use PhysicalRDD for both existing RDD and data sources, they are becoming much different, we should use different physical plans for them.\",\n        \"shortDescription\": \"Right now, we use PhysicalRDD for both existing RDD and data sources, they are becoming much different, we should use different physical plans for the …\",\n        \"created\": \"2016-03-04T08:01:16.000+0000\",\n        \"resolved\": \"2017-01-12T09:54:50.000+0000\",\n        \"belongsTo\": \"SPARK\",\n        \"issueType\": \"Task\",\n        \"status\": \"Resolved\",\n        \"resolution\": \"Fixed\",\n        \"priority\": \"Major\",\n        \"assignee\": \"davies\",\n        \"reporter\": \"davies\",\n        \"designDecision\": true,\n        \"decisionCategory\": \"Structural decision\",\n        \"concepts\": \"\",\n        \"keywords\": [\n            \"data\",\n            \"sources\",\n            \"PLAN\",\n            \"physical\",\n            \"physicalrdd\",\n            \"C\",\n            \"source\",\n            \"data source\",\n            \"plans\"\n        ],\n        \"qualityAttributes\": \"\",\n        \"similarDocuments\": [\n            {\n                \"summary\": \"toLocalIterator to pyspark rdd\",\n                \"name\": \"SPARK-5440\",\n                \"description\": \"toLocalIterator is available in Java and Scala  If we add this functionality to Python  then we can also be able to use PySpark to iterate over a dataset partition by partition\",\n                \"jaccardsimilarity\": \"8.33\",\n                \"cosinesimilarity\": \"15.79\"\n            },\n            {\n                \"summary\": \"different physical plan for existing RDD and data sources\",\n                \"name\": \"SPARK-13671\",\n                \"description\": \"now  we use PhysicalRDD for both existing RDD and data sources  they are becoming much different  we should use different physical plans for them\",\n                \"jaccardsimilarity\": \"91.67\",\n                \"cosinesimilarity\": \"100.00\"\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get one design decision",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{SERVER_URL}}/designDecision?issueKey={{ISSUE_KEY}}",
+							"host": [
+								"{{SERVER_URL}}"
+							],
+							"path": [
+								"designDecision"
+							],
+							"query": [
+								{
+									"key": "issueKey",
+									"value": "{{ISSUE_KEY}}"
+								}
+							]
+						},
+						"description": "This endpoint is used to retrieve one processed design decision.\n\nIt accepts the issue key as a parameter. If found, the design decision will be returned."
+					},
+					"response": [
+						{
+							"id": "a0fb361f-2df9-4d75-9fda-a64a5982d3f7",
+							"name": "Get one design decision example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{SERVER_URL}}/designDecision?issueKey={{ISSUE_KEY}}",
+									"host": [
+										"{{SERVER_URL}}"
+									],
+									"path": [
+										"designDecision"
+									],
+									"query": [
+										{
+											"key": "issueKey",
+											"value": "{{ISSUE_KEY}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Length",
+									"value": "2359",
+									"name": "Content-Length",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8",
+									"name": "Content-Type",
+									"description": "The mime type of this content"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 13 May 2018 22:16:29 GMT",
+									"name": "Date",
+									"description": "The date and time that the message was sent"
+								}
+							],
+							"cookie": [],
+							"body": "{\"name\":\"SPARK-12177\",\"summary\":\"Update KafkaDStreams to new Kafka 0.10 Consumer API\",\"description\":\"Kafka 0.9 already released and it introduce new consumer API that not compatible with old one. So, I added new consumer api. I made separate classes in package org.apache.spark.streaming.kafka.v09 with changed API. I didn't remove old classes for more backward compatibility. User will not need to change his old spark applications when he uprgade to new Spark version.\\nPlease rewiew my changes\",\"shortDescription\":\"Kafka 0.9 already released and it introduce new consumer API that not compatible with old one. So, I added new consumer api. I made separate classes i …\",\"created\":\"2015-12-07T11:26:41.000+0000\",\"resolved\":\"2016-06-30T06:21:56.000+0000\",\"belongsTo\":\"SPARK\",\"issueType\":\"Improvement\",\"status\":\"Resolved\",\"resolution\":\"Fixed\",\"priority\":\"Major\",\"assignee\":\"cody@koeninger.org\",\"reporter\":\"ntarasenko\",\"designDecision\":true,\"decisionCategory\":\"Structural decision\",\"concepts\":[\"Apache Spark\",\"backward compatibility\",\"kafka\",\"API\",\"Apache\"],\"keywords\":[\"compatible\",\"classes\",\"user\",\"streaming\",\"applications\",\"Apache\",\"separate\",\"consumer\",\"package\",\"version\",\"kafkadstreams\",\"C\",\"ease\",\"stream\",\"release\",\"dstreams\",\"didn\",\"EL\",\"rate\",\"class\",\"streams\",\"Kafka\",\"Compatibility\",\"Read\",\"application\",\"move\",\"Change\"],\"qualityAttributes\":\"\",\"similarDocuments\":[{\"summary\":\"Python API for ml feature CountVectorizer\",\"name\":\"SPARK-9769\",\"description\":\"Python API  user guide and example for ml feature CountVectorizerModel\",\"jaccardsimilarity\":\"5.71\",\"cosinesimilarity\":\"46.39\"},{\"summary\":\"Python API for ml regression IsotonicRegression\",\"name\":\"SPARK-9774\",\"description\":\"Python API  user guide and example for ml regression IsotonicRegression\",\"jaccardsimilarity\":\"5.88\",\"cosinesimilarity\":\"51.27\"},{\"summary\":\"KafkaDStreams to new Kafka 0 10 Consumer API\",\"name\":\"SPARK-12177\",\"description\":\"0 9 already released and it introduce new consumer API that not compatible with old one  So  I added new consumer api  I made separate classes in package org apache spark streaming kafka v09 with changed API  I didn t remove old classes for more backward compatibility  User will not need to change his old spark applications when he uprgade to new Spark version  Please rewiew my changes\",\"jaccardsimilarity\":\"96.67\",\"cosinesimilarity\":\"99.34\"}]}"
 						}
 					]
 				}

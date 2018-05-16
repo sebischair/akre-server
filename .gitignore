@@ -13,3 +13,5 @@ logs/
 target/
 yajsw
 conf/application.local.conf
+cert/
+dist/

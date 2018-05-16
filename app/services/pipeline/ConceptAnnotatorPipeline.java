@@ -3,18 +3,13 @@ package services.pipeline;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import model.DBpediaToken;
-import model.Document;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.InvalidXMLException;
 import play.libs.Json;
 import services.annotator.ConceptAnnotator;
 import services.annotator.SpotlightAnnotator;
@@ -22,10 +17,7 @@ import util.PipelineUtil;
 import util.StaticFunctions;
 import util.UimaUtil;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -34,13 +26,6 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
  * Created by mahabaleshwar on 6/23/2016.
  */
 public class ConceptAnnotatorPipeline extends UIMAPipeline {
-
-    @Override
-    public String preProcessDocument() {
-        // logic to preprocess the document goes here...
-        return null;
-    }
-
     @Override
     public ArrayNode processDocument() {
         ArrayNode annotations = Json.newArray();

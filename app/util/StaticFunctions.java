@@ -28,14 +28,11 @@ public class StaticFunctions {
     public static final String TEMPLATE = "template";
     public static final String CONCEPT = "CONCEPT";
     public static final String SPOTLIGHT = "SPOTLIGHT";
-    public static final String REGEX = "REGEX";
     public static final String NAME = "name";
 
     public static final String ASSIGNEE = "assignee";
     public static final String CONCEPTS = "concepts";
     public static final String SUMMARY = "summary";
-    public static final String TAGS = "tags";
-    public static final String ID = "id";
 
     public static final String PERSONNAME= "personName";
     public static final String KEYWORDS= "keywords";
@@ -91,14 +88,6 @@ public class StaticFunctions {
             sortedJsonArray.add(jsonValues.get(i));
         }
         return sortedJsonArray;
-    }
-
-    public static ArrayNode getJsonFromList(ArrayList<String> lines) {
-        ArrayNode l = Json.newArray();
-        if (lines != null)
-            for (String line : lines)
-                l.add(line);
-        return l;
     }
 
     public static boolean containsStringValue(String key, String value, ArrayNode ja) {
@@ -187,4 +176,5 @@ public class StaticFunctions {
         else
             return text;
     }
+
 }

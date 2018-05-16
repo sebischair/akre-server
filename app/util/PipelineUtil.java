@@ -34,39 +34,13 @@ public class PipelineUtil {
         return false;
     }
 
-    public static List<String> getAnnotationBlackList() {
-        return ANNOTATION_BLACK_LIST;
-    }
-
-    public static void setAnnotationBlackList(List<String> annotationBlackList) {
-        ANNOTATION_BLACK_LIST = annotationBlackList;
-    }
-
-    public static List<String> getAnnotationWhiteList() {
-        return ANNOTATION_WHITE_LIST;
-    }
-
-    public static void setAnnotationWhiteList(List<String> annotationWhiteList) {
-        ANNOTATION_WHITE_LIST = annotationWhiteList;
-    }
-
-    public static List<String> getFeatureBlackList() {
-        return FEATURE_BLACK_LIST;
-    }
-
-    public static void setFeatureBlackList(List<String> featureBlackList) {
-        FEATURE_BLACK_LIST = featureBlackList;
-    }
-
     private static List<String> ANNOTATION_BLACK_LIST = new ArrayList<>();
     static {
         ANNOTATION_BLACK_LIST.add("uima.tcas.");
-        //ANNOTATION_BLACK_LIST.add("de.tudarmstadt.ukp.dkpro.core.api.segmentation.");
         ANNOTATION_BLACK_LIST.add("de.tudarmstadt.ukp.dkpro.core.api.metadata.");
         ANNOTATION_BLACK_LIST.add("org.apache.uima.ruta.type.");
         ANNOTATION_BLACK_LIST.add("de.tudarmstadt.ukp.dkpro.");
         ANNOTATION_BLACK_LIST.add("informationExtraction.lexiaTypes.ArticleHeader");
-        //ANNOTATION_BLACK_LIST.add("de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
     }
 
     private static List<String> ANNOTATION_WHITE_LIST = new ArrayList<>();

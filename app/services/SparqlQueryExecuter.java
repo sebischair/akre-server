@@ -5,9 +5,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.jena.query.*;
 import play.libs.Json;
 import util.StaticFunctions;
-import java.net.Authenticator;
-import org.apache.jena.atlas.web.auth.SimpleNTAuthenticator;
-import org.apache.jena.atlas.web.auth.SimpleAuthenticator;
 
 public class SparqlQueryExecuter {
 

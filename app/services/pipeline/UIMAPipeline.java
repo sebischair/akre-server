@@ -13,6 +13,5 @@ public abstract class UIMAPipeline {
 
     public void setDocument(Document document) { this.document = document; }
 
-    public abstract String preProcessDocument();
     public abstract ArrayNode processDocument();
 }

@@ -11,7 +11,6 @@ import play.libs.Json;
 import play.libs.ws.WSClient;
 import play.mvc.Controller;
 import play.mvc.Result;
-import util.HtmlUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +30,7 @@ public class SimilarDocumentsController extends Controller {
         ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
         issues.forEach(issue -> {
             System.out.println(issue.get("name").asText());
-            String text = HtmlUtil.convertToPlaintext((issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " "));
+            String text = (issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " ");
             ObjectNode json = Json.newObject().put("textToClassify", text);
             json.put("pipeline", Json.newObject().put("name", projectKey).put("library", 1));
 

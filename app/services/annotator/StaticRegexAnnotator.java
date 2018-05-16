@@ -1,7 +1,5 @@
 package services.annotator;
 
-import model.PatternEntity;
-import model.Regex;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -9,7 +7,6 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import services.annotationType.StaticRegex.StaticRegex;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,29 +32,19 @@ public class StaticRegexAnnotator extends JCasAnnotator_ImplBase {
     @Override
     public void process(JCas jCas) throws AnalysisEngineProcessException {
         String document = jCas.getDocumentText();
-        String projectId = "";
         if(jCas.getDocumentText().contains(":projectId:")) {
             String[] dt_temp = jCas.getDocumentText().split(":projectId:");
             document = dt_temp[0];
             projectId = dt_temp[1];
         }
 
-
         String documentText = document.toLowerCase();
         if (documentText == null || documentText.isEmpty()) {
             return;
         }
 
-        if(projectId != "") {
-            PatternEntity p = new PatternEntity().findByProjectId(projectId);
-            List<Regex> regex = p.getRegex();
-            for(Regex r: regex) {
-                addAnnotations(jCas, documentText, Pattern.compile(r.getRegex()), r.getDescription());
-            }
-        } else {
-            addAnnotations(jCas, documentText, pattern1, "Hardcoded system name detected");
-            addAnnotations(jCas, documentText, pattern2, "Hardcoded wait function detected");
-        }
+        addAnnotations(jCas, documentText, pattern1, "Hardcoded system name detected");
+        addAnnotations(jCas, documentText, pattern2, "Hardcoded wait function detected");
     }
 
     private void addAnnotations(JCas aJCas, String docText, Pattern pattern, String name) {

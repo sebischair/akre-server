@@ -58,9 +58,6 @@ GET           /deleteCodeToken                  controllers.CCAnnotatorControlle
 POST          /upload                           controllers.getFileContent.uploadAndSave()
 GET           /annotate/:paraghraphHash         controllers.SpaCyController.process(paraghraphHash)
 
-#POST          /record/delete/all                           controllers.RecordController.deleteAllDocuments()
-#GET           /record/all                                  controllers.RecordController.getAllDocuments()
-
 # Testing APIs
 GET           /updateAllConcepts                controllers.amelie.KeywordExtractorController.updateConceptsForDesignDecisions(projectKey: String)
 GET           /updateAllKeywords                controllers.amelie.KeywordExtractorController.updateKeywordsForDesignDecisions(projectKey: String)

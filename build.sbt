@@ -9,7 +9,6 @@ scalaVersion := "2.11.11"
 lazy val webJarsPlay = file("..").getAbsoluteFile.toURI
 
 libraryDependencies ++= Seq(
-  filters,
   cache,
   javaWs,
   "com.google.code.gson" % "gson" % "2.8.0",

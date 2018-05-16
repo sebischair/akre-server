@@ -44,16 +44,6 @@ DELETE        /annotation/:annotationId         controllers.AnnotationController
 GET           /updateProjectProcessState        controllers.amelie.ProjectController.updateProjectProcessState(projectKey: String)
 GET           /updateProjectIssueCount          controllers.amelie.ProjectController.updateProjectIssueCount(projectKey: String)
 
-# cc-annotator rest api - not documented
-POST          /processCode                      controllers.CodeController.processCode()
-GET           /pattern                          controllers.CodeController.pattern(projectId: String ?= "")
-POST          /pattern                          controllers.CodeController.updatePattern()
-POST          /codeToken                        controllers.CCAnnotatorController.create()
-GET           /codeToken                        controllers.CCAnnotatorController.getAll()
-GET           /codeTokenInFile                  controllers.CCAnnotatorController.getAllForFileId(fileId: String ?= "")
-GET           /codeTokenInProject               controllers.CCAnnotatorController.getAllForProjectId(projectId: String ?= "")
-GET           /deleteCodeToken                  controllers.CCAnnotatorController.delete(id: String ?= "")
-
 # uncertainty detection - not documented
 POST          /upload                           controllers.getFileContent.uploadAndSave()
 GET           /annotate/:paraghraphHash         controllers.SpaCyController.process(paraghraphHash)

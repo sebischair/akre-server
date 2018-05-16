@@ -3,11 +3,12 @@ package util;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.bson.Document;
 import play.libs.Json;
 import play.mvc.Result;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by mahabaleshwar on 8/29/2016.
@@ -29,14 +30,10 @@ public class StaticFunctions {
     public static final String SPOTLIGHT = "SPOTLIGHT";
     public static final String REGEX = "REGEX";
     public static final String NAME = "name";
-    public static final String PROGLANGUAGE = "progLanguage";
-    public static final String PATTERN = "pattern";
-    public static final String PROJECTID = "projectId";
 
     public static final String ASSIGNEE = "assignee";
     public static final String CONCEPTS = "concepts";
     public static final String SUMMARY = "summary";
-    public static final String VALUES = "values";
     public static final String TAGS = "tags";
     public static final String ID = "id";
 
@@ -147,7 +144,6 @@ public class StaticFunctions {
         ((ArrayNode) conceptArray).add(jo);
     }
 
-
     public static List<String> getItemsToRemove(ArrayNode ja) {
         List<String> itemsToRemove = new ArrayList<>();
         itemsToRemove.add("unassigned");
@@ -168,21 +164,6 @@ public class StaticFunctions {
                     break;
                 }
             }
-        }
-    }
-
-    public static void updateAttributesArray(ArrayNode attributesArray, ArrayNode value, String attributeName) {
-        if(value != null) {
-            ObjectNode newAttribute = Json.newObject();
-            ArrayNode valueNodes = Json.newArray();
-            newAttribute.put(StaticFunctions.NAME, attributeName);
-            for(int i=0; i<value.size(); i++) {
-                ObjectNode valueObject = Json.newObject();
-                valueObject.put("id", value.get(i).asText());
-                valueNodes.add(valueObject);
-            }
-            newAttribute.set(StaticFunctions.VALUES, valueNodes);
-            attributesArray.add(newAttribute);
         }
     }
 

@@ -123,19 +123,19 @@ public class AnnotationController extends Controller {
         return array;
     }
 
-    public Result removeToken(String token) {
-        if (new DBpediaToken().updateTokenScore(token, -1))
+    public Result removeArchitecturalElement(String architecturalElement) {
+        if (new DBpediaToken().updateTokenScore(architecturalElement, -1))
             return ok("200");
         return ok("500");
     }
 
-    public Result addToken(String token) {
-        DBpediaToken savedToken = new DBpediaToken().findByName(token);
+    public Result addArchitecturalElement(String architecturalElement) {
+        DBpediaToken savedToken = new DBpediaToken().findByName(architecturalElement);
         if (savedToken == null) {
-            DBpediaToken dbType = new DBpediaToken(token, "custom", 1);
+            DBpediaToken dbType = new DBpediaToken(architecturalElement, "custom", 1);
             dbType.save();
         } else {
-            new DBpediaToken().updateTokenScore(token, 1);
+            new DBpediaToken().updateTokenScore(architecturalElement, 1);
         }
         return ok("200");
     }

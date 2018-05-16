@@ -11,7 +11,6 @@ import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import util.HtmlUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;

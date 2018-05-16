@@ -1,8 +1,6 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
 # TBD: group the following APIs into related groups
-GET           /addToken                         controllers.AnnotationController.addToken(token: String ?= "")
-GET           /removeToken                      controllers.AnnotationController.removeToken(token: String ?= "")
 POST          /processDocument                  controllers.DocumentController.processDocument()
 POST          /annotate                         controllers.DocumentController.processDocument()
 POST          /getMetaInformation               controllers.DocumentController.getMetaInformation()
@@ -58,6 +56,8 @@ GET           /predictAssignee                  controllers.amelie.AssigneePredi
 POST          /getDataForDDV                    controllers.amelie.DDDataController.getDDData()
 GET           /designDecisions                  controllers.amelie.DesignDecisionController.getAllDesignDecisions(projectKey: String)
 GET           /designDecision                   controllers.amelie.DesignDecisionController.getDesignDecision(issueKey: String)
+GET           /addArchitecturalElement          controllers.AnnotationController.addArchitecturalElement(architecturalElement: String ?= "")
+GET           /removeArchitecturalElement       controllers.AnnotationController.removeArchitecturalElement(architecturalElement: String ?= "")
 
 # Import projects
 GET           /updateProjectProcessState        controllers.amelie.ProjectController.updateProjectProcessState(projectKey: String)

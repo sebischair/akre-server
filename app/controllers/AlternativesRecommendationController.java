@@ -21,73 +21,78 @@ import java.util.List;
 public class AlternativesRecommendationController extends Controller {
 
     public Result getAlternatives() {
-        String uri = request().body().asJson().findValue(StaticFunctions.URI).toString().replace("\"", "");
-        ArrayNode result = Json.newArray();
-        if(!uri.contains("http:")) {
-            Alternative alternative = new Alternative().findByName(uri);
-            if(alternative != null)
-                result.addAll(StaticFunctions.sortJsonArray(alternative.getAlternativesAsJsonArray()));
-        } else {
-            Alternative alternative = new Alternative().findByName(uri);
-            if (alternative != null)
-                result.addAll(StaticFunctions.sortJsonArray(alternative.getAlternativesAsJsonArray()));
-            else if (result.size() > 0 ){
-                String key = "<" + uri + "> ";
-                String queryString = "PREFIX dct: <http://purl.org/dc/terms/>\n" +
-                        "PREFIX dbr: <http://dbpedia.org/resource/>\n" +
-                        "PREFIX dbo: <http://dbpedia.org/ontology/>\n" +
-                        "PREFIX schema: <http://www.w3.org/2000/01/rdf-schema#>\n" +
-                        "PREFIX ns: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "SELECT DISTINCT ?x ?title WHERE { \n" +
-                        "{SELECT DISTINCT ?x ?title WHERE { \n" +
-                        key + "ns:type dbo:Software .\n" +
-                        key + "dbo:genre ?genre .\n" +
-                        key + "dct:subject ?subject .\n" +
-                        "?x dbo:genre ?genre .\n" +
-                        "?x dct:subject ?subject .\n" +
-                        "?x ns:type dbo:Software .\n" +
-                        "?x schema:label ?title }\n" +
-                        "} UNION { \n" +
-                        "SELECT DISTINCT ?x ?title WHERE { \n" +
-                        key + " ns:type dbo:Genre .\n" +
-                        key + " dct:subject ?concept .\n" +
-                        "?x dct:subject ?concept .\n" +
-                        "?x ns:type dbo:Genre .\n" +
-                        "?x schema:label ?title } } \n" +
-                        "UNION { \n"+
-                        "SELECT DISTINCT ?x ?title WHERE { \n" +
-                        key + " dct:subject ?concept .\n" +
-                        "?x dct:subject ?concept .\n" +
-                        "?x ns:type <http://dbpedia.org/class/yago/Software106566077> .\n" +
-                        "?x schema:label ?title } }\n" +
-                        "FILTER langMatches(lang(?title), \"EN\")\n" +
-                        " } LIMIT 100";
-
-                SparqlQueryExecuter e = new SparqlQueryExecuter();
-                ArrayNode response = e.query(queryString);
-
-                if (response.size() == 0) {
-                    queryString = "PREFIX dct: <http://purl.org/dc/terms/> \n" +
+        if(request().body().asJson().hasNonNull(StaticFunctions.URI)) {
+            String uri = request().body().asJson().findValue(StaticFunctions.URI).toString().replace("\"", "");
+            ArrayNode result = Json.newArray();
+            if (!uri.contains("http:")) {
+                Alternative alternative = new Alternative().findByName(uri);
+                if (alternative != null)
+                    result.addAll(StaticFunctions.sortJsonArray(alternative.getAlternativesAsJsonArray()));
+            } else {
+                Alternative alternative = new Alternative().findByName(uri);
+                if (alternative != null)
+                    result.addAll(StaticFunctions.sortJsonArray(alternative.getAlternativesAsJsonArray()));
+                else if (result.size() > 0) {
+                    String key = "<" + uri + "> ";
+                    String queryString = "PREFIX dct: <http://purl.org/dc/terms/>\n" +
+                            "PREFIX dbr: <http://dbpedia.org/resource/>\n" +
+                            "PREFIX dbo: <http://dbpedia.org/ontology/>\n" +
                             "PREFIX schema: <http://www.w3.org/2000/01/rdf-schema#>\n" +
-                            "SELECT DISTINCT ?x ?title WHERE {\n" +
-                            key + " dct:subject ?concept . \n" +
-                            "?x dct:subject ?concept . \n" +
-                            "?x schema:label ?title . \n" +
-                            "FILTER(regex(?concept, \"pattern\", \"i\")) \n" +
-                            "FILTER langMatches(lang(?title), \"EN\") \n" +
-                            "} LIMIT 100";
-                    e = new SparqlQueryExecuter();
-                    response = e.query(queryString);
+                            "PREFIX ns: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                            "SELECT DISTINCT ?x ?title WHERE { \n" +
+                            "{SELECT DISTINCT ?x ?title WHERE { \n" +
+                            key + "ns:type dbo:Software .\n" +
+                            key + "dbo:genre ?genre .\n" +
+                            key + "dct:subject ?subject .\n" +
+                            "?x dbo:genre ?genre .\n" +
+                            "?x dct:subject ?subject .\n" +
+                            "?x ns:type dbo:Software .\n" +
+                            "?x schema:label ?title }\n" +
+                            "} UNION { \n" +
+                            "SELECT DISTINCT ?x ?title WHERE { \n" +
+                            key + " ns:type dbo:Genre .\n" +
+                            key + " dct:subject ?concept .\n" +
+                            "?x dct:subject ?concept .\n" +
+                            "?x ns:type dbo:Genre .\n" +
+                            "?x schema:label ?title } } \n" +
+                            "UNION { \n" +
+                            "SELECT DISTINCT ?x ?title WHERE { \n" +
+                            key + " dct:subject ?concept .\n" +
+                            "?x dct:subject ?concept .\n" +
+                            "?x ns:type <http://dbpedia.org/class/yago/Software106566077> .\n" +
+                            "?x schema:label ?title } }\n" +
+                            "FILTER langMatches(lang(?title), \"EN\")\n" +
+                            " } LIMIT 100";
+
+                    SparqlQueryExecuter e = new SparqlQueryExecuter();
+                    ArrayNode response = e.query(queryString);
+
+                    if (response.size() == 0) {
+                        queryString = "PREFIX dct: <http://purl.org/dc/terms/> \n" +
+                                "PREFIX schema: <http://www.w3.org/2000/01/rdf-schema#>\n" +
+                                "SELECT DISTINCT ?x ?title WHERE {\n" +
+                                key + " dct:subject ?concept . \n" +
+                                "?x dct:subject ?concept . \n" +
+                                "?x schema:label ?title . \n" +
+                                "FILTER(regex(?concept, \"pattern\", \"i\")) \n" +
+                                "FILTER langMatches(lang(?title), \"EN\") \n" +
+                                "} LIMIT 100";
+                        e = new SparqlQueryExecuter();
+                        response = e.query(queryString);
+                    }
+
+                    WikiTrends trends = new WikiTrends();
+                    response = trends.getTrends(response);
+
+                    result.addAll(StaticFunctions.sortJsonArray(response));
+                    saveAlternative(uri, result);
                 }
-
-                WikiTrends trends = new WikiTrends();
-                response = trends.getTrends(response);
-
-                result.addAll(StaticFunctions.sortJsonArray(response));
-                saveAlternative(uri, result);
             }
+            return ok(result);
         }
-        return ok(result);
+        ObjectNode res = Json.newObject();
+        res.put("status", "400");
+        return ok(res);
     }
 
     public Result removeAlternative() {

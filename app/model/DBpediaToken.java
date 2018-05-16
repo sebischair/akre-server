@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by mahabaleshwar on 8/11/2016.
  */
-@Entity("dbpediaTypes")
+@Entity("architecturalElements")
 @Indexes(@Index(value = "name", fields = @Field("name")))
 public class DBpediaToken {
     @Id

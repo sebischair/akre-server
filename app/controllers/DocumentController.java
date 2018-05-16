@@ -112,15 +112,20 @@ public class DocumentController extends Controller {
     }
 
     public Result getMetaInformation() {
-        String uri = request().body().asJson().findValue(StaticFunctions.URI).toString().replace("\"", "");
-        //String url = "http://dbpedia.org/data/Relational_database.json";
-        //String key = "http://dbpedia.org/resource/Relational_database"
-        CompletionStage<JsonNode> jsonResponse = getResponse(uri.replace("resource", "data") + ".json");
-        jsonResponse.thenApply(wsResponse -> {
-            metaInformation = getResource(wsResponse, uri);
-            return ok();
-        }).toCompletableFuture().join();
-        return ok(metaInformation);
+        ObjectNode res = Json.newObject();
+        if(request().body().asJson().hasNonNull(StaticFunctions.URI)) {
+            String uri = request().body().asJson().findValue(StaticFunctions.URI).toString().replace("\"", "");
+            //String url = "http://dbpedia.org/data/Relational_database.json";
+            //String key = "http://dbpedia.org/resource/Relational_database"
+            CompletionStage<JsonNode> jsonResponse = getResponse(uri.replace("resource", "data") + ".json");
+            jsonResponse.thenApply(wsResponse -> {
+                metaInformation = getResource(wsResponse, uri);
+                return ok();
+            }).toCompletableFuture().join();
+            return ok(metaInformation);
+        }
+        res.put("status", "400");
+        return ok(res);
     }
 
     private JsonNode getResource(JsonNode wsResponse, String key) {

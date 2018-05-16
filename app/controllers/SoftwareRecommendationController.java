@@ -60,50 +60,55 @@ public class SoftwareRecommendationController extends Controller {
     }
 
     public Result getSoftwareSolutions() {
-        String uri = request().body().asJson().findValue(StaticFunctions.URI).toString().replace("\"", "");
-        ArrayNode result = Json.newArray();
-        if(!uri.contains("http:")) {
-            Genre genre = new Genre().findByName(uri);
-            if(genre != null)
-                result.addAll(StaticFunctions.sortJsonArray(genre.getSoftwareAsJsonArray()));
-        } else {
-            Genre genre = new Genre().findByName(uri);
-            if(genre != null)
-                result.addAll(StaticFunctions.sortJsonArray(genre.getSoftwareAsJsonArray()));
-            else {
-                String key = "<" + uri + "> ";
-                String queryString = "PREFIX dct:<http://purl.org/dc/terms/> \n" +
-                        "PREFIX dbo: <http://dbpedia.org/ontology/> \n" +
-                        "PREFIX ns: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n" +
-                        "PREFIX schema: <http://www.w3.org/2000/01/rdf-schema#> \n" +
-                        "SELECT DISTINCT ?x ?title WHERE { { \n" +
-                        "SELECT ?x ?title WHERE { \n" +
-                        "?x dbo:genre" + key + " . \n" +
-                        "?x ns:type dbo:Software . \n" +
-                        "?x schema:label ?title } } UNION { \n" +
-                        "SELECT ?x ?title WHERE { \n" +
-                        key + "dct:subject ?concept . \n" +
-                        "?x dct:subject ?concept . \n" +
-                        "?x ns:type dbo:Software . \n" +
-                        "?x schema:label ?title } \n" +
-                        "} UNION { \n" +
-                        "SELECT ?x ?title WHERE { \n" +
-                        key + "dct:subject ?concept . \n" +
-                        "?genre dct:subject ?concept . \n" +
-                        "?x dbo:genre ?genre . \n" +
-                        "?x ns:type dbo:Software ." +
-                        "?x schema:label ?title } } \n" +
-                        "filter(langMatches(lang(?title),\"EN\")) } LIMIT 100";
+        if(request().body().asJson().hasNonNull(StaticFunctions.URI)) {
+            String uri = request().body().asJson().findValue(StaticFunctions.URI).toString().replace("\"", "");
+            ArrayNode result = Json.newArray();
+            if(!uri.contains("http:")) {
+                Genre genre = new Genre().findByName(uri);
+                if(genre != null)
+                    result.addAll(StaticFunctions.sortJsonArray(genre.getSoftwareAsJsonArray()));
+            } else {
+                Genre genre = new Genre().findByName(uri);
+                if(genre != null)
+                    result.addAll(StaticFunctions.sortJsonArray(genre.getSoftwareAsJsonArray()));
+                else {
+                    String key = "<" + uri + "> ";
+                    String queryString = "PREFIX dct:<http://purl.org/dc/terms/> \n" +
+                            "PREFIX dbo: <http://dbpedia.org/ontology/> \n" +
+                            "PREFIX ns: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> \n" +
+                            "PREFIX schema: <http://www.w3.org/2000/01/rdf-schema#> \n" +
+                            "SELECT DISTINCT ?x ?title WHERE { { \n" +
+                            "SELECT ?x ?title WHERE { \n" +
+                            "?x dbo:genre" + key + " . \n" +
+                            "?x ns:type dbo:Software . \n" +
+                            "?x schema:label ?title } } UNION { \n" +
+                            "SELECT ?x ?title WHERE { \n" +
+                            key + "dct:subject ?concept . \n" +
+                            "?x dct:subject ?concept . \n" +
+                            "?x ns:type dbo:Software . \n" +
+                            "?x schema:label ?title } \n" +
+                            "} UNION { \n" +
+                            "SELECT ?x ?title WHERE { \n" +
+                            key + "dct:subject ?concept . \n" +
+                            "?genre dct:subject ?concept . \n" +
+                            "?x dbo:genre ?genre . \n" +
+                            "?x ns:type dbo:Software ." +
+                            "?x schema:label ?title } } \n" +
+                            "filter(langMatches(lang(?title),\"EN\")) } LIMIT 100";
 
-                SparqlQueryExecuter e = new SparqlQueryExecuter();
-                ArrayNode response = e.query(queryString);
-                WikiTrends trends = new WikiTrends();
-                response = trends.getTrends(response);
-                result.addAll(StaticFunctions.sortJsonArray(response));
-                saveGenre(uri, result);
+                    SparqlQueryExecuter e = new SparqlQueryExecuter();
+                    ArrayNode response = e.query(queryString);
+                    WikiTrends trends = new WikiTrends();
+                    response = trends.getTrends(response);
+                    result.addAll(StaticFunctions.sortJsonArray(response));
+                    saveGenre(uri, result);
+                }
             }
+            return ok(result);
         }
-        return ok(result);
+        ObjectNode res = Json.newObject();
+        res.put("status", "400");
+        return ok(res);
     }
 
     private void saveGenre(String uri, ArrayNode result) {

@@ -34,7 +34,6 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
  * Created by mahabaleshwar on 6/23/2016.
  */
 public class ConceptAnnotatorPipeline extends UIMAPipeline {
-    Map<String, Object> result = new HashMap<String, Object>();
 
     @Override
     public String preProcessDocument() {
@@ -61,18 +60,9 @@ public class ConceptAnnotatorPipeline extends UIMAPipeline {
 
             jCas.reset();
             pipe.destroy();
-        } catch (ResourceInitializationException e) {
-            e.printStackTrace();
-        } catch (AnalysisEngineProcessException e) {
-            e.printStackTrace();
-        } catch (InvalidXMLException e) {
-            e.printStackTrace();
-        } catch (CASException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
         return annotations;
     }
 
@@ -123,19 +113,7 @@ public class ConceptAnnotatorPipeline extends UIMAPipeline {
             if(savedToken != null && savedToken.getScore() >= 0) {
                 annotations.add(featureAsJson);
             }
-			
-			//if(featureAsJson.get(StaticFunctions.CONCEPTTYPE).asText().equalsIgnoreCase(StaticFunctions.EXPERTISE) ||
-			//featureAsJson.get(StaticFunctions.CONCEPTTYPE).asText().equalsIgnoreCase(StaticFunctions.METHOD) ||
-			//featureAsJson.get(StaticFunctions.CONCEPTTYPE).asText().equalsIgnoreCase(StaticFunctions.TEMPLATE)
-			//) {
-			//	annotations.add(featureAsJson);
-			//}
         }
         return annotations;
-    }
-
-    public void executePipeline(Document document) {
-        this.setDocument(document);
-        processDocument();
     }
 }

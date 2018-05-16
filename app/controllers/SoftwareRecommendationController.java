@@ -94,7 +94,7 @@ public class SoftwareRecommendationController extends Controller {
                             "?x dbo:genre ?genre . \n" +
                             "?x ns:type dbo:Software ." +
                             "?x schema:label ?title } } \n" +
-                            "filter(langMatches(lang(?title),\"EN\")) } LIMIT 100";
+                            "filter(langMatches(lang(?title),\"EN\")) } LIMIT 1000";
 
                     SparqlQueryExecuter e = new SparqlQueryExecuter();
                     ArrayNode response = e.query(queryString);

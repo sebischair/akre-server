@@ -24,18 +24,10 @@ public class DocumentController extends Controller {
     @Inject
     WSClient ws;
 
-    @Inject
-    private Materializer materializer;
-
-    private JsonNode metaInformation = Json.newObject();
-
-    private final String PARAGRAPH_NUMBER = "parNum";
+    private String metaInformation;
     private final String CONTENT = "content";
     private final String SPACY_SERVER_ERROR = "[{}] server error: {}";
     private final String SPACY_HOST_MISSING = "spacy.host is not configured. Check application.conf";
-    private final String DOCUMENT_HASH = "docHash";
-    private final String PARAGRAPH_MAX = "parMax";
-    private final String SESSION = "uuid";
 
     private final String ANNOTATION_TYPE = "annotationType";
     private final String TAGS = "tags";
@@ -83,19 +75,6 @@ public class DocumentController extends Controller {
         ObjectNode result = Json.newObject();
         JsonNode request = request().body().asJson();
         ArrayNode annotations = Json.newArray();
-        //TODO: Move to the filter
-//        if (request.has(SESSION) && request.has(PARAGRAPH_NUMBER) && request.has(DOCUMENT_HASH)) {
-//            Record record = Record.getOrCreateRecord(request.findValue(SESSION).asText(), request.findValue(DOCUMENT_HASH).asText());
-//            if (request.has(PARAGRAPH_MAX) && request.findValue(PARAGRAPH_MAX).asInt() == record.getParagraphs().size()) {
-//                //document already in db
-//            } else {
-//                int paragraphNumber = request.findValue(PARAGRAPH_NUMBER).asInt();
-//                Paragraph paragraph = new Paragraph().setParagraphNum(paragraphNumber);
-//                paragraph.setContent(request.findValue(CONTENT).toString().replace("\"", ""));
-//                record.addParagraph(paragraph).save();
-//            }
-//        }
-
         if (request.has(ANNOTATION_TYPE)) {
             ArrayNode annotationType = (ArrayNode) request.findValue(ANNOTATION_TYPE);
             for (int i = 0; i < annotationType.size(); i++) {
@@ -107,7 +86,6 @@ public class DocumentController extends Controller {
 
         result.put("status", "OK");
         result.set("data", annotations);
-
         return ok(result);
     }
 
@@ -115,14 +93,20 @@ public class DocumentController extends Controller {
         ObjectNode res = Json.newObject();
         if(request().body().asJson().hasNonNull(StaticFunctions.URI)) {
             String uri = request().body().asJson().findValue(StaticFunctions.URI).toString().replace("\"", "");
-            //String url = "http://dbpedia.org/data/Relational_database.json";
-            //String key = "http://dbpedia.org/resource/Relational_database"
             CompletionStage<JsonNode> jsonResponse = getResponse(uri.replace("resource", "data") + ".json");
             jsonResponse.thenApply(wsResponse -> {
-                metaInformation = getResource(wsResponse, uri);
+                JsonNode resource = getResource(wsResponse, uri);
+                ArrayNode allAbstract = (ArrayNode) resource.get("http://dbpedia.org/ontology/abstract");
+                allAbstract.forEach(abst -> {
+                    if(abst.hasNonNull("lang") && abst.get("lang").asText("").equalsIgnoreCase("en") && abst.hasNonNull("value")) {
+                        metaInformation = abst.get("value").asText("");
+                    }
+                });
                 return ok();
             }).toCompletableFuture().join();
-            return ok(metaInformation);
+            res.put("info", metaInformation);
+            res.put("status", "200");
+            return ok(res);
         }
         res.put("status", "400");
         return ok(res);

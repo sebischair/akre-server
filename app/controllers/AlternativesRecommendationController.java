@@ -32,7 +32,7 @@ public class AlternativesRecommendationController extends Controller {
                 Alternative alternative = new Alternative().findByName(uri);
                 if (alternative != null)
                     result.addAll(StaticFunctions.sortJsonArray(alternative.getAlternativesAsJsonArray()));
-                else if (result.size() > 0) {
+                else {
                     String key = "<" + uri + "> ";
                     String queryString = "PREFIX dct: <http://purl.org/dc/terms/>\n" +
                             "PREFIX dbr: <http://dbpedia.org/resource/>\n" +
@@ -41,7 +41,6 @@ public class AlternativesRecommendationController extends Controller {
                             "PREFIX ns: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                             "SELECT DISTINCT ?x ?title WHERE { \n" +
                             "{SELECT DISTINCT ?x ?title WHERE { \n" +
-                            key + "ns:type dbo:Software .\n" +
                             key + "dbo:genre ?genre .\n" +
                             key + "dct:subject ?subject .\n" +
                             "?x dbo:genre ?genre .\n" +
@@ -62,7 +61,7 @@ public class AlternativesRecommendationController extends Controller {
                             "?x ns:type <http://dbpedia.org/class/yago/Software106566077> .\n" +
                             "?x schema:label ?title } }\n" +
                             "FILTER langMatches(lang(?title), \"EN\")\n" +
-                            " } LIMIT 100";
+                            " } LIMIT 1000";
 
                     SparqlQueryExecuter e = new SparqlQueryExecuter();
                     ArrayNode response = e.query(queryString);
@@ -76,7 +75,7 @@ public class AlternativesRecommendationController extends Controller {
                                 "?x schema:label ?title . \n" +
                                 "FILTER(regex(?concept, \"pattern\", \"i\")) \n" +
                                 "FILTER langMatches(lang(?title), \"EN\") \n" +
-                                "} LIMIT 100";
+                                "} LIMIT 1000";
                         e = new SparqlQueryExecuter();
                         response = e.query(queryString);
                     }

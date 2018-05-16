@@ -35,24 +35,14 @@ public class StaticFunctions {
 
     public static final String ASSIGNEE = "assignee";
     public static final String CONCEPTS = "concepts";
-    public static final String ATTRIBUTES = "attributes";
     public static final String SUMMARY = "summary";
-    public static final String VALUE = "value";
     public static final String VALUES = "values";
     public static final String TAGS = "tags";
     public static final String ID = "id";
 
     public static final String PERSONNAME= "personName";
     public static final String KEYWORDS= "keywords";
-    public static final String KEYWORDSID = "h2iqv58q9it2";
-    public static final String BELONGSTO = "belongsTo";
-    public static final String DESIGNDECISION = "designDecision";
-    public static final String DECISIONCATEGORY = "decisionCategory";
     public static final String LABEL = "label";
-    public static final String KEYWORD = "keyword";
-    public static final String QUALITYATTRIBUTES = "qualityAttributes";
-    public static final String WORKSPACE = "workspace";
-    public static final String ENTITYTYPE = "entityType";
 
     public static Result jsonResult(Result httpResponse) {
         return httpResponse.as("application/json; charset=utf-8");

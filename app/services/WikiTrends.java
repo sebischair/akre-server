@@ -20,8 +20,6 @@ public class WikiTrends {
         HttpClient client = new HttpClient();
         for (int i = 0; i < resources.size(); i++) {
             ObjectNode resource = (ObjectNode) resources.get(i);
-            System.out.println(".............................");
-            System.out.println(resource.get(StaticFunctions.TITLE).toString().trim());
             String query = resource.get(StaticFunctions.TITLE).toString().trim().replaceAll("\"", "").replaceAll(" ", "_");
             String url = String.format("https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=%s&srlimit=1&format=json", query);
             try {
@@ -39,7 +37,6 @@ public class WikiTrends {
                         description = jsonObject.get("query").get("search").get(0).get("snippet").asText();
 
                     } catch (Exception e) {}
-                    System.out.println(score);
                     resource.put(StaticFunctions.SCORE, score);
                     resource.put(StaticFunctions.DESCRIPTION, description);
                 }

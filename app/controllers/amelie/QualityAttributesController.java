@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mongodb.BasicDBObject;
 import model.amelie.Issue;
 import model.amelie.QualityAttribute;
+import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -19,7 +20,7 @@ import java.util.List;
 public class QualityAttributesController extends Controller {
 
     public Result updateTaskWithQA(String projectKey) {
-        System.out.println("request to update Tasks with QAs");
+        Logger.info("request to update Tasks with QAs");
         Issue issueModel = new Issue();
         ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
         // ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
@@ -27,7 +28,6 @@ public class QualityAttributesController extends Controller {
         ArrayNode qas = qaModel.getAllQAs();
         issues.forEach(issue -> {
             List<String> qaList = getQAList(issue.get("summary").asText("") + " " + issue.get("description").asText(""), qas);
-            System.out.println(qaList.size());
             if(qaList.size() > 0) {
                 BasicDBObject newConcepts = new BasicDBObject();
                 newConcepts.append("$set", new BasicDBObject().append("amelie.qualityAttributes", qaList));
@@ -35,7 +35,7 @@ public class QualityAttributesController extends Controller {
             }
         });
 
-        System.out.println("QAs for tasks have been updated");
+        Logger.info("QAs for tasks have been updated");
         ObjectNode result = Json.newObject();
         result.put("status", "OK");
         result.put("statusCode", "200");

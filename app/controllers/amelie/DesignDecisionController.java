@@ -15,7 +15,6 @@ public class DesignDecisionController extends Controller {
     }
 
     public Result getDesignDecision(String issueKey) {
-        System.out.println(issueKey);
         return StaticFunctions.jsonResult(ok(new Issue().getDesignDecisionByKey(issueKey)));
     }
 }

@@ -30,12 +30,11 @@ public class ArchitecturalElementsController extends Controller {
         //ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
         ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
         issues.forEach(issue -> {
-            System.out.println(issue.get("name").asText());
             String text = (issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " ").replaceAll("\\*", "");
             text = text.replaceAll("^\\w{1,20}\\b", " ").replaceAll("\\r\\n|\\r|\\n", " ").replaceAll("\\$", "");
             List<String> conceptList = getConceptsList(text);
 
-            for (Iterator<String> iter = conceptList.listIterator(); iter.hasNext(); ) {
+            for(Iterator<String> iter = conceptList.listIterator(); iter.hasNext(); ) {
                 String a = iter.next();
                 if(a.equalsIgnoreCase("-")) {
                     iter.remove();
@@ -43,7 +42,6 @@ public class ArchitecturalElementsController extends Controller {
             }
 
             if(conceptList.size() > 0) {
-                System.out.println(conceptList);
                 BasicDBObject newConcepts = new BasicDBObject();
                 newConcepts.append("$set", new BasicDBObject().append("amelie.concepts", conceptList));
                 issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
@@ -56,8 +54,6 @@ public class ArchitecturalElementsController extends Controller {
             text = text.replaceAll("\\r\\n|\\r|\\n", " ").replaceAll("\\$", "");
             List<String> keywordList = getKeywordsList(text, keywordModel.getAllKeywords());
             if(keywordList.size() > 0) {
-                System.out.println(keywordList);
-                System.out.println(issue.get("name"));
                 BasicDBObject newConcepts = new BasicDBObject();
                 newConcepts.append("$set", new BasicDBObject().append("amelie.concepts", keywordList));
                 issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);

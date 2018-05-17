@@ -29,7 +29,6 @@ public class SimilarDocumentsController extends Controller {
         Issue issueModel = new Issue();
         ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
         issues.forEach(issue -> {
-            System.out.println(issue.get("name").asText());
             String text = (issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " ");
             ObjectNode json = Json.newObject().put("textToClassify", text);
             json.put("pipeline", Json.newObject().put("name", projectKey).put("library", 1));
@@ -66,5 +65,4 @@ public class SimilarDocumentsController extends Controller {
         result.put("statusCode", "200");
         return ok(result);
     }
-
 }

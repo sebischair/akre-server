@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
 public class AssigneePredictionController extends Controller {
 
     public Result predictAssignee(String projectKey) {
-        System.out.println(projectKey);
         ArrayNode ja = Json.newArray();
         ArrayNode results = Json.newArray();
         List<String> conceptList = new ArrayList<>();
@@ -142,9 +141,7 @@ public class AssigneePredictionController extends Controller {
             r.set("predictions", pa);
             results.add(r);
         }
-/*
-        System.out.println(allExpertsInDataSet.size());
-
+        /*
             ArrayNode correctMatches = Json.newArray();
             ArrayNode catalogCoverages = Json.newArray();
             Set<String> allRecommendedExpertsInTestingSet = new HashSet<>();
@@ -169,7 +166,7 @@ public class AssigneePredictionController extends Controller {
             summaryResult.put("predictionCoverage", testingDataSetForWhichPredictionsWereMade/testingData.size());
             summaryResult.set("correctMatch", correctMatches);
             results.add(summaryResult);
-*/
+        */
         if(results.size() == 0) {
             return StaticFunctions.jsonResult(ok(results.add(Json.newObject())));
         }

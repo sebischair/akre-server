@@ -116,7 +116,6 @@ public class QADataController extends Controller {
                         }
                     }
                 } catch (Exception e) {
-                    System.out.println(date);
                     Logger.error("Cannot get resolved date!");
                 }
             }

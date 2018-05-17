@@ -33,8 +33,6 @@ public class AssigneeController extends Controller {
             }
         });
 
-        System.out.println(assigneeList.size());
-
         assigneeList.forEach(assignee -> {
             if (!StaticFunctions.containsStringValue("personName", assignee, ja)) {
                 ObjectNode jo = Json.newObject();

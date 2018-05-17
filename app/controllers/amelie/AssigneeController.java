@@ -62,6 +62,10 @@ public class AssigneeController extends Controller {
         });
         StaticFunctions.removeItemsFromJSONArray(ja, StaticFunctions.getItemsToRemove(ja));
 
+        if(ja.size() == 0) {
+            return StaticFunctions.jsonResult(ok(ja.add(Json.newObject())));
+        }
+
         return ok(transformArrayForD3(ja));
     }
 

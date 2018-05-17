@@ -170,6 +170,9 @@ public class AssigneePredictionController extends Controller {
             summaryResult.set("correctMatch", correctMatches);
             results.add(summaryResult);
 */
+        if(results.size() == 0) {
+            return StaticFunctions.jsonResult(ok(results.add(Json.newObject())));
+        }
         return ok(results);
     }
 

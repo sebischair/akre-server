@@ -50,7 +50,9 @@ public class AEDataController extends Controller {
             res.set("values", values);
             results.add(res);
         });
-
+        if(results.size() == 0) {
+            return StaticFunctions.jsonResult(ok(results.add(Json.newObject())));
+        }
         return StaticFunctions.jsonResult(ok(results));
     }
 

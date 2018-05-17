@@ -32,6 +32,9 @@ public class DDDataController  extends Controller {
         } else {
             results = issueModel.findAllDesignDecisionsInAProject(projectKey);
         }
+        if(results.size() == 0) {
+            return StaticFunctions.jsonResult(ok(results.add(Json.newObject())));
+        }
         return StaticFunctions.jsonResult(ok(results));
     }
 }

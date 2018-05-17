@@ -11,6 +11,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import play.libs.Json;
+import services.SparqlQueryExecuter;
 import services.annotator.ConceptAnnotator;
 import services.annotator.SpotlightAnnotator;
 import util.PipelineUtil;
@@ -30,11 +31,13 @@ public class ConceptAnnotatorPipeline extends UIMAPipeline {
     public ArrayNode processDocument() {
         ArrayNode annotations = Json.newArray();
         try {
+
             AnalysisEngineDescription conceptAnnotatorDesc = createEngineDescription(ConceptAnnotator.class);
 
             AnalysisEngineDescription spotlightDesc = createEngineDescription(SpotlightAnnotator.class);
 
             AnalysisEngineDescription basicPipeDesc = createEngineDescription(spotlightDesc, conceptAnnotatorDesc);
+
             AnalysisEngine pipe = createEngine(basicPipeDesc);
 
             JCas jCas = UimaUtil.produceJCas(StaticFunctions.CONCEPT, StaticFunctions.SPOTLIGHT);
@@ -74,23 +77,22 @@ public class ConceptAnnotatorPipeline extends UIMAPipeline {
            if(savedToken != null && savedToken.getScore() >= 0) {
                 featureAsJson.put(StaticFunctions.CONCEPTTYPE, savedToken.getType());
            } else if (featureAsJson.has(StaticFunctions.URI.toUpperCase())) {
-                //String queryString = "select DISTINCT ?x where { <" + featureAsJson.get(StaticFunctions.URI.toUpperCase()).asText() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?x }";
-                //SparqlQueryExecuter e = new SparqlQueryExecuter();
-                //ArrayNode result = e.query(queryString);
+                String queryString = "select DISTINCT ?x where { <" + featureAsJson.get(StaticFunctions.URI.toUpperCase()).asText() + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?x }";
+                SparqlQueryExecuter e = new SparqlQueryExecuter();
+                ArrayNode result = e.query(queryString);
 				String conceptType = "dbpedia";
-				DBpediaToken dbType = new DBpediaToken(featureAsJson.get(StaticFunctions.TOKEN).asText(), conceptType, 1);
-				dbType.save();
-                /*for(int i=0; i<result.size(); i++) {
+				//DBpediaToken dbType = new DBpediaToken(featureAsJson.get(StaticFunctions.TOKEN).asText(), conceptType, 1);
+				//dbType.save();
+                for(int i=0; i<result.size(); i++) {
                     String type = result.get(i).get(StaticFunctions.URI).asText();
-                    String typeName = type.substring(type.lastIndexOf('/') + 1);
-                    if(typeName.equalsIgnoreCase("Genre") || typeName.equalsIgnoreCase("Software") || typeName.equalsIgnoreCase("Concept")) {
-                        conceptType = typeName;
-
-                        DBpediaToken dbType = new DBpediaToken(featureAsJson.get(StaticFunctions.TOKEN).asText(), typeName, 1);
+                    String typeName = type.substring(type.lastIndexOf('/') + 1).toLowerCase();
+                    if(typeName.contains("genre") || typeName.contains("software") || typeName.contains("concept") ||
+                            type.toLowerCase().contains("libraries") || type.toLowerCase().contains("algorithm")) {
+                        DBpediaToken dbType = new DBpediaToken(featureAsJson.get(StaticFunctions.TOKEN).asText(), conceptType, 1);
                         dbType.save();
                         break;
                     }
-                }*/
+                }
                featureAsJson.put(StaticFunctions.CONCEPTTYPE, conceptType);
             }
 

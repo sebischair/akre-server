@@ -34,11 +34,11 @@ public class KeywordExtractorController extends Controller {
                 String description = issue.get(StaticFunctions.DESCRIPTION).asText("").trim().replaceAll(" +", " ").toLowerCase();
                 List<String> conceptList = new ArrayList<>();
                 List<Concept> concepts = tac.extractConcepts(summary + " " + description);
-                for (Concept concept : concepts) {
+                for(Concept concept : concepts) {
                     SurfaceForm[] sfs = concept.getSurfaceForms();
-                    for(int k=0; k<sfs.length; k++) {
-                        String sf = sfs[k].getString();
-                        if (!conceptList.contains(sf)) {
+                    for(SurfaceForm sf1 : sfs) {
+                        String sf = sf1.getString();
+                        if(!conceptList.contains(sf)) {
                             conceptList.add(sf);
                         }
                     }

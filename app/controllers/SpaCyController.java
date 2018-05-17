@@ -18,11 +18,8 @@ public class SpaCyController extends Controller{
     @Inject
     WSClient ws;
 
-    private Configuration configuration;
-
     public CompletionStage<Result> process(String paraghraphHash) {
-
-        configuration = Configuration.root();
+        Configuration configuration = Configuration.root();
         String url = configuration.getString("spacy.host");
         JsonNode json = Json.newObject()
                 .put("text",  Paragraph.getParagraph(paraghraphHash).getContent());

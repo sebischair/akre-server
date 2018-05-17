@@ -115,7 +115,7 @@ public class DocumentController extends Controller {
         if (wsResponse.has(key))
             return wsResponse.get(key);
         if (wsResponse.isObject()) {
-            for (Iterator iterator = wsResponse.fieldNames(); iterator.hasNext(); ) {
+            for(Iterator iterator = wsResponse.fieldNames(); iterator.hasNext(); ) {
                 String k = (String) iterator.next();
                 return getResource(wsResponse.get(k), key);
             }

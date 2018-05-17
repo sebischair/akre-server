@@ -138,7 +138,7 @@ public class AlternativesRecommendationController extends Controller {
         if(alternative == null) {
             alternative = new Alternative();
             alternative.setConceptName(uri);
-            List<Software> softwareList = new ArrayList<Software>();
+            List<Software> softwareList = new ArrayList<>();
             for(int i=0; i<result.size(); i++) {
                 JsonNode jsonObject = result.get(i);
                 if(jsonObject.has(StaticFunctions.URI) && jsonObject.has(StaticFunctions.TITLE) && jsonObject.has(StaticFunctions.DESCRIPTION) && jsonObject.has(StaticFunctions.SCORE))

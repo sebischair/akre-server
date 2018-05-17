@@ -7,17 +7,15 @@ import java.util.List;
  * Created by bwaltl on 20.10.15.
  */
 public class PipelineUtil {
-
     public static boolean IS_ON_ANNOTATION_BLACK_LIST(String typeName) {
-
         for (String excludedAnnotation : ANNOTATION_BLACK_LIST) {
             if (typeName.startsWith(excludedAnnotation))
                 return true;
         }
         return false;
     }
-    public static boolean IS_ON_ANNOTATION_WHITE_LIST(String typeName) {
 
+    public static boolean IS_ON_ANNOTATION_WHITE_LIST(String typeName) {
         for (String includedAnnotation : ANNOTATION_WHITE_LIST) {
             if (typeName.startsWith(includedAnnotation))
                 return true;
@@ -26,7 +24,6 @@ public class PipelineUtil {
     }
 
     public static boolean IS_ON_FEATURE_BLACK_LIST(String typeName) {
-
         for (String excludedAnnotation : FEATURE_BLACK_LIST) {
             if (typeName.startsWith(excludedAnnotation))
                 return true;

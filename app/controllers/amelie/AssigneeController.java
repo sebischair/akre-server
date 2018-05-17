@@ -37,7 +37,7 @@ public class AssigneeController extends Controller {
             if (!StaticFunctions.containsStringValue("personName", assignee, ja)) {
                 ObjectNode jo = Json.newObject();
                 jo.put("personName", assignee.toLowerCase());
-                jo.put("concepts", Json.newArray());
+                jo.set("concepts", Json.newArray());
                 ja.add(jo);
             }
         });
@@ -73,9 +73,9 @@ public class AssigneeController extends Controller {
             JsonNode ca = jo.get(StaticFunctions.CONCEPTS);
             ca.forEach(co -> {
                 ObjectNode newJO = Json.newObject();
-                newJO.put("personName", jo.get("personName"));
-                newJO.put("conceptName", co.get("conceptName"));
-                newJO.put("value", co.get("value"));
+                newJO.set("personName", jo.get("personName"));
+                newJO.set("conceptName", co.get("conceptName"));
+                newJO.set("value", co.get("value"));
                 newJA.add(newJO);
             });
         });

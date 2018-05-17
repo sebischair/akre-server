@@ -16,7 +16,6 @@ import util.StaticFunctions;
 import java.io.File;
 import java.util.Iterator;
 
-
 public class getFileContent extends Controller {
 
     public Result upload() {
@@ -68,16 +67,4 @@ public class getFileContent extends Controller {
             return StaticFunctions.jsonResult(badRequest(StaticFunctions.errorAsJson(t)));
         }
     }
-
-    public Result getAllDocuments(){ //unsafe TODO:replace later on
-        try {
-            Record.getAllRecords();
-            return StaticFunctions.jsonResult(ok());
-        }
-        catch (Throwable t) {
-            Logger.error("Exception in getAllDocuments handler", t);
-            return StaticFunctions.jsonResult(badRequest(StaticFunctions.errorAsJson(t)));
-        }
-    }
-
 }

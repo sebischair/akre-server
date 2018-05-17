@@ -116,7 +116,7 @@ public class SoftwareRecommendationController extends Controller {
         if(genre == null) {
             genre = new Genre();
             genre.setGenreName(uri);
-            List<Software> softwareList = new ArrayList<Software>();
+            List<Software> softwareList = new ArrayList<>();
             for(int i=0; i<result.size(); i++) {
                 JsonNode jsonObject = result.get(i);
                 String id =  jsonObject.get(StaticFunctions.URI) != null ? jsonObject.get(StaticFunctions.URI).asText() : "";

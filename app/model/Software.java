@@ -33,10 +33,6 @@ public class Software {
         return score;
     }
 
-    public void setScore(double score) {
-        this.score = score;
-    }
-
     public String getUri() {
         return uri;
     }

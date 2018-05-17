@@ -33,14 +33,7 @@ public class ArchitecturalElementsController extends Controller {
             String text = (issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " ").replaceAll("\\*", "");
             text = text.replaceAll("^\\w{1,20}\\b", " ").replaceAll("\\r\\n|\\r|\\n", " ").replaceAll("\\$", "");
             List<String> conceptList = getConceptsList(text);
-
-            for(Iterator<String> iter = conceptList.listIterator(); iter.hasNext(); ) {
-                String a = iter.next();
-                if(a.equalsIgnoreCase("-")) {
-                    iter.remove();
-                }
-            }
-
+            conceptList.removeIf(a -> a.equalsIgnoreCase("-"));
             if(conceptList.size() > 0) {
                 BasicDBObject newConcepts = new BasicDBObject();
                 newConcepts.append("$set", new BasicDBObject().append("amelie.concepts", conceptList));

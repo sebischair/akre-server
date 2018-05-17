@@ -61,7 +61,7 @@ public class AssigneePredictionController extends Controller {
                 String description = issue.get(StaticFunctions.DESCRIPTION).asText("").toLowerCase().trim().replaceAll(" +", " ");
                 JsonNode concepts = issue.get(StaticFunctions.CONCEPTS);
 
-                if (assignee != "" && assignee != "unassigned" && summary + description != "" && concepts.size() > 0) {
+                if (!assignee.equals("") && !assignee.equalsIgnoreCase("unassigned") && !(summary + description).equals("") && concepts.size() > 0) {
                     ObjectNode jo = Json.newObject();
                     jo.put(StaticFunctions.ASSIGNEE, assignee.toLowerCase());
                     jo.set(StaticFunctions.CONCEPTS, issue.get(StaticFunctions.CONCEPTS));
@@ -173,6 +173,7 @@ public class AssigneePredictionController extends Controller {
         return ok(results);
     }
 
+    /*
     private int computeCorrectMatch(ArrayNode decisionsToPredict, int run, Set<String> allRecommendedExpertsInTestingSet) {
         int correctMatch = 0;
         for(int n=0; n <decisionsToPredict.size(); n++) {
@@ -201,6 +202,7 @@ public class AssigneePredictionController extends Controller {
         }
         return correctMatch;
     }
+    */
 
     private ArrayNode ordering(ArrayNode decisionsToPredict) {
         decisionsToPredict.forEach(decisionsToPredictItr -> {
@@ -225,7 +227,7 @@ public class AssigneePredictionController extends Controller {
         List<JsonNode> jsonValues = new ArrayList<>();
         predArray.forEach(jsonValues::add);
 
-        Collections.sort(jsonValues, new Comparator<JsonNode>() {
+        jsonValues.sort(new Comparator<JsonNode>() {
             private static final String KEY_NAME = "score";
 
             @Override

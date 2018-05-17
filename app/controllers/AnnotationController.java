@@ -55,7 +55,7 @@ public class AnnotationController extends Controller {
     public Result update(String annotationId) {
         ObjectNode result = Json.newObject();
         JsonNode request = request().body().asJson();
-        Map<String, String> update = new HashMap<String, String>();
+        Map<String, String> update = new HashMap<>();
 
         if (request.has(TYPE)) {
             update.put(TYPE, request.findValue(TYPE).asText());

@@ -2,7 +2,6 @@ package controllers.amelie;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.mongodb.BasicDBObject;
-import model.amelie.Issue;
 import model.amelie.Project;
 import org.bson.Document;
 import play.Logger;

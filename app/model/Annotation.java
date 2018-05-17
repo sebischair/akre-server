@@ -101,7 +101,7 @@ public class Annotation {
     public static List<Annotation> getAllByParagraph(String paragraphHash){
         List<Paragraph> paragraphs = DefaultMongoClient.datastore.createQuery(Paragraph.class).field("hash").equalIgnoreCase(paragraphHash).asList();
         if(paragraphs.isEmpty()) {
-            return new ArrayList<Annotation>();
+            return new ArrayList<>();
         }
         return DefaultMongoClient.datastore.createQuery(Annotation.class).filter("paragraph", paragraphs.get(0)).asList();
     }

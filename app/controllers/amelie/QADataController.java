@@ -72,11 +72,7 @@ public class QADataController extends Controller {
         Logger.debug("request to get all Quality Attributes");
         ArrayNode results = Json.newArray();
         QualityAttribute qaModel = new QualityAttribute();
-
-        qaModel.getAllQAs().forEach(qa -> {
-            results.add(qa.get("name").asText());
-        });
-
+        qaModel.getAllQAs().forEach(qa -> results.add(qa.get("name").asText()));
         return StaticFunctions.jsonResult(ok(results));
     }
 
@@ -87,8 +83,6 @@ public class QADataController extends Controller {
         AtomicInteger countA = new AtomicInteger();
         AtomicInteger countB = new AtomicInteger();
         AtomicInteger countC = new AtomicInteger();
-
-        //DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
         issues.forEach(issue -> {
             String date = issue.get("resolved").asText("");

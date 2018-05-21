@@ -13,6 +13,13 @@ services:
       - docclustering:docclustering
       - docclassification:docclassification
       - syncpipes-server:syncpipes-server
+  amelie:
+    image: 'sebischair/amelie:amelietor'
+    ports:
+      - "8080:3001"
+      - "8081:3002"
+    depends_on:
+      - akre
   syncpipes-client:
     image: 'sebischair/amelie:syncpipes-client'
     depends_on:

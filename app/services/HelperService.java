@@ -1,6 +1,7 @@
 package services;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import play.Logger;
 import play.libs.ws.WSClient;
 import play.libs.ws.WSResponse;
 
@@ -18,6 +19,13 @@ public class HelperService {
     }
 
     public CompletionStage<JsonNode> postWSRequest(String url, JsonNode json) {
-        return ws.url(url).post(json).thenApply(WSResponse::asJson);
+        CompletionStage<JsonNode> response = null;
+        try {
+            response = ws.url(url).post(json).thenApply(WSResponse::asJson);
+        } catch (Exception e) {
+            Logger.error("Unable to connect to the request service: " + url);
+            e.printStackTrace();
+        }
+        return response;
     }
 }

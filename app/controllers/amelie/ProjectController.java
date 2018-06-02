@@ -40,21 +40,6 @@ public class ProjectController extends Controller {
         return StaticFunctions.jsonResult(ok(new Project().findByKey(key)));
     }
 
-    public Result updateProjectProcessState(String projectKey) {
-        Project p = new Project();
-        BasicDBObject preProcessedObject = new BasicDBObject();
-        preProcessedObject.append("$set", new BasicDBObject().append("preProcessed", true));
-        p.updateProjectByKey(projectKey, preProcessedObject);
-
-        p.updateDecisionCount(projectKey);
-
-        ObjectNode result = Json.newObject();
-        result.put("status", "OK");
-        result.put("message", "Project has been preprocessed!");
-        result.put("statusCode", "200");
-        return ok(result);
-    }
-
     public Result updateProjectIssueCount(String projectKey) {
         Project p = new Project();
         p.updateIssueCount(projectKey);

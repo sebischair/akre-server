@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import com.mongodb.BasicDBObject;
 import model.amelie.Issue;
 import play.Configuration;
+import play.Logger;
 import play.libs.Json;
 import play.libs.ws.WSClient;
 import play.mvc.Controller;
@@ -38,24 +39,29 @@ public class LabelDesignDecisionsController extends Controller {
         Issue issueModel = new Issue();
         ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
         issues.forEach(issue -> {
-            String summary = issue.get("summary").asText("");
-            String description = issue.get("description").asText("");
-            String isDesignDecisionLabel = getDesignDecisionLabel(summary + " " + description).get(StaticFunctions.LABEL).toString();
-            boolean isDesignDecision = false;
-            if (isDesignDecisionLabel.toLowerCase().contains("yes")) {
-                isDesignDecision = true;
-            }
-            BasicDBObject decisionObject = new BasicDBObject();
-            decisionObject.append("$set", new BasicDBObject().append("amelie.designDecision", isDesignDecision));
-            issueModel.updateIssueByKey(issue.get("name").asText(), decisionObject);
-            if(isDesignDecision) {
-                String decisionCategoryLabel = getDecisionCategoryLabel(summary + " " + description).get(StaticFunctions.LABEL).asText();
-                if(decisionCategoryLabel.split("Class predicted: ").length > 1) {
-                    String dcl = decisionCategoryLabel.split("Class predicted: ")[1];
-                    BasicDBObject categoryObject = new BasicDBObject();
-                    categoryObject.append("$set", new BasicDBObject().append("amelie.decisionCategory", dcl));
-                    issueModel.updateIssueByKey(issue.get("name").asText(), categoryObject);
+            try {
+                String summary = issue.get("summary").asText("");
+                String description = issue.get("description").asText("");
+                String issueText = StaticFunctions.cleanText(summary + " " + description);
+                String isDesignDecisionLabel = getDesignDecisionLabel(issueText).get(StaticFunctions.LABEL).toString();
+                boolean isDesignDecision = false;
+                if (isDesignDecisionLabel.toLowerCase().contains("true")) {
+                    isDesignDecision = true;
                 }
+                BasicDBObject decisionObject = new BasicDBObject();
+                decisionObject.append("$set", new BasicDBObject().append("amelie.designDecision", isDesignDecision));
+                issueModel.updateIssueByKey(issue.get("name").asText(), decisionObject);
+                if(isDesignDecision) {
+                    String decisionCategoryLabel = getDecisionCategoryLabel(issueText).get(StaticFunctions.LABEL).asText();
+                    if(decisionCategoryLabel.split("Class predicted: ").length > 1) {
+                        String dcl = decisionCategoryLabel.split("Class predicted: ")[1];
+                        BasicDBObject categoryObject = new BasicDBObject();
+                        categoryObject.append("$set", new BasicDBObject().append("amelie.decisionCategory", dcl));
+                        issueModel.updateIssueByKey(issue.get("name").asText(), categoryObject);
+                    }
+                }
+            } catch (Exception e) {
+                Logger.error("Unable to label an issue");
             }
         });
 
@@ -72,7 +78,9 @@ public class LabelDesignDecisionsController extends Controller {
         body.put("textToClassify", textToClassify);
         ObjectNode result = Json.newObject();
         hs.postWSRequest(configuration.getString("predict.url"), body).thenApply(response -> {
-            result.put("label", response.get("result").asText());
+            if(response != null) {
+                result.put("label", response.get("result").asText());
+            }
             return ok();
         }).toCompletableFuture().join();
         return result;
@@ -84,7 +92,9 @@ public class LabelDesignDecisionsController extends Controller {
         body.put("textToClassify", textToClassify);
         ObjectNode result = Json.newObject();
         hs.postWSRequest(configuration.getString("predict.url"), body).thenApply(response -> {
-            result.put("label", response.get("result").asText());
+            if(response != null) {
+                result.put("label", response.get("result").asText());
+            }
             return ok();
         }).toCompletableFuture().join();
         return result;

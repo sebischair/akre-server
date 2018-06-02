@@ -41,8 +41,10 @@ PUT           /annotation/:annotationId         controllers.AnnotationController
 DELETE        /annotation/:annotationId         controllers.AnnotationController.delete(annotationId: String)
 
 # Import projects
-GET           /updateProjectProcessState        controllers.amelie.ProjectController.updateProjectProcessState(projectKey: String)
 GET           /updateProjectIssueCount          controllers.amelie.ProjectController.updateProjectIssueCount(projectKey: String)
+
+# Preprocess issues in a project
+GET           /preProcess                       controllers.amelie.PreProcessProjectController.preProcess(projectKey: String)
 
 # uncertainty detection - not documented
 POST          /upload                           controllers.getFileContent.uploadAndSave()

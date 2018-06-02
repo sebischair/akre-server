@@ -11,6 +11,7 @@ import play.Logger;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import util.StaticFunctions;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,10 +28,10 @@ public class ArchitecturalElementsController extends Controller {
         Logger.debug("request to update Tasks with AEs");
 
         Issue issueModel = new Issue();
-        //ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
-        ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
+        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
+        //ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
         issues.forEach(issue -> {
-            String text = (issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " ").replaceAll("\\*", "");
+            String text = StaticFunctions.cleanText(issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase();
             text = text.replaceAll("^\\w{1,20}\\b", " ").replaceAll("\\r\\n|\\r|\\n", " ").replaceAll("\\$", "");
             List<String> conceptList = getConceptsList(text);
             conceptList.removeIf(a -> a.equalsIgnoreCase("-"));
@@ -43,7 +44,7 @@ public class ArchitecturalElementsController extends Controller {
 
         Keyword keywordModel = new Keyword();
         issues.forEach(issue -> {
-            String text = (issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " ").replaceAll("\\*", "");
+            String text = StaticFunctions.cleanText(issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase();
             text = text.replaceAll("\\r\\n|\\r|\\n", " ").replaceAll("\\$", "");
             List<String> keywordList = getKeywordsList(text, keywordModel.getAllKeywords());
             if(keywordList.size() > 0) {
@@ -90,8 +91,8 @@ public class ArchitecturalElementsController extends Controller {
         Logger.debug("request to update Tasks with AEs");
 
         Issue issueModel = new Issue();
-        //ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
-        ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
+        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
+        //ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
 
         issues.forEach(issue -> {
             if(issue.has("concepts") && issue.get("concepts") != null) {

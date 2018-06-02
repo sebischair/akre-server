@@ -11,7 +11,10 @@ import play.libs.Json;
 import play.libs.ws.WSClient;
 import play.mvc.Controller;
 import play.mvc.Result;
+import services.HelperService;
+import util.StaticFunctions;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,43 +25,63 @@ import java.util.Map;
  */
 public class SimilarDocumentsController extends Controller {
     @Inject WSClient ws;
+    HelperService hs;
+
+    private ObjectNode createRequestObject(String projectKey) {
+        ObjectNode clusterRequest = Json.newObject();
+        ObjectNode clusterRequestBody = Json.newObject().put("mongoProjectKey", projectKey);
+        clusterRequestBody.put("name", projectKey);
+        clusterRequestBody.put("href", projectKey);
+        clusterRequestBody.put("scLink", false);
+        clusterRequestBody.put("dataset", projectKey);
+        clusterRequestBody.put("transformer", Json.newObject().put("id", "spark-word2vec"));
+        clusterRequestBody.put("library", Json.newObject().put("id", 1));
+
+        ObjectNode algorithmRequest = Json.newObject();
+        algorithmRequest.put("id", "spark-kmeans");
+        algorithmRequest.put("name", "spark-kmeans");
+
+        ArrayNode options = Json.newArray();
+        ObjectNode kvalue = Json.newObject();
+        kvalue.put("name", "K-value");
+        kvalue.put("value", 30);
+        options.add(kvalue);
+
+        ObjectNode iterations = Json.newObject();
+        iterations.put("name", "iterations");
+        iterations.put("value", 10);
+        options.add(iterations);
+
+        algorithmRequest.put("options", options);
+
+        clusterRequestBody.put("algorithm", algorithmRequest);
+        clusterRequest.put("pipeline", clusterRequestBody);
+        return clusterRequest;
+    }
+
+    private boolean checkIfPipelineExists(String projectKey) {
+        String existingPipeline = Configuration.root().getString("docclustering.url", "").concat("clustering/pipeline/" + projectKey);
+        ObjectNode result = Json.newObject();
+        hs.getWSResponse(existingPipeline).thenApply(res -> {
+            if(res.hasNonNull("_id")) {
+                result.put("pipelineExists", true);
+            } else {
+                result.put("pipelineExists", false);
+            }
+            return ok();
+        }).toCompletableFuture().join();
+        return result.get("pipelineExists").asBoolean();
+    }
 
     public Result updateSimilarDocuments(String projectKey) {
         Logger.debug("request to update DDs with similar documents");
-        String url = Configuration.root().getString("docclustering.url", "").concat("clustering/pipeline/predict");
-        Issue issueModel = new Issue();
-        ArrayNode issues = issueModel.findAllDesignDecisionsInAProject(projectKey);
-        issues.forEach(issue -> {
-            String text = (issue.get("summary").asText("") + " " + issue.get("description").asText("")).toLowerCase().replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("http.*?\\s", " ");
-            ObjectNode json = Json.newObject().put("textToClassify", text);
-            json.put("pipeline", Json.newObject().put("name", projectKey).put("library", 1));
-
-            ws.url(url).post(json).thenApply(response -> {
-                List similarDocuments = new ArrayList();
-                ArrayNode sds = (ArrayNode) response.asJson().get("result");
-                for(int i=0; i<sds.size(); i++) {
-                    ObjectNode sd = (ObjectNode) sds.get(i);
-                    Map similarDocument = new HashMap();
-                    similarDocument.put("name", sd.get("_c0").asText(""));
-                    if(sd.has("_c1")) similarDocument.put("summary", sd.get("_c1").asText("").trim());
-                    else similarDocument.put("summary", "");
-                    if(sd.has("_c2")) similarDocument.put("description", sd.get("_c2").asText("").trim());
-                    else similarDocument.put("description", "");
-                    //similarDocument.set("features", sd.get("filtered"));
-                    similarDocument.put("cosinesimilarity", sd.get("cosinesimilarity").asText(""));
-                    similarDocument.put("jaccardsimilarity", sd.get("jaccardsimilarity").asText(""));
-                    similarDocuments.add(similarDocument);
-                }
-                if(similarDocuments.size() > 0) {
-                    BasicDBObject newConcepts = new BasicDBObject();
-                    newConcepts.append("$set", new BasicDBObject().append("amelie.similarDocuments", similarDocuments));
-                    issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
-                }
-
-                return ok();
-            }).toCompletableFuture().join();
-        });
-
+        hs = new HelperService(ws);
+        String clusterURL = Configuration.root().getString("docclustering.url", "").concat("clustering/pipeline/create");
+        String updateSimilarDocumentsURL = Configuration.root().getString("docclustering.url", "").concat("/pipeline/updateSimilarDocuments?projectKey=" + projectKey);
+        if(!checkIfPipelineExists(projectKey)) {
+            hs.postWSRequest(clusterURL, createRequestObject(projectKey)).thenApply(response -> ok()).toCompletableFuture().join();
+        }
+        hs.getWSResponse(updateSimilarDocumentsURL).thenApply(response -> ok()).toCompletableFuture().join();
         Logger.debug("Similar DDs have been updated");
         ObjectNode result = Json.newObject();
         result.put("status", "OK");

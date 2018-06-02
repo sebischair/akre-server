@@ -33,6 +33,7 @@ public class DocumentController extends Controller {
 
     public void getAnnotations(String type, ArrayNode annotations, JsonNode request){
         String content = request.findValue(CONTENT).toString().replace("\"", "");
+        content = StaticFunctions.cleanText(content);
         switch (type){
             case "uncertainty":
                 String url = Configuration.root().getString("spacy.host", null);

@@ -31,7 +31,9 @@ libraryDependencies ++= Seq(
   "commons-httpclient" % "commons-httpclient" % "3.1",
   "org.apache.tika" % "tika-parsers" % "1.4",
   //AYLIEN
-  "com.aylien.textapi" % "client" % "0.6.1"
+  "com.aylien.textapi" % "client" % "0.6.1",
+  //HTML to plain text
+  "org.jsoup" % "jsoup" % "1.8.3"
 )
 
 unmanagedResourceDirectories in (Compile, runMain) <+=  baseDirectory ( _ /"../myresources")

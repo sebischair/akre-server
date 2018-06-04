@@ -30,10 +30,14 @@ public class PreProcessProjectController extends Controller {
         Logger.debug("request to process all issues in a project");
         Result response = labelDesignDecisionsController.labelDesignDecisions(projectKey);
         JsonNode responseAsJson = getJsonFromResult(response);
+        Logger.debug("done with labeling issues");
         if(responseAsJson.get("statusCode").asText("").equals("200")) {
             JsonNode qaResponse = getJsonFromResult(qaController.updateTaskWithQA(projectKey));
+            Logger.debug("done with adding qas");
             JsonNode aeResponse = getJsonFromResult(aeController.updateTaskWithAE(projectKey));
+            Logger.debug("done with adding aes");
             JsonNode sdResponse = getJsonFromResult(similarDocumentsController.updateSimilarDocuments(projectKey));
+            Logger.debug("done with creating cluster models");
             if(qaResponse.get("statusCode").asText("").equals("200") && aeResponse.get("statusCode").asText("").equals("200") && sdResponse.get("statusCode").asText("").equals("200")) {
                 return updateProjectProcessState(projectKey);
             } else {

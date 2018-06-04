@@ -123,8 +123,6 @@ public class Issue {
 
             if(amelie.has("similarDocuments")) {
                 issue.put("similarDocuments", amelie.get("similarDocuments"));
-            } else {
-                issue.put("similarDocuments", Json.newArray());
             }
         }
         return issue;

@@ -21,6 +21,7 @@ GET           /predictAssignee                  controllers.amelie.AssigneePredi
 POST          /getDataForDDV                    controllers.amelie.DDDataController.getDDData()
 GET           /designDecisions                  controllers.amelie.DesignDecisionController.getAllDesignDecisions(projectKey: String)
 GET           /designDecision                   controllers.amelie.DesignDecisionController.getDesignDecision(issueKey: String)
+GET           /similarDecisions                 controllers.amelie.SimilarDocumentsController.updateSimilarDocumentsForDD(issueKey: String)
 GET           /addToken                         controllers.AnnotationController.addArchitecturalElement(architecturalElement: String ?= "")
 GET           /removeToken                      controllers.AnnotationController.removeArchitecturalElement(architecturalElement: String ?= "")
 POST          /getSoftwareSolutions             controllers.SoftwareRecommendationController.getSoftwareSolutions()

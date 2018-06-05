@@ -36,6 +36,6 @@ libraryDependencies ++= Seq(
   "org.jsoup" % "jsoup" % "1.8.3"
 )
 
-unmanagedResourceDirectories in (Compile, runMain) <+=  baseDirectory ( _ /"../myresources")
+unmanagedResourceDirectories in (Compile, runMain) <+=  baseDirectory ( _ / "app/myresources")
 
 routesGenerator := InjectedRoutesGenerator

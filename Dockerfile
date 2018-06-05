@@ -18,6 +18,9 @@ RUN cd ${PROJECT_HOME} && \
     unzip akre-1.0.zip && \
     chmod +x ${PROJECT_HOME}/akre-1.0/bin/akre
 
+RUN mkdir -p ${PROJECT_HOME}/akre-1.0/app/resources
+COPY app/resources/ ${PROJECT_HOME}/akre-1.0/app/resources/
+
 CMD ["/usr/src/akre-1.0/bin/akre", "-Dhttp.port=9000"]
 
 # Expose port 9000

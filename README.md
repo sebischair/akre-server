@@ -1,7 +1,7 @@
 AKREC Server
 =================================
 
-Check out the <a href="https://documenter.getpostman.com/view/4318985/akrec-server/RW84rWWK" target="_blank">API documentation</a>.
+Check out the <a href="https://documenter.getpostman.com/view/4318985/RW84rWWK" target="_blank">API documentation</a>.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/run-collection/fc107bbaed1335885c4c)
 

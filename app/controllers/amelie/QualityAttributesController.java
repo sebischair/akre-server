@@ -70,7 +70,7 @@ public class QualityAttributesController extends Controller {
     public Result getAllIssuesForQAs() {
         JsonNode request = request().body().asJson();
         ObjectNode result = Json.newObject();
-        if(request.has("project-key") && request.has("quality-attributes") && request.get("quality-attributes").isArray()) {
+        if(request!= null && request.has("project-key") && request.has("quality-attributes") && request.get("quality-attributes").isArray()) {
             ArrayNode qas = new QualityAttribute().getAllQAs();
             String projectKey = request.get("project-key").asText("");
             ArrayNode requestedQualityAttributes = (ArrayNode) request.get("quality-attributes");

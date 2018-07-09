@@ -11,10 +11,12 @@ import model.amelie.Issue;
 import model.amelie.Keyword;
 import org.bson.Document;
 import play.Logger;
+import play.Play;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -93,6 +95,48 @@ public class ArchitecturalElementsController extends Controller {
             e.printStackTrace();
         }
         return tokens;
+    }
+
+    public Result fixTasksWithKeywords(String projectKey) {
+        Logger.debug("request to update Tasks with keywords");
+        Issue issueModel = new Issue();
+        ArrayNode issues = issueModel.findAllIssuesInAProject(projectKey);
+        Keyword keyword = new Keyword();
+        ArrayList<String> allKeywords = keyword.getAllKeywords();
+        allKeywords.addAll(keyword.getAllENKeywords());
+
+        issues.forEach(issue -> {
+            String text = (issue.get("summary").asText("") + issue.get("description").asText("")).toLowerCase();
+            JsonNode existingKeys = issue.get("keywords");
+            List keys = new ArrayList<String>();
+            if(existingKeys != null && existingKeys.isArray()) {
+                for(int i = 0; i< existingKeys.size(); i++) {
+                    String k = existingKeys.get(i).asText();
+                    if(!k.isEmpty() && !allKeywords.contains(k) && k.length() > 0) {
+                        allKeywords.add(k);
+                    }
+                }
+            }
+
+            for(int i = 0; i< allKeywords.size(); i++) {
+                String k = allKeywords.get(i);
+                if(text.contains(k) && !k.isEmpty()) {
+                    keys.add(k);
+                }
+            }
+
+            if(keys.size() > 0) {
+                System.out.println("Updating issue: " + issue.get("name").asText());
+                BasicDBObject newConcepts = new BasicDBObject();
+                newConcepts.append("$set", new BasicDBObject().append("amelie.keywords", keys));
+                issueModel.updateIssueByKey(issue.get("name").asText(), newConcepts);
+            }
+        });
+
+        ObjectNode result = Json.newObject();
+        result.put("status", "OK");
+        result.put("statusCode", "200");
+        return ok(result);
     }
 
     public Result fixTasks(String projectKey) {
@@ -177,4 +221,29 @@ public class ArchitecturalElementsController extends Controller {
         result.put("statusCode", "200");
         return ok(result);
     }
+
+    public Result updateKeywordList() {
+        Keyword keyword = new Keyword();
+        ArrayList<String> allKeywords = keyword.getAllKeywords();
+        try {
+            FileInputStream fs = new FileInputStream(new File(Play.application().path().getAbsolutePath() + "/upload/customList.json"));
+            JsonNode jsonArray = Json.parse(fs);
+            jsonArray.forEach(jsonObject -> {
+                String topicName = jsonObject.get("topic").asText("").toLowerCase();
+                if(!allKeywords.contains(topicName)) {
+                    System.out.println("Add topic");
+                    keyword.addKeyWord(topicName);
+                    allKeywords.add(topicName);
+                }
+            });
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        ObjectNode result = Json.newObject();
+        result.put("status", "OK");
+        result.put("statusCode", "200");
+        return ok(result);
+    }
+
 }

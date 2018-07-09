@@ -70,5 +70,7 @@ POST         /search-expert                controllers.amelie.PredictionControll
 GET          /getUniqueAssignees           controllers.amelie.AssigneeController.getUniqueAssignees(projectKey: String)
 GET          /removeConceptsThatOccourOnlyOnce controllers.amelie.ArchitecturalElementsController.removeConceptsThatOccourOnlyOnce(projectKey: String)
 POST         /getExpertForATopic           controllers.amelie.AssigneeController.getExpertForATopic()
+GET          /updateKeywordList            controllers.amelie.ArchitecturalElementsController.updateKeywordList
 
 GET          /fixTasks                     controllers.amelie.ArchitecturalElementsController.fixTasks(projectKey: String)
+GET          /fixTasksWithKeywords         controllers.amelie.ArchitecturalElementsController.fixTasksWithKeywords(projectKey: String)

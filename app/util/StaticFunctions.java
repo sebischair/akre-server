@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.bson.Document;
+import play.Configuration;
 import play.libs.Json;
 import play.mvc.Result;
 
@@ -166,6 +167,17 @@ public class StaticFunctions {
                 itemsToRemove.add(jo.get("personName").asText(""));
             }
         });
+
+        Configuration configuration = Configuration.root();
+        String functionAccounts = configuration.getString("function.accounts", "");
+        if(functionAccounts != null && functionAccounts != "") {
+            String[] fas = functionAccounts.split(", ");
+            if(fas.length > 0) {
+                for(String fa: fas) {
+                    itemsToRemove.add(fa);
+                }
+            }
+        }
         return itemsToRemove;
     }
 
@@ -173,7 +185,7 @@ public class StaticFunctions {
         for (String pName : itemsToRemove) {
             for (int i = 0; i < ja.size(); i++) {
                 JsonNode jo = ja.get(i);
-                if (jo.get("personName").asText("").equalsIgnoreCase(pName)) {
+                if(jo.get("personName").asText("").equalsIgnoreCase(pName) || jo.get("personName").asText("").contains("$cpl")) {
                     ja.remove(i);
                     break;
                 }

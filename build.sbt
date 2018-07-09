@@ -1,10 +1,12 @@
-name := """07AKRec"""
+name := """AKRec"""
 
-version := "1.0-SNAPSHOT"
+version := "1.0"
 
-lazy val root = (project in file(".")).enablePlugins(PlayJava)
+lazy val root = (project in file(".")).enablePlugins(PlayJava, LauncherJarPlugin)
 
 scalaVersion := "2.11.7"
+
+lazy val webJarsPlay = file("..").getAbsoluteFile.toURI
 
 libraryDependencies ++= Seq(
   filters,

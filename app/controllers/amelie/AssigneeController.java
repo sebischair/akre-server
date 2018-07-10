@@ -50,6 +50,7 @@ public class AssigneeController extends Controller {
             if(issue.has(StaticFunctions.ASSIGNEE)) {
                 String assignee = issue.get(StaticFunctions.ASSIGNEE).asText("");
                 JsonNode ca = issue.get(StaticFunctions.CONCEPTS);
+                JsonNode keywords = issue.get(StaticFunctions.KEYWORDS);
                 JsonNode personObject = StaticFunctions.getJSONObject("personName", assignee, ja);
                 JsonNode conceptArray = personObject.get(StaticFunctions.CONCEPTS);
                 if(ca !=null && ca.isArray()) {
@@ -60,6 +61,16 @@ public class AssigneeController extends Controller {
                         }
                     });
                 }
+
+                if(keywords != null && keywords.isArray()) {
+                    keywords.forEach(concept -> {
+                        String key = concept.asText("");
+                        if(key!= null) {
+                            StaticFunctions.updateConceptArray(key.toLowerCase(), conceptArray);
+                        }
+                    });
+                }
+
             }
         });
 
